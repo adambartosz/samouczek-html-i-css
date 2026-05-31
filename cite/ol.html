@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>ol</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;ol&gt;</strong> to lista uporządkowana, czyli taka, w której kolejność elementów ma
+            znaczenie. Każdy element jest automatycznie numerowany przez przeglądarkę.</p>
+        <p>Jest elementem blokowym i domyślnie wyświetla się jako lista z numerami po lewej stronie.</p>
+    </section>
+
+    <section>
+        <p>Używamy <strong>&lt;ol&gt;</strong> kiedy chcemy:</p>
+        <ul>
+            <li>pokazać kolejność kroków (instrukcje)</li>
+            <li>tworzyć rankingi</li>
+            <li>opisać procesy krok po kroku</li>
+        </ul>
+        <p>Każdy element listy musi być zapisany w znaczniku <code>&lt;li&gt;</code>, bo tylko on tworzy pojedynczy
+            punkt listy.</p>
+    </section>
+
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>start</td>
+                <td>liczba</td>
+                <td>ustawia od którego numeru zaczyna się lista</td>
+            </tr>
+            <tr>
+                <td>reversed</td>
+                <td>reversed</td>
+                <td>odwraca kolejność numerowania</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znaczenie semantyczne <code>&lt;ol&gt;</code> informuje przeglądarkę i czytniki ekranu, że elementy mają
+            określoną kolejność. Dzięki temu użytkownik wie, że kolejność ma znaczenie i nie można jej zmieniać.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Lista uporządkowana</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>li</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>body, section, article, nav</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>block</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz sprawdzić działanie atrybutów <code>start</code> oraz <code>reversed</code> w
+            znaczniku <code>&lt;ol&gt;</code>. Dzięki nim zmieniasz sposób numerowania listy.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Start numeracji:
+                <select id="sim-ol-start">
+                    <option value="1">1</option>
+                    <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                </select>
+            </label>
+
+            <label>
+                Odwrócona lista:
+                <select id="sim-ol-reversed">
+                    <option value="false">wyłączone</option>
+                    <option value="true">włączone</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-ol"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-ol"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var startSel = document.getElementById("sim-ol-start");
+                var revSel = document.getElementById("sim-ol-reversed");
+
+                var kod = document.getElementById("sim-kod-ol");
+                var podgl = document.getElementById("sim-podglad-ol");
+
+                function aktualizuj() {
+
+                    var start = startSel.value;
+                    var reversed = revSel.value === "true";
+
+                    var items = ["Pierwszy element", "Drugi element", "Trzeci element", "Czwarty element"];
+
+                    var html = "<ol start='" + start + "'" + (reversed ? " reversed" : "") + ">\n";
+
+                    for (var i = 0; i < items.length; i++) {
+                        html += "  <li>" + items[i] + "</li>\n";
+                    }
+
+                    html += "</ol>";
+
+                    kod.textContent = html;
+
+                    podgl.innerHTML = "";
+
+                    var ol = document.createElement("ol");
+                    ol.start = parseInt(start, 10);
+
+                    if (reversed) {
+                        ol.reversed = true;
+                    }
+
+                    for (var j = 0; j < items.length; j++) {
+                        var li = document.createElement("li");
+                        li.textContent = items[j];
+                        ol.appendChild(li);
+                    }
+
+                    podgl.appendChild(ol);
+
+                }
+
+                startSel.addEventListener("change", aktualizuj);
+                revSel.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

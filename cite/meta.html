@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>meta</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;meta&gt;</strong> służy do przekazywania informacji o stronie internetowej przeglądarce,
+            wyszukiwarkom i innym programom. Umieszcza się go wewnątrz sekcji <code>&lt;head&gt;</code>.</p>
+        <p>Jest elementem <strong>pustym</strong>, więc nie zawiera treści i nie ma znacznika zamykającego.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>ustawić kodowanie znaków strony</li>
+            <li>określić opis strony dla wyszukiwarek</li>
+            <li>ustawić słowa kluczowe</li>
+            <li>sterować skalowaniem strony na urządzeniach mobilnych</li>
+            <li>przekazać informacje dla robotów wyszukiwarek</li>
+            <li>odświeżyć lub przekierować stronę</li>
+            <li>przekazać dodatkowe dane aplikacjom i przeglądarkom</li>
+        </ul>
+        <p>Najczęściej spotykane są znaczniki ustawiające <code>charset</code>, <code>viewport</code> oraz
+            <code>robots</code>.
+        </p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>charset</td>
+                <td>UTF-8 i inne kodowania</td>
+                <td>Określa kodowanie znaków dokumentu</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>description, keywords, author, viewport, robots, application-name, generator, referrer,
+                    color-scheme, theme-color</td>
+                <td>Definiuje rodzaj metadanych</td>
+            </tr>
+            <tr>
+                <td>content</td>
+                <td>Dowolny tekst zależny od atrybutu name</td>
+                <td>Zawiera wartość metadanych</td>
+            </tr>
+            <tr>
+                <td>http-equiv</td>
+                <td>refresh, content-type, default-style, x-ua-compatible, content-security-policy</td>
+                <td>Przekazuje instrukcje podobne do nagłówków HTTP</td>
+            </tr>
+            <tr>
+                <td>media</td>
+                <td>Zapytania media, np. screen and (max-width: 600px)</td>
+                <td>Określa dla jakich urządzeń obowiązują dane metadane</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;meta&gt;</strong> ma znaczenie semantyczne, ponieważ opisuje stronę i przekazuje
+            informacje o dokumencie. Czytniki ekranu zwykle nie odczytują większości metadanych użytkownikowi, ale
+            przeglądarki, wyszukiwarki i inne narzędzia wykorzystują je do poprawnego działania.</p>
+        <p>Google może używać opisu z <code>description</code>, a przeglądarka korzysta z <code>charset</code> i
+            <code>viewport</code> podczas wyświetlania strony.
+        </p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Pusty</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Nie (niekontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Metadane dokumentu HTML</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Żadnych elementów ani tekstu</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Głównie sekcji &lt;head&gt;</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>none</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze można sprawdzić najczęściej używane atrybuty i zastosowania znacznika meta.</p>
+
+        <div class="sim-controls">
+            <label>
+                Typ metadanych:
+                <select id="sim-meta-typ">
+                    <option value="charset">charset</option>
+                    <option value="description">description</option>
+                    <option value="keywords">keywords</option>
+                    <option value="author">author</option>
+                    <option value="viewport">viewport</option>
+                    <option value="robots">robots</option>
+                    <option value="refresh">refresh</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-meta"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-meta"></div>
+        </div>
+
+        <script>
+            (function () {
+                var typ = document.getElementById("sim-meta-typ");
+                var kod = document.getElementById("sim-kod-meta");
+                var podgl = document.getElementById("sim-podglad-meta");
+
+                function aktualizuj() {
+                    var v = typ.value;
+                    var html = "";
+                    var opis = "";
+
+                    if (v === "charset") {
+                        html = '<meta charset="UTF-8">';
+                        opis = "Kodowanie UTF-8 umożliwia poprawne wyświetlanie polskich znaków.";
+                    }
+                    else if (v === "description") {
+                        html = '<meta name="description" content="Opis strony internetowej">';
+                        opis = "Opis strony może pojawić się w wynikach wyszukiwania.";
+                    }
+                    else if (v === "keywords") {
+                        html = '<meta name="keywords" content="html, css, javascript">';
+                        opis = "Lista słów kluczowych związanych ze stroną.";
+                    }
+                    else if (v === "author") {
+                        html = '<meta name="author" content="Jan Kowalski">';
+                        opis = "Informacja o autorze strony.";
+                    }
+                    else if (v === "viewport") {
+                        html = '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+                        opis = "Dostosowanie strony do urządzeń mobilnych.";
+                    }
+                    else if (v === "robots") {
+                        html = '<meta name="robots" content="index,follow">';
+                        opis = "Instrukcje dla robotów wyszukiwarek.";
+                    }
+                    else {
+                        html = '<meta http-equiv="refresh" content="5">';
+                        opis = "Automatyczne odświeżenie strony po 5 sekundach.";
+                    }
+
+                    kod.textContent = html;
+
+                    while (podgl.firstChild) {
+                        podgl.removeChild(podgl.firstChild);
+                    }
+
+                    var p = document.createElement("p");
+                    p.textContent = opis;
+                    podgl.appendChild(p);
+                }
+
+                typ.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

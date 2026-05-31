@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>label</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;label&gt;</strong> służy do opisania pola formularza. Najczęściej łączy się go z
+            inputem, żeby użytkownik wiedział co ma wpisać albo kliknąć.</p>
+        <p>Jest elementem liniowym i nie tworzy nowej sekcji na stronie. Dobrze użyty poprawia dostępność formularza.
+        </p>
+        <p>Może działać na dwa sposoby: przez <code>for</code> albo przez otoczenie elementu input.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>opisać pole tekstowe w formularzu</li>
+            <li>powiązać tekst z checkboxem lub radiobuttonem</li>
+            <li>poprawić dostępność strony</li>
+            <li>umożliwić kliknięcie w tekst zamiast w małe pole</li>
+            <li>tworzyć czytelne formularze</li>
+            <li>ułatwić obsługę dla czytników ekranu</li>
+            <li>zwiększyć wygodę użytkownika</li>
+        </ul>
+        <p>Bez label formularz działa, ale jest mniej wygodny.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>for</td>
+                <td>id elementu</td>
+                <td>Łączy label z konkretnym inputem</td>
+            </tr>
+            <tr>
+                <td>form</td>
+                <td>id formularza</td>
+                <td>Przypisuje label do formularza</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;label&gt;</strong> ma duże znaczenie semantyczne w formularzach. Informuje przeglądarkę
+            i technologie wspomagające, do którego pola odnosi się opis.</p>
+        <p>Czytniki ekranu odczytują label razem z polem input, dzięki czemu użytkownik wie co ma wpisać.</p>
+        <p>To jeden z podstawowych elementów poprawnej dostępności formularzy.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Liniowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Etykieta pola formularza</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>tekst, input, select, textarea i inne elementy formularza</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>form, div, section, fieldset</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz sprawdzić jak działa powiązanie label z inputem przez atrybut <code>for</code> oraz
+            przez otoczenie elementu.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Tryb powiązania:
+                <select id="sim-label-mode">
+                    <option value="for">for + id</option>
+                    <option value="wrap">owinięcie input</option>
+                </select>
+            </label>
+
+            <label>
+                Tekst label:
+                <select id="sim-label-text">
+                    <option value="Imię">Imię</option>
+                    <option value="Nazwisko">Nazwisko</option>
+                    <option value="E-mail">E-mail</option>
+                    <option value="Hasło">Hasło</option>
+                </select>
+            </label>
+
+            <label>
+                Typ input:
+                <select id="sim-label-type">
+                    <option value="text">text</option>
+                    <option value="email">email</option>
+                    <option value="password">password</option>
+                    <option value="number">number</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-label"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-label"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var mode = document.getElementById("sim-label-mode");
+                var text = document.getElementById("sim-label-text");
+                var type = document.getElementById("sim-label-type");
+
+                var kod = document.getElementById("sim-kod-label");
+                var podglad = document.getElementById("sim-podglad-label");
+
+                function aktualizuj() {
+
+                    podglad.innerHTML = "";
+
+                    if (mode.value === "for") {
+
+                        kod.textContent =
+                            '<label for="inp1">' + text.value + '</label>\n' +
+                            '<input id="inp1" type="' + type.value + '">';
+
+                        var lab = document.createElement("label");
+                        lab.setAttribute("for", "inp1");
+                        lab.textContent = text.value;
+
+                        var inp = document.createElement("input");
+                        inp.id = "inp1";
+                        inp.type = type.value;
+
+                        podglad.appendChild(lab);
+                        podglad.appendChild(inp);
+
+                    } else {
+
+                        kod.textContent =
+                            '<label>' + text.value + '<input type="' + type.value + '"></label>';
+
+                        var lab2 = document.createElement("label");
+                        lab2.textContent = text.value;
+
+                        var inp2 = document.createElement("input");
+                        inp2.type = type.value;
+
+                        lab2.appendChild(inp2);
+                        podglad.appendChild(lab2);
+
+                    }
+
+                }
+
+                mode.addEventListener("change", aktualizuj);
+                text.addEventListener("change", aktualizuj);
+                type.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

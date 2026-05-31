@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>li</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;li&gt;</strong> to element listy w HTML. Służy do tworzenia pojedynczych punktów w
+            listach uporządkowanych i nieuporządkowanych.</p>
+        <p>Jest elementem blokowym w kontekście list, ale zależy od stylowania rodzica. Sam zawsze występuje wewnątrz
+            <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code> albo <code>&lt;menu&gt;</code>.
+        </p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>tworzyć listy punktowane w <code>&lt;ul&gt;</code></li>
+            <li>tworzyć listy numerowane w <code>&lt;ol&gt;</code></li>
+            <li>porządkować informacje w formie kroków</li>
+            <li>robić menu na stronach</li>
+            <li>grupować elementy nawigacji</li>
+        </ul>
+        <p>Jeśli nie potrzebujesz struktury listy, lepiej użyć zwykłych <code>&lt;div&gt;</code> lub sekcji.</p>
+    </section>
+
+    <section></section>
+
+    <section>
+        <p>Znacznik <strong>&lt;li&gt;</strong> ma znaczenie semantyczne, bo mówi przeglądarce i czytnikom ekranu, że to
+            element listy. Dzięki temu użytkownik wie, że dane elementy są częścią większej grupy.</p>
+        <p>Czytniki ekranu potrafią odczytać ile elementów jest w liście i który punkt jest aktualnie czytany.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Element listy w strukturze <code>ul/ol</code></td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst, linki, elementy blokowe i inline</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>ul, ol, menu</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>list-item</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Krótki opis co można tu wypróbować. Możesz zmieniać atrybut <code>value</code> oraz sprawdzić jak wpływa na
+            numerację w liście uporządkowanej.</p>
+
+        <div class="sim-controls">
+            <label>
+                Wartość atrybutu value:
+                <select id="sim-li">
+                    <option value="auto">auto</option>
+                    <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var sel = document.getElementById("sim-li");
+                var kod = document.getElementById("sim-kod");
+                var podgl = document.getElementById("sim-podglad");
+
+                function aktualizuj() {
+                    var v = sel.value;
+
+                    var html = "<ol>\n" +
+                        "<li>Element 1</li>\n" +
+                        "<li value='" + v + "'>Element 2</li>\n" +
+                        "<li>Element 3</li>\n" +
+                        "</ol>";
+
+                    kod.textContent = html;
+
+                    podgl.innerHTML = "";
+
+                    var wrapper = document.createElement("div");
+                    wrapper.style.padding = "10px";
+
+                    var ol = document.createElement("ol");
+
+                    var li1 = document.createElement("li");
+
+                    li1.textContent = "Element 1";
+
+                    var li2 = document.createElement("li");
+                    li2.textContent = "Element 2";
+                    if (v !== "auto") {
+                        li2.setAttribute("value", v);
+                    }
+
+                    var li3 = document.createElement("li");
+                    li3.textContent = "Element 3";
+
+                    ol.appendChild(li1);
+                    ol.appendChild(li2);
+                    ol.appendChild(li3);
+
+                    wrapper.appendChild(ol);
+                    podgl.appendChild(wrapper);
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

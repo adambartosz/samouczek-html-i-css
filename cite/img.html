@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>img</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+
+    <section>
+        <p>Znacznik <strong>&lt;img&gt;</strong> służy do wyświetlania obrazków na stronie. Jest to element pusty,
+            czyli nie ma tagu zamykającego.</p>
+        <p>Obrazek wstawia się przez atrybut <code>src</code>, a opis alternatywny daje <code>alt</code>.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>pokazać zdjęcie lub grafikę</li>
+            <li>dodać ikonę na stronie</li>
+            <li>wyświetlić ilustracje do treści</li>
+            <li>zrobić interfejs graficzny</li>
+        </ul>
+        <p>Bez <code>&lt;img&gt;</code> strony byłyby tylko tekstem.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>src</td>
+                <td>URL, ścieżka względna</td>
+                <td>Źródło obrazka</td>
+            </tr>
+            <tr>
+                <td>alt</td>
+                <td>tekst</td>
+                <td>Opis obrazka dla czytników ekranu</td>
+            </tr>
+            <tr>
+                <td>width</td>
+                <td>px, %</td>
+                <td>Szerokość obrazka</td>
+            </tr>
+            <tr>
+                <td>height</td>
+                <td>px, %</td>
+                <td>Wysokość obrazka</td>
+            </tr>
+            <tr>
+                <td>loading</td>
+                <td>lazy, eager</td>
+                <td>Sposób ładowania</td>
+            </tr>
+            <tr>
+                <td>decoding</td>
+                <td>async, sync, auto</td>
+                <td>Sposób dekodowania</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <code>&lt;img&gt;</code> ma duże znaczenie semantyczne, szczególnie przez <code>alt</code>.</p>
+        <p>Czytniki ekranu czytają tekst alternatywny, gdy obrazek się nie wyświetli.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Pusty</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Nie (niekontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Obraz / treść graficzna</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>brak (element pusty)</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>div, p, section, a</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze sprawdzisz jak działa <code>&lt;img&gt;</code> w dwóch trybach: poprawny/uszkodzony link
+            oraz z <code>alt</code> i bez <code>alt</code>. Gdy obraz się nie wczyta i nie ma alt, podmieniamy go na
+            „pusty obraz” (taki jakby placeholder), czyli zwykły <code>&lt;img src="loremipsum"&gt;</code>.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Stan obrazka:
+                <select id="sim-img-src">
+                    <option value="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg">poprawny
+                    </option>
+                    <option value="https://example.com/broken-image.jpg">uszkodzony</option>
+                </select>
+            </label>
+
+            <label>
+                Alt:
+                <select id="sim-img-alt">
+                    <option value="1">z alt</option>
+                    <option value="0">bez alt</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-img"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-img"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var src = document.getElementById("sim-img-src");
+                var altMode = document.getElementById("sim-img-alt");
+
+                var kod = document.getElementById("sim-kod-img");
+                var podglad = document.getElementById("sim-podglad-img");
+
+                function aktualizuj() {
+
+                    var s = src.value;
+                    var mode = altMode.value;
+
+                    podglad.innerHTML = "";
+
+                    var img = document.createElement("img");
+                    img.style.maxWidth = "100%";
+
+                    if (mode === "1") {
+                        img.alt = "Opis obrazka: góry";
+                        kod.textContent = '<img src="' + s + '" alt="Opis obrazka: góry">';
+                    } else {
+                        kod.textContent = '<img src="' + s + '">';
+                    }
+
+                    img.src = s;
+
+                    img.onerror = function () {
+
+                        podglad.innerHTML = "";
+
+                        if (mode === "0") {
+                            var fallback = document.createElement("img");
+                            fallback.src = "loremipsum";
+                            fallback.alt = "";
+                            fallback.style.maxWidth = "100%";
+
+                            podglad.appendChild(fallback);
+                        } else {
+                            var box = document.createElement("div");
+                            box.style.cssText = "padding:10px;border:1px solid #aaa;background:#f5f5f5;color:#333;";
+                            box.textContent = "Obraz nie został wczytany, ale istnieje alt: " + img.alt;
+                            podglad.appendChild(box);
+                        }
+
+                    };
+
+                    podglad.appendChild(img);
+
+                }
+
+                src.addEventListener("change", aktualizuj);
+                altMode.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

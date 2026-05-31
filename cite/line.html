@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>line</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;line&gt;</strong> służy do rysowania pojedynczej linii w SVG. Łączy dwa punkty:
+            początkowy i końcowy, tworząc prosty odcinek.</p>
+        <p>Jest to element SVG, więc musi znajdować się wewnątrz <code>&lt;svg&gt;</code>. Sam w sobie nie działa w HTML
+            i nie wyświetli nic bez kontenera SVG.</p>
+        <p>Linia nie ma wypełnienia, tylko obrys, dlatego najczęściej styluje się ją kolorem i grubością.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>narysować prostą linię między dwoma punktami</li>
+            <li>tworzyć wykresy i diagramy</li>
+            <li>rysować połączenia w schematach</li>
+            <li>budować siatki i układy pomocnicze</li>
+            <li>oznaczać kierunki lub strzałki (z dodatkiem markerów)</li>
+            <li>tworzyć elementy interfejsów SVG</li>
+            <li>rysować proste podziały graficzne</li>
+        </ul>
+        <p>Jeżeli potrzebna jest łamana linia, lepiej użyć <code>&lt;polyline&gt;</code>.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>x1</td>
+                <td>liczba lub jednostka</td>
+                <td>Pozycja początkowa linii w osi X</td>
+            </tr>
+            <tr>
+                <td>y1</td>
+                <td>liczba lub jednostka</td>
+                <td>Pozycja początkowa linii w osi Y</td>
+            </tr>
+            <tr>
+                <td>x2</td>
+                <td>liczba lub jednostka</td>
+                <td>Pozycja końcowa linii w osi X</td>
+            </tr>
+            <tr>
+                <td>y2</td>
+                <td>liczba lub jednostka</td>
+                <td>Pozycja końcowa linii w osi Y</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;line&gt;</strong> opisuje prosty odcinek w grafice SVG. Informuje przeglądarkę, że
+            należy połączyć dwa punkty linią.</p>
+        <p>Nie jest to znacznik HTML semantyczny, ale element graficzny SVG używany do budowania rysunków i schematów.
+        </p>
+        <p>Może być interpretowany przez narzędzia graficzne jako pojedynczy segment bez wypełnienia.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Pusty</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Nie (niekontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Odcinek linii SVG</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Żadnych elementów</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>svg, g, symbol, marker, pattern, mask, clipPath i innych kontenerów SVG</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz zmieniać współrzędne punktów linii SVG. Zmienia się zarówno kod HTML, jak i podgląd
+            graficzny.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                x1:
+                <select id="sim-x1-line">
+                    <option value="10">10</option>
+                    <option value="30" selected>30</option>
+                    <option value="50">50</option>
+                    <option value="70">70</option>
+                </select>
+            </label>
+
+            <label>
+                y1:
+                <select id="sim-y1-line">
+                    <option value="10">10</option>
+                    <option value="30" selected>30</option>
+                    <option value="50">50</option>
+                    <option value="70">70</option>
+                </select>
+            </label>
+
+            <label>
+                x2:
+                <select id="sim-x2-line">
+                    <option value="100">100</option>
+                    <option value="150" selected>150</option>
+                    <option value="180">180</option>
+                    <option value="200">200</option>
+                </select>
+            </label>
+
+            <label>
+                y2:
+                <select id="sim-y2-line">
+                    <option value="10">10</option>
+                    <option value="60" selected>60</option>
+                    <option value="100">100</option>
+                    <option value="150">150</option>
+                </select>
+            </label>
+
+            <label>
+                kolor:
+                <select id="sim-stroke-line">
+                    <option value="black">czarny</option>
+                    <option value="red">czerwony</option>
+                    <option value="blue">niebieski</option>
+                    <option value="green">zielony</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-line"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-line"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var x1 = document.getElementById("sim-x1-line");
+                var y1 = document.getElementById("sim-y1-line");
+                var x2 = document.getElementById("sim-x2-line");
+                var y2 = document.getElementById("sim-y2-line");
+                var stroke = document.getElementById("sim-stroke-line");
+
+                var kod = document.getElementById("sim-kod-line");
+                var podglad = document.getElementById("sim-podglad-line");
+
+                function aktualizuj() {
+
+                    kod.textContent =
+                        '<svg width="250" height="150">\n' +
+                        '    <line x1="' + x1.value +
+                        '" y1="' + y1.value +
+                        '" x2="' + x2.value +
+                        '" y2="' + y2.value +
+                        '" stroke="' + stroke.value +
+                        '" stroke-width="3"/>\n' +
+                        '</svg>';
+
+                    podglad.innerHTML = "";
+
+                    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                    svg.setAttribute("width", "250");
+                    svg.setAttribute("height", "150");
+
+                    var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+
+                    line.setAttribute("x1", x1.value);
+                    line.setAttribute("y1", y1.value);
+                    line.setAttribute("x2", x2.value);
+                    line.setAttribute("y2", y2.value);
+                    line.setAttribute("stroke", stroke.value);
+                    line.setAttribute("stroke-width", "3");
+
+                    svg.appendChild(line);
+                    podglad.appendChild(svg);
+
+                }
+
+                x1.addEventListener("change", aktualizuj);
+                y1.addEventListener("change", aktualizuj);
+                x2.addEventListener("change", aktualizuj);
+                y2.addEventListener("change", aktualizuj);
+                stroke.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

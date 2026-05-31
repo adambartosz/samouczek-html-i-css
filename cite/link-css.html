@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>link</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;link&gt;</strong> służy do podłączania zewnętrznych zasobów do dokumentu HTML.
+            Najczęściej używa się go do dołączania arkuszy CSS za pomocą atrybutu <code>rel="stylesheet"</code>.</p>
+        <p>Jest elementem <strong>pustym</strong>, więc nie posiada zawartości ani znacznika zamykającego.</p>
+        <p>Najczęściej znajduje się w sekcji <code>&lt;head&gt;</code> strony.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>podłączyć zewnętrzny arkusz stylów CSS</li>
+            <li>załadować ikonę strony favicon</li>
+            <li>połączyć dokument z innym zasobem</li>
+            <li>przyspieszyć ładowanie niektórych zasobów przez preload</li>
+            <li>zdefiniować relacje pomiędzy dokumentami</li>
+        </ul>
+        <p>Jeżeli chcemy osadzić kod CSS bezpośrednio w pliku HTML, zamiast <code>&lt;link&gt;</code> można użyć
+            znacznika <code>&lt;style&gt;</code>.</p>
+        <p>Bardzo często za pomocą <code>&lt;link rel="stylesheet"&gt;</code> podłącza się również tak zwany
+            <strong>arkusz zerujący Meyera (Meyer Reset CSS)</strong>. Jego zadaniem jest usunięcie domyślnych
+            marginesów, odstępów i stylów dodawanych przez przeglądarki, dzięki czemu strona wygląda bardziej
+            przewidywalnie na różnych urządzeniach.
+        </p>
+
+        <pre><code>&lt;link rel="stylesheet" href="../css/arkuszzerujacy.css"&gt;<br>
+&lt;link rel="stylesheet" href="../css/style.css"&gt;</code></pre>
+
+        <p>Najpierw ładowany jest arkusz zerujący, a dopiero później właściwy plik ze stylami strony. Dzięki temu własne
+            reguły CSS nadpisują ustawienia resetu.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>href</td>
+                <td>adres URL lub ścieżka</td>
+                <td>Wskazuje położenie zasobu</td>
+            </tr>
+            <tr>
+                <td>rel</td>
+                <td>stylesheet</td>
+                <td>Informuje przeglądarkę, że podłączany plik jest arkuszem stylów CSS (np. style.css lub arkusz
+                    zerujący Meyera)</td>
+            </tr>
+            <tr>
+                <td>media</td>
+                <td>all, screen, print i zapytania media</td>
+                <td>Określa kiedy zasób ma być używany</td>
+            </tr>
+            <tr>
+                <td>sizes</td>
+                <td>np. 16x16, 32x32, 180x180</td>
+                <td>Rozmiar ikony</td>
+            </tr>
+            <tr>
+                <td>imagesizes</td>
+                <td>wartości atrybutu sizes</td>
+                <td>Rozmiary obrazów dla niektórych relacji</td>
+            </tr>
+            <tr>
+                <td>imagesrcset</td>
+                <td>lista obrazów srcset</td>
+                <td>Alternatywne wersje obrazów</td>
+            </tr>
+            <tr>
+                <td>crossorigin</td>
+                <td>anonymous, use-credentials</td>
+                <td>Kontrola żądań między domenami</td>
+            </tr>
+            <tr>
+                <td>integrity</td>
+                <td>hash SRI</td>
+                <td>Sprawdza integralność pliku</td>
+            </tr>
+            <tr>
+                <td>referrerpolicy</td>
+                <td>no-referrer, origin, strict-origin i inne</td>
+                <td>Kontroluje nagłówek Referer</td>
+            </tr>
+            <tr>
+                <td>blocking</td>
+                <td>render</td>
+                <td>Wpływa na blokowanie renderowania</td>
+            </tr>
+            <tr>
+                <td>fetchpriority</td>
+                <td>high, low, auto</td>
+                <td>Priorytet pobierania zasobu</td>
+            </tr>
+            <tr>
+                <td>disabled</td>
+                <td>disabled</td>
+                <td>Wyłącza arkusz stylów</td>
+            </tr>
+            <tr>
+                <td>as</td>
+                <td>style, script, font, image, fetch i inne</td>
+                <td>Typ pobieranego zasobu przy preload</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>typ MIME, np. text/css</td>
+                <td>Typ zasobu</td>
+            </tr>
+            <tr>
+                <td>hreflang</td>
+                <td>kod języka</td>
+                <td>Język powiązanego zasobu</td>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td>tekst</td>
+                <td>Nazwa alternatywnego arkusza stylów</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;link&gt;</strong> ma znaczenie semantyczne, ponieważ informuje przeglądarkę o relacji
+            pomiędzy bieżącym dokumentem a zewnętrznym zasobem.</p>
+        <p>Czytniki ekranu zwykle nie odczytują go użytkownikowi, ale przeglądarka wykorzystuje jego informacje do
+            ładowania stylów, ikon i innych plików.</p>
+        <p>Roboty wyszukiwarek również mogą korzystać z informacji zapisanych w atrybucie <code>rel</code>.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Pusty</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Nie (niekontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Określa relację dokumentu z zewnętrznym zasobem</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Żadnych elementów ani tekstu</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Najczęściej head, w wybranych przypadkach body</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>none</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze można sprawdzić najczęściej używane atrybuty znacznika <code>&lt;link&gt;</code> podczas
+            podłączania arkusza CSS.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Href:
+                <select id="sim-href">
+                    <option value="../css/style.css">style.css</option>
+                    <option value="../css/arkuszerujacy.css">arkuszZerujacyMeyera.css</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var href = document.getElementById("sim-href");
+                var kod = document.getElementById("sim-kod");
+                var podgl = document.getElementById("sim-podglad");
+
+                function aktualizuj() {
+                    kod.textContent = '<link rel="stylesheet" href="' + href.value + '">';
+
+                    podgl.innerHTML = "";
+                    var p2 = document.createElement("p");
+                    p2.textContent = "Plik: " + href.value;
+
+                    podgl.appendChild(p2);
+
+                    document.querySelector("link:nth-of-type(2)").href = `../css/${href.value}`;
+                }
+
+                href.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

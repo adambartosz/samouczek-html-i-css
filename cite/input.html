@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>input</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;input&gt;</strong> to podstawowe pole formularza w HTML. Używa się go do wprowadzania
+            danych przez użytkownika w różnych formach, zależnie od ustawionego typu.</p>
+        <p>Jest elementem liniowym i nie ma zamykającego znacznika. Wszystko, co robi, zależy od atrybutu
+            <code>type</code>, który zmienia jego zachowanie.
+        </p>
+        <p>To jeden z najczęściej używanych elementów w formularzach HTML.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>pobrać tekst od użytkownika</li>
+            <li>tworzyć logowanie i rejestrację</li>
+            <li>dodawać hasła i zabezpieczenia</li>
+            <li>wybierać daty, liczby i zakresy</li>
+            <li>dodawać checkboxy i opcje wyboru</li>
+            <li>przesyłać pliki</li>
+            <li>tworzyć formularze kontaktowe i ankiety</li>
+        </ul>
+        <p>Każdy typ <code>input</code> ma inne zastosowanie i wygląd.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>text, password, email, number, checkbox, radio, file, date, time, range, color, submit, reset,
+                    hidden, search, tel, url, image</td>
+                <td>Określa typ pola i jego zachowanie</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>tekst</td>
+                <td>Nazwa pola wysyłana do serwera</td>
+            </tr>
+            <tr>
+                <td>value</td>
+                <td>tekst</td>
+                <td>Domyślna lub aktualna wartość</td>
+            </tr>
+            <tr>
+                <td>placeholder</td>
+                <td>tekst</td>
+                <td>Podpowiedź w polu</td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td>required</td>
+                <td>Wymaga wypełnienia pola</td>
+            </tr>
+            <tr>
+                <td>disabled</td>
+                <td>disabled</td>
+                <td>Wyłącza pole</td>
+            </tr>
+            <tr>
+                <td>readonly</td>
+                <td>readonly</td>
+                <td>Pole tylko do odczytu</td>
+            </tr>
+            <tr>
+                <td>min</td>
+                <td>liczba, data</td>
+                <td>Minimalna wartość</td>
+            </tr>
+            <tr>
+                <td>max</td>
+                <td>liczba, data</td>
+                <td>Maksymalna wartość</td>
+            </tr>
+            <tr>
+                <td>step</td>
+                <td>liczba</td>
+                <td>Skok wartości</td>
+            </tr>
+            <tr>
+                <td>minlength</td>
+                <td>liczba</td>
+                <td>Minimalna długość tekstu</td>
+            </tr>
+            <tr>
+                <td>maxlength</td>
+                <td>liczba</td>
+                <td>Maksymalna długość tekstu</td>
+            </tr>
+            <tr>
+                <td>autocomplete</td>
+                <td>on, off</td>
+                <td>Podpowiedzi przeglądarki</td>
+            </tr>
+            <tr>
+                <td>checked</td>
+                <td>checked</td>
+                <td>Domyślnie zaznaczone (checkbox/radio)</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;input&gt;</strong> ma bardzo duże znaczenie semantyczne w formularzach. Przeglądarka
+            rozumie jego typ i dostosowuje sposób wprowadzania danych.</p>
+        <p>Czytniki ekranu informują użytkownika, jaki typ danych ma wpisać, np. hasło, e-mail czy liczba.</p>
+        <p>To element kluczowy dla dostępności i poprawnego działania formularzy.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Liniowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Nie (niekontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Pole wprowadzania danych formularza</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Brak (element pusty)</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>form, label, fieldset, div, section</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz przetestować różne typy inputów i zobaczyć jak zmienia się ich działanie oraz kod
+            HTML.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Typ input:
+                <select id="sim-type-input">
+                    <option value="text">text</option>
+                    <option value="password">password</option>
+                    <option value="email">email</option>
+                    <option value="number">number</option>
+                    <option value="checkbox">checkbox</option>
+                    <option value="radio">radio</option>
+                    <option value="file">file</option>
+                    <option value="date">date</option>
+                    <option value="time">time</option>
+                    <option value="range">range</option>
+                    <option value="color">color</option>
+                    <option value="search">search</option>
+                    <option value="tel">tel</option>
+                    <option value="url">url</option>
+                    <option value="submit">submit</option>
+                    <option value="reset">reset</option>
+                    <option value="hidden">hidden</option>
+                </select>
+            </label>
+
+            <label>
+                Required:
+                <select id="sim-required-input">
+                    <option value="">brak</option>
+                    <option value="required">required</option>
+                </select>
+            </label>
+
+            <label>
+                Disabled:
+                <select id="sim-disabled-input">
+                    <option value="">brak</option>
+                    <option value="disabled">disabled</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-input"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-input"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var type = document.getElementById("sim-type-input");
+                var req = document.getElementById("sim-required-input");
+                var dis = document.getElementById("sim-disabled-input");
+
+                var kod = document.getElementById("sim-kod-input");
+                var podglad = document.getElementById("sim-podglad-input");
+
+                function aktualizuj() {
+
+                    var attrReq = req.value ? " " + req.value : "";
+                    var attrDis = dis.value ? " " + dis.value : "";
+
+                    kod.textContent =
+                        '<form>\n<input type="' + type.value + '"' + attrReq + attrDis + '>\n</form>';
+
+                    podglad.innerHTML = "<form></form>";
+
+                    if (type.value === "checkbox" || type.value === "radio") {
+                        var el = document.createElement("input");
+                        el.type = type.value;
+                        el.required = req.value === "required";
+                        el.disabled = dis.value === "disabled";
+                        podglad.appendChild(el);
+                    } else {
+                        var el2 = document.createElement("input");
+                        el2.type = type.value;
+                        el2.required = req.value === "required";
+                        el2.disabled = dis.value === "disabled";
+                        podglad.querySelector("form").appendChild(el2);
+                    }
+
+                }
+
+                type.addEventListener("change", aktualizuj);
+                req.addEventListener("change", aktualizuj);
+                dis.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

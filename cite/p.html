@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>p</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;p&gt;</strong> służy do tworzenia akapitów tekstu w HTML. To podstawowy element do
+            pisania treści na stronie.</p>
+        <p>Jest elementem <strong>blokowym</strong>, więc każdy akapit zaczyna się od nowej linii i zajmuje całą
+            szerokość kontenera.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>podzielić tekst na czytelne fragmenty</li>
+            <li>tworzyć artykuły i opisy</li>
+            <li>oddzielić myśli w treści strony</li>
+            <li>zachować strukturę tekstu</li>
+        </ul>
+        <p>Nie używa się go do tworzenia odstępów między elementami — do tego są CSS.</p>
+    </section>
+
+    <section>
+
+    </section>
+
+    <section>
+        <p>Znacznik <code>&lt;p&gt;</code> ma znaczenie semantyczne. Informuje przeglądarkę i czytniki ekranu, że jest
+            to osobny akapit tekstu.</p>
+        <p>Google i inne wyszukiwarki używają akapitów do analizy treści strony.</p>
+        <p>Czytniki ekranu traktują każdy <code>p</code> jako osobny blok informacji.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Akapit tekstu</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst i elementy liniowe</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Elementów blokowych (np. article, section, div)</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>block</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz zobaczyć kilka akapitów <code>&lt;p&gt;</code> jeden pod drugim. Możesz zmieniać ich
+            liczbę i tekst.</p>
+
+        <div class="sim-controls">
+            <label>
+                Ilość akapitów:
+                <select id="sim-p-count">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3" selected>3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </label>
+
+            <label>
+                Typ tekstu:
+                <select id="sim-p-text">
+                    <option value="krótki">krótki tekst</option>
+                    <option value="średni">średni tekst akapitu do testów</option>
+                    <option value="długi">długi tekst akapitu, który sprawdza zawijanie linii</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-p"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-p"></div>
+        </div>
+
+        <script>
+            (function () {
+
+                var count = document.getElementById("sim-p-count");
+                var text = document.getElementById("sim-p-text");
+
+                var kod = document.getElementById("sim-kod-p");
+                var podglad = document.getElementById("sim-podglad-p");
+
+                function getText(v) {
+                    if (v === "krótki") return "To jest krótki akapit.";
+                    if (v === "długi") return "To jest bardzo długi akapit tekstu, który pokazuje jak działa zawijanie linii w elemencie p oraz jak zachowuje się w bloku.";
+                    return "To jest średni akapit tekstu do testów.";
+                }
+
+                function aktualizuj() {
+
+                    var ile = parseInt(count.value);
+                    var txt = getText(text.value);
+
+                    kod.textContent = "";
+                    podglad.innerHTML = "";
+
+                    var kontener = document.createElement("div");
+
+                    for (let i = 0; i < ile; i++) {
+                        var p = document.createElement("p");
+                        p.textContent = txt;
+                        p.style.cssText = "margin:6px 0; line-height:1.6;";
+                        kontener.appendChild(p);
+
+                        kod.textContent += "<p>" + txt + "</p>\n";
+                    }
+
+                    podglad.appendChild(kontener);
+                }
+
+                count.addEventListener("change", aktualizuj);
+                text.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>

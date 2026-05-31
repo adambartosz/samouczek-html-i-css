@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>ins</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;ins&gt;</strong> oznacza tekst dodany. Najczęściej używa się go razem z
+            <code>&lt;del&gt;</code>.
+        </p>
+        <p>Jest liniowy i działa w środku tekstu.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy:</p>
+        <ul>
+            <li>coś zostało dodane</li>
+            <li>pokazujemy zmiany w treści</li>
+            <li>robimy historię edycji</li>
+        </ul>
+        <p>Może mieć też atrybut datetime.</p>
+    </section>
+
+    <section></section>
+
+    <section>
+        <p><code>&lt;ins&gt;</code> oznacza nową treść.</p>
+        <p>Czytniki traktują to jako dopisaną informację.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Liniowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Dodana treść</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst i elementy liniowe</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Elementów blokowych i liniowych</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W symulatorze zobaczysz podkreślony tekst.</p>
+
+        <div class="sim-controls">
+            <label>
+                Tryb:
+                <select id="sim-ins-mode">
+                    <option value="off">normalny</option>
+                    <option value="ins">ins</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-ins"></pre>
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-ins"></div>
+        </div>
+
+        <script>
+            (function () {
+
+                var mode = document.getElementById("sim-ins-mode");
+                var kod = document.getElementById("sim-kod-ins");
+                var podglad = document.getElementById("sim-podglad-ins");
+
+                var tekst = "Ten tekst został podkreślony";
+
+                function aktualizuj() {
+
+                    podglad.innerHTML = "";
+
+                    var p = document.createElement("p");
+
+                    if (mode.value === "ins") {
+                        p.innerHTML = "Ten tekst został <ins>podkreślony</ins>";
+                        kod.textContent = "<p>Ten tekst został <ins>podkreślony</ins></p>";
+                    } else {
+                        p.textContent = tekst;
+                        kod.textContent = "<p>" + tekst + "</p>";
+                    }
+
+                    podglad.appendChild(p);
+
+                }
+
+                mode.addEventListener("change", aktualizuj);
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

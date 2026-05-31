@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>min-width, max-width</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="wlasciwosc">
+
+    <section>
+        <p>Właściwości <strong>min-width</strong> i <strong>max-width</strong> kontrolują minimalną i maksymalną
+            szerokość elementu. Dzięki nim element nie może być ani za mały, ani za duży.</p>
+
+        <p><code>min-width</code> ustala najmniejszą możliwą szerokość, a <code>max-width</code> największą.</p>
+
+        <p>Stosuje się je głównie w responsywnych stronach.</p>
+    </section>
+
+    <section>
+        <p>Składnia: <code>właściwość: wartość;</code></p>
+
+        <table>
+            <tr>
+                <th>Wartość</th>
+                <th>Co robi</th>
+            </tr>
+
+            <tr>
+                <td>px</td>
+                <td>stała szerokość w pikselach</td>
+            </tr>
+
+            <tr>
+                <td>%</td>
+                <td>procent względem rodzica</td>
+            </tr>
+
+            <tr>
+                <td>vw</td>
+                <td>procent szerokości okna</td>
+            </tr>
+
+            <tr>
+                <td>none</td>
+                <td>brak ograniczenia (dla max-width)</td>
+            </tr>
+
+            <tr>
+                <td>inherit</td>
+                <td>dziedziczenie od rodzica</td>
+            </tr>
+
+            <tr>
+                <td>initial</td>
+                <td>wartość domyślna</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Domyślnie <code>min-width</code> wynosi <code>0</code>, a <code>max-width</code> to <code>none</code>.</p>
+
+        <p>To oznacza, że element może się kurczyć i rozciągać bez ograniczeń.</p>
+
+        <p><code>initial</code> resetuje wartości, a <code>inherit</code> przejmuje je od rodzica.</p>
+    </section>
+
+    <section>
+        <p>Te właściwości są bardzo ważne w responsywności.</p>
+
+        <p>Przykład: obrazek nigdy nie wyjdzie poza ekran.</p>
+
+        <pre><code>img {
+    max-width: 100%;
+}</code></pre>
+
+        <p>Można też wymusić minimalny rozmiar elementu.</p>
+
+        <pre><code>div {
+    min-width: 200px;
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Przykłady użycia:</p>
+
+        <pre><code>.box {
+    min-width: 200px;
+    max-width: 600px;
+}</code></pre>
+
+        <pre><code>img {
+    max-width: 100%;
+    height: auto;
+}</code></pre>
+
+        <pre><code>.container {
+    min-width: 300px;
+    max-width: 1200px;
+}</code></pre>
+
+        <p>Dzięki temu layout nie „rozjeżdża się” na różnych ekranach.</p>
+    </section>
+
+    <section>
+        <p>Symulator: sprawdź jak działa ograniczanie szerokości elementu.</p>
+
+        <div class="sim-controls">
+            <label>
+                Szerokość:
+                <select id="sim-width">
+                    <option value="100px">100px</option>
+                    <option value="200px">200px</option>
+                    <option value="400px">400px</option>
+                    <option value="800px">800px</option>
+                    <option value="1200px">1200px</option>
+                </select>
+            </label>
+
+            <label>
+                Max-width:
+                <select id="sim-max">
+                    <option value="none">none</option>
+                    <option value="300px">300px</option>
+                    <option value="500px">500px</option>
+                    <option value="700px">700px</option>
+                </select>
+            </label>
+
+            <label>
+                Min-width:
+                <select id="sim-min">
+                    <option value="0px">0px</option>
+                    <option value="150px">150px</option>
+                    <option value="300px">300px</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var w = document.getElementById("sim-width");
+                var mx = document.getElementById("sim-max");
+                var mn = document.getElementById("sim-min");
+                var kod = document.getElementById("sim-kod");
+                var pod = document.getElementById("sim-podglad");
+
+                function update() {
+                    var width = w.value;
+                    var max = mx.value;
+                    var min = mn.value;
+
+                    kod.textContent =
+                        "width: " + width + ";\n" +
+                        "max-width: " + max + ";\n" +
+                        "min-width: " + min + ";";
+
+                    while (pod.firstChild) {
+                        pod.removeChild(pod.firstChild);
+                    }
+
+                    var box = document.createElement("div");
+                    box.textContent = "BOX";
+                    box.style.cssText =
+                        "background:#ddd;border:2px solid black;display:flex;align-items:center;justify-content:center;" +
+                        "width:" + width + ";max-width:" + max + ";min-width:" + min + ";height:80px;";
+
+                    pod.appendChild(box);
+                }
+
+                w.addEventListener("change", update);
+                mx.addEventListener("change", update);
+                mn.addEventListener("change", update);
+
+                update();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

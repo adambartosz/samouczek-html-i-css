@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>kolory w css</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="wlasciwosc">
+
+    <section>
+        <p>Kolory w CSS służą do ustawiania wyglądu elementów, np. tekstu, tła czy obramowania. Najczęściej używa się
+            ich w właściwościach <code>color</code> i <code>background-color</code>.</p>
+
+        <p>Kolor można zapisać na kilka sposobów: nazwą, HEX, RGB, RGBA, HSL i HSLA.</p>
+
+        <p>To jedna z podstawowych rzeczy przy stylowaniu stron.</p>
+    </section>
+
+    <section>
+        <p>Składnia: <code>color: wartość;</code> lub <code>background-color: wartość;</code></p>
+
+        <table>
+            <tr>
+                <th>Format</th>
+                <th>Przykład</th>
+                <th>Co robi</th>
+            </tr>
+
+            <tr>
+                <td>nazwa</td>
+                <td>red, blue, green</td>
+                <td>prosty zapis koloru</td>
+            </tr>
+
+            <tr>
+                <td>HEX</td>
+                <td>#ff0000</td>
+                <td>kolor w systemie szesnastkowym</td>
+            </tr>
+
+            <tr>
+                <td>RGB</td>
+                <td>rgb(255,0,0)</td>
+                <td>kolor z czerwonym, zielonym, niebieskim</td>
+            </tr>
+
+            <tr>
+                <td>RGBA</td>
+                <td>rgba(255,0,0,0.5)</td>
+                <td>jak RGB + przezroczystość</td>
+            </tr>
+
+            <tr>
+                <td>HSL</td>
+                <td>hsl(0,100%,50%)</td>
+                <td>kolor przez odcień, nasycenie i jasność</td>
+            </tr>
+
+            <tr>
+                <td>HSLA</td>
+                <td>hsla(0,100%,50%,0.5)</td>
+                <td>HSL + przezroczystość</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Domyślnie tekst ma kolor czarny, czyli <code>color: black</code>.</p>
+
+        <p>Tło jest przezroczyste, czyli <code>background-color: transparent</code>.</p>
+
+        <p><code>initial</code> resetuje kolor, a <code>inherit</code> pobiera go od rodzica.</p>
+    </section>
+
+    <section>
+        <p>Kolory nie są dziedziczone automatycznie w każdym przypadku, ale <code>color</code> zwykle się dziedziczy.
+        </p>
+
+        <p><code>background-color</code> nie jest dziedziczony.</p>
+
+        <pre><code>p {
+    color: red;
+    background-color: yellow;
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Przykłady użycia:</p>
+
+        <pre><code>h1 {
+    color: blue;
+}</code></pre>
+
+        <pre><code>div {
+    background-color: #f0f0f0;
+}</code></pre>
+
+        <pre><code>button {
+    background-color: rgb(0, 150, 0);
+    color: white;
+}</code></pre>
+
+        <pre><code>span {
+    color: hsla(200, 100%, 50%, 0.7);
+}</code></pre>
+
+        <p>Każdy sposób daje trochę inne możliwości stylowania.</p>
+    </section>
+
+    <section>
+        <p>Symulator: wybierz kolor i zobacz efekt na elemencie.</p>
+
+        <div class="sim-controls">
+            <label>
+                Typ koloru:
+                <select id="sim-color-type">
+                    <option value="red">nazwa</option>
+                    <option value="#ff0000">HEX</option>
+                    <option value="rgb(255,0,0)">RGB</option>
+                    <option value="rgba(255,0,0,0.5)">RGBA</option>
+                    <option value="hsl(0,100%,50%)">HSL</option>
+                </select>
+            </label>
+
+            <label>
+                Kolor tła:
+                <select id="sim-bg-type">
+                    <option value="white">biały</option>
+                    <option value="black">czarny</option>
+                    <option value="#ddd">szary</option>
+                    <option value="yellow">żółty</option>
+                    <option value="lightblue">niebieski</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var c = document.getElementById("sim-color-type");
+                var b = document.getElementById("sim-bg-type");
+                var kod = document.getElementById("sim-kod");
+                var pod = document.getElementById("sim-podglad");
+
+                function update() {
+                    var color = c.value;
+                    var bg = b.value;
+
+                    kod.textContent =
+                        "color: " + color + ";\n" +
+                        "background-color: " + bg + ";";
+
+                    while (pod.firstChild) {
+                        pod.removeChild(pod.firstChild);
+                    }
+
+                    var box = document.createElement("div");
+                    box.textContent = "TEKST";
+                    box.style.cssText =
+                        "padding:20px;border:2px solid black;text-align:center;" +
+                        "color:" + color + ";background-color:" + bg + ";";
+
+                    pod.appendChild(box);
+                }
+
+                c.addEventListener("change", update);
+                b.addEventListener("change", update);
+                update();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

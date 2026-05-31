@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>overflow</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="wlasciwosc">
+
+    <section>
+        <p>Właściwość <strong>overflow</strong> w CSS decyduje o tym, co się dzieje z treścią, która nie mieści się w
+            elemencie.</p>
+
+        <p>Może ją ukryć, pokazać albo dodać paski przewijania.</p>
+
+        <p>To bardzo ważne przy kontenerach o stałej wysokości lub szerokości.</p>
+    </section>
+
+    <section>
+        <p>Składnia: <code>overflow: wartość;</code></p>
+
+        <table>
+            <tr>
+                <th>Wartość</th>
+                <th>Co robi</th>
+            </tr>
+
+            <tr>
+                <td>visible</td>
+                <td>treść wychodzi poza element</td>
+            </tr>
+
+            <tr>
+                <td>hidden</td>
+                <td>ukrywa nadmiar treści</td>
+            </tr>
+
+            <tr>
+                <td>scroll</td>
+                <td>zawsze pokazuje paski przewijania</td>
+            </tr>
+
+            <tr>
+                <td>auto</td>
+                <td>dodaje scroll tylko gdy potrzeba</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Domyślna wartość to <code>visible</code>, czyli nic nie jest obcinane.</p>
+
+        <p>Jeśli nie ustawimy overflow, treść może „wylewać się” z elementu.</p>
+
+        <p><code>initial</code> przywraca visible, a <code>inherit</code> bierze ustawienie od rodzica.</p>
+    </section>
+
+    <section>
+        <p><code>overflow</code> nie jest dziedziczone automatycznie.</p>
+
+        <p>Często używa się go razem z <code>height</code> lub <code>max-height</code>.</p>
+
+        <pre><code>div {
+    width: 200px;
+    height: 100px;
+    overflow: hidden;
+}</code></pre>
+
+        <pre><code>.box {
+    overflow: auto;
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Przykłady użycia:</p>
+
+        <pre><code>.panel {
+    width: 250px;
+    height: 120px;
+    overflow: scroll;
+}</code></pre>
+
+        <pre><code>.card {
+    overflow: hidden;
+}</code></pre>
+
+        <pre><code>.text-box {
+    max-height: 100px;
+    overflow: auto;
+}</code></pre>
+
+        <pre><code>section {
+    overflow: visible;
+}</code></pre>
+
+        <p>Najczęściej używa się auto, żeby scroll pojawiał się tylko gdy trzeba.</p>
+    </section>
+
+    <section>
+        <p>Symulator: sprawdzisz jak działa overflow na tekście.</p>
+
+        <div class="sim-controls">
+            <label>
+                Overflow:
+                <select id="sim-overflow">
+                    <option value="visible">visible</option>
+                    <option value="hidden">hidden</option>
+                    <option value="scroll">scroll</option>
+                    <option value="auto">auto</option>
+                </select>
+            </label>
+
+            <label>
+                Wysokość:
+                <select id="sim-height">
+                    <option value="80px">80px</option>
+                    <option value="120px">120px</option>
+                    <option value="160px">160px</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var o = document.getElementById("sim-overflow");
+                var h = document.getElementById("sim-height");
+                var kod = document.getElementById("sim-kod");
+                var pod = document.getElementById("sim-podglad");
+
+                function update() {
+                    var ov = o.value;
+                    var hv = h.value;
+
+                    kod.textContent =
+                        "width: 220px;\n" +
+                        "height: " + hv + ";\n" +
+                        "overflow: " + ov + ";";
+
+                    while (pod.firstChild) {
+                        pod.removeChild(pod.firstChild);
+                    }
+
+                    var box = document.createElement("div");
+                    box.textContent = "To jest bardzo długi tekst, który ma pokazać jak działa overflow w CSS i co się dzieje gdy treść nie mieści się w kontenerze.";
+                    box.style.cssText =
+                        "width:220px;height:" + hv + ";border:2px solid black;padding:10px;background:#f5f5f5;overflow:" + ov + ";";
+
+                    pod.appendChild(box);
+                }
+
+                o.addEventListener("change", update);
+                h.addEventListener("change", update);
+                update();
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

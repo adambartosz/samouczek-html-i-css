@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>zagnieżdżanie list</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to jest zagnieżdżanie list?</h2>
+        <p>Zagnieżdżanie list w HTML to sytuacja, w której jedna lista znajduje się wewnątrz drugiej. Dzięki temu można
+            budować wielopoziomowe struktury, np. menu albo spisy treści.</p>
+        <p>Każdy poziom jest tworzony przez <code>&lt;li&gt;</code>, a w nim może być kolejna lista
+            <code>&lt;ul&gt;</code> albo <code>&lt;ol&gt;</code>.
+        </p>
+    </section>
+
+    <section>
+        <h2>Podstawowa zasada</h2>
+        <p>Lista zawsze składa się z elementów <code>&lt;li&gt;</code>. Podlista musi być wewnątrz
+            <code>&lt;li&gt;</code>, a nie obok niego.
+        </p>
+
+        <pre><code>&lt;ul&gt;<br>
+  &lt;li&gt;Poziom 1<br>
+    &lt;ul&gt;<br>
+      &lt;li&gt;Poziom 2&lt;/li&gt;<br>
+    &lt;/ul&gt;<br>
+  &lt;/li&gt;<br>
+&lt;/ul&gt;</code></pre>
+    </section>
+
+    <section>
+        <h2>Przykład zagnieżdżenia</h2>
+        <ul>
+            <li>Frontend
+                <ul>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                </ul>
+            </li>
+            <li>Backend
+                <ul>
+                    <li>PHP</li>
+                    <li>Node.js</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Zagnieżdżanie kroków</h2>
+        <ol>
+            <li>Plan
+                <ol>
+                    <li>Analiza</li>
+                    <li>Projekt</li>
+                </ol>
+            </li>
+            <li>Wykonanie
+                <ol>
+                    <li>Kodowanie</li>
+                    <li>Testy</li>
+                </ol>
+            </li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Najczęstsze błędy</h2>
+        <ul>
+            <li>Podlista poza <code>&lt;li&gt;</code></li>
+            <li>Brak poprawnego domknięcia list</li>
+            <li>Mieszanie poziomów bez struktury</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Interaktywny symulator</h2>
+        <p>Możesz tutaj zmieniać typ listy i sprawdzić jak działa zagnieżdżanie.</p>
+
+        <div class="sim-controls">
+            <label>
+                Typ listy głównej:
+                <select id="sim-type">
+                    <option value="ul">ul</option>
+                    <option value="ol">ol</option>
+                </select>
+            </label>
+
+            <label>
+                Typ podlisty:
+                <select id="sim-subtype">
+                    <option value="ul">ul</option>
+                    <option value="ol">ol</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var main = document.getElementById("sim-type");
+                var sub = document.getElementById("sim-subtype");
+                var kod = document.getElementById("sim-kod");
+                var podgl = document.getElementById("sim-podglad");
+
+                function buildList() {
+                    var mainType = main.value;
+                    var subType = sub.value;
+
+                    var html =
+                        "<" + mainType + ">\n\t" +
+                        "<li>Element 1\n\t\t<" + subType + ">\n\t\t\t<li>Podpunkt A</li>\n\t\t\t<li>Podpunkt B</li>\n\t\t</" + subType + ">\n\t</li>\n" +
+                        "\t<li>Element 2</li>\n" +
+                        "</" + mainType + ">";
+
+                    kod.textContent = html;
+
+                    podgl.innerHTML = "";
+
+                    var mainList = document.createElement(mainType);
+
+                    var li1 = document.createElement("li");
+                    li1.textContent = "Element 1";
+
+                    var subList = document.createElement(subType);
+
+                    var sub1 = document.createElement("li");
+                    sub1.textContent = "Podpunkt A";
+
+                    var sub2 = document.createElement("li");
+                    sub2.textContent = "Podpunkt B";
+
+                    subList.appendChild(sub1);
+                    subList.appendChild(sub2);
+
+                    li1.appendChild(subList);
+
+                    var li2 = document.createElement("li");
+                    li2.textContent = "Element 2";
+
+                    mainList.appendChild(li1);
+                    mainList.appendChild(li2);
+
+                    podgl.appendChild(mainList);
+                }
+
+                main.addEventListener("change", buildList);
+                sub.addEventListener("change", buildList);
+
+                buildList();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

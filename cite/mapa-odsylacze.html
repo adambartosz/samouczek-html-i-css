@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Mapa odsyłaczy</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <section>
+            <h2>Mapa odsyłaczy</h2>
+            <p>Mapa odsyłaczy to funkcja w HTML, która pozwala na kliknięcie różnych obszarów jednego obrazka i
+                przeniesienie się w inne miejsce.</p>
+            <p>Wykorzystuje się do tego <code>&lt;map&gt;</code> oraz <code>&lt;area&gt;</code>, które łączą się z
+                obrazem przez atrybut <code>usemap</code>.</p>
+        </section>
+
+        <section>
+            <h2>Jak to działa</h2>
+            <p>Obrazek jest „podpięty” pod mapę, a w środku mapy definiuje się klikane strefy.</p>
+
+            <ul>
+                <li>każdy obszar ma swój link</li>
+                <li>może być prostokąt, koło albo wielokąt</li>
+                <li>kliknięcie działa tylko w wyznaczonym miejscu</li>
+            </ul>
+
+            <p>Bez mapy cały obraz jest jednym dużym linkiem.</p>
+        </section>
+
+        <section>
+            <h2>Znacznik &lt;map&gt;</h2>
+            <p><code>&lt;map&gt;</code> to kontener na obszary klikalne. Łączy się z obrazkiem przez nazwę.</p>
+
+            <ul>
+                <li>musi mieć atrybut <code>name</code></li>
+                <li>jest niewidoczny na stronie</li>
+                <li>zawiera znaczniki <code>&lt;area&gt;</code></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Znacznik &lt;area&gt;</h2>
+            <p><code>&lt;area&gt;</code> definiuje klikalny fragment obrazka.</p>
+
+            <table>
+                <tr>
+                    <th>Atrybut</th>
+                    <th>Opis</th>
+                </tr>
+                <tr>
+                    <td>shape</td>
+                    <td>kształt obszaru (rect, circle, poly)</td>
+                </tr>
+                <tr>
+                    <td>coords</td>
+                    <td>współrzędne punktów</td>
+                </tr>
+                <tr>
+                    <td>href</td>
+                    <td>adres linku</td>
+                </tr>
+                <tr>
+                    <td>alt</td>
+                    <td>opis alternatywny</td>
+                </tr>
+                <tr>
+                    <td>target</td>
+                    <td>sposób otwarcia linku</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Przykład kodu</h2>
+
+            <pre><code>&lt;img src="mapa.jpg" usemap="#mapa1"&gt;
+
+&lt;map name="mapa1"&gt;
+  &lt;area shape="rect" coords="10,10,100,100" href="strona1.html" alt="Strefa 1"&gt;
+  &lt;area shape="circle" coords="150,80,40" href="strona2.html" alt="Strefa 2"&gt;
+&lt;/map&gt;</code></pre>
+
+        </section>
+
+        <section>
+            <h2>Symulator</h2>
+            <p>Zobacz jak działa mapa odsyłaczy</p>
+
+
+            <div class="sim-output">
+
+                <div class="sim-preview-label">Kod HTML:</div>
+                <pre id="sim-kod">
+&lt;img src="../img/gitara.jpg" usemap="#image-map">
+
+&lt;map name="image-map">
+    &lt;area target="_blank" alt="Pudło rezonansowe" title="Pudło rezonansowe"
+    href="https://pl.wikipedia.org/wiki/Pud%C5%82o_rezonansowe"
+    coords="147,55,166,57,175,66,185,68,206,65,216,67,230,74,240,85,242,104,232,129,219,
+    150,202,155,189,152,179,147,168,132,161,124,152,124,136,118,128,111,122,92,135,64"
+    shape="poly">
+    &lt;area target="_blank" alt="Gryf" title="Gryf"
+    href="https://www.google.com/search?q=gitara+gryf"
+    coords="131,72,59,47,43,38,30,35,20,40,22,46,23,51,50,61,56,60,124,85" shape="poly">
+&lt;/map>
+
+                </pre>
+
+                <div class="sim-preview-label">Podgląd:</div>
+                <div class="sim-preview" id="sim-podglad"
+                    style="display: flex; align-items: center; justify-content: center;">
+
+                    <img src="../img/gitara.jpg" usemap="#image-map">
+
+                    <map name="image-map">
+                        <area target="_blank" alt="Pudło rezonansowe" title="Pudło rezonansowe"
+                            href="https://pl.wikipedia.org/wiki/Pud%C5%82o_rezonansowe"
+                            coords="147,55,166,57,175,66,185,68,206,65,216,67,230,74,240,85,242,104,232,129,219,150,202,155,189,152,179,147,168,132,161,124,152,124,136,118,128,111,122,92,135,64"
+                            shape="poly">
+                        <area target="_blank" alt="Gryf" title="Gryf"
+                            href="https://www.google.com/search?q=gitara+gryf&amp;sca_esv=a0cfb8db5af234db&amp;udm=2&amp;biw=1920&amp;bih=945&amp;sxsrf=ANbL-n60-L6y4u-ha2iUDcWVX3bNv7R4Uw%3A1780163039484&amp;ei=3yEbapaiHYGDqgGT2Y_ABQ&amp;ved=0ahUKEwjWjfGMyOGUAxWBgSoKHZPsA1gQ4dUDCBE&amp;uact=5&amp;oq=gitara+gryf&amp;gs_lp=Egtnd3Mtd2l6LWltZyILZ2l0YXJhIGdyeWYyBRAAGIAEMgUQABiABDIEEAAYHjIEEAAYHjIGEAAYCBgeMgYQABgIGB4yBhAAGAgYHjIGEAAYCBgeMgYQABgIGB4yBhAAGAgYHkiJGlDRCFjRCHABeACQAQCYAT2gAT2qAQExuAEDyAEA-AEBmAIBoAJFmAMAiAYBkgcBMaAHjwayBwExuAdFwgcDMi0xyAcGgAgB&amp;sclient=gws-wiz-img"
+                            coords="131,72,59,47,43,38,30,35,20,40,22,46,23,51,50,61,56,60,124,85" shape="poly">
+                    </map>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

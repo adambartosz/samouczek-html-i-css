@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Menu pionowe</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to jest menu pionowe?</h2>
+        <p>Menu pionowe to pasek nawigacyjny, w którym linki są ułożone jeden pod drugim w kolumnie. Najczęściej pojawia
+            się jako boczny panel – po lewej lub po prawej stronie treści.</p>
+        <p>Buduje się je tak samo jak poziome: <code>&lt;nav&gt;</code> + <code>&lt;ul&gt;</code> +
+            <code>&lt;li&gt;</code> + <code>&lt;a&gt;</code>. Różnica jest tylko w CSS – lista domyślnie jest już
+            pionowa, więc nie trzeba jej "kłaść" jak w menu poziomym.
+        </p>
+    </section>
+
+    <section>
+        <h2>Struktura HTML</h2>
+        <p>Struktura jest identyczna jak w menu poziomym:</p>
+        <pre><code>&lt;nav&gt;<br>
+  &lt;ul&gt;<br>
+    &lt;li&gt;&lt;a href="index.html"&gt;Strona główna&lt;/a&gt;&lt;/li&gt;<br>
+    &lt;li&gt;&lt;a href="o-nas.html"&gt;O nas&lt;/a&gt;&lt;/li&gt;<br>
+    &lt;li&gt;&lt;a href="oferta.html"&gt;Oferta&lt;/a&gt;&lt;/li&gt;<br>
+    &lt;li&gt;&lt;a href="kontakt.html"&gt;Kontakt&lt;/a&gt;&lt;/li&gt;<br>
+  &lt;/ul&gt;<br>
+&lt;/nav&gt;</code></pre>
+        <p>Używamy <code>&lt;nav&gt;</code>, bo czytniki ekranu i Google wiedzą wtedy, że to nawigacja. Lista
+            <code>&lt;ul&gt;</code> ma sens, bo pozycje menu są równorzędne.
+        </p>
+    </section>
+
+    <section>
+        <h2>CSS – podstawowe menu pionowe</h2>
+        <p>Lista jest już pionowa z natury, więc potrzebujemy tylko usunąć domyślne style i nadać wygląd linkom:</p>
+        <pre><code>nav {<br>
+  width: 200px;<br>
+}<br>
+<br>
+nav ul {<br>
+  list-style: none;<br>
+  margin: 0;<br>
+  padding: 0;<br>
+}<br>
+<br>
+nav ul li a {<br>
+  display: block;<br>
+  padding: 10px 18px;<br>
+  text-decoration: none;<br>
+  color: white;<br>
+  background: #333;<br>
+}<br>
+<br>
+nav ul li a:hover {<br>
+  background: #555;<br>
+}</code></pre>
+        <p>Kluczowe rzeczy:</p>
+        <ul>
+            <li><code>list-style: none</code> – usuwa kropki z listy</li>
+            <li><code>margin: 0; padding: 0</code> – usuwa domyślne wcięcia</li>
+            <li><code>display: block</code> na linku – cały wiersz jest klikalny, nie tylko tekst</li>
+            <li><code>width</code> na <code>nav</code> – bez tego menu rozciągnie się na całą szerokość strony</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Układanie obok treści</h2>
+        <p>Menu pionowe ma sens tylko wtedy, gdy siedzi obok treści. Najwygodniej osiągnąć to Flexboxem na rodzicu:</p>
+        <pre><code>.strona {<br>
+  display: flex;<br>
+  gap: 20px;<br>
+}<br>
+<br>
+nav {<br>
+  width: 200px;<br>
+  flex-shrink: 0;<br>
+}<br>
+<br>
+main {<br>
+  flex: 1;<br>
+}</code></pre>
+        <p>Albo Gridem:</p>
+        <pre><code>.strona {<br>
+  display: grid;<br>
+  grid-template-columns: 200px 1fr;<br>
+  gap: 20px;<br>
+}</code></pre>
+        <p><code>flex-shrink: 0</code> na <code>nav</code> zapobiega temu, żeby Flexbox zwęził menu przy małym ekranie.
+            <code>flex: 1</code> na <code>main</code> sprawia, że treść zajmuje całą pozostałą przestrzeń.
+        </p>
+    </section>
+
+    <section>
+        <h2>Aktywna pozycja i separatory</h2>
+        <p>Aktywną pozycję zaznaczamy klasą <code>active</code>:</p>
+        <pre><code>&lt;li&gt;&lt;a href="index.html" class="active"&gt;Strona główna&lt;/a&gt;&lt;/li&gt;</code></pre>
+        <pre><code>nav ul li a.active {<br>
+  background: #0066cc;<br>
+  color: white;<br>
+}</code></pre>
+        <p>Separator między pozycjami można zrobić przez <code>border-bottom</code> na każdym <code>li</code>:</p>
+        <pre><code>nav ul li {<br>
+  border-bottom: 1px solid #555;<br>
+}<br>
+<br>
+nav ul li:last-child {<br>
+  border-bottom: none;<br>
+}</code></pre>
+        <p><code>:last-child</code> usuwa separator pod ostatnim elementem – bez tego byłby podwójny border przy
+            krawędzi menu.</p>
+    </section>
+
+    <section>
+        <h2>Menu z ikonami i podsekcjami</h2>
+        <p>W menu pionowym łatwo dodać ikonę przed tekstem linku – wystarczy wstawić znak Unicode lub SVG:</p>
+        <pre><code>&lt;li&gt;&lt;a href="index.html"&gt;&lt;span class="ikona"&gt;&#9776;&lt;/span&gt; Strona główna&lt;/a&gt;&lt;/li&gt;</code></pre>
+        <pre><code>.ikona {<br>
+  display: inline-block;<br>
+  width: 20px;<br>
+  margin-right: 8px;<br>
+  text-align: center;<br>
+}</code></pre>
+        <p>Podsekcje (podmenu) tworzy się przez zagnieżdżoną listę <code>&lt;ul&gt;</code> wewnątrz
+            <code>&lt;li&gt;</code>:
+        </p>
+        <pre><code>&lt;li&gt;<br>
+  &lt;a href="oferta.html"&gt;Oferta&lt;/a&gt;<br>
+  &lt;ul&gt;<br>
+    &lt;li&gt;&lt;a href="web.html"&gt;Strony www&lt;/a&gt;&lt;/li&gt;<br>
+    &lt;li&gt;&lt;a href="sklepy.html"&gt;Sklepy&lt;/a&gt;&lt;/li&gt;<br>
+  &lt;/ul&gt;<br>
+&lt;/li&gt;</code></pre>
+        <pre><code>nav ul ul {<br>
+  padding-left: 16px;<br>
+}<br>
+<br>
+nav ul ul li a {<br>
+  font-size: 0.9em;<br>
+  background: #444;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Interaktywny symulator</h2>
+        <p>Zmieniaj wygląd menu na żywo.</p>
+
+        <div class="sim-controls" style="flex-direction:column; gap:12px; align-items:center;">
+            <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:flex-end; justify-content:center;">
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    Styl tła linków
+                    <select id="sim-styl">
+                        <option value="ciemny">ciemny</option>
+                        <option value="jasny">jasny</option>
+                        <option value="kolorowy">kolorowy</option>
+                        <option value="bez-tla">bez tła (lewy pasek)</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    Szerokość menu
+                    <select id="sim-width">
+                        <option value="160px">160px (wąskie)</option>
+                        <option value="200px" selected>200px (standardowe)</option>
+                        <option value="260px">260px (szerokie)</option>
+                        <option value="100%">100% (pełna szerokość)</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    Zaokrąglenie linków
+                    <select id="sim-radius">
+                        <option value="0px">0px (ostre)</option>
+                        <option value="4px" selected>4px</option>
+                        <option value="8px">8px</option>
+                        <option value="999px">999px (pigułki)</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad" style="padding:16px;"></div>
+        </div>
+
+        <script>
+            (function () {
+
+                var sStyl = document.getElementById("sim-styl");
+                var sWidth = document.getElementById("sim-width");
+                var sRadius = document.getElementById("sim-radius");
+                var kodEl = document.getElementById("sim-kod");
+                var podglad = document.getElementById("sim-podglad");
+
+                var pozycje = ["Strona główna", "O nas", "Oferta", "Portfolio", "Kontakt"];
+
+                var style = {
+                    ciemny: { bg: "#333333", fg: "#ffffff", hoverBg: "#555555", hoverFg: "#ffffff" },
+                    jasny: { bg: "#eeeeee", fg: "#222222", hoverBg: "#dddddd", hoverFg: "#222222" },
+                    kolorowy: { bg: "#0066cc", fg: "#ffffff", hoverBg: "#0055aa", hoverFg: "#ffffff" },
+                    "bez-tla": { bg: "transparent", fg: "#0066cc", hoverBg: "transparent", hoverFg: "#003388" }
+                };
+
+                function aktualizuj() {
+                    var styl = sStyl.value;
+                    var width = sWidth.value;
+                    var radius = sRadius.value;
+                    var s = style[styl];
+                    var isBezTla = styl === "bez-tla";
+
+                    podglad.innerHTML = "";
+
+                    var nav = document.createElement("nav");
+                    nav.style.width = width;
+                    nav.style.overflow = `auto`;
+
+                    var ul = document.createElement("ul");
+                    ul.style.cssText = "list-style:none; margin:0; padding:0;";
+
+                    pozycje.forEach(function (nazwa) {
+                        var li = document.createElement("li");
+                        var a = document.createElement("a");
+                        a.textContent = nazwa;
+                        a.href = "#";
+                        a.style.cssText = "display:block; padding:10px 18px; text-decoration:none; cursor:pointer; border-radius:" + radius + "; transition: background 0.15s, color 0.15s;";
+                        a.style.background = s.bg;
+                        a.style.color = s.fg;
+                        if (isBezTla) {
+                            a.style.borderLeft = "4px solid transparent";
+                            a.style.paddingLeft = "14px";
+                        }
+                        a.addEventListener("mouseenter", function () {
+                            a.style.background = s.hoverBg;
+                            a.style.color = s.hoverFg;
+                            if (isBezTla) a.style.borderLeft = "4px solid #0066cc";
+                        });
+                        a.addEventListener("mouseleave", function () {
+                            a.style.background = s.bg;
+                            a.style.color = s.fg;
+                            if (isBezTla) a.style.borderLeft = "4px solid transparent";
+                        });
+                        li.appendChild(a);
+                        ul.appendChild(li);
+                    });
+
+                    nav.appendChild(ul);
+                    podglad.appendChild(nav);
+
+                    var borderBit = isBezTla ? "\n  border-left: 4px solid transparent;\n  padding-left: 14px;" : "";
+                    var hoverBorderBit = isBezTla ? "\n  border-left: 4px solid #0066cc;" : "";
+
+                    kodEl.textContent =
+                        "nav {\n" +
+                        "  width: " + width + ";\n" +
+                        "}\n\n" +
+                        "nav ul {\n" +
+                        "  list-style: none;\n" +
+                        "  margin: 0;\n" +
+                        "  padding: 0;\n" +
+                        "}\n\n" +
+                        "nav ul li a {\n" +
+                        "  display: block;\n" +
+                        "  padding: 10px 18px;\n" +
+                        "  text-decoration: none;\n" +
+                        "  background: " + s.bg + ";\n" +
+                        "  color: " + s.fg + ";\n" +
+                        "  border-radius: " + radius + ";" +
+                        borderBit + "\n" +
+                        "}\n\n" +
+                        "nav ul li a:hover {\n" +
+                        "  background: " + s.hoverBg + ";\n" +
+                        "  color: " + s.hoverFg + ";" +
+                        hoverBorderBit + "\n" +
+                        "}";
+                }
+
+                [sStyl, sWidth, sRadius].forEach(function (el) {
+                    el.addEventListener("change", aktualizuj);
+                });
+
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Menu rozwijane</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        #sekcja-js {
+            opacity: .7;
+        }
+
+        #sekcja-js:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to jest menu rozwijane?</h2>
+        <p>Menu rozwijane (dropdown) to menu, w którym po najechaniu lub kliknięciu na pozycję pojawia się lista
+            dodatkowych linków – podmenu. Używa się go gdy strona ma dużo podstron i nie chcemy upychać wszystkiego w
+            głównym pasku nawigacji.</p>
+        <p>Zbudowane jest z zagnieżdżonej listy <code>&lt;ul&gt;</code> wewnątrz <code>&lt;li&gt;</code>. Domyślnie
+            podmenu jest ukryte przez CSS i pokazuje się dopiero przy <code>:hover</code> lub przez JavaScript.</p>
+    </section>
+
+    <section>
+        <h2>Struktura HTML</h2>
+        <p>Podmenu to po prostu lista wewnątrz elementu listy:</p>
+        <pre><code>&lt;nav&gt;<br>
+  &lt;ul&gt;<br>
+    &lt;li&gt;&lt;a href="index.html"&gt;Strona główna&lt;/a&gt;&lt;/li&gt;<br>
+    &lt;li&gt;<br>
+      &lt;a href="oferta.html"&gt;Oferta&lt;/a&gt;<br>
+      &lt;ul&gt;<br>
+        &lt;li&gt;&lt;a href="web.html"&gt;Strony www&lt;/a&gt;&lt;/li&gt;<br>
+        &lt;li&gt;&lt;a href="sklepy.html"&gt;Sklepy internetowe&lt;/a&gt;&lt;/li&gt;<br>
+        &lt;li&gt;&lt;a href="aplikacje.html"&gt;Aplikacje&lt;/a&gt;&lt;/li&gt;<br>
+      &lt;/ul&gt;<br>
+    &lt;/li&gt;<br>
+    &lt;li&gt;&lt;a href="kontakt.html"&gt;Kontakt&lt;/a&gt;&lt;/li&gt;<br>
+  &lt;/ul&gt;<br>
+&lt;/nav&gt;</code></pre>
+        <p>Ważne: <code>&lt;li&gt;</code> z podmenu musi mieć <code>position: relative</code>, żeby podmenu mogło się
+            pozycjonować względem niego.</p>
+    </section>
+
+    <section>
+        <h2>CSS – dropdown na hover</h2>
+        <p>Najpopularniejsza metoda – podmenu pokazuje się przy najechaniu myszką:</p>
+        <pre><code>nav ul {<br>
+  list-style: none;<br>
+  margin: 0;<br>
+  padding: 0;<br>
+  display: flex;<br>
+}<br>
+<br>
+nav ul li {<br>
+  position: relative;<br>
+}<br>
+<br>
+nav ul li a {<br>
+  display: block;<br>
+  padding: 10px 18px;<br>
+  text-decoration: none;<br>
+  color: white;<br>
+  background: #333;<br>
+}<br>
+<br>
+nav ul li a:hover {<br>
+  background: #555;<br>
+}<br>
+<br>
+nav ul ul {<br>
+  display: none;<br>
+  position: absolute;<br>
+  top: 100%;<br>
+  left: 0;<br>
+  min-width: 180px;<br>
+  z-index: 100;<br>
+}<br>
+<br>
+nav ul li:hover &gt; ul {<br>
+  display: block;<br>
+}<br>
+<br>
+nav ul ul li a {<br>
+  background: #444;<br>
+}<br>
+<br>
+nav ul ul li a:hover {<br>
+  background: #666;<br>
+}</code></pre>
+        <p>Kluczowe właściwości:</p>
+        <ul>
+            <li><code>position: relative</code> na <code>li</code> – punkt odniesienia dla podmenu</li>
+            <li><code>position: absolute</code> na <code>ul ul</code> – podmenu wyrywa się z normalnego przepływu i
+                nakłada na treść</li>
+            <li><code>top: 100%</code> – podmenu zaczyna się dokładnie pod rodzicem</li>
+            <li><code>display: none</code> – podmenu domyślnie ukryte</li>
+            <li><code>li:hover &gt; ul</code> – <code>&gt;</code> oznacza bezpośrednie dziecko, żeby nie pokazywać
+                głębszych poziomów naraz</li>
+            <li><code>z-index: 100</code> – podmenu przykrywa inne elementy strony</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>CSS – płynne pokazywanie (opacity + transition)</h2>
+        <p>Zamiast skakać z ukrytego do widocznego, można dodać płynne pojawienie się:</p>
+        <pre><code>nav ul ul {<br>
+  display: block;<br>
+  position: absolute;<br>
+  top: 100%;<br>
+  left: 0;<br>
+  min-width: 180px;<br>
+  z-index: 100;<br>
+  opacity: 0;<br>
+  pointer-events: none;<br>
+  transform: translateY(-6px);<br>
+  transition: opacity 0.2s, transform 0.2s;<br>
+}<br>
+<br>
+nav ul li:hover &gt; ul {<br>
+  opacity: 1;<br>
+  pointer-events: auto;<br>
+  transform: translateY(0);<br>
+}</code></pre>
+        <p>Tu nie używamy <code>display: none</code>, bo z nim <code>transition</code> nie działa. Zamiast tego ukrywamy
+            przez <code>opacity: 0</code> i blokujemy klikanie przez <code>pointer-events: none</code>.</p>
+    </section>
+
+    <section style="position: relative; overflow:visible;" id="sekcja-js">
+        <span
+            style="position: absolute; right: -10px; top: -10px; opacity: 1; background-color: orange; padding: 5px;">PONAD
+            PODSTAWĘ!!!!</span>
+        <h2>Dropdown przez JavaScript</h2>
+        <p>Hover nie działa na urządzeniach dotykowych. Dlatego często robi się dropdown otwierany kliknięciem:</p>
+        <pre><code>&lt;li class="ma-podmenu"&gt;<br>
+  &lt;a href="oferta.html"&gt;Oferta ▾&lt;/a&gt;<br>
+  &lt;ul class="podmenu"&gt;<br>
+    &lt;li&gt;&lt;a href="web.html"&gt;Strony www&lt;/a&gt;&lt;/li&gt;<br>
+  &lt;/ul&gt;<br>
+&lt;/li&gt;</code></pre>
+        <pre><code>.podmenu {<br>
+  display: none;<br>
+  position: absolute;<br>
+  top: 100%;<br>
+  left: 0;<br>
+  z-index: 100;<br>
+}<br>
+<br>
+.podmenu.otwarte {<br>
+  display: block;<br>
+}</code></pre>
+        <pre><code>var przyciski = document.querySelectorAll(".ma-podmenu &gt; a");<br>
+<br>
+przyciski.forEach(function(a) {<br>
+  a.addEventListener("click", function(e) {<br>
+    e.preventDefault();<br>
+    var podmenu = a.nextElementSibling;<br>
+    podmenu.classList.toggle("otwarte");<br>
+  });<br>
+});<br>
+<br>
+document.addEventListener("click", function(e) {<br>
+  if (!e.target.closest(".ma-podmenu")) {<br>
+    document.querySelectorAll(".podmenu").forEach(function(p) {<br>
+      p.classList.remove("otwarte");<br>
+    });<br>
+  }<br>
+});</code></pre>
+        <p><code>classList.toggle</code> dodaje klasę jeśli jej nie ma, usuwa jeśli jest. <code>e.target.closest</code>
+            sprawdza czy kliknięto wewnątrz elementu z daną klasą – dzięki temu kliknięcie poza menu je zamknie.</p>
+    </section>
+
+    <section>
+        <h2>Interaktywny symulator</h2>
+        <p>Zmieniaj ustawienia i sprawdź jak zachowuje się menu rozwijane.</p>
+
+        <div class="sim-controls" style="flex-direction:column; gap:12px; align-items:center;">
+            <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:flex-end; justify-content:center;">
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    Sposób otwierania
+                    <select id="sim-tryb">
+                        <option value="hover">hover (najechanie)</option>
+                        <option value="click">click (kliknięcie)</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    Animacja
+                    <select id="sim-anim">
+                        <option value="nie">brak (display none/block)</option>
+                        <option value="tak">płynna (opacity + transform)</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    Styl
+                    <select id="sim-styl">
+                        <option value="ciemny">ciemny</option>
+                        <option value="jasny">jasny</option>
+                        <option value="kolorowy">kolorowy</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"
+                style="padding:16px; min-height:160px; overflow:visible; position:relative;"></div>
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+        </div>
+
+        <script>
+            (function () {
+
+                var sTryb = document.getElementById("sim-tryb");
+                var sAnim = document.getElementById("sim-anim");
+                var sStyl = document.getElementById("sim-styl");
+                var kodEl = document.getElementById("sim-kod");
+                var podglad = document.getElementById("sim-podglad");
+
+                var style = {
+                    ciemny: { bg: "#333", fg: "#fff", hoverBg: "#555", subBg: "#444", subHoverBg: "#666" },
+                    jasny: { bg: "#eee", fg: "#222", hoverBg: "#ddd", subBg: "#f5f5f5", subHoverBg: "#ddd" },
+                    kolorowy: { bg: "#0066cc", fg: "#fff", hoverBg: "#0055aa", subBg: "#0055aa", subHoverBg: "#004499" }
+                };
+
+                var otwarteLi = null;
+
+                function zamknijWszystkie() {
+                    var wszystkie = podglad.querySelectorAll(".sim-podmenu");
+                    wszystkie.forEach(function (ul) {
+                        ul.style.opacity = "0";
+                        ul.style.pointerEvents = "none";
+                        ul.style.transform = "translateY(-6px)";
+                        ul.style.display = sAnim.value === "nie" ? "none" : "block";
+                    });
+                    otwarteLi = null;
+                }
+
+                function aktualizuj() {
+                    var tryb = sTryb.value;
+                    var anim = sAnim.value;
+                    var styl = sStyl.value;
+                    var s = style[styl];
+
+                    podglad.innerHTML = "";
+
+                    var nav = document.createElement("nav");
+                    nav.style.height = `200px`;
+                    var ul = document.createElement("ul");
+                    ul.style.cssText = "list-style:none; margin:0; padding:0; display:flex; position:relative;";
+
+                    var pozycje = [
+                        { nazwa: "Strona główna", podmenu: [] },
+                        { nazwa: "Oferta ▾", podmenu: ["Strony www", "Sklepy internetowe", "Aplikacje"] },
+                        { nazwa: "Portfolio ▾", podmenu: ["Projekty webowe", "Grafika"] },
+                        { nazwa: "Kontakt", podmenu: [] }
+                    ];
+
+                    pozycje.forEach(function (poz) {
+                        var li = document.createElement("li");
+                        li.style.position = "relative";
+
+                        var a = document.createElement("a");
+                        a.textContent = poz.nazwa;
+                        a.href = "#";
+                        a.style.cssText = "display:block; padding:10px 18px; text-decoration:none; cursor:pointer; white-space:nowrap;";
+                        a.style.background = s.bg;
+                        a.style.color = s.fg;
+
+                        a.addEventListener("mouseenter", function () { a.style.background = s.hoverBg; });
+                        a.addEventListener("mouseleave", function () { a.style.background = s.bg; });
+
+                        if (poz.podmenu.length > 0) {
+                            var subUl = document.createElement("ul");
+                            subUl.className = "sim-podmenu";
+                            subUl.style.cssText = "list-style:none; margin:0; padding:0; position:absolute; top:100%; left:0; min-width:180px; z-index:100;";
+
+                            if (anim === "nie") {
+                                subUl.style.display = "none";
+                            } else {
+                                subUl.style.display = "block";
+                                subUl.style.opacity = "0";
+                                subUl.style.pointerEvents = "none";
+                                subUl.style.transform = "translateY(-6px)";
+                                subUl.style.transition = "opacity 0.2s, transform 0.2s";
+                            }
+
+                            poz.podmenu.forEach(function (nazwa) {
+                                var sLi = document.createElement("li");
+                                var sA = document.createElement("a");
+                                sA.textContent = nazwa;
+                                sA.href = "#";
+                                sA.style.cssText = "display:block; padding:10px 18px; text-decoration:none; cursor:pointer; white-space:nowrap;";
+                                sA.style.background = s.subBg;
+                                sA.style.color = s.fg;
+                                sA.addEventListener("mouseenter", function () { sA.style.background = s.subHoverBg; });
+                                sA.addEventListener("mouseleave", function () { sA.style.background = s.subBg; });
+                                sA.addEventListener("click", function (e) { e.preventDefault(); });
+                                sLi.appendChild(sA);
+                                subUl.appendChild(sLi);
+                            });
+
+                            li.appendChild(subUl);
+
+                            if (tryb === "hover") {
+                                li.addEventListener("mouseenter", function () {
+                                    if (anim === "nie") {
+                                        subUl.style.display = "block";
+                                    } else {
+                                        subUl.style.opacity = "1";
+                                        subUl.style.pointerEvents = "auto";
+                                        subUl.style.transform = "translateY(0)";
+                                    }
+                                });
+                                li.addEventListener("mouseleave", function () {
+                                    if (anim === "nie") {
+                                        subUl.style.display = "none";
+                                    } else {
+                                        subUl.style.opacity = "0";
+                                        subUl.style.pointerEvents = "none";
+                                        subUl.style.transform = "translateY(-6px)";
+                                    }
+                                });
+                            } else {
+                                a.addEventListener("click", function (e) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    var juzOtwarte = (otwarteLi === li);
+                                    zamknijWszystkie();
+                                    if (!juzOtwarte) {
+                                        otwarteLi = li;
+                                        if (anim === "nie") {
+                                            subUl.style.display = "block";
+                                        } else {
+                                            subUl.style.opacity = "1";
+                                            subUl.style.pointerEvents = "auto";
+                                            subUl.style.transform = "translateY(0)";
+                                        }
+                                    }
+                                });
+                            }
+                        } else {
+                            a.addEventListener("click", function (e) { e.preventDefault(); });
+                        }
+
+                        li.appendChild(a);
+                        ul.appendChild(li);
+                    });
+
+                    podglad.addEventListener("click", function (e) {
+                        if (tryb === "click" && !e.target.closest("li")) {
+                            zamknijWszystkie();
+                        }
+                    });
+
+                    nav.appendChild(ul);
+                    podglad.appendChild(nav);
+
+                    var animKod = anim === "tak"
+                        ? "nav ul ul {\n  display: block;\n  position: absolute;\n  top: 100%;\n  left: 0;\n  min-width: 180px;\n  z-index: 100;\n  opacity: 0;\n  pointer-events: none;\n  transform: translateY(-6px);\n  transition: opacity 0.2s, transform 0.2s;\n}\n\nnav ul li:hover > ul {\n  opacity: 1;\n  pointer-events: auto;\n  transform: translateY(0);\n}"
+                        : "nav ul ul {\n  display: none;\n  position: absolute;\n  top: 100%;\n  left: 0;\n  min-width: 180px;\n  z-index: 100;\n}\n\nnav ul li:hover > ul {\n  display: block;\n}";
+
+                    var clickKod = "/* CSS */\n.podmenu {\n  display: none;\n  position: absolute;\n  top: 100%;\n  left: 0;\n  z-index: 100;\n}\n\n.podmenu.otwarte {\n  display: block;\n}";
+
+                    kodEl.textContent =
+                        "nav ul {\n" +
+                        "  list-style: none;\n" +
+                        "  margin: 0;\n" +
+                        "  padding: 0;\n" +
+                        "  display: flex;\n" +
+                        "}\n\n" +
+                        "nav ul li {\n" +
+                        "  position: relative;\n" +
+                        "}\n\n" +
+                        "nav ul li a {\n" +
+                        "  display: block;\n" +
+                        "  padding: 10px 18px;\n" +
+                        "  text-decoration: none;\n" +
+                        "  background: " + s.bg + ";\n" +
+                        "  color: " + s.fg + ";\n" +
+                        "}\n\n" +
+                        "nav ul ul li a {\n" +
+                        "  background: " + s.subBg + ";\n" +
+                        "}\n\n" +
+                        (tryb === "hover" ? animKod : clickKod);
+                }
+
+                [sTryb, sAnim, sStyl].forEach(function (el) {
+                    el.addEventListener("change", aktualizuj);
+                });
+
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

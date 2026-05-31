@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>optgroup</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;optgroup&gt;</strong> służy do grupowania opcji wewnątrz listy
+            <code>&lt;select&gt;</code>. Dzięki temu opcje są podzielone na logiczne sekcje.
+        </p>
+        <p>Jest elementem używanym tylko w <code>&lt;select&gt;</code> i nie działa samodzielnie. Pomaga uporządkować
+            długie listy wyboru.</p>
+        <p>Ułatwia użytkownikowi znalezienie odpowiedniej opcji w formularzu.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>grupować opcje w select</li>
+            <li>porządkować długie listy wyboru</li>
+            <li>podzielić dane na kategorie</li>
+            <li>poprawić czytelność formularza</li>
+            <li>ułatwić wybór użytkownikowi</li>
+            <li>tworzyć logiczne sekcje w listach</li>
+            <li>unikać chaosu w dropdownach</li>
+        </ul>
+        <p>Jeśli lista jest krótka, optgroup nie jest potrzebny.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>label</td>
+                <td>tekst</td>
+                <td>Nazwa grupy wyświetlana w select</td>
+            </tr>
+            <tr>
+                <td>disabled</td>
+                <td>disabled</td>
+                <td>Wyłącza całą grupę opcji</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;optgroup&gt;</strong> nie ma dużego znaczenia semantycznego poza organizacją danych w
+            formularzu. Nie jest osobną kontrolką.</p>
+        <p>Czytniki ekranu traktują go jako nagłówek grupy opcji, co pomaga w nawigacji po liście.</p>
+        <p>Jest elementem wspierającym strukturę wyboru w <code>&lt;select&gt;</code>.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy (logiczny w select)</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Grupa opcji w liście wyboru</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>option</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>select</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>none (niewidoczny jako osobny element)</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz sprawdzić jak działa grupowanie opcji w <code>&lt;select&gt;</code> za pomocą
+            <code>&lt;optgroup&gt;</code>.
+        </p>
+
+        <div class="sim-controls">
+
+            <label>
+                Kraj/region:
+                <select id="sim-group-select">
+                    <optgroup label="Europa">
+                        <option value="Polska">Polska</option>
+                        <option value="Niemcy">Niemcy</option>
+                        <option value="Francja">Francja</option>
+                    </optgroup>
+                    <optgroup label="Azja">
+                        <option value="Japonia">Japonia</option>
+                        <option value="Korea">Korea</option>
+                        <option value="Chiny">Chiny</option>
+                    </optgroup>
+                </select>
+            </label>
+
+            <label>
+                Wyłącz Azję:
+                <select id="sim-disable-group">
+                    <option value="no">nie</option>
+                    <option value="yes">tak</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-optgroup"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-optgroup"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var dis = document.getElementById("sim-disable-group");
+
+                var kod = document.getElementById("sim-kod-optgroup");
+                var podglad = document.getElementById("sim-podglad-optgroup");
+
+                function aktualizuj() {
+
+                    var asiaDisabled = dis.value === "yes";
+
+                    kod.textContent =
+                        '<select>\n' +
+                        '  <optgroup label="Europa">\n' +
+                        '    <option>Polska</option>\n' +
+                        '    <option>Niemcy</option>\n' +
+                        '    <option>Francja</option>\n' +
+                        '  </optgroup>\n' +
+                        '  <optgroup label="Azja"' + (asiaDisabled ? ' disabled' : '') + '>\n' +
+                        '    <option>Japonia</option>\n' +
+                        '    <option>Korea</option>\n' +
+                        '    <option>Chiny</option>\n' +
+                        '  </optgroup>\n' +
+                        '</select>';
+
+                    podglad.innerHTML = "";
+
+                    var sel = document.createElement("select");
+
+                    var europa = document.createElement("optgroup");
+                    europa.label = "Europa";
+
+                    var e1 = document.createElement("option");
+                    e1.textContent = "Polska";
+                    var e2 = document.createElement("option");
+                    e2.textContent = "Niemcy";
+                    var e3 = document.createElement("option");
+                    e3.textContent = "Francja";
+
+                    europa.appendChild(e1);
+                    europa.appendChild(e2);
+                    europa.appendChild(e3);
+
+                    var asia = document.createElement("optgroup");
+                    asia.label = "Azja";
+
+                    if (asiaDisabled) asia.disabled = true;
+
+                    var a1 = document.createElement("option");
+                    a1.textContent = "Japonia";
+                    var a2 = document.createElement("option");
+                    a2.textContent = "Korea";
+                    var a3 = document.createElement("option");
+                    a3.textContent = "Chiny";
+
+                    asia.appendChild(a1);
+                    asia.appendChild(a2);
+                    asia.appendChild(a3);
+
+                    sel.appendChild(europa);
+                    sel.appendChild(asia);
+
+                    podglad.appendChild(sel);
+
+                }
+
+                dis.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
