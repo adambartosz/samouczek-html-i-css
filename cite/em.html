@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>em</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;em&gt;</strong> służy do podkreślenia fragmentu tekstu, który ma mieć inny nacisk w
+            zdaniu. Nie jest to tylko styl, ale też znaczenie semantyczne. Domyślnie przeglądarka pokazuje go jako
+            kursywę.</p>
+        <p>Jest elementem <strong>liniowym</strong>, więc nie robi nowej linii i działa w środku tekstu.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>zaznaczyć emocję w zdaniu</li>
+            <li>podkreślić ważny fragment wypowiedzi</li>
+            <li>zmienić sens akcentu w tekście</li>
+            <li>wyróżnić słowo bez użycia strong</li>
+        </ul>
+        <p>Nie używamy go tylko do stylowania tekstu kursywą — od tego jest CSS.</p>
+    </section>
+
+    <section>
+    </section>
+
+    <section>
+        <p>Znacznik <code>&lt;em&gt;</code> ma znaczenie semantyczne. Przeglądarki i czytniki ekranu traktują go jako
+            fragment z naciskiem.</p>
+        <p>Nie jest to zwykła kursywa — to informacja, że ten fragment jest ważniejszy w kontekście zdania.</p>
+        <p>Czytniki ekranowe mogą zmieniać intonację przy czytaniu takiego tekstu.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Liniowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Nacisk w tekście (emfaza)</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst i elementy liniowe</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Elementów blokowych i liniowych</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz sprawdzić jak działa <code>em</code> w tekście. Zobaczysz różnicę między zwykłym
+            tekstem a wyróżnionym fragmentem.</p>
+
+        <div class="sim-controls">
+            <label>
+                Tryb wyróżnienia:
+                <select id="sim-em-mode">
+                    <option value="off">bez em</option>
+                    <option value="em">em</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-em"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-em"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var mode = document.getElementById("sim-em-mode");
+                var kod = document.getElementById("sim-kod-em");
+                var podglad = document.getElementById("sim-podglad-em");
+
+                var tekst = "To jest przykład zdania w którym fragment ma mieć nacisk";
+
+                function aktualizuj() {
+
+                    podglad.innerHTML = "";
+
+                    var p = document.createElement("p");
+
+                    if (mode.value === "em") {
+
+                        p.innerHTML = "To jest przykład zdania w którym <em>fragment</em> ma mieć nacisk";
+                        kod.textContent = "<p>To jest przykład zdania w którym <em>fragment</em> ma mieć nacisk</p>";
+
+                    } else {
+
+                        p.textContent = tekst;
+                        kod.textContent = "<p>" + tekst + "</p>";
+
+                    }
+
+                    podglad.appendChild(p);
+
+                }
+
+                mode.addEventListener("change", aktualizuj);
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

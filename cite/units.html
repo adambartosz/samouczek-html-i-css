@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Jednostki CSS</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to są jednostki CSS?</h2>
+
+        <p>Jednostki CSS określają, w jakich wartościach zapisujemy rozmiary w stylach. Dzięki nim ustawiamy szerokości,
+            wysokości, marginesy, fonty i inne parametry wyglądu strony.</p>
+
+        <p>Bez jednostek przeglądarka nie wie, czy coś ma być duże, małe, czy średnie. Dlatego zawsze trzeba je podawać.
+        </p>
+
+        <p>Najważniejsze jest to, że jednostki dzielą się na <strong>względne</strong> i <strong>bezwzględne</strong>.
+        </p>
+    </section>
+
+    <section>
+        <h2>Podział jednostek CSS</h2>
+
+        <p>W CSS mamy dwa główne typy jednostek:</p>
+
+        <ul>
+            <li>jednostki bezwzględne – stałe, nie zależą od niczego</li>
+            <li>jednostki względne – zależą od innych wartości (np. ekranu lub rodzica)</li>
+        </ul>
+
+        <p>W praktyce częściej używa się jednostek względnych, bo lepiej działają na różnych urządzeniach.</p>
+    </section>
+
+    <section>
+        <h2>Jednostki bezwzględne</h2>
+
+        <p>Jednostki bezwzględne mają stałą wielkość. Nie zmieniają się w zależności od ekranu czy ustawień użytkownika.
+        </p>
+
+        <table>
+            <tr>
+                <th>Jednostka</th>
+                <th>Opis</th>
+            </tr>
+
+            <tr>
+                <td>px</td>
+                <td>piksele – najczęściej używana jednostka w CSS</td>
+            </tr>
+
+            <tr>
+                <td>cm</td>
+                <td>centymetry – rzadko używane w webie</td>
+            </tr>
+
+            <tr>
+                <td>mm</td>
+                <td>milimetry</td>
+            </tr>
+
+            <tr>
+                <td>in</td>
+                <td>cale (1in = 2.54cm)</td>
+            </tr>
+
+            <tr>
+                <td>pt</td>
+                <td>punkty typograficzne (1pt = 1/72 cala)</td>
+            </tr>
+
+            <tr>
+                <td>pc</td>
+                <td>pica (1pc = 12pt)</td>
+            </tr>
+        </table>
+
+        <p>Najczęściej używaną jednostką bezwzględną jest <code>px</code>.</p>
+    </section>
+
+    <section>
+        <h2>Jednostki względne</h2>
+
+        <p>Jednostki względne zmieniają swoją wartość w zależności od kontekstu, np. rozmiaru ekranu, rodzica albo
+            czcionki.</p>
+
+        <table>
+            <tr>
+                <th>Jednostka</th>
+                <th>Opis</th>
+            </tr>
+
+            <tr>
+                <td>%</td>
+                <td>Procent względem elementu nadrzędnego</td>
+            </tr>
+
+            <tr>
+                <td>em</td>
+                <td>Względem rozmiaru czcionki elementu rodzica</td>
+            </tr>
+
+            <tr>
+                <td>rem</td>
+                <td>Względem rozmiaru czcionki elementu root (html)</td>
+            </tr>
+
+            <tr>
+                <td>vw</td>
+                <td>1% szerokości okna przeglądarki</td>
+            </tr>
+
+            <tr>
+                <td>vh</td>
+                <td>1% wysokości okna przeglądarki</td>
+            </tr>
+
+            <tr>
+                <td>vmin</td>
+                <td>Mniejsza wartość z vw i vh</td>
+            </tr>
+
+            <tr>
+                <td>vmax</td>
+                <td>Większa wartość z vw i vh</td>
+            </tr>
+
+            <tr>
+                <td>ch</td>
+                <td>Szerokość znaku „0” w danej czcionce</td>
+            </tr>
+
+            <tr>
+                <td>ex</td>
+                <td>Wysokość małej litery x</td>
+            </tr>
+        </table>
+
+        <p>Najczęściej używane są: <code>%</code>, <code>rem</code>, <code>vw</code> i <code>vh</code>.</p>
+    </section>
+
+    <section>
+        <h2>Różnica między px a rem</h2>
+
+        <p><code>px</code> jest stałe i nie zmienia się przy zmianie ustawień użytkownika.</p>
+
+        <p><code>rem</code> zależy od ustawień czcionki w elemencie <code>html</code>, więc lepiej skaluje się na
+            różnych urządzeniach.</p>
+
+        <pre><code>html {
+    font-size: 16px;
+}
+
+p {
+    font-size: 1rem;
+}
+
+h1 {
+    font-size: 2rem;
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Przykłady użycia jednostek</h2>
+
+        <pre><code>/* stała szerokość */
+.box {
+    width: 300px;
+}
+
+/* szerokość zależna od rodzica */
+.container {
+    width: 80%;
+}
+
+/* wysokość ekranu */
+.hero {
+    height: 100vh;
+}
+
+/* rozmiar czcionki */
+.text {
+    font-size: 1.2rem;
+}
+
+/* margines zależny od czcionki */
+.card {
+    padding: 2em;
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Dlaczego używa się jednostek względnych?</h2>
+
+        <ul>
+            <li>lepiej działają na telefonach</li>
+            <li>łatwiej robić responsywne strony</li>
+            <li>skalują się z tekstem</li>
+            <li>ułatwiają dostępność strony</li>
+        </ul>
+
+        <p>Dlatego nowoczesne strony prawie zawsze używają <code>rem</code> i <code>%</code>.</p>
+    </section>
+
+    <section>
+        <h2>Interaktywny symulator jednostek</h2>
+
+        <p>Wybierz jednostkę i zobacz jak zmienia się rozmiar elementu.</p>
+
+        <div class="sim-controls">
+            <label>
+                Jednostka:
+                <select id="sim-unit">
+                    <option value="px">px</option>
+                    <option value="%">%</option>
+                    <option value="em">em</option>
+                    <option value="rem">rem</option>
+                    <option value="vw">vw</option>
+                    <option value="vh">vh</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var sel = document.getElementById("sim-unit");
+                var kod = document.getElementById("sim-kod");
+                var podglad = document.getElementById("sim-podglad");
+
+                function aktualizuj() {
+                    var unit = sel.value;
+
+                    kod.textContent = "width: 20" + unit + "; height: 30" + unit + ";";
+
+                    while (podglad.firstChild) {
+                        podglad.removeChild(podglad.firstChild);
+                    }
+
+                    var box = document.createElement("div");
+                    box.textContent = "BOX";
+                    box.style.cssText = "background:#ddd;display:flex;align-items:center;justify-content:center;width:20" + unit + ";height:30" + unit + ";";
+
+                    podglad.appendChild(box);
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

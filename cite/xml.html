@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>XML</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to jest XML</h2>
+        <p>XML (Extensible Markup Language) to język znaczników do opisywania danych. Nie służy do wyglądu strony, tylko
+            do przechowywania i przenoszenia informacji.</p>
+        <p>Jest czytelny zarówno dla człowieka, jak i dla komputera. Struktura opiera się na znacznikach podobnych do
+            HTML, ale są one własne i dowolnie definiowane.</p>
+        <p>XML musi być dobrze sformatowany, inaczej parser go odrzuci.</p>
+        <p>Każdy element musi mieć znacznik otwierający i zamykający.</p>
+        <p>Można w nim tworzyć własne struktury danych.</p>
+        <p>Nie ma gotowych znaczników jak w HTML.</p>
+        <p>Jest często używany w konfiguracjach i wymianie danych.</p>
+        <p>Pliki XML są tekstowe.</p>
+        <p>Można je otworzyć w każdym edytorze.</p>
+        <p>Najczęściej zapisuje się je z rozszerzeniem .xml.</p>
+    </section>
+
+    <section>
+        <h2>Budowa dokumentu XML</h2>
+        <p>Dokument XML ma strukturę drzewiastą. Na samej górze znajduje się element główny.</p>
+        <p>Wszystkie inne elementy muszą być w nim zagnieżdżone.</p>
+        <p>Przykład:</p>
+        <pre><code>&lt;root&gt;
+  &lt;user&gt;
+    &lt;name&gt;Jan&lt;/name&gt;
+    &lt;age&gt;17&lt;/age&gt;
+  &lt;/user&gt;
+&lt;/root&gt;</code></pre>
+        <p>Każdy element musi być poprawnie zamknięty.</p>
+        <p>Niedomknięty tag powoduje błąd.</p>
+        <p>W XML liczy się wielkość liter.</p>
+        <p>&lt;User&gt; i &lt;user&gt; to dwa różne elementy.</p>
+        <p>Struktura musi być spójna.</p>
+        <p>Nie można mieszać źle zagnieżdżonych tagów.</p>
+        <p>To odróżnia XML od HTML, który jest bardziej tolerancyjny.</p>
+    </section>
+
+    <section>
+        <h2>Składnia XML</h2>
+        <p>XML ma bardzo prostą składnię, ale jest rygorystyczna.</p>
+        <p>Każdy element wygląda jak znacznik HTML, ale jest definiowany przez użytkownika.</p>
+        <p>Przykład:</p>
+        <pre><code>&lt;book&gt;
+  &lt;title&gt;HTML dla początkujących&lt;/title&gt;
+  &lt;author&gt;Kowalski&lt;/author&gt;
+&lt;/book&gt;</code></pre>
+        <p>Elementy mogą mieć atrybuty.</p>
+        <p>Przykład atrybutu:</p>
+        <pre><code>&lt;book id="1" lang="pl"&gt;
+  &lt;title&gt;XML podstawy&lt;/title&gt;
+&lt;/book&gt;</code></pre>
+        <p>Atrybuty są w cudzysłowie.</p>
+        <p>Można używać pojedynczych lub podwójnych.</p>
+        <p>Najczęściej używa się podwójnych.</p>
+        <p>XML nie pozwala na błędy składni.</p>
+        <p>Każdy błąd zatrzymuje odczyt pliku.</p>
+    </section>
+
+    <section>
+        <h2>Prolog XML</h2>
+        <p>Na początku pliku XML często znajduje się deklaracja XML.</p>
+        <p>Wygląda tak:</p>
+        <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</code></pre>
+        <p>Określa wersję i kodowanie znaków.</p>
+        <p>Dzięki temu system wie jak czytać plik.</p>
+        <p>UTF-8 jest najczęściej używane.</p>
+        <p>Obsługuje polskie znaki.</p>
+        <p>Prolog nie jest obowiązkowy, ale zalecany.</p>
+        <p>Pomaga uniknąć błędów kodowania.</p>
+    </section>
+
+    <section>
+        <h2>Elementy i atrybuty</h2>
+        <p>Elementy XML to podstawowe bloki danych.</p>
+        <p>Atrybuty dodają dodatkowe informacje.</p>
+        <p>Przykład:</p>
+        <pre><code>&lt;user id="10" role="admin"&gt;
+  &lt;name&gt;Anna&lt;/name&gt;
+&lt;/user&gt;</code></pre>
+        <p>Elementy mogą być zagnieżdżone.</p>
+        <p>Atrybuty nie mogą zawierać struktury.</p>
+        <p>Dlatego dane lepiej trzymać w elementach.</p>
+        <p>Atrybuty są tylko dodatkiem.</p>
+        <p>XML nie narzuca ich znaczenia.</p>
+    </section>
+
+    <section>
+        <h2>Przestrzenie nazw XML</h2>
+        <p>Namespace w XML służy do unikania konfliktów nazw.</p>
+        <p>Można mieć dwa różne znaczenia tego samego tagu.</p>
+        <p>Przykład:</p>
+        <pre><code>&lt;h:table xmlns:h="http://example.com/html"&gt;
+&lt;f:table xmlns:f="http://example.com/furniture"&gt;</code></pre>
+        <p>Każda przestrzeń ma swój prefix.</p>
+        <p>Pomaga to w dużych dokumentach.</p>
+        <p>Bez namespace mogłyby powstać konflikty.</p>
+        <p>Używa się ich w XML bardziej zaawansowanym.</p>
+    </section>
+
+    <section>
+        <h2>Poprawność XML</h2>
+        <p>XML musi być well-formed, czyli poprawnie zbudowany.</p>
+        <p>Każdy tag musi być zamknięty.</p>
+        <p>Nie można mieć błędów w strukturze.</p>
+        <p>Przykład błędu:</p>
+        <pre><code>&lt;user&gt;
+  &lt;name&gt;Jan
+&lt;/user&gt;</code></pre>
+        <p>Brakuje zamknięcia &lt;/name&gt;.</p>
+        <p>Taki plik nie zadziała.</p>
+        <p>Parser XML go odrzuci.</p>
+        <p>To bardzo ważna zasada.</p>
+    </section>
+
+    <section>
+        <h2>DTD i XML Schema</h2>
+        <p>DTD i XML Schema służą do definiowania struktury XML.</p>
+        <p>DTD jest starszy i prostszy.</p>
+        <p>XML Schema jest bardziej rozbudowany.</p>
+        <p>Pozwala określić typy danych.</p>
+        <p>Przykład DTD:</p>
+        <pre><code>&lt;!ELEMENT user (name, age)&gt;</code></pre>
+        <p>Schema XML jest bardziej nowoczesna.</p>
+        <p>Używa się jej w większych systemach.</p>
+    </section>
+
+    <section>
+        <h2>Zastosowanie XML</h2>
+        <p>XML używa się do wymiany danych między systemami.</p>
+        <p>Jest często w konfiguracjach aplikacji.</p>
+        <p>Stosowany w Androidzie i starszych API.</p>
+        <p>Przykłady:</p>
+        <ul>
+            <li>pliki konfiguracyjne</li>
+            <li>wymiana danych między serwerami</li>
+            <li>formaty dokumentów</li>
+        </ul>
+        <p>Obecnie często zastępowany przez JSON, ale nadal ważny.</p>
+    </section>
+
+    <section>
+        <h2>Podsumowanie</h2>
+        <p>XML to język do opisu danych, a nie wyglądu.</p>
+        <p>Jest bardzo rygorystyczny i wymaga poprawnej składni.</p>
+        <p>Ma zastosowanie w wielu systemach informatycznych.</p>
+        <p>Choć mniej popularny niż JSON, nadal jest używany.</p>
+        <p>Warto znać jego podstawy.</p>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

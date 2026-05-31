@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>a</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;a&gt;</strong> to odnośnik, czyli link do innej strony, pliku albo miejsca w tej samej
+            stronie. Jest to element liniowy, więc nie robi nowej linii.</p>
+        <p>Najczęściej używa się go do przechodzenia między stronami albo otwierania zasobów z internetu.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>przejść na inną stronę internetową</li>
+            <li>pobrać plik</li>
+            <li>otworzyć maila lub telefon</li>
+            <li>przenieść do sekcji na stronie (#id)</li>
+        </ul>
+        <p>Bez linków strony byłyby statyczne i nie dałoby się po nich „klikać”.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>href</td>
+                <td>URL, ścieżka, #id, mailto:, tel:</td>
+                <td>Adres docelowy linku</td>
+            </tr>
+            <tr>
+                <td>target</td>
+                <td>_blank, _self, _parent, _top</td>
+                <td>Gdzie otworzyć link</td>
+            </tr>
+            <tr>
+                <td>download</td>
+                <td>nazwa pliku lub pusty</td>
+                <td>Wymusza pobranie pliku</td>
+            </tr>
+            <tr>
+                <td>rel</td>
+                <td>noopener, noreferrer, nofollow</td>
+                <td>Relacja między stronami</td>
+            </tr>
+            <tr>
+                <td>hreflang</td>
+                <td>np. pl, en</td>
+                <td>Język strony docelowej</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>media type (np. text/html)</td>
+                <td>Typ zasobu</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;a&gt;</strong> ma duże znaczenie semantyczne. Przeglądarka i czytniki ekranu rozumieją
+            go jako link.</p>
+        <p>Dzięki temu użytkownik wie, że to element klikalny i prowadzi do innego miejsca.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Liniowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Link / odnośnik</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>tekst, img, span</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>div, p, li</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz sprawdzić jak działa <code>&lt;a&gt;</code>. Opcja kotwicy tworzy punkt na dole
+            strony, do którego link może skakać.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Href:
+                <select id="sim-a-href">
+                    <option value="https://www.google.com">Google</option>
+                    <option value="https://www.wikipedia.org">Wikipedia</option>
+                    <option value="https://www.youtube.com">YouTube</option>
+                    <option value="#test">Kotwica (#test)</option>
+                    <option value="mailto:test@example.com">Mail</option>
+                </select>
+            </label>
+
+            <label>
+                Target:
+                <select id="sim-a-target">
+                    <option value="_self">_self</option>
+                    <option value="_blank">_blank</option>
+                    <option value="_parent">_parent</option>
+                    <option value="_top">_top</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-a"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-a"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var href = document.getElementById("sim-a-href");
+                var target = document.getElementById("sim-a-target");
+
+                var kod = document.getElementById("sim-kod-a");
+                var podglad = document.getElementById("sim-podglad-a");
+
+                var anchor = document.createElement("div");
+                anchor.id = "test";
+                anchor.style.cssText = "margin-top:5000px; padding:20px; background:rgba(0,0,0,0.5); color: white; margin-left: auto; margin-right: auto; dispaly: inline-block; text-align: center;";
+                const p = document.createElement("div");
+                document.body.appendChild(p);
+                p.style.cssText = `position: absolute; top: 0`;
+                p.id = `powrot`;
+                anchor.innerHTML = `Jesteś na kotwicy (#test).<br><a href="#powrot" style="color: #ddd"">Powrót</a>`;
+
+                function aktualizuj() {
+
+                    var h = href.value;
+                    var t = target.value;
+
+                    kod.textContent =
+                        '<a href="' + h + '" target="' + t + '">Kliknij mnie</a>';
+
+                    podglad.innerHTML = "";
+
+                    var el = document.createElement("a");
+                    el.textContent = "Kliknij mnie";
+                    el.href = h;
+                    el.target = t;
+
+                    podglad.appendChild(el);
+
+                    if (h === "#test") {
+                        if (!document.getElementById("test")) {
+                            document.body.appendChild(anchor);
+                        }
+                    } else {
+                        var existing = document.getElementById("test");
+                        if (existing) {
+                            existing.remove();
+                        }
+                    }
+
+                }
+
+                href.addEventListener("change", aktualizuj);
+                target.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

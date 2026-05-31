@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>text-decoration</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="wlasciwosc">
+
+    <section>
+        <p>Właściwość <strong>text-decoration</strong> służy do dekorowania tekstu liniami. Najczęściej używa się jej do
+            podkreślenia, przekreślenia albo nadkreślenia tekstu.</p>
+
+        <p>Można nią też ustawiać styl linii, jej grubość i kolor. Jest często używana przy linkach i wyróżnieniach.</p>
+
+        <p>Działa na tekst, ale nie zmienia jego treści ani struktury HTML.</p>
+    </section>
+
+    <section>
+        <p>Składnia: <code>text-decoration: wartość;</code></p>
+
+        <table>
+            <tr>
+                <th>Wartość</th>
+                <th>Co robi</th>
+            </tr>
+
+            <tr>
+                <td>none</td>
+                <td>Usuwa dekorację tekstu</td>
+            </tr>
+
+            <tr>
+                <td>underline</td>
+                <td>Dodaje linię pod tekstem</td>
+            </tr>
+
+            <tr>
+                <td>overline</td>
+                <td>Dodaje linię nad tekstem</td>
+            </tr>
+
+            <tr>
+                <td>line-through</td>
+                <td>Przekreśla tekst</td>
+            </tr>
+
+            <tr>
+                <td>underline overline</td>
+                <td>Łączy dwie linie: pod i nad tekstem</td>
+            </tr>
+
+            <tr>
+                <td>underline line-through</td>
+                <td>Podkreślenie i przekreślenie jednocześnie</td>
+            </tr>
+
+            <tr>
+                <td>solid</td>
+                <td>Linia ciągła</td>
+            </tr>
+
+            <tr>
+                <td>dashed</td>
+                <td>Linia przerywana</td>
+            </tr>
+
+            <tr>
+                <td>dotted</td>
+                <td>Linia kropkowana</td>
+            </tr>
+
+            <tr>
+                <td>double</td>
+                <td>Podwójna linia</td>
+            </tr>
+
+            <tr>
+                <td>wavy</td>
+                <td>Linia falowana</td>
+            </tr>
+
+            <tr>
+                <td>inherit</td>
+                <td>Dziedziczy wartość od rodzica</td>
+            </tr>
+
+            <tr>
+                <td>initial</td>
+                <td>Przywraca wartość domyślną</td>
+            </tr>
+
+            <tr>
+                <td>unset</td>
+                <td>Jak inherit lub initial zależnie od kontekstu</td>
+            </tr>
+
+            <tr>
+                <td>revert</td>
+                <td>Przywraca styl przeglądarki</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Domyślna wartość to <code>none</code>, czyli brak dekoracji tekstu.</p>
+
+        <p>Jeżeli nie ustawimy tej właściwości, tekst będzie wyświetlany normalnie bez linii.</p>
+
+        <p>Wartość <code>initial</code> również przywraca brak dekoracji, a <code>inherit</code> przejmuje ustawienia od
+            elementu nadrzędnego.</p>
+    </section>
+
+    <section>
+        <p>Właściwość <code>text-decoration</code> jest dziedziczona tylko częściowo. W praktyce często zachowanie
+            zależy od konkretnej przeglądarki i wartości.</p>
+
+        <p>Jeśli ustawimy dekorację dla elementu nadrzędnego, elementy potomne mogą ją odziedziczyć, ale można to
+            nadpisać.</p>
+
+        <pre><code>a {<br>
+    text-decoration: underline;<br>
+}</code></pre>
+
+        <p>Wartości <code>inherit</code> i <code>initial</code> pozwalają kontrolować to zachowanie.</p>
+    </section>
+
+    <section>
+        <p>Przykłady użycia:</p>
+
+        <p>Podkreślone linki:</p>
+        <pre><code>a {<br>
+    text-decoration: underline;<br>
+}</code></pre>
+
+        <p>Usunięcie podkreślenia:</p>
+        <pre><code>a {<br>
+    text-decoration: none;<br>
+}</code></pre>
+
+        <p>Przekreślony tekst:</p>
+        <pre><code>.stare {<br>
+    text-decoration: line-through;<br>
+}</code></pre>
+
+        <p>Funkcja dekoracyjna:</p>
+        <pre><code>h1 {<br>
+    text-decoration: overline;<br>
+}</code></pre>
+
+        <p>Stylowana linia:</p>
+        <pre><code>p {<br>
+    text-decoration: underline wavy red;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Wybierz styl dekoracji tekstu i zobacz efekt w czasie rzeczywistym.</p>
+
+        <div class="sim-controls">
+            <label>
+                Styl dekoracji:
+                <select id="sim-decoration">
+                    <option value="none">none</option>
+                    <option value="underline">underline</option>
+                    <option value="overline">overline</option>
+                    <option value="line-through">line-through</option>
+                    <option value="underline overline">underline overline</option>
+                    <option value="underline line-through">underline line-through</option>
+                    <option value="underline wavy red">underline wavy red</option>
+                    <option value="underline dotted blue">underline dotted blue</option>
+                    <option value="underline dashed green">underline dashed green</option>
+                    <option value="underline double black">underline double black</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var select = document.getElementById("sim-decoration");
+                var kod = document.getElementById("sim-kod");
+                var podglad = document.getElementById("sim-podglad");
+
+                function aktualizuj() {
+                    var val = select.value;
+
+                    kod.textContent = "text-decoration: " + val + ";";
+
+                    while (podglad.firstChild) {
+                        podglad.removeChild(podglad.firstChild);
+                    }
+
+                    var h = document.createElement("h3");
+                    h.textContent = "Przykładowy tekst";
+                    h.style.cssText = "text-decoration:" + val + ";";
+
+                    var p = document.createElement("p");
+                    p.textContent = "Zażółć gęślą jaźń - test dekoracji tekstu.";
+                    p.style.cssText = "text-decoration:" + val + ";";
+
+                    var p2 = document.createElement("p");
+                    p2.textContent = "HTML i CSS uczą jak kontrolować wygląd strony.";
+                    p2.style.cssText = "text-decoration:" + val + ";";
+
+                    podglad.appendChild(h);
+                    podglad.appendChild(p);
+                    podglad.appendChild(p2);
+                }
+
+                select.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

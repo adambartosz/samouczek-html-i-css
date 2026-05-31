@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>typy stylów</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Czym są typy stylów?</h2>
+        <p>W CSS istnieją trzy podstawowe sposoby dodawania stylów do strony internetowej. Różnią się one miejscem
+            zapisu kodu CSS oraz wygodą użycia.</p>
+        <p>Każdy z tych sposobów powoduje ten sam efekt wizualny, ale w praktyce najczęściej korzysta się z zewnętrznych
+            arkuszy stylów.</p>
+    </section>
+
+    <section>
+        <h2>Styl lokalny (inline)</h2>
+        <p>Styl lokalny zapisuje się bezpośrednio w znaczniku HTML za pomocą atrybutu <code>style</code>.</p>
+
+        <pre><code>&lt;p style="color:red;"&gt;Przykładowy tekst&lt;/p&gt;</code></pre>
+
+        <p>Zalety:</p>
+        <ul>
+            <li>szybkie dodanie pojedynczego stylu</li>
+            <li>proste do przetestowania</li>
+        </ul>
+
+        <p>Wady:</p>
+        <ul>
+            <li>utrudnia zarządzanie większym projektem</li>
+            <li>powoduje mieszanie HTML i CSS</li>
+            <li>trudno zmieniać wygląd wielu elementów naraz</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Styl wewnętrzny (internal)</h2>
+        <p>Styl wewnętrzny zapisuje się w znaczniku <code>&lt;style&gt;</code> znajdującym się najczęściej w sekcji
+            <code>&lt;head&gt;</code>.
+        </p>
+
+        <pre><code>&lt;head&gt;<br>
+    &lt;style&gt;<br>
+        p {<br>
+            color: blue;<br>
+        }<br>
+    &lt;/style&gt;<br>
+&lt;/head&gt;</code></pre>
+
+        <p>Zalety:</p>
+        <ul>
+            <li>oddzielenie stylów od treści HTML</li>
+            <li>wygodne przy małych stronach</li>
+            <li>łatwa edycja wszystkich reguł w jednym miejscu</li>
+        </ul>
+
+        <p>Wady:</p>
+        <ul>
+            <li>style działają tylko w jednym dokumencie</li>
+            <li>przy dużych projektach plik HTML staje się zbyt długi</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Zewnętrzny arkusz stylów (external)</h2>
+        <p>Jest to najczęściej używany sposób dodawania CSS. Style zapisuje się w osobnym pliku z rozszerzeniem
+            <code>.css</code>.
+        </p>
+
+        <p>Podłączenie arkusza:</p>
+
+        <pre><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></pre>
+
+        <p>Przykładowa zawartość pliku CSS:</p>
+
+        <pre><code>body {<br>
+    font-family: Arial, sans-serif;<br>
+}<br>
+<br>
+h1 {<br>
+    color: green;<br>
+}</code></pre>
+
+        <p>Zalety:</p>
+        <ul>
+            <li>jeden plik może obsługiwać wiele stron</li>
+            <li>łatwe zarządzanie projektem</li>
+            <li>czytelniejszy kod HTML</li>
+            <li>szybsze ładowanie kolejnych podstron dzięki pamięci podręcznej przeglądarki</li>
+        </ul>
+
+        <p>Wady:</p>
+        <ul>
+            <li>wymaga dodatkowego pliku</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Porównanie typów stylów</h2>
+
+        <table>
+            <tr>
+                <th>Typ stylu</th>
+                <th>Miejsce zapisu</th>
+                <th>Zastosowanie</th>
+            </tr>
+
+            <tr>
+                <td>lokalny</td>
+                <td>Atrybut style</td>
+                <td>Pojedyncze elementy</td>
+            </tr>
+
+            <tr>
+                <td>Wewnętrzny</td>
+                <td>Znacznik style</td>
+                <td>Małe strony i testy</td>
+            </tr>
+
+            <tr>
+                <td>Zewnętrzny</td>
+                <td>Osobny plik CSS</td>
+                <td>Profesjonalne projekty</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Który typ stylów wybrać?</h2>
+        <p>W prawdziwych projektach zdecydowanie najczęściej stosuje się zewnętrzne arkusze stylów. Dzięki nim kod HTML
+            pozostaje przejrzysty, a zmiany wyglądu można wykonywać w jednym miejscu.</p>
+
+        <p>Styl wewnętrzny sprawdza się podczas nauki lub przy bardzo małych stronach. Styl lokalny warto traktować
+            głównie jako rozwiązanie pomocnicze do szybkich testów.</p>
+
+        <p>Najlepsza praktyka:</p>
+
+        <ol>
+            <li>używaj zewnętrznego pliku CSS</li>
+            <li>ograniczaj style wewnętrzne</li>
+            <li>unikaj stylów lokalnych, jeśli nie są konieczne</li>
+        </ol>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>audio</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+    <section>
+        <p>Znacznik <strong>&lt;audio&gt;</strong> służy do osadzania plików dźwiękowych na stronie internetowej. Dzięki
+            niemu można odtwarzać muzykę, podcasty, nagrania głosowe oraz inne materiały audio bez instalowania
+            dodatkowych wtyczek.</p>
+        <p>Element ten pozwala korzystać z gotowego odtwarzacza przeglądarki albo sterować odtwarzaniem za pomocą
+            JavaScript. Najczęściej spotyka się go na stronach z muzyką, kursami online i podcastami.</p>
+        <p>Do wskazania pliku można użyć atrybutu <code>src</code> lub jednego albo kilku znaczników
+            <code>&lt;source&gt;</code>.
+        </p>
+    </section>
+    <section>
+        <p>Najczęstsze zastosowania znacznika:</p>
+        <ul>
+            <li>odtwarzanie muzyki na stronie</li>
+            <li>udostępnianie podcastów</li>
+            <li>publikowanie nagrań głosowych</li>
+            <li>dodawanie komunikatów dźwiękowych do aplikacji internetowych</li>
+            <li>tworzenie materiałów edukacyjnych z lektorem</li>
+            <li>odtwarzanie efektów dźwiękowych w grach przeglądarkowych</li>
+        </ul>
+        <p>Jeżeli potrzebny jest jednocześnie obraz i dźwięk, lepiej użyć znacznika <code>&lt;video&gt;</code>.</p>
+    </section>
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>src</td>
+                <td>URL lub ścieżka do pliku</td>
+                <td>Określa źródło pliku audio</td>
+            </tr>
+            <tr>
+                <td>controls</td>
+                <td>controls</td>
+                <td>Wyświetla przyciski odtwarzacza</td>
+            </tr>
+            <tr>
+                <td>autoplay</td>
+                <td>autoplay</td>
+                <td>Automatycznie rozpoczyna odtwarzanie</td>
+            </tr>
+            <tr>
+                <td>loop</td>
+                <td>loop</td>
+                <td>Odtwarza plik w pętli</td>
+            </tr>
+            <tr>
+                <td>muted</td>
+                <td>muted</td>
+                <td>Uruchamia odtwarzanie bez dźwięku</td>
+            </tr>
+            <tr>
+                <td>preload</td>
+                <td>none, metadata, auto</td>
+                <td>Określa sposób wstępnego ładowania pliku</td>
+            </tr>
+            <tr>
+                <td>crossorigin</td>
+                <td>anonymous, use-credentials</td>
+                <td>Ustawia sposób pobierania plików z innych domen</td>
+            </tr>
+            <tr>
+                <td>controlslist</td>
+                <td>nodownload, nofullscreen, noremoteplayback</td>
+                <td>Ukrywa wybrane funkcje odtwarzacza</td>
+            </tr>
+            <tr>
+                <td>disableremoteplayback</td>
+                <td>disableremoteplayback</td>
+                <td>Wyłącza zdalne odtwarzanie</td>
+            </tr>
+        </table>
+    </section>
+    <section>
+        <p>Znacznik <strong>&lt;audio&gt;</strong> ma znaczenie semantyczne, ponieważ informuje przeglądarkę i
+            technologie wspomagające, że w tym miejscu znajduje się materiał dźwiękowy.</p>
+        <p>Czytniki ekranu mogą rozpoznać obecność odtwarzacza oraz jego kontrolek. Wyszukiwarki również wiedzą, że dana
+            część strony zawiera multimedia audio.</p>
+        <p>Dzięki temu zawartość strony jest łatwiejsza do zrozumienia zarówno dla użytkowników, jak i programów
+            analizujących dokument HTML.</p>
+    </section>
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Osadzony materiał dźwiękowy</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>source, track, tekst alternatywny</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>większości elementów HTML przechowujących treść</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+    <section>
+        <p>W tym symulatorze można przetestować najważniejsze atrybuty znacznika <code>&lt;audio&gt;</code>. Podgląd
+            zawiera prawdziwy plik MP3 pobierany z internetu, więc odtwarzacz działa bez dodawania własnych plików do
+            projektu.</p>
+        <div class="sim-controls"> <label> Kontrolki: <select id="sim-controls-audio">
+                    <option value="0">Wyłączone</option>
+                    <option value="1" selected>Włączone</option>
+                </select> </label> <label> Autoplay: <select id="sim-autoplay-audio">
+                    <option value="0" selected>Nie</option>
+                    <option value="1">Tak</option>
+                </select> </label> <label> Loop: <select id="sim-loop-audio">
+                    <option value="0" selected>Nie</option>
+                    <option value="1">Tak</option>
+                </select> </label> <label> Muted: <select id="sim-muted-audio">
+                    <option value="0" selected>Nie</option>
+                    <option value="1">Tak</option>
+                </select> </label> <label> Preload: <select id="sim-preload-audio">
+                    <option value="none">none</option>
+                    <option value="metadata">metadata</option>
+                    <option value="auto" selected>auto</option>
+                </select> </label> </div>
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-audio"></pre>
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-audio"></div>
+        </div>
+        <script> (function () { var controls = document.getElementById("sim-controls-audio"); var autoplay = document.getElementById("sim-autoplay-audio"); var loop = document.getElementById("sim-loop-audio"); var muted = document.getElementById("sim-muted-audio"); var preload = document.getElementById("sim-preload-audio"); var kod = document.getElementById("sim-kod-audio"); var podglad = document.getElementById("sim-podglad-audio"); var plik = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"; function aktualizuj() { var atrybuty = 'src="' + plik + '"'; if (controls.value === "1") { atrybuty += " controls"; } if (autoplay.value === "1") { atrybuty += " autoplay"; } if (loop.value === "1") { atrybuty += " loop"; } if (muted.value === "1") { atrybuty += " muted"; } atrybuty += ' preload="' + preload.value + '"'; kod.textContent = "<audio " + atrybuty + "></audio>"; podglad.innerHTML = ""; var audio = document.createElement("audio"); audio.src = plik; audio.preload = preload.value; if (controls.value === "1") { audio.controls = true; } if (autoplay.value === "1") { audio.autoplay = true; } if (loop.value === "1") { audio.loop = true; } if (muted.value === "1") { audio.muted = true; } podglad.appendChild(audio); } controls.addEventListener("change", aktualizuj); autoplay.addEventListener("change", aktualizuj); loop.addEventListener("change", aktualizuj); muted.addEventListener("change", aktualizuj); preload.addEventListener("change", aktualizuj); aktualizuj(); })(); </script>
+    </section>
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

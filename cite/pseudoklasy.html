@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>pseudoklasy</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        #hover:hover {
+            background: lightblue
+        }
+
+        label:has(#checkbox:checked) {
+            font-size: 17px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to są pseudoklasy?</h2>
+
+        <p>Pseudoklasy CSS pozwalają wybierać elementy znajdujące się w określonym stanie lub położeniu. Nie wymagają
+            dodawania dodatkowych klas w HTML.</p>
+
+        <p>Rozpoznaje się je po znaku <code>:</code> umieszczonym przed nazwą pseudoklasy. Dzięki nim można reagować na
+            działania użytkownika lub wybierać elementy według ich pozycji w dokumencie.</p>
+
+        <p>Pseudoklasy są bardzo często używane przy linkach, formularzach, przyciskach i listach.</p>
+    </section>
+
+    <section>
+        <h2>Składnia pseudoklas</h2>
+
+        <p>Pseudoklasę dopisuje się na końcu selektora.</p>
+
+        <pre><code>a:hover {<br>
+    color: red;<br>
+}</code></pre>
+
+        <p>W tym przykładzie styl zostanie zastosowany po najechaniu kursorem na link.</p>
+
+        <p>Można również używać pseudoklas z innymi selektorami:</p>
+
+        <pre><code>input:focus {<br>
+    border: 2px solid blue;<br>
+}</code></pre>
+
+        <pre><code>li:first-child {<br>
+    font-weight: bold;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Najpopularniejsze pseudoklasy</h2>
+
+        <table>
+            <tr>
+                <th>Pseudoklasa</th>
+                <th>Działanie</th>
+            </tr>
+
+            <tr>
+                <td>:hover</td>
+                <td>Element pod kursorem myszy</td>
+            </tr>
+
+            <tr>
+                <td>:active</td>
+                <td>Element podczas kliknięcia</td>
+            </tr>
+
+            <tr>
+                <td>:focus</td>
+                <td>Element posiadający fokus</td>
+            </tr>
+
+            <tr>
+                <td>:visited</td>
+                <td>Odwiedzony link</td>
+            </tr>
+
+            <tr>
+                <td>:link</td>
+                <td>Nieodwiedzony link</td>
+            </tr>
+
+            <tr>
+                <td>:checked</td>
+                <td>Zaznaczony checkbox lub radio</td>
+            </tr>
+
+            <tr>
+                <td>:disabled</td>
+                <td>Wyłączony element formularza</td>
+            </tr>
+
+            <tr>
+                <td>:enabled</td>
+                <td>Aktywny element formularza</td>
+            </tr>
+
+            <tr>
+                <td>:required</td>
+                <td>Pole wymagane</td>
+            </tr>
+
+            <tr>
+                <td>:optional</td>
+                <td>Pole niewymagane</td>
+            </tr>
+
+            <tr>
+                <td>:first-child</td>
+                <td>Pierwszy element w rodzicu</td>
+            </tr>
+
+            <tr>
+                <td>:last-child</td>
+                <td>Ostatni element w rodzicu</td>
+            </tr>
+
+            <tr>
+                <td>:nth-child()</td>
+                <td>Element o określonej pozycji</td>
+            </tr>
+
+            <tr>
+                <td>:empty</td>
+                <td>Element bez zawartości</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Pseudoklasy związane z użytkownikiem</h2>
+
+        <p>Najczęściej spotykane pseudoklasy reagują na działania użytkownika.</p>
+
+        <p>Najechanie kursorem:</p>
+
+        <pre><code>button:hover {<br>
+    background-color: lightblue;<br>
+}</code></pre>
+
+        <p>Kliknięcie:</p>
+
+        <pre><code>button:active {<br>
+    transform: scale(0.95);<br>
+}</code></pre>
+
+        <p>Przejście do pola formularza:</p>
+
+        <pre><code>input:focus {<br>
+    outline: 2px solid blue;<br>
+}</code></pre>
+
+        <p>Zaznaczony checkbox:</p>
+
+        <pre><code>input:checked {<br>
+    width: 25px;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Pseudoklasy pozycyjne</h2>
+
+        <p>Niektóre pseudoklasy wybierają elementy na podstawie ich położenia w kodzie HTML.</p>
+
+        <p>Pierwszy element:</p>
+
+        <pre><code>li:first-child {<br>
+    font-weight: bold;<br>
+}</code></pre>
+
+        <p>Ostatni element:</p>
+
+        <pre><code>li:last-child {<br>
+    color: red;<br>
+}</code></pre>
+
+        <p>Trzeci element:</p>
+
+        <pre><code>li:nth-child(3) {<br>
+    background: yellow;<br>
+}</code></pre>
+
+        <p>Elementy parzyste:</p>
+
+        <pre><code>tr:nth-child(even) {<br>
+    background: #eee;<br>
+}</code></pre>
+
+        <p>Elementy nieparzyste:</p>
+
+        <pre><code>tr:nth-child(odd) {<br>
+    background: #ddd;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Wybierz pseudoklasę i zobacz przykład jej działania.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Pseudoklasa:
+                <select id="sim-pseudo">
+                    <option value="hover">:hover</option>
+                    <option value="focus">:focus</option>
+                    <option value="checked">:checked</option>
+                    <option value="first">:first-child</option>
+                    <option value="nth">:nth-child(2)</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var sel = document.getElementById("sim-pseudo");
+                var kod = document.getElementById("sim-kod");
+                var podgl = document.getElementById("sim-podglad");
+
+                function aktualizuj() {
+
+                    while (podgl.firstChild) {
+                        podgl.removeChild(podgl.firstChild);
+                    }
+
+                    if (sel.value === "hover") {
+
+                        kod.textContent = 'button:hover {\n    background-color: lightblue;\n}';
+
+                        var btn = document.createElement("button");
+                        btn.textContent = "Przycisk";
+                        btn.id = `hover`;
+
+                        podgl.appendChild(btn);
+
+                    }
+                    else if (sel.value === "focus") {
+
+                        kod.textContent = 'input:focus {\n    border: 2px solid blue;\n}';
+
+                        var input = document.createElement("input");
+                        input.value = "Pole z fokusem";
+                        input.style.border = "2px solid blue";
+
+                        podgl.appendChild(input);
+
+                    }
+                    else if (sel.value === "checked") {
+
+                        kod.textContent = 'input:checked {\n    transform: scale(1.2);\n}';
+
+                        var label = document.createElement("label");
+
+                        var checkbox = document.createElement("input");
+                        checkbox.type = "checkbox";
+                        checkbox.id = `checkbox`;
+
+                        label.appendChild(checkbox);
+                        label.appendChild(document.createTextNode(" Zaznaczony checkbox"));
+
+                        podgl.appendChild(label);
+
+                    }
+                    else if (sel.value === "first") {
+
+                        kod.textContent = 'li:first-child {\n    font-weight: bold;\n}';
+
+                        var ul = document.createElement("ul");
+
+                        var li1 = document.createElement("li");
+                        li1.textContent = "Pierwszy element";
+                        li1.style.fontWeight = "bold";
+
+                        var li2 = document.createElement("li");
+                        li2.textContent = "Drugi element";
+
+                        var li3 = document.createElement("li");
+                        li3.textContent = "Trzeci element";
+
+                        ul.appendChild(li1);
+                        ul.appendChild(li2);
+                        ul.appendChild(li3);
+
+                        podgl.appendChild(ul);
+
+                    }
+                    else {
+
+                        kod.textContent = 'li:nth-child(2) {\n    background: yellow;\n}';
+
+                        var ul = document.createElement("ul");
+
+                        var li1 = document.createElement("li");
+                        li1.textContent = "Element 1";
+
+                        var li2 = document.createElement("li");
+                        li2.textContent = "Element 2";
+                        li2.style.backgroundColor = "yellow";
+
+                        var li3 = document.createElement("li");
+                        li3.textContent = "Element 3";
+
+                        ul.appendChild(li1);
+                        ul.appendChild(li2);
+                        ul.appendChild(li3);
+
+                        podgl.appendChild(ul);
+
+                    }
+
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>blockquote</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;blockquote&gt;</strong> służy do cytowania dłuższych fragmentów tekstu. Wyróżnia cytat
+            jako osobny blok na stronie.</p>
+        <p>Jest elementem <strong>blokowym</strong>, więc zajmuje całą szerokość i jest oddzielony od reszty treści.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>zacytować dłuższy tekst z innej strony</li>
+            <li>wyróżnić opinię lub wypowiedź</li>
+            <li>pokazać fragment artykułu</li>
+            <li>zachować semantykę cytowania</li>
+        </ul>
+        <p>Do krótkich cytatów używa się <code>&lt;q&gt;</code>.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>cite</td>
+                <td>URL</td>
+                <td>Adres źródła cytatu</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <code>&lt;blockquote&gt;</code> ma znaczenie semantyczne. Informuje, że dany fragment jest cytatem z
+            innego źródła.</p>
+        <p>Czytniki ekranu mogą oznajmiać początek i koniec cytatu.</p>
+        <p>Wyszukiwarki rozumieją go jako treść pochodzącą z zewnętrznego źródła.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Cytat blokowy</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst i elementy blokowe</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Elementów blokowych (article, section, div)</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>block</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz zobaczyć różnicę między <code>&lt;blockquote&gt;</code>, zwykłym
+            <code>&lt;p&gt;</code> i <code>&lt;div&gt;</code>. Wszystkie są obok siebie, żeby było widać jak się różnią
+            w układzie.
+        </p>
+
+        <div class="sim-controls">
+
+            <label>
+                Wariant treści:
+                <select id="sim-bq-type">
+                    <option value="1">ten sam tekst w 3 elementach</option>
+                    <option value="2">różne opisy</option>
+                </select>
+            </label>
+
+            <label>
+                Styl porównania:
+                <select id="sim-bq-style">
+                    <option value="normal">normalny</option>
+                    <option value="cytat">cytat wyróżniony</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-bq"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-bq"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var type = document.getElementById("sim-bq-type");
+                var style = document.getElementById("sim-bq-style");
+
+                var kod = document.getElementById("sim-kod-bq");
+                var podglad = document.getElementById("sim-podglad-bq");
+
+                function getText(mode) {
+                    if (mode === "2") {
+                        return {
+                            p: "To jest zwykły akapit tekstu w paragrafie.",
+                            div: "To jest kontener div bez semantyki.",
+                            bq: "To jest cytat w blockquote."
+                        };
+                    }
+                    return {
+                        p: "Przykładowy tekst",
+                        div: "Przykładowy tekst",
+                        bq: "Przykładowy tekst"
+                    };
+                }
+
+                function applyStyle(el, tag, mode) {
+
+                    el.textContent = getText(type.value)[tag];
+
+                    if (mode === "cytat" && tag === "bq") {
+                        el.style.cssText =
+                            "border-left:3px solid #2a0060;" +
+                            "padding:10px;" +
+                            "margin:6px 0;" +
+                            "background:rgba(0,0,0,0.04);" +
+                            "font-style:italic;";
+                    } else {
+                        el.style.cssText =
+                            "border:1px solid rgba(0,0,0,0.1);" +
+                            "padding:10px;" +
+                            "margin:6px 0;" +
+                            "background:rgba(255,255,255,0.6);";
+                    }
+                }
+
+                function aktualizuj() {
+
+                    var txt = getText(type.value);
+                    var mode = style.value;
+
+                    kod.textContent =
+                        "<div>\n" +
+                        "  <p>" + txt.p + "</p>\n" +
+                        "  <blockquote>" + txt.bq + "</blockquote>\n" +
+                        "  <div>" + txt.div + "</div>\n" +
+                        "</div>";
+
+                    podglad.innerHTML = "";
+
+                    var wrapper = document.createElement("div");
+
+                    var p = document.createElement("p");
+                    var div = document.createElement("div");
+                    var bq = document.createElement("blockquote");
+
+                    applyStyle(p, "p", mode);
+                    applyStyle(div, "div", mode);
+                    applyStyle(bq, "bq", mode);
+
+                    wrapper.appendChild(p);
+                    wrapper.appendChild(bq);
+                    wrapper.appendChild(div);
+
+                    podglad.appendChild(wrapper);
+                }
+
+                type.addEventListener("change", aktualizuj);
+                style.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

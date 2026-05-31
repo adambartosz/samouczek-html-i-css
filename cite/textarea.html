@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>textarea</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;textarea&gt;</strong> służy do wpisywania dłuższego tekstu w formularzu. W
+            przeciwieństwie do inputa nie jest jedną linią, tylko polem wielowierszowym.</p>
+        <p>Jest elementem liniowym zastępowalnym i zawsze ma znacznik zamykający. Użytkownik może w nim pisać większe
+            treści, np. wiadomości.</p>
+        <p>Najczęściej używa się go w formularzach kontaktowych i komentarzach.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>tworzyć pole na wiadomości kontaktowe</li>
+            <li>dodawać komentarze lub opinie</li>
+            <li>zbierać dłuższy tekst od użytkownika</li>
+            <li>tworzyć opisy, notatki i treści</li>
+            <li>budować formularze zgłoszeniowe</li>
+            <li>umożliwić wpisanie wielu linii tekstu</li>
+            <li>zastąpić input tam, gdzie tekst jest za długi</li>
+        </ul>
+        <p>Jeśli tekst ma być krótki, lepiej użyć <code>&lt;input&gt;</code>.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>tekst</td>
+                <td>Nazwa pola wysyłana do serwera</td>
+            </tr>
+            <tr>
+                <td>rows</td>
+                <td>liczba</td>
+                <td>Określa liczbę widocznych wierszy</td>
+            </tr>
+            <tr>
+                <td>cols</td>
+                <td>liczba</td>
+                <td>Określa szerokość pola w znakach</td>
+            </tr>
+            <tr>
+                <td>placeholder</td>
+                <td>tekst</td>
+                <td>Podpowiedź w polu</td>
+            </tr>
+            <tr>
+                <td>maxlength</td>
+                <td>liczba</td>
+                <td>Maksymalna liczba znaków</td>
+            </tr>
+            <tr>
+                <td>minlength</td>
+                <td>liczba</td>
+                <td>Minimalna liczba znaków</td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td>required</td>
+                <td>Wymaga wypełnienia pola</td>
+            </tr>
+            <tr>
+                <td>disabled</td>
+                <td>disabled</td>
+                <td>Wyłącza pole</td>
+            </tr>
+            <tr>
+                <td>readonly</td>
+                <td>readonly</td>
+                <td>Pole tylko do odczytu</td>
+            </tr>
+            <tr>
+                <td>wrap</td>
+                <td>soft, hard</td>
+                <td>Określa zawijanie tekstu</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;textarea&gt;</strong> ma duże znaczenie semantyczne w formularzach. Informuje
+            przeglądarkę, że użytkownik ma wpisać dłuższą treść.</p>
+        <p>Czytniki ekranu traktują go jako pole tekstowe wielowierszowe i odczytują jego opis z label.</p>
+        <p>Jest ważny dla dostępności formularzy i wygody użytkownika.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Liniowy (zastępowalny)</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Pole tekstowe wielowierszowe</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>tekst (wartość początkowa)</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>form, div, section, fieldset, label</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline-block</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz sprawdzić jak działają podstawowe atrybuty <code>&lt;textarea&gt;</code> i zobaczyć
+            zmiany w kodzie oraz podglądzie.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Wiersze (rows):
+                <select id="sim-rows-textarea">
+                    <option value="2">2</option>
+                    <option value="4" selected>4</option>
+                    <option value="6">6</option>
+                    <option value="10">10</option>
+                </select>
+            </label>
+
+            <label>
+                Kolumny (cols):
+                <select id="sim-cols-textarea">
+                    <option value="20">20</option>
+                    <option value="30" selected>30</option>
+                    <option value="40">40</option>
+                    <option value="60">60</option>
+                </select>
+            </label>
+
+            <label>
+                Placeholder:
+                <select id="sim-ph-textarea">
+                    <option value="Wpisz tekst...">Wpisz tekst...</option>
+                    <option value="Twoja wiadomość">Twoja wiadomość</option>
+                    <option value="Komentarz">Komentarz</option>
+                    <option value="Opis">Opis</option>
+                </select>
+            </label>
+
+            <label>
+                Readonly:
+                <select id="sim-ro-textarea">
+                    <option value="">brak</option>
+                    <option value="readonly">readonly</option>
+                </select>
+            </label>
+
+            <label>
+                Disabled:
+                <select id="sim-dis-textarea">
+                    <option value="">brak</option>
+                    <option value="disabled">disabled</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-textarea"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-textarea"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var rows = document.getElementById("sim-rows-textarea");
+                var cols = document.getElementById("sim-cols-textarea");
+                var ph = document.getElementById("sim-ph-textarea");
+                var ro = document.getElementById("sim-ro-textarea");
+                var dis = document.getElementById("sim-dis-textarea");
+
+                var kod = document.getElementById("sim-kod-textarea");
+                var podglad = document.getElementById("sim-podglad-textarea");
+
+                function aktualizuj() {
+
+                    var attrRo = ro.value ? " " + ro.value : "";
+                    var attrDis = dis.value ? " " + dis.value : "";
+
+                    kod.textContent =
+                        '<textarea rows="' + rows.value +
+                        '" cols="' + cols.value +
+                        '" placeholder="' + ph.value + '"' +
+                        attrRo + attrDis +
+                        '>Tekst...</textarea>';
+
+                    podglad.innerHTML = "";
+
+                    var ta = document.createElement("textarea");
+                    ta.rows = rows.value;
+                    ta.cols = cols.value;
+                    ta.placeholder = ph.value;
+                    ta.readOnly = ro.value === "readonly";
+                    ta.disabled = dis.value === "disabled";
+                    ta.textContent = "Tekst...";
+
+                    podglad.appendChild(ta);
+
+                }
+
+                rows.addEventListener("change", aktualizuj);
+                cols.addEventListener("change", aktualizuj);
+                ph.addEventListener("change", aktualizuj);
+                ro.addEventListener("change", aktualizuj);
+                dis.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

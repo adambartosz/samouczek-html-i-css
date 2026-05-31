@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>q</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;q&gt;</strong> służy do krótkich cytatów w tekście. Przeglądarka automatycznie dodaje
+            cudzysłowy, więc nie trzeba ich pisać ręcznie.</p>
+        <p>Jest elementem <strong>liniowym</strong>, działa w środku zdania.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>wstawić krótki cytat w zdaniu</li>
+            <li>oznaczyć wypowiedź kogoś</li>
+            <li>pokazać fragment cudzej wypowiedzi</li>
+        </ul>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>cite</td>
+                <td>URL</td>
+                <td>Wskazuje źródło cytatu lub dokument, z którego pochodzi wypowiedź</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik ma znaczenie semantyczne. Informuje, że to cytat w tekście. Czytniki ekranów mogą inaczej
+            interpretować taki fragment jako wypowiedź cytowaną.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Liniowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Krótkie cytaty w tekście</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Blokowych i liniowych</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Sprawdź jak działa atrybut <code>cite</code> w znaczniku &lt;q&gt;.</p>
+
+        <div class="sim-controls">
+            <label>
+                Źródło cytatu:
+                <select id="sim-q">
+                    <option value="">brak</option>
+                    <option value="https://example.com">https://example.com</option>
+                    <option value="https://wikipedia.org">https://wikipedia.org</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-q"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-q"></div>
+        </div>
+
+        <script>
+            (function () {
+                var sel = document.getElementById("sim-q");
+                var kod = document.getElementById("sim-kod-q");
+                var podgl = document.getElementById("sim-podglad-q");
+
+                function aktualizuj() {
+                    var v = sel.value;
+
+                    podgl.innerHTML = "";
+
+                    var el = document.createElement("p");
+
+                    var q = document.createElement("q");
+                    q.textContent = "To jest przykładowy cytat";
+
+                    if (v !== "") {
+                        q.title = v;
+                        kod.textContent = "<q cite=\"" + v + "\">To jest przykładowy cytat</q>";
+                    } else {
+                        kod.textContent = "<q>To jest przykładowy cytat</q>";
+                    }
+
+                    el.appendChild(q);
+                    podgl.appendChild(el);
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

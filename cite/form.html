@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>form</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;form&gt;</strong> służy do tworzenia formularzy HTML, czyli miejsca gdzie użytkownik
+            może wpisywać dane i je wysyłać. To podstawowy element do komunikacji między użytkownikiem a serwerem.</p>
+        <p>Jest elementem blokowym i działa jako kontener dla pól takich jak input, textarea czy button. Sam formularz
+            nic nie wysyła bez ustawionego adresu i przycisku wysyłki.</p>
+        <p>Każdy formularz musi mieć określone, co się stanie z danymi po wysłaniu.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>tworzyć logowanie i rejestrację użytkownika</li>
+            <li>zbierać dane od użytkownika</li>
+            <li>wysyłać wiadomości (np. kontakt)</li>
+            <li>tworzyć ankiety i quizy</li>
+            <li>przesyłać dane na serwer</li>
+            <li>obsługiwać wyszukiwarki</li>
+            <li>budować interaktywne aplikacje webowe</li>
+        </ul>
+        <p>Jeśli nie trzeba wysyłać danych, lepiej użyć zwykłych kontenerów jak <code>&lt;div&gt;</code>.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>action</td>
+                <td>URL, ścieżka</td>
+                <td>Adres, na który wysyłane są dane formularza</td>
+            </tr>
+            <tr>
+                <td>method</td>
+                <td>get, post</td>
+                <td>Określa sposób wysyłania danych</td>
+            </tr>
+            <tr>
+                <td>enctype</td>
+                <td>application/x-www-form-urlencoded, multipart/form-data, text/plain</td>
+                <td>Format kodowania danych przy wysyłce</td>
+            </tr>
+            <tr>
+                <td>target</td>
+                <td>_self, _blank, _parent, _top</td>
+                <td>Gdzie otworzyć wynik wysyłki</td>
+            </tr>
+            <tr>
+                <td>autocomplete</td>
+                <td>on, off</td>
+                <td>Włącza lub wyłącza podpowiedzi przeglądarki</td>
+            </tr>
+            <tr>
+                <td>novalidate</td>
+                <td>novalidate</td>
+                <td>Wyłącza domyślną walidację formularza</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;form&gt;</strong> ma duże znaczenie semantyczne. Informuje przeglądarkę i systemy
+            wspomagające, że mamy do czynienia z formularzem do wprowadzania danych.</p>
+        <p>Czytniki ekranu rozpoznają go jako sekcję interaktywną i mogą przechodzić między polami formularza w
+            logicznej kolejności.</p>
+        <p>Wyszukiwarki również traktują formularze jako miejsca interakcji użytkownika z aplikacją.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Sekcja interaktywnego formularza danych</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>input, textarea, button, select, label i inne elementy formularza</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>body, section, main, article i innych kontenerów</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>block</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz sprawdzić podstawowe atrybuty formularza i zobaczyć jak zmienia się jego kod HTML
+            oraz zachowanie.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Metoda:
+                <select id="sim-method-form">
+                    <option value="get">GET</option>
+                    <option value="post">POST</option>
+                </select>
+            </label>
+
+            <label>
+                Autocomplete:
+                <select id="sim-auto-form">
+                    <option value="on">on</option>
+                    <option value="off">off</option>
+                </select>
+            </label>
+
+            <label>
+                Enctype:
+                <select id="sim-enctype-form">
+                    <option value="application/x-www-form-urlencoded">urlencoded</option>
+                    <option value="multipart/form-data">multipart</option>
+                    <option value="text/plain">text/plain</option>
+                </select>
+            </label>
+
+            <label>
+                Target:
+                <select id="sim-target-form">
+                    <option value="_self">_self</option>
+                    <option value="_blank">_blank</option>
+                    <option value="_parent">_parent</option>
+                    <option value="_top">_top</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-form"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-form"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var method = document.getElementById("sim-method-form");
+                var auto = document.getElementById("sim-auto-form");
+                var enctype = document.getElementById("sim-enctype-form");
+                var target = document.getElementById("sim-target-form");
+
+                var kod = document.getElementById("sim-kod-form");
+                var podglad = document.getElementById("sim-podglad-form");
+
+                function aktualizuj() {
+
+                    kod.textContent =
+                        '<form method="' + method.value +
+                        '" autocomplete="' + auto.value +
+                        '" enctype="' + enctype.value +
+                        '" target="' + target.value +
+                        '">\n    <input type="text" placeholder="Wpisz dane" name="pole_formularza">\n    <inpu type="submit">Wyślij</input>\n</form>';
+
+                    podglad.innerHTML = "";
+
+                    var form = document.createElement("form");
+                    form.method = method.value;
+                    form.autocomplete = auto.value;
+                    form.enctype = enctype.value;
+                    form.target = target.value;
+
+                    var input = document.createElement("input");
+                    input.type = "text";
+                    input.placeholder = "Wpisz dane";
+
+                    var button = document.createElement("input");
+                    button.type = `submit`;
+                    button.textContent = "Wyślij";
+
+                    form.appendChild(input);
+                    form.appendChild(button);
+
+                    podglad.appendChild(form);
+
+                }
+
+                method.addEventListener("change", aktualizuj);
+                auto.addEventListener("change", aktualizuj);
+                enctype.addEventListener("change", aktualizuj);
+                target.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

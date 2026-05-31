@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Selektory id i class</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to są selektory id i class?</h2>
+
+        <p>Selektory <strong>id</strong> oraz <strong>class</strong> służą do wybierania elementów HTML i przypisywania
+            im stylów CSS.</p>
+
+        <p>Selektor id odnosi się do jednego konkretnego elementu, natomiast selektor class może być używany przez wiele
+            elementów jednocześnie.</p>
+
+        <p>Oba selektory są bardzo często wykorzystywane podczas tworzenia stron internetowych.</p>
+    </section>
+
+    <section>
+        <h2>Selektor id</h2>
+
+        <p>Selektor id wykorzystuje atrybut <code>id</code>. W CSS zapisuje się go za pomocą znaku <code>#</code>.</p>
+
+        <pre><code>&lt;h1 id="logo"&gt;Moja strona&lt;/h1&gt;</code></pre>
+
+        <pre><code>#logo {<br>
+    color: red;<br>
+}</code></pre>
+
+        <p>Identyfikator powinien być unikalny, czyli na jednej stronie nie powinno być dwóch elementów z tym samym id.
+        </p>
+    </section>
+
+    <section>
+        <h2>Selektor class</h2>
+
+        <p>Selektor class wykorzystuje atrybut <code>class</code>. W CSS zapisuje się go za pomocą znaku <code>.</code>.
+        </p>
+
+        <pre><code>&lt;p class="ważny"&gt;Tekst&lt;/p&gt;<br>
+&lt;p class="ważny"&gt;Kolejny tekst&lt;/p&gt;</code></pre>
+
+        <pre><code>.ważny {<br>
+    color: blue;<br>
+}</code></pre>
+
+        <p>Tę samą klasę można przypisać wielu elementom jednocześnie.</p>
+    </section>
+
+    <section>
+        <h2>Porównanie id i class</h2>
+
+        <table>
+            <tr>
+                <th>Cecha</th>
+                <th>id</th>
+                <th>class</th>
+            </tr>
+
+            <tr>
+                <td>Znak w CSS</td>
+                <td>#</td>
+                <td>.</td>
+            </tr>
+
+            <tr>
+                <td>Unikalność</td>
+                <td>Tak</td>
+                <td>Nie</td>
+            </tr>
+
+            <tr>
+                <td>Może wystąpić wiele razy</td>
+                <td>Nie</td>
+                <td>Tak</td>
+            </tr>
+
+            <tr>
+                <td>Typowe zastosowanie</td>
+                <td>Pojedynczy element</td>
+                <td>Grupa elementów</td>
+            </tr>
+
+            <tr>
+                <td>Specyficzność</td>
+                <td>Wyższa</td>
+                <td>Niższa</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Przykłady użycia</h2>
+
+        <p>Id dla logo strony:</p>
+
+        <pre><code>&lt;h1 id="logo"&gt;Firma&lt;/h1&gt;</code></pre>
+
+        <p>Klasa dla wielu przycisków:</p>
+
+        <pre><code>&lt;button class="przycisk"&gt;Zapisz&lt;/button&gt;<br>
+&lt;button class="przycisk"&gt;Usuń&lt;/button&gt;</code></pre>
+
+        <p>CSS:</p>
+
+        <pre><code>#logo {<br>
+    font-size: 40px;<br>
+}<br>
+<br>
+.przycisk {<br>
+    padding: 10px;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Kiedy używać id, a kiedy class?</h2>
+
+        <ul>
+            <li>id używaj dla pojedynczych elementów, np. logo, menu, stopka</li>
+            <li>class używaj dla grup elementów mających wspólny wygląd</li>
+            <li>większość stylowania wykonuje się za pomocą klas</li>
+            <li>id często wykorzystuje się także w JavaScript i kotwicach</li>
+        </ul>
+
+        <p>W nowoczesnych projektach klasy są używane znacznie częściej niż identyfikatory.</p>
+    </section>
+
+    <section>
+        <p>Porównaj kod dla selektora id oraz class.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Typ selektora:
+                <select id="sim-typ">
+                    <option value="id">id</option>
+                    <option value="class">class</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+
+        </div>
+
+        <script>
+            (function () {
+                var typ = document.getElementById("sim-typ");
+                var kod = document.getElementById("sim-kod");
+                var podgl = document.getElementById("sim-podglad");
+
+                function aktualizuj() {
+
+                    kod.textContent = "";
+
+                    while (podgl.firstChild) {
+                        podgl.removeChild(podgl.firstChild);
+                    }
+
+                    if (typ.value === "id") {
+
+                        kod.textContent = '<div id="logo">Element z id="logo"</div>\n<div class="box">Drugi element z klasą</div>\n\n#logo {\n    color: blue;\n}';
+
+                        var div1 = document.createElement("div");
+                        div1.id = "logo";
+                        div1.textContent = 'Element z id="logo"';
+                        div1.style.color = "blue";
+                        var div2 = document.createElement("div");
+                        div2.className = "box";
+                        div2.textContent = "Drugi element z klasą";
+                        div2.style.color = "black";
+
+                        podgl.appendChild(div1);
+                        podgl.appendChild(div2);
+
+                    } else {
+
+                        kod.textContent = '<div class="box">Pierwszy element</div>\n<div class="box">Drugi element</div>\n\n.box {\n    color: blue;\n}';
+
+                        var div1 = document.createElement("div");
+                        div1.className = "box";
+                        div1.textContent = "Pierwszy element z klasą";
+                        div1.style.color = "blue";
+
+                        var div2 = document.createElement("div");
+                        div2.className = "box";
+                        div2.textContent = "Drugi element z klasą";
+                        div2.style.color = "blue";
+
+                        podgl.appendChild(div1);
+                        podgl.appendChild(div2);
+                    }
+                }
+
+                typ.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

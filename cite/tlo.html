@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>właściwości tła</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="wlasciwosc">
+
+    <section>
+        <p>Właściwości tła w CSS służą do ustawiania wyglądu tła elementu. Możemy dodać kolor, obrazek, ustawić
+            powtarzanie i pozycję.</p>
+
+        <p>Najczęściej łączy się kilka właściwości, żeby tło wyglądało normalnie, a nie „rozciągnięte na siłę”.</p>
+
+        <p>To jedna z podstaw CSS przy robieniu layoutów.</p>
+    </section>
+
+    <section>
+        <p>Składnia: <code>background: wartość;</code> albo osobne właściwości tła.</p>
+
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Co robi</th>
+            </tr>
+
+            <tr>
+                <td>background-color</td>
+                <td>ustawia kolor tła</td>
+            </tr>
+
+            <tr>
+                <td>background-image</td>
+                <td>ustawia obraz jako tło</td>
+            </tr>
+
+            <tr>
+                <td>background-repeat</td>
+                <td>określa czy obrazek się powtarza</td>
+            </tr>
+
+            <tr>
+                <td>background-position</td>
+                <td>ustawia pozycję obrazka</td>
+            </tr>
+
+            <tr>
+                <td>background-size</td>
+                <td>skaluje obraz (np. cover, contain)</td>
+            </tr>
+
+            <tr>
+                <td>background-attachment</td>
+                <td>czy tło scrolluje czy jest stałe</td>
+            </tr>
+
+            <tr>
+                <td>background</td>
+                <td>skrót wszystkich naraz</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Domyślnie tło jest przezroczyste, a obrazek nie istnieje (<code>none</code>).</p>
+
+        <p><code>background-repeat</code> domyślnie = <code>repeat</code>, czyli obrazek się powtarza.</p>
+
+        <p><code>initial</code> resetuje ustawienia, a <code>inherit</code> bierze z rodzica.</p>
+    </section>
+
+    <section>
+        <p>Ważne: żeby <code>background-repeat</code> było widoczne, obrazek NIE może być rozciągany przez
+            <code>background-size: cover</code>.
+        </p>
+
+        <p>Dlatego w przykładach używamy małych obrazków.</p>
+
+        <pre><code>div {
+    background-image: url("../img/tlo1.jpg");
+    background-repeat: repeat;
+}</code></pre>
+
+        <pre><code>div {
+    background-image: url("../img/tlo1.jpg");
+    background-repeat: no-repeat;
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Przykłady użycia:</p>
+
+        <pre><code>body {
+    background-image: url("../img/tlo1.jpg");
+    background-repeat: repeat;
+}</code></pre>
+
+        <pre><code>.box {
+    background-image: url("../img/tlo2.jpg");
+    background-repeat: no-repeat;
+}</code></pre>
+
+        <pre><code>header {
+    background-image: url("../img/tlo3.jpg");
+    background-repeat: repeat-x;
+}</code></pre>
+
+        <pre><code>section {
+    background-image: url("../img/tlo4.png");
+    background-repeat: repeat-y;
+}</code></pre>
+
+        <p>Różne wartości dają różne efekty wizualne.</p>
+    </section>
+
+    <section>
+        <p>Symulator: sprawdzisz jak działa repeat na małym obrazku.</p>
+
+        <div class="sim-controls">
+            <label>
+                Obrazek:
+                <select id="sim-img">
+                    <option value="../img/tlo1.jpg">tło 1</option>
+                    <option value="../img/tlo2.jpg">tło 2</option>
+                    <option value="../img/tlo3.jpg">tło 3</option>
+                </select>
+            </label>
+
+            <label>
+                Powtarzanie:
+                <select id="sim-repeat">
+                    <option value="repeat">repeat</option>
+                    <option value="no-repeat">no-repeat</option>
+                    <option value="repeat-x">repeat-x</option>
+                    <option value="repeat-y">repeat-y</option>
+                </select>
+            </label>
+
+            <label>
+                Rozmiar:
+                <select id="sim-size">
+                    <option value="auto">auto</option>
+                    <option value="contain">contain</option>
+                    <option value="cover">cover</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var img = document.getElementById("sim-img");
+                var rep = document.getElementById("sim-repeat");
+                var size = document.getElementById("sim-size");
+                var kod = document.getElementById("sim-kod");
+                var pod = document.getElementById("sim-podglad");
+
+                function update() {
+                    var i = img.value;
+                    var r = rep.value;
+                    var s = size.value;
+
+                    kod.textContent =
+                        "background-image: url('" + i + "');\n" +
+                        "background-repeat: " + r + ";\n" +
+                        "background-size: " + s + ";";
+
+                    while (pod.firstChild) {
+                        pod.removeChild(pod.firstChild);
+                    }
+
+                    var box = document.createElement("div");
+                    box.textContent = "BOX";
+                    box.style.cssText =
+                        "width:260px;height:160px;border:2px solid black;display:flex;align-items:center;justify-content:center;" +
+                        "background-image:url('" + i + "');background-repeat:" + r + ";background-size:" + s + ";background-position:top left;";
+
+                    pod.appendChild(box);
+                }
+
+                img.addEventListener("change", update);
+                rep.addEventListener("change", update);
+                size.addEventListener("change", update);
+                update();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

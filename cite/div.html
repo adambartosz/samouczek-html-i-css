@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>div</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;div&gt;</strong> to uniwersalny kontener używany do grupowania innych elementów HTML.
+            Sam nie nadaje żadnego znaczenia treści - służy głównie do organizowania kodu oraz stylowania przez CSS.</p>
+
+        <p>Jest elementem <strong>blokowym</strong>, więc domyślnie zajmuje całą dostępną szerokość rodzica i rozpoczyna
+            się od nowej linii.</p>
+
+        <p>To jeden z najczęściej używanych znaczników podczas tworzenia układów stron internetowych.</p>
+    </section>
+
+    <section>
+        <p>Najczęściej używamy go gdy chcemy:</p>
+
+        <ul>
+            <li>pogrupować kilka elementów w jeden kontener</li>
+            <li>nadać wspólne style wielu elementom</li>
+            <li>tworzyć sekcje układu strony</li>
+            <li>budować siatki, kolumny i karty</li>
+            <li>tworzyć kontenery Flexbox</li>
+            <li>tworzyć kontenery Grid</li>
+            <li>łatwiej sterować elementami przez JavaScript</li>
+            <li>organizować strukturę dokumentu</li>
+            <li>tworzyć komponenty interfejsu użytkownika</li>
+            <li>oddzielać logiczne części kodu</li>
+        </ul>
+
+        <p>Jeżeli dany fragment ma konkretne znaczenie, lepiej użyć znaczników semantycznych takich jak
+            <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>,
+            <code>&lt;article&gt;</code> lub <code>&lt;footer&gt;</code>.</p>
+    </section>
+
+    <section>
+    </section>
+
+    <section>
+        <p>Znacznik <code>&lt;div&gt;</code> nie posiada własnego znaczenia semantycznego. Dla przeglądarki, Google i
+            czytników ekranu jest po prostu neutralnym kontenerem.</p>
+
+        <p>Nie przekazuje żadnej informacji o tym, co znajduje się w środku. Z tego powodu nie powinien zastępować
+            elementów semantycznych, gdy takie są dostępne.</p>
+
+        <p>Jeżeli tworzysz nagłówek strony, użyj <code>&lt;header&gt;</code>. Jeżeli tworzysz menu, użyj
+            <code>&lt;nav&gt;</code>. Dzięki temu kod będzie bardziej zrozumiały dla ludzi i narzędzi analizujących
+            stronę.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Brak - neutralny pojemnik</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Większość elementów HTML zgodnie z zasadami dokumentu</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Większości elementów blokowych oraz sekcji dokumentu</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>block</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz tworzyć zagnieżdżone kontenery <code>&lt;div&gt;</code> i sprawdzić, jak zmienia się
+            ich sposób wyświetlania po zmianie wartości <code>display</code>.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Rodzic:
+                <select id="sim-div-parent">
+                    <option value="block">block</option>
+                    <option value="inline">inline</option>
+                    <option value="inline-block">inline-block</option>
+                </select>
+            </label>
+
+            <label>
+                Dziecko:
+                <select id="sim-div-child">
+                    <option value="block">block</option>
+                    <option value="inline">inline</option>
+                    <option value="inline-block">inline-block</option>
+                </select>
+            </label>
+
+            <label>
+                Wnuk:
+                <select id="sim-div-grandchild">
+                    <option value="block">block</option>
+                    <option value="inline">inline</option>
+                    <option value="inline-block">inline-block</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-div"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-div"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var parentSel = document.getElementById("sim-div-parent");
+                var childSel = document.getElementById("sim-div-child");
+                var grandSel = document.getElementById("sim-div-grandchild");
+
+                var kod = document.getElementById("sim-kod-div");
+                var podglad = document.getElementById("sim-podglad-div");
+
+                function aktualizuj() {
+
+                    kod.textContent =
+                        '<div style="display:' + parentSel.value + ';">\n' +
+                        '    <div style="display:' + childSel.value + ';">\n' +
+                        '        <div style="display:' + grandSel.value + ';">Wnuk</div>\n' +
+                        '    </div>\n' +
+                        '</div>';
+
+                    while (podglad.firstChild) {
+                        podglad.removeChild(podglad.firstChild);
+                    }
+
+                    var rodzic = document.createElement("div");
+                    var dziecko = document.createElement("div");
+                    var wnuk = document.createElement("div");
+                    var sasiad = document.createElement("div");
+
+                    rodzic.textContent = "RODZIC ";
+                    dziecko.textContent = "DZIECKO ";
+                    wnuk.textContent = "WNUK";
+                    sasiad.textContent = "SĄSIAD";
+
+                    rodzic.style.cssText =
+                        "display:" + parentSel.value + ";" +
+                        "border:3px solid #2563eb;" +
+                        "padding:10px;" +
+                        "margin:5px;" +
+                        "background:#dbeafe;";
+
+                    dziecko.style.cssText =
+                        "display:" + childSel.value + ";" +
+                        "border:3px solid #16a34a;" +
+                        "padding:10px;" +
+                        "margin:5px;" +
+                        "background:#dcfce7;";
+
+                    wnuk.style.cssText =
+                        "display:" + grandSel.value + ";" +
+                        "border:3px solid #dc2626;" +
+                        "padding:10px;" +
+                        "margin:5px;" +
+                        "background:#fee2e2;";
+
+                    sasiad.style.cssText =
+                        "display:inline-block;" +
+                        "border:3px solid #9333ea;" +
+                        "padding:10px;" +
+                        "margin:5px;" +
+                        "background:#f3e8ff;";
+
+                    dziecko.appendChild(wnuk);
+                    rodzic.appendChild(dziecko);
+
+                    podglad.appendChild(rodzic);
+                    podglad.appendChild(sasiad);
+
+                }
+
+                parentSel.addEventListener("change", aktualizuj);
+                childSel.addEventListener("change", aktualizuj);
+                grandSel.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

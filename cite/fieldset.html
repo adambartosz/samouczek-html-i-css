@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>fieldset</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;fieldset&gt;</strong> służy do grupowania elementów formularza w jedną logiczną całość.
+            Najczęściej używa się go razem z <code>&lt;legend&gt;</code>, który opisuje tę grupę.</p>
+        <p>Jest elementem blokowym i tworzy ramkę wokół powiązanych pól formularza. Dzięki temu formularz jest bardziej
+            czytelny.</p>
+        <p>To typowy element porządkujący w większych formularzach.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>grupować pola formularza w sekcje</li>
+            <li>oddzielić dane użytkownika (np. dane osobowe)</li>
+            <li>tworzyć czytelne formularze</li>
+            <li>poprawić dostępność formularzy</li>
+            <li>logicznie podzielić formularz na części</li>
+            <li>zaznaczyć powiązane pola</li>
+            <li>ułatwić użytkownikowi wypełnianie formularza</li>
+        </ul>
+        <p>Jeśli formularz jest mały, fieldset nie jest konieczny.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>disabled</td>
+                <td>disabled</td>
+                <td>Wyłącza wszystkie pola w grupie</td>
+            </tr>
+            <tr>
+                <td>form</td>
+                <td>id formularza</td>
+                <td>Przypisuje fieldset do formularza</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>tekst</td>
+                <td>Nazwa grupy danych</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;fieldset&gt;</strong> ma duże znaczenie semantyczne w formularzach. Informuje, że dane
+            są logicznie pogrupowane.</p>
+        <p>Czytniki ekranu odczytują go jako sekcję formularza i łączą go z <code>&lt;legend&gt;</code>, który opisuje
+            jego zawartość.</p>
+        <p>To ważny element dostępności i organizacji formularzy.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Grupa pól formularza</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>input, select, textarea, label, button</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>form</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>block</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz sprawdzić jak działa grupowanie pól formularza przez <code>&lt;fieldset&gt;</code> i
+            opis grupy przez <code>&lt;legend&gt;</code>.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Tryb grupy:
+                <select id="sim-fieldset-mode">
+                    <option value="on">fieldset + legend</option>
+                    <option value="off">bez grupy</option>
+                </select>
+            </label>
+
+            <label>
+                Stan pól:
+                <select id="sim-fieldset-state">
+                    <option value="enabled">aktywne</option>
+                    <option value="disabled">wyłączone</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-fieldset"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-fieldset"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var mode = document.getElementById("sim-fieldset-mode");
+                var state = document.getElementById("sim-fieldset-state");
+
+                var kod = document.getElementById("sim-kod-fieldset");
+                var podglad = document.getElementById("sim-podglad-fieldset");
+
+                function aktualizuj() {
+
+                    podglad.innerHTML = "";
+
+                    var disabled = state.value === "disabled";
+
+                    if (mode.value === "on") {
+
+                        kod.textContent =
+                            '<fieldset' + (disabled ? ' disabled' : '') + '>\n' +
+                            '  <legend>Dane użytkownika</legend>\n' +
+                            '  <input type="text" placeholder="Imię">\n' +
+                            '  <input type="text" placeholder="Nazwisko">\n' +
+                            '</fieldset>';
+
+                        var fs = document.createElement("fieldset");
+                        if (disabled) fs.disabled = true;
+
+                        var legend = document.createElement("legend");
+                        legend.textContent = "Dane użytkownika";
+
+                        var i1 = document.createElement("input");
+                        i1.type = "text";
+                        i1.placeholder = "Imię";
+
+                        var i2 = document.createElement("input");
+                        i2.type = "text";
+                        i2.placeholder = "Nazwisko";
+
+                        fs.appendChild(legend);
+                        fs.appendChild(i1);
+                        fs.appendChild(i2);
+
+                        podglad.appendChild(fs);
+
+                    } else {
+
+                        kod.textContent =
+                            '<div>\n' +
+                            '  <input type="text" placeholder="Imię">\n' +
+                            '  <input type="text" placeholder="Nazwisko">\n' +
+                            '</div>';
+
+                        var div = document.createElement("div");
+
+                        var i1b = document.createElement("input");
+                        i1b.type = "text";
+                        i1b.placeholder = "Imię";
+
+                        var i2b = document.createElement("input");
+                        i2b.type = "text";
+                        i2b.placeholder = "Nazwisko";
+
+                        div.appendChild(i1b);
+                        div.appendChild(i2b);
+
+                        podglad.appendChild(div);
+
+                    }
+
+                }
+
+                mode.addEventListener("change", aktualizuj);
+                state.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

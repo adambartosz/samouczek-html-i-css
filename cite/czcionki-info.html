@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>czcionki - wprowadzenie</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to są czcionki?</h2>
+        <p>Czcionka określa wygląd tekstu wyświetlanego na stronie internetowej. Dzięki niej litery mogą wyglądać
+            nowocześnie, klasycznie, oficjalnie albo bardziej ozdobnie.</p>
+
+        <p>W CSS wygląd tekstu najczęściej ustawiamy za pomocą właściwości <code>font-family</code>. To właśnie ona
+            decyduje, jakiej rodziny czcionek użyje przeglądarka.</p>
+
+        <p>Dobrze dobrana czcionka poprawia czytelność strony i wpływa na jej odbiór przez użytkownika.</p>
+    </section>
+
+    <section>
+        <h2>Dlaczego czcionki są ważne?</h2>
+
+        <ul>
+            <li>wpływają na czytelność treści</li>
+            <li>budują wygląd i charakter strony</li>
+            <li>pomagają wyróżnić nagłówki od zwykłego tekstu</li>
+            <li>ułatwiają odbiór dużych ilości informacji</li>
+            <li>mogą poprawić dostępność strony</li>
+        </ul>
+
+        <p>Strona z dobrze dobraną typografią wygląda bardziej profesjonalnie i jest wygodniejsza w użyciu.</p>
+    </section>
+
+    <section>
+        <h2>Podstawowe rodziny czcionek</h2>
+
+        <table>
+            <tr>
+                <th>Rodzina</th>
+                <th>Opis</th>
+            </tr>
+
+            <tr>
+                <td>serif</td>
+                <td>Czcionki posiadające ozdobne zakończenia liter. Często spotykane w książkach i gazetach.</td>
+            </tr>
+
+            <tr>
+                <td>sans-serif</td>
+                <td>Czcionki bez ozdobników. Najczęściej używane na stronach internetowych.</td>
+            </tr>
+
+            <tr>
+                <td>monospace</td>
+                <td>Każdy znak zajmuje tyle samo miejsca. Popularne w programowaniu.</td>
+            </tr>
+
+            <tr>
+                <td>cursive</td>
+                <td>Przypominają pismo odręczne.</td>
+            </tr>
+
+            <tr>
+                <td>fantasy</td>
+                <td>Czcionki dekoracyjne i ozdobne.</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Przykłady rodzin czcionek</h2>
+
+        <p>Najczęściej spotykane czcionki:</p>
+
+        <table>
+            <tr>
+                <th>Nazwa</th>
+                <th>Rodzina</th>
+            </tr>
+
+            <tr>
+                <td>Arial</td>
+                <td>sans-serif</td>
+            </tr>
+
+            <tr>
+                <td>Verdana</td>
+                <td>sans-serif</td>
+            </tr>
+
+            <tr>
+                <td>Tahoma</td>
+                <td>sans-serif</td>
+            </tr>
+
+            <tr>
+                <td>Times New Roman</td>
+                <td>serif</td>
+            </tr>
+
+            <tr>
+                <td>Georgia</td>
+                <td>serif</td>
+            </tr>
+
+            <tr>
+                <td>Courier New</td>
+                <td>monospace</td>
+            </tr>
+
+            <tr>
+                <td>Consolas</td>
+                <td>monospace</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Ustawianie czcionki w CSS</h2>
+
+        <p>Najprostszy zapis wygląda tak:</p>
+
+        <pre><code>body {<br>
+    font-family: Arial, sans-serif;<br>
+}</code></pre>
+
+        <p>Przeglądarka najpierw próbuje użyć Arial. Jeśli użytkownik nie ma jej zainstalowanej, użyje dowolnej
+            dostępnej czcionki z rodziny <code>sans-serif</code>.</p>
+
+        <p>Możemy również ustawiać czcionki dla konkretnych elementów:</p>
+
+        <pre><code>h1 {<br>
+    font-family: Georgia, serif;<br>
+}<br>
+<br>
+p {<br>
+    font-family: Verdana, sans-serif;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Powiązane właściwości CSS</h2>
+
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Zastosowanie</th>
+            </tr>
+
+            <tr>
+                <td>font-family</td>
+                <td>Wybór czcionki</td>
+            </tr>
+
+            <tr>
+                <td>font-size</td>
+                <td>Rozmiar tekstu</td>
+            </tr>
+
+            <tr>
+                <td>font-weight</td>
+                <td>Grubość tekstu</td>
+            </tr>
+
+            <tr>
+                <td>font-style</td>
+                <td>Kursywa</td>
+            </tr>
+
+            <tr>
+                <td>line-height</td>
+                <td>Wysokość linii</td>
+            </tr>
+
+            <tr>
+                <td>letter-spacing</td>
+                <td>Odstępy między literami</td>
+            </tr>
+        </table>
+
+        <p>Razem tworzą podstawę typografii w CSS.</p>
+    </section>
+
+    <section>
+        <h2>Czcionki internetowe</h2>
+
+        <p>Nie wszystkie urządzenia mają te same czcionki zainstalowane. Dlatego często korzysta się z tzw. czcionek
+            internetowych.</p>
+
+        <p>Najpopularniejszym źródłem jest Google Fonts.</p>
+
+        <pre><code>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;<br>
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;<br>
+&lt;link href="https://fonts.googleapis.com/css2?family=Roboto&amp;display=swap" rel="stylesheet"&gt;</code></pre>
+
+        <p>Następnie można użyć czcionki w CSS:</p>
+
+        <pre><code>body {<br>
+    font-family: "Roboto", sans-serif;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Dobre praktyki</h2>
+
+        <ul>
+            <li>nie używaj zbyt wielu różnych czcionek na jednej stronie</li>
+            <li>dla zwykłego tekstu wybieraj czytelne kroje pisma</li>
+            <li>zawsze podawaj rodzinę zapasową, np. sans-serif</li>
+            <li>unikaj bardzo ozdobnych czcionek w długich tekstach</li>
+            <li>sprawdzaj wygląd strony na różnych urządzeniach</li>
+            <li>dbaj o odpowiedni rozmiar tekstu</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Najczęstsze błędy początkujących</h2>
+
+        <ul>
+            <li>używanie wyłącznie jednej konkretnej czcionki bez zapasowej rodziny</li>
+            <li>stosowanie wielu różnych krojów na jednej stronie</li>
+            <li>ustawianie zbyt małego rozmiaru tekstu</li>
+            <li>korzystanie z trudnych do odczytania ozdobnych czcionek</li>
+            <li>brak testów na telefonach i tabletach</li>
+        </ul>
+
+        <p>W praktyce często mniej znaczy więcej. Dwie dobrze dobrane czcionki zwykle całkowicie wystarczają.</p>
+    </section>
+
+    <section>
+        <h2>Interaktywny podgląd rodzin czcionek</h2>
+
+        <p>Wybierz rodzinę czcionki i zobacz, jak zmienia się wygląd tekstu.</p>
+
+        <div class="sim-controls">
+            <label>
+                Rodzina czcionki:
+                <select id="sim-font">
+                    <option value="serif">serif</option>
+                    <option value="sans-serif">sans-serif</option>
+                    <option value="monospace">monospace</option>
+                    <option value="cursive">cursive</option>
+                    <option value="fantasy">fantasy</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var select = document.getElementById("sim-font");
+                var kod = document.getElementById("sim-kod");
+                var podglad = document.getElementById("sim-podglad");
+
+                function aktualizuj() {
+                    var font = select.value;
+
+                    kod.textContent = "body {\n    font-family: " + font + ";\n}";
+
+                    podglad.innerHTML = "";
+
+                    var p = document.createElement("p");
+                    p.textContent = "Zażółć gęślą jaźń - przykładowy tekst z polskimi znakami.";
+                    p.style.fontFamily = font;
+
+                    podglad.appendChild(p);
+                }
+
+                select.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

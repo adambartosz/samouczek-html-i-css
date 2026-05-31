@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Zasady tworzenia stron</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Dlaczego warto znać zasady tworzenia stron?</h2>
+
+        <p>Strona internetowa powinna być nie tylko ładna, ale również czytelna, szybka i wygodna w użyciu. Dobre nawyki
+            od początku nauki pozwalają uniknąć wielu problemów w większych projektach.</p>
+
+        <p>Przestrzeganie podstawowych zasad sprawia, że kod jest łatwiejszy do rozwijania, poprawiania i współpracy z
+            innymi programistami.</p>
+
+    </section>
+
+    <section>
+        <h2>Twórz poprawną strukturę dokumentu</h2>
+
+        <p>Każda strona powinna rozpoczynać się od podstawowego szablonu HTML.</p>
+
+        <pre><code>&lt;!DOCTYPE html&gt;<br>
+&lt;html lang="pl"&gt;<br>
+&lt;head&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta charset="utf-8"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Moja strona&lt;/title&gt;<br>
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Treść strony<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;</code></pre>
+
+        <p>Dzięki temu przeglądarka poprawnie interpretuje dokument i wie, z jakim standardem pracuje.</p>
+
+    </section>
+
+    <section>
+        <h2>Używaj odpowiednich znaczników</h2>
+
+        <p>Każdy znacznik ma swoje przeznaczenie. Nie należy używać przypadkowych elementów tylko dlatego, że wizualnie
+            dają podobny efekt.</p>
+
+        <table>
+            <tr>
+                <th>Zadanie</th>
+                <th>Poprawny znacznik</th>
+            </tr>
+            <tr>
+                <td>Nagłówek strony</td>
+                <td>&lt;h1&gt; - &lt;h6&gt;</td>
+            </tr>
+            <tr>
+                <td>Akapit tekstu</td>
+                <td>&lt;p&gt;</td>
+            </tr>
+            <tr>
+                <td>Lista punktowana</td>
+                <td>&lt;ul&gt;</td>
+            </tr>
+            <tr>
+                <td>Lista numerowana</td>
+                <td>&lt;ol&gt;</td>
+            </tr>
+            <tr>
+                <td>Odnośnik</td>
+                <td>&lt;a&gt;</td>
+            </tr>
+            <tr>
+                <td>Obraz</td>
+                <td>&lt;img&gt;</td>
+            </tr>
+        </table>
+
+        <p>Dzięki temu kod jest bardziej semantyczny i łatwiejszy do zrozumienia.</p>
+
+    </section>
+
+    <section>
+        <h2>Dbaj o semantykę</h2>
+
+        <p>Semantyka oznacza używanie elementów zgodnie z ich znaczeniem.</p>
+
+        <p>Zamiast tworzyć wszystko przy pomocy znaczników <code>&lt;div&gt;</code>, warto korzystać z elementów
+            opisujących rolę danego fragmentu strony.</p>
+
+        <pre><code>&lt;header&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Sklep komputerowy&lt;/h1&gt;<br>
+&lt;/header&gt;<br>
+<br>
+&lt;nav&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Menu<br>
+&lt;/nav&gt;<br>
+<br>
+&lt;main&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Treść strony<br>
+&lt;/main&gt;<br>
+<br>
+&lt;footer&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Stopka<br>
+&lt;/footer&gt;</code></pre>
+
+        <p>Takie rozwiązanie pomaga przeglądarkom, wyszukiwarkom i czytnikom ekranu.</p>
+
+    </section>
+
+    <section>
+        <h2>Stosuj odpowiednie wcięcia</h2>
+
+        <p>Czytelny kod jest łatwiejszy do analizowania i poprawiania.</p>
+
+        <p>Dobrze sformatowany kod:</p>
+
+        <pre><code>&lt;section&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;Aktualności&lt;/h2&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Treść artykułu&lt;/p&gt;<br>
+&lt;/section&gt;</code></pre>
+
+        <p>Źle sformatowany kod:</p>
+
+        <pre><code>&lt;section&gt;&lt;h2&gt;Aktualności&lt;/h2&gt;&lt;p&gt;Treść artykułu&lt;/p&gt;&lt;/section&gt;</code></pre>
+
+        <p>Przy większych projektach odpowiednie wcięcia są bardzo ważne.</p>
+
+    </section>
+
+    <section>
+        <h2>Oddzielaj HTML, CSS i JavaScript</h2>
+
+        <p>Każda technologia ma inne zadanie.</p>
+
+        <table>
+            <tr>
+                <th>Technologia</th>
+                <th>Przeznaczenie</th>
+            </tr>
+            <tr>
+                <td>HTML</td>
+                <td>Struktura strony</td>
+            </tr>
+            <tr>
+                <td>CSS</td>
+                <td>Wygląd strony</td>
+            </tr>
+            <tr>
+                <td>JavaScript</td>
+                <td>Interakcja i logika</td>
+            </tr>
+        </table>
+
+        <p>Zamiast pisać wszystko w jednym miejscu, lepiej używać osobnych plików.</p>
+
+        <pre><code>&lt;link rel="stylesheet" href="../css/style.css"&gt;<br>
+&lt;script src="../js/script.js"&gt;&lt;/script&gt;</code></pre>
+
+    </section>
+
+    <section>
+        <h2>Pamiętaj o dostępności</h2>
+
+        <p>Nie wszyscy użytkownicy korzystają ze strony w taki sam sposób. Niektóre osoby używają czytników ekranu lub
+            specjalnych urządzeń.</p>
+
+        <p>Dlatego warto:</p>
+
+        <ul>
+            <li>dodawać opisy alt do obrazów</li>
+            <li>stosować nagłówki w odpowiedniej kolejności</li>
+            <li>używać czytelnych tekstów linków</li>
+            <li>zachowywać odpowiedni kontrast kolorów</li>
+            <li>nie ukrywać ważnych informacji wyłącznie w obrazach</li>
+        </ul>
+
+        <p>Przykład:</p>
+
+        <pre><code>&lt;img src="../img/logo.png" alt="Logo szkoły"&gt;</code></pre>
+
+    </section>
+
+    <section>
+        <h2>Dbaj o szybkość działania strony</h2>
+
+        <p>Użytkownicy nie lubią długo czekać na załadowanie strony.</p>
+
+        <p>Warto:</p>
+
+        <ul>
+            <li>zmniejszać rozmiar obrazów</li>
+            <li>usuwać niepotrzebny kod</li>
+            <li>łączyć pliki CSS i JavaScript w większych projektach</li>
+            <li>używać nowoczesnych formatów obrazów</li>
+            <li>ładować tylko potrzebne zasoby</li>
+        </ul>
+
+        <p>Zbyt duże pliki mogą znacząco spowolnić działanie witryny.</p>
+
+    </section>
+
+    <section>
+        <h2>Testuj stronę regularnie</h2>
+
+        <p>Nie warto pisać kilkuset linii kodu bez sprawdzania efektów.</p>
+
+        <p>Dobrą praktyką jest częste odświeżanie strony i kontrolowanie zmian.</p>
+
+        <p>Warto testować witrynę:</p>
+
+        <ul>
+            <li>w różnych przeglądarkach</li>
+            <li>na komputerze</li>
+            <li>na telefonie</li>
+            <li>na tablecie</li>
+            <li>w różnych rozdzielczościach</li>
+        </ul>
+
+    </section>
+
+    <section>
+        <h2>Nazywaj pliki i foldery w uporządkowany sposób</h2>
+
+        <p>Dobrze zorganizowany projekt jest łatwiejszy do rozwijania.</p>
+
+        <p>Przykładowa struktura:</p>
+
+        <pre><code>projekt<br>
+├── index.html<br>
+├── css<br>
+│&nbsp;&nbsp;&nbsp;└── style.css<br>
+├── js<br>
+│&nbsp;&nbsp;&nbsp;└── script.js<br>
+└── img<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── logo.png<br>
+&nbsp;&nbsp;&nbsp;&nbsp;└── tlo.jpg</code></pre>
+
+        <p>Nazwy plików powinny być krótkie i jednoznaczne.</p>
+
+    </section>
+
+    <section>
+        <h2>Unikaj najczęstszych błędów</h2>
+
+        <ul>
+            <li>brak DOCTYPE</li>
+            <li>brak zamknięcia znacznika</li>
+            <li>powtarzanie identycznych identyfikatorów id</li>
+            <li>używanie zbyt wielu divów bez potrzeby</li>
+            <li>brak atrybutu alt w obrazach</li>
+            <li>pisanie całego CSS w atrybucie style</li>
+            <li>nieczytelne nazwy klas</li>
+            <li>brak testowania strony</li>
+            <li>kopiowanie kodu bez zrozumienia jego działania</li>
+            <li>chaotyczna struktura katalogów</li>
+        </ul>
+
+    </section>
+
+    <section>
+        <h2>Złota zasada początkującego programisty</h2>
+
+        <p>Pisz kod tak, abyś za miesiąc nadal rozumiał, co zrobiłeś.</p>
+
+        <p>Czytelność jest ważniejsza od sprytnych, ale niezrozumiałych rozwiązań.</p>
+
+        <p>Dobrze napisany kod:</p>
+
+        <ul>
+            <li>łatwo przeczytać</li>
+            <li>łatwo poprawić</li>
+            <li>łatwo rozbudować</li>
+            <li>łatwo przekazać innej osobie</li>
+        </ul>
+
+        <p>Większość profesjonalnych projektów powstaje właśnie według tej zasady.</p>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

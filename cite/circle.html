@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>circle</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;circle&gt;</strong> służy do rysowania okręgów i kół wewnątrz grafiki SVG. Jest jednym z
+            podstawowych elementów SVG i pozwala bardzo szybko tworzyć proste kształty geometryczne.</p>
+        <p>Jest elementem opisującym grafikę, dlatego nie działa samodzielnie w HTML. Musi znajdować się wewnątrz
+            znacznika <code>&lt;svg&gt;</code>.</p>
+        <p>Położenie koła określa się za pomocą współrzędnych środka oraz promienia.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>narysować koło lub okrąg w SVG</li>
+            <li>tworzyć ikony i ilustracje wektorowe</li>
+            <li>budować wykresy i diagramy</li>
+            <li>tworzyć przyciski graficzne</li>
+            <li>rysować punkty na mapach lub wykresach</li>
+            <li>przygotowywać animacje SVG</li>
+            <li>tworzyć elementy interaktywne sterowane JavaScript</li>
+        </ul>
+        <p>Jeżeli potrzebny jest prostokąt, lepiej użyć <code>&lt;rect&gt;</code>. Jeżeli potrzebna jest bardziej
+            skomplikowana figura, można użyć <code>&lt;path&gt;</code>.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>cx</td>
+                <td>liczba lub jednostka długości</td>
+                <td>Określa położenie środka koła w osi X</td>
+            </tr>
+            <tr>
+                <td>cy</td>
+                <td>liczba lub jednostka długości</td>
+                <td>Określa położenie środka koła w osi Y</td>
+            </tr>
+            <tr>
+                <td>r</td>
+                <td>liczba lub jednostka długości</td>
+                <td>Określa promień koła</td>
+            </tr>
+            <tr>
+                <td>pathLength</td>
+                <td>liczba</td>
+                <td>Definiuje długość ścieżki używaną przez niektóre animacje i obliczenia SVG</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;circle&gt;</strong> posiada znaczenie semantyczne związane z grafiką SVG. Informuje
+            przeglądarkę, że należy narysować koło o określonym środku i promieniu.</p>
+        <p>Nie jest elementem semantycznym strony internetowej w takim sensie jak <code>&lt;header&gt;</code> czy
+            <code>&lt;article&gt;</code>, ale ma konkretne znaczenie w strukturze dokumentu SVG.
+        </p>
+        <p>Programy analizujące grafikę SVG wiedzą dzięki niemu, że dany obiekt jest kołem, a nie przypadkowym zbiorem
+            punktów.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Pusty</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Nie (niekontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Figura SVG reprezentująca koło</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Żadnych elementów</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>svg, g, symbol, marker, pattern, mask, clipPath i innych kontenerów SVG</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze można zmieniać wszystkie własne atrybuty znacznika <code>&lt;circle&gt;</code>. Podgląd
+            pokazuje rzeczywisty element SVG, a obok generowany jest kod HTML.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                cx:
+                <select id="sim-cx-circle">
+                    <option value="40">40</option>
+                    <option value="75" selected>75</option>
+                    <option value="110">110</option>
+                    <option value="140">140</option>
+                </select>
+            </label>
+
+            <label>
+                cy:
+                <select id="sim-cy-circle">
+                    <option value="40">40</option>
+                    <option value="75" selected>75</option>
+                    <option value="110">110</option>
+                    <option value="140">140</option>
+                </select>
+            </label>
+
+            <label>
+                r:
+                <select id="sim-r-circle">
+                    <option value="20">20</option>
+                    <option value="40" selected>40</option>
+                    <option value="60">60</option>
+                    <option value="70">70</option>
+                </select>
+            </label>
+
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-circle"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-circle"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var cx = document.getElementById("sim-cx-circle");
+                var cy = document.getElementById("sim-cy-circle");
+                var r = document.getElementById("sim-r-circle");
+
+                var kod = document.getElementById("sim-kod-circle");
+                var podglad = document.getElementById("sim-podglad-circle");
+
+                function aktualizuj() {
+
+                    kod.textContent =
+                        '<svg width="200" height="200">\n' +
+                        '    <circle cx="' + cx.value +
+                        '" cy="' + cy.value +
+                        '" r="' + r.value +
+                        '"/>\n' +
+                        '</svg>';
+
+                    podglad.innerHTML = "";
+
+                    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                    svg.setAttribute("width", "200");
+                    svg.setAttribute("height", "200");
+
+                    var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+
+                    circle.setAttribute("cx", cx.value);
+                    circle.setAttribute("cy", cy.value);
+                    circle.setAttribute("r", r.value);
+                    circle.setAttribute("fill", "skyblue");
+                    circle.setAttribute("stroke", "black");
+                    circle.setAttribute("stroke-width", "2");
+
+                    svg.appendChild(circle);
+                    podglad.appendChild(svg);
+
+                }
+
+                cx.addEventListener("change", aktualizuj);
+                cy.addEventListener("change", aktualizuj);
+                r.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

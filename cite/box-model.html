@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>model pudełkowy</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to jest model pudełkowy?</h2>
+
+        <p>Model pudełkowy (box model) w CSS opisuje każdy element jako prostokąt. Każdy taki element ma warstwy:
+            content, padding, border i margin.</p>
+
+        <p>To jest podstawowa rzecz w CSS, bo wszystko na stronie da się traktować jak pudełko.</p>
+
+        <p>Dzięki temu łatwo kontrolować odstępy i rozmiary elementów.</p>
+    </section>
+
+    <section>
+        <h2>Budowa modelu pudełkowego</h2>
+
+        <p>Każdy element składa się z 4 warstw:</p>
+
+        <ul>
+            <li>content – treść elementu</li>
+            <li>padding – odstęp wewnętrzny</li>
+            <li>border – obramowanie</li>
+            <li>margin – odstęp zewnętrzny</li>
+        </ul>
+
+        <p>Te warstwy razem tworzą jeden model pudełkowy.</p>
+    </section>
+
+    <section>
+        <h2>Graficzne pudełko (poprawne wyświetlanie)</h2>
+
+        <pre style="font-family: monospace; white-space: pre; line-height: 1.2;">
+margin
+┌──────────────────────────────┐
+│          border              │
+│  ┌────────────────────────┐  │
+│  │       padding          │  │
+│  │  ┌──────────────────┐  │  │
+│  │  │     content      │  │  │
+│  │  └──────────────────┘  │  │
+│  │                        │  │
+│  └────────────────────────┘  │
+└──────────────────────────────┘
+</pre>
+
+    </section>
+
+    <section>
+        <h2>Podstawowe właściwości</h2>
+
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Opis</th>
+            </tr>
+
+            <tr>
+                <td>width</td>
+                <td>szerokość contentu</td>
+            </tr>
+
+            <tr>
+                <td>height</td>
+                <td>wysokość contentu</td>
+            </tr>
+
+            <tr>
+                <td>padding</td>
+                <td>odstęp wewnętrzny</td>
+            </tr>
+
+            <tr>
+                <td>border</td>
+                <td>obramowanie</td>
+            </tr>
+
+            <tr>
+                <td>margin</td>
+                <td>odstęp zewnętrzny</td>
+            </tr>
+
+            <tr>
+                <td>box-sizing</td>
+                <td>określa sposób liczenia rozmiaru</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Box-sizing</h2>
+
+        <p>Domyślnie jest <code>content-box</code>, czyli padding i border zwiększają rozmiar elementu.</p>
+
+        <p><code>border-box</code> wlicza wszystko do szerokości i wysokości.</p>
+
+        <pre><code>div {
+    box-sizing: border-box;
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Przykład CSS</h2>
+
+        <pre><code>.box {
+    width: 200px;
+    height: 100px;
+    padding: 20px;
+    border: 5px solid black;
+    margin: 10px;
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Dlaczego to ważne?</h2>
+
+        <ul>
+            <li>każdy element to pudełko</li>
+            <li>łatwiej robić layout</li>
+            <li>Flexbox i Grid bazują na tym modelu</li>
+            <li>kontrola odstępów</li>
+        </ul>
+    </section>
+
+
+    <section>
+        <h2>Interaktywny symulator</h2>
+
+        <p>Zmieniając wartości widzisz jak zmienia się pudełko.</p>
+
+        <div class="sim-controls">
+            <label>
+                Padding:
+                <select id="sim-padding">
+                    <option value="0">0px</option>
+                    <option value="10">10px</option>
+                    <option value="30">30px</option>
+                    <option value="50">50px</option>
+                </select>
+            </label>
+
+            <label>
+                Border:
+                <select id="sim-border">
+                    <option value="0">0px</option>
+                    <option value="2">2px</option>
+                    <option value="6">6px</option>
+                    <option value="10">10px</option>
+                </select>
+            </label>
+
+            <label>
+                Margin:
+                <select id="sim-margin">
+                    <option value="0">0px</option>
+                    <option value="10">10px</option>
+                    <option value="30">30px</option>
+                    <option value="50">50px</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad" style="box-sizing: content-box;"></div>
+        </div>
+
+        <script>
+            (function () {
+                var pad = document.getElementById("sim-padding");
+                var bor = document.getElementById("sim-border");
+                var mar = document.getElementById("sim-margin");
+                var kod = document.getElementById("sim-kod");
+                var pod = document.getElementById("sim-podglad");
+
+                function update() {
+                    var p = pad.value;
+                    var b = bor.value;
+                    var m = mar.value;
+
+                    kod.textContent =
+                        "padding: " + p + "px;\n" +
+                        "border: " + b + "px solid black;\n" +
+                        "margin: " + m + "px;";
+
+                    while (pod.firstChild) {
+                        pod.removeChild(pod.firstChild);
+                    }
+
+                    var outer = document.createElement("div");
+                    outer.style.cssText = "background:#f2f2f2;padding:10px;display:inline-block;";
+
+                    var box = document.createElement("div");
+                    box.textContent = "CONTENT";
+                    box.style.cssText =
+                        "padding:" + p + "px;border:" + b + "px solid black;margin:" + m + "px;";
+
+                    outer.appendChild(box);
+                    pod.appendChild(outer);
+                }
+
+                pad.addEventListener("change", update);
+                bor.addEventListener("change", update);
+                mar.addEventListener("change", update);
+
+                update();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

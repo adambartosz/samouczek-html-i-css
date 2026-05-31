@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>thead</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;thead&gt;</strong> grupuje wiersze nagłówkowe tabeli. Wstawia się go bezpośrednio
+            wewnątrz <code>&lt;table&gt;</code>, a jego zawartością są wiersze <code>&lt;tr&gt;</code> z komórkami
+            <code>&lt;th&gt;</code> opisującymi kolumny.
+        </p>
+        <p>Jest elementem <strong>blokowym</strong> na poziomie tabeli - nie zajmuje całej szerokości strony, ale
+            określa sekcję w strukturze tabeli.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>wyraźnie oddzielić wiersz(e) nagłówkowe od danych - przeglądarka wie co jest etykietą kolumny</li>
+            <li>umożliwić stylowanie nagłówka tabeli osobnym regułą CSS:
+                <code>thead { background: #333; color: #fff; }</code>
+            </li>
+            <li>poprawnie obsłużyć wydruk - przy drukowaniu długich tabel przeglądarka powtarza
+                <code>&lt;thead&gt;</code> na każdej stronie
+            </li>
+            <li>ułatwić czytnikowi ekranu powiązanie komórek <code>&lt;th&gt;</code> z danymi w
+                <code>&lt;tbody&gt;</code>
+            </li>
+        </ul>
+        <p>Jeśli tabela ma tylko jeden wiersz nagłówka i nie potrzebujesz stylować go osobno, technicznie możesz go
+            pominąć - przeglądarka i tak zadziała. Ale to zła praktyka.</p>
+    </section>
+
+    <section></section>
+
+    <section>
+        <p><code>&lt;thead&gt;</code> ma konkretne znaczenie semantyczne - informuje przeglądarkę, czytniki ekranu i
+            Google, że zawarte w nim wiersze pełnią rolę nagłówka tabeli, nie danych.</p>
+        <p>Czytnik ekranu (np. NVDA) przy napotkaniu komórki <code>&lt;th&gt;</code> wewnątrz <code>&lt;thead&gt;</code>
+            odczyta ją jako etykietę kolumny i będzie do niej odsyłał przy każdej komórce danych w tej kolumnie: "Cena:
+            150 zł". Bez <code>&lt;thead&gt;</code> i <code>&lt;th&gt;</code> czytnik po prostu czyta komórki po kolei
+            bez kontekstu.</p>
+        <p>Dla Google <code>&lt;thead&gt;</code> wskazuje które wiersze opisują strukturę danych - to pomaga w
+            indeksowaniu tabel w wynikach wyszukiwania.</p>
+        <p>Przy drukowaniu - jedyna sekcja tabeli powtarzana automatycznie na kolejnych stronach wydruku to właśnie
+            <code>&lt;thead&gt;</code>.
+        </p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy (poziom tabeli)</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Sekcja nagłówkowa tabeli - wiersze opisujące kolumny</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>tylko <code>&lt;tr&gt;</code></td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td><code>&lt;table&gt;</code> - przed <code>&lt;tbody&gt;</code> i <code>&lt;tfoot&gt;</code></td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>table-header-group</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Sprawdź jak wygląda tabela z <code>&lt;thead&gt;</code> i bez niego, oraz jak zmienia się zachowanie przy
+            stylowaniu CSS. Ustaw treść i włącz lub wyłącz użycie <code>&lt;thead&gt;</code>.</p>
+
+        <div class="sim-controls">
+            <label>Użycie thead:
+                <select id="sim-thead">
+                    <option value="tak" selected>z &lt;thead&gt;</option>
+                    <option value="nie">bez &lt;thead&gt; (samo &lt;tr&gt;)</option>
+                </select>
+            </label>
+            <label>Styl nagłówka (CSS):
+                <select id="sim-styl">
+                    <option value="brak" selected>brak stylowania</option>
+                    <option value="ciemny">ciemne tło</option>
+                    <option value="kolor">kolorowe tło</option>
+                </select>
+            </label>
+            <label>Liczba wierszy danych:
+                <select id="sim-rows">
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod"></pre>
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad" style="overflow:auto;"></div>
+        </div>
+
+        <script>
+            (function () {
+                var theadSel = document.getElementById("sim-thead");
+                var stylSel = document.getElementById("sim-styl");
+                var rowsSel = document.getElementById("sim-rows");
+                var kod = document.getElementById("sim-kod");
+                var podglad = document.getElementById("sim-podglad");
+
+                var kolumny = ["Imię", "Nazwisko", "Ocena"];
+                var dane = [
+                    ["Anna", "Nowak", "5"],
+                    ["Piotr", "Wiśniewski", "4"],
+                    ["Kasia", "Kowalska", "3"],
+                    ["Marek", "Zając", "5"]
+                ];
+
+                function getTheadStyle(styl) {
+                    if (styl === "ciemny") return "background:#333; color:#fff;";
+                    if (styl === "kolor") return "background:#7c3aed; color:#fff;";
+                    return "";
+                }
+
+                function aktualizuj() {
+                    var uzyjThead = theadSel.value === "tak";
+                    var styl = stylSel.value;
+                    var rows = parseInt(rowsSel.value);
+
+                    var linie = [];
+                    linie.push("&lt;table&gt;");
+                    if (uzyjThead) {
+                        linie.push("  &lt;thead&gt;");
+                        linie.push("    &lt;tr&gt;");
+                        kolumny.forEach(function (k) { linie.push("      &lt;th&gt;" + k + "&lt;/th&gt;"); });
+                        linie.push("    &lt;/tr&gt;");
+                        linie.push("  &lt;/thead&gt;");
+                        linie.push("  &lt;tbody&gt;");
+                    } else {
+                        linie.push("  &lt;tr&gt;");
+                        kolumny.forEach(function (k) { linie.push("    &lt;th&gt;" + k + "&lt;/th&gt;"); });
+                        linie.push("  &lt;/tr&gt;");
+                    }
+                    for (var r = 0; r < rows; r++) {
+                        linie.push("  " + (uzyjThead ? "  " : "") + "&lt;tr&gt;");
+                        dane[r].forEach(function (d) { linie.push("  " + (uzyjThead ? "    " : "  ") + "&lt;td&gt;" + d + "&lt;/td&gt;"); });
+                        linie.push("  " + (uzyjThead ? "  " : "") + "&lt;/tr&gt;");
+                    }
+                    if (uzyjThead) linie.push("  &lt;/tbody&gt;");
+                    linie.push("&lt;/table&gt;");
+                    kod.innerHTML = linie.join("\n");
+
+                    podglad.innerHTML = "";
+                    var tbl = document.createElement("table");
+                    tbl.style.cssText = "border-collapse:collapse; width:100%;";
+
+                    if (uzyjThead) {
+                        var thead = document.createElement("thead");
+                        var trH = document.createElement("tr");
+                        var theadStyle = getTheadStyle(styl);
+                        kolumny.forEach(function (k) {
+                            var th = document.createElement("th");
+                            th.textContent = k;
+                            th.style.cssText = "border:2px solid #7c3aed; padding:8px 14px; " + theadStyle;
+                            trH.appendChild(th);
+                        });
+                        thead.appendChild(trH);
+                        tbl.appendChild(thead);
+                        var tbody = document.createElement("tbody");
+                        for (var i = 0; i < rows; i++) {
+                            var tr = document.createElement("tr");
+                            dane[i].forEach(function (d) {
+                                var td = document.createElement("td");
+                                td.textContent = d;
+                                td.style.cssText = "border:1px solid #ccc; padding:8px 14px;";
+                                tr.appendChild(td);
+                            });
+                            tbody.appendChild(tr);
+                        }
+                        tbl.appendChild(tbody);
+                    } else {
+                        var trH2 = document.createElement("tr");
+                        kolumny.forEach(function (k) {
+                            var th = document.createElement("th");
+                            th.textContent = k;
+                            th.style.cssText = "border:2px solid #999; padding:8px 14px; background:#eee;";
+                            trH2.appendChild(th);
+                        });
+                        tbl.appendChild(trH2);
+                        for (var j = 0; j < rows; j++) {
+                            var tr2 = document.createElement("tr");
+                            dane[j].forEach(function (d) {
+                                var td = document.createElement("td");
+                                td.textContent = d;
+                                td.style.cssText = "border:1px solid #ccc; padding:8px 14px;";
+                                tr2.appendChild(td);
+                            });
+                            tbl.appendChild(tr2);
+                        }
+                    }
+
+                    podglad.appendChild(tbl);
+
+                    var info = document.createElement("p");
+                    info.style.cssText = "margin-top:8px; font-size:0.82em; color:#666;";
+                    if (uzyjThead) {
+                        info.textContent = "Tabela używa <thead> - nagłówek jest semantycznie oddzielony od danych. Styl CSS zastosowany na <thead> obejmuje tylko nagłówek.";
+                    } else {
+                        info.textContent = "Bez <thead> - wiersz nagłówkowy jest zwykłym <tr> w tabeli. Przeglądarka i tak to wyrenderuje, ale semantyka jest słabsza.";
+                    }
+                    podglad.appendChild(info);
+                }
+
+                theadSel.addEventListener("change", aktualizuj);
+                stylSel.addEventListener("change", aktualizuj);
+                rowsSel.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

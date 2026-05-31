@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>select>, &lt;option</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;select&gt;</strong> tworzy listę rozwijaną w formularzu. Użytkownik może z niej wybrać
+            jedną lub kilka opcji, które są definiowane przez <code>&lt;option&gt;</code>.</p>
+        <p>Jest elementem liniowym i działa tylko razem z opcjami. Sam w sobie nic nie pokazuje bez elementów
+            wewnętrznych.</p>
+        <p>Najczęściej używa się go tam, gdzie trzeba ograniczyć wybór do konkretnych wartości.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>tworzyć listy wyboru (np. kraj, miasto)</li>
+            <li>ograniczyć użytkownika do gotowych opcji</li>
+            <li>budować formularze rejestracji</li>
+            <li>wybierać kategorię lub typ danych</li>
+            <li>tworzyć filtry i sortowanie</li>
+            <li>unikać błędów w wpisywaniu danych</li>
+            <li>ułatwiać szybki wybór wartości</li>
+        </ul>
+        <p>Jeśli potrzebujesz wielu zaznaczeń, używa się atrybutu <code>multiple</code>.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>tekst</td>
+                <td>Nazwa pola wysyłana do serwera</td>
+            </tr>
+            <tr>
+                <td>multiple</td>
+                <td>multiple</td>
+                <td>Pozwala wybrać wiele opcji</td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td>required</td>
+                <td>Wymaga wyboru opcji</td>
+            </tr>
+            <tr>
+                <td>disabled</td>
+                <td>disabled</td>
+                <td>Wyłącza listę</td>
+            </tr>
+            <tr>
+                <td>size</td>
+                <td>liczba</td>
+                <td>Ile opcji jest widocznych naraz</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;select&gt;</strong> ma znaczenie semantyczne w formularzach. Informuje, że użytkownik ma
+            wybrać jedną lub więcej wartości z listy.</p>
+        <p>Czytniki ekranu odczytują go jako kontrolkę wyboru i prezentują dostępne opcje.</p>
+        <p>To ważny element interaktywny w HTML.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Liniowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Lista wyboru</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>option, optgroup</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>form, div, section, fieldset, label</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline-block</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz sprawdzić jak działa <code>&lt;select&gt;</code> i <code>&lt;option&gt;</code> oraz
+            jak zmienia się wybór użytkownika.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Tryb wyboru:
+                <select id="sim-multi-select">
+                    <option value="single">jedna opcja</option>
+                    <option value="multiple">wiele opcji</option>
+                </select>
+            </label>
+            </label>
+
+            <label>
+                Rozmiar listy:
+                <select id="sim-size-select">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-select"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-select"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var multi = document.getElementById("sim-multi-select");
+                var size = document.getElementById("sim-size-select");
+
+                var kod = document.getElementById("sim-kod-select");
+                var podglad = document.getElementById("sim-podglad-select");
+
+                function aktualizuj() {
+
+                    kod.textContent =
+                        '<select' +
+                        (multi.value === "multiple" ? ' multiple' : '') +
+                        ' size="' + size.value + '">\n' +
+                        '  <option value="Polska">Polska</option>\n' +
+                        '  <option value="Niemcy">Niemcy</option>\n' +
+                        '  <option value="Czechy">Czechy</option>\n' +
+                        '  <option value="Francja">Francja</option>\n' +
+                        '</select>';
+
+                    podglad.innerHTML = "";
+
+                    var sel = document.createElement("select");
+
+                    if (multi.value === "multiple") sel.multiple = true;
+                    sel.size = size.value;
+
+                    var opcje = ["Polska", "Niemcy", "Czechy", "Francja"];
+
+                    for (var i = 0; i < opcje.length; i++) {
+                        var opt = document.createElement("option");
+                        opt.value = opcje[i];
+                        opt.textContent = opcje[i];
+                        sel.appendChild(opt);
+                    }
+
+                    podglad.appendChild(sel);
+
+                }
+
+                multi.addEventListener("change", aktualizuj);
+                size.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

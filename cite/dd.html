@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>dd</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;dd&gt;</strong> oznacza opis definicji w liście definicyjnej. To element, który wyjaśnia
+            znaczenie terminu zapisanego w <code>&lt;dt&gt;</code>.</p>
+        <p>Jest używany tylko wewnątrz <code>&lt;dl&gt;</code> i zawsze odnosi się do poprzedniego lub bieżącego
+            <code>&lt;dt&gt;</code>.
+        </p>
+    </section>
+
+    <section>
+        <p>Używamy <code>&lt;dd&gt;</code> kiedy chcemy:</p>
+        <ul>
+            <li>opisać pojęcie z <code>&lt;dt&gt;</code></li>
+            <li>tworzyć słowniki i definicje</li>
+            <li>opisywać parametry i wartości</li>
+            <li>robić FAQ (pytanie → odpowiedź)</li>
+        </ul>
+        <p>Bez <code>&lt;dt&gt;</code> ten znacznik nie ma sensu.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>brak</td>
+                <td>-</td>
+                <td>Znacznik nie posiada własnych atrybutów</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <code>&lt;dd&gt;</code> ma znaczenie semantyczne — oznacza opis lub wyjaśnienie terminu.</p>
+        <p>Dla czytników ekranu jest to treść rozwijająca wcześniej podany <code>&lt;dt&gt;</code>.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Opis terminu</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst i elementy blokowe/liniowe</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>dl</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>block</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz zobaczyć jak <code>&lt;dd&gt;</code> opisuje różne terminy w liście definicyjnej.
+        </p>
+
+        <div class="sim-controls">
+            <label>
+                Wybierz opis:
+                <select id="sim-dd">
+                    <option value="HTML – struktura strony internetowej">HTML – struktura strony internetowej</option>
+                    <option value="CSS – stylowanie wyglądu strony">CSS – stylowanie wyglądu strony</option>
+                    <option value="JavaScript – logika i interakcje">JavaScript – logika i interakcje</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-dd"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-dd"></div>
+        </div>
+
+        <script>
+            (function () {
+                var sel = document.getElementById("sim-dd");
+                var kod = document.getElementById("sim-kod-dd");
+                var podglad = document.getElementById("sim-podglad-dd");
+
+                function aktualizuj() {
+                    var v = sel.value;
+                    var parts = v.split(" – ");
+
+                    var dtVal = parts[0];
+                    var ddVal = parts[1];
+
+                    kod.textContent =
+                        "<dl>\n" +
+                        "  <dt>" + dtVal + "</dt>\n" +
+                        "  <dd>" + ddVal + "</dd>\n" +
+                        "</dl>";
+
+                    podglad.innerHTML = "";
+
+                    var dl = document.createElement("dl");
+
+                    var dt = document.createElement("dt");
+                    dt.textContent = dtVal;
+
+                    var dd = document.createElement("dd");
+                    dd.textContent = ddVal;
+
+                    dl.appendChild(dt);
+                    dl.appendChild(dd);
+
+                    podglad.appendChild(dl);
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

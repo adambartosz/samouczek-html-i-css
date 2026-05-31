@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>ul</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;ul&gt;</strong> to lista nieuporządkowana. Służy do tworzenia wypunktowań, gdzie
+            kolejność elementów nie ma znaczenia.</p>
+        <p>Jest elementem blokowym i zawsze wyświetla się jako osobna sekcja na stronie.</p>
+    </section>
+
+    <section>
+        <p>Używamy <strong>&lt;ul&gt;</strong> kiedy chcemy:</p>
+        <ul>
+            <li>tworzyć listy punktowane</li>
+            <li>przedstawiać elementy bez kolejności</li>
+            <li>grupować elementy menu</li>
+        </ul>
+        <p>Do każdego elementu listy używa się znacznika <code>&lt;li&gt;</code>, który przechowuje pojedynczy punkt
+            listy.</p>
+    </section>
+
+    <section>
+    </section>
+
+
+    <section>
+        <p>Znaczenie semantyczne <code>&lt;ul&gt;</code> informuje przeglądarkę i czytniki ekranu, że mamy do czynienia
+            z listą elementów bez kolejności.</p>
+        <p>Pomaga to w strukturze dokumentu i nawigacji, szczególnie dla technologii asystujących.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Lista nieuporządkowana</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>li</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>body, section, article, nav</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>block</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz sprawdzić jak działa lista <code>ul</code> i elementy <code>li</code>.</p>
+
+        <div class="sim-controls">
+            <label>
+                Typ listy:
+                <select id="sim-ul">
+                    <option value="disc">disc</option>
+                    <option value="circle">circle</option>
+                    <option value="square">square</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-ul"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-ul"></div>
+        </div>
+
+        <script>
+            (function () {
+                var sel = document.getElementById("sim-ul");
+                var kod = document.getElementById("sim-kod-ul");
+                var podgl = document.getElementById("sim-podglad-ul");
+
+                function aktualizuj() {
+                    var v = sel.value;
+                    kod.style.whiteSpace = `pre-warp`;
+
+                    kod.textContent =
+                        "<ul style='list-style-type:" + v + "'>\n" +
+                        "  <li>Element 1</li>\n" +
+                        "  <li>Element 2</li>\n" +
+                        "  <li>Element 3</li>\n" +
+                        "</ul>";
+
+                    podgl.innerHTML = "";
+
+                    var ul = document.createElement("ul");
+                    ul.style.listStyleType = v;
+
+                    ["Element 1", "Element 2", "Element 3"].forEach(function (t) {
+                        var li = document.createElement("li");
+                        li.textContent = t;
+                        ul.appendChild(li);
+                    });
+
+                    podgl.appendChild(ul);
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

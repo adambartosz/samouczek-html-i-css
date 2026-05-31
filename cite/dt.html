@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>dt</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;dt&gt;</strong> oznacza termin w liście definicji. Jest używany wewnątrz
+            <code>&lt;dl&gt;</code>.
+        </p>
+        <p>Sam nie działa samodzielnie, zawsze występuje razem z <code>&lt;dd&gt;</code>, który opisuje jego znaczenie.
+        </p>
+    </section>
+
+    <section>
+        <p>Używamy <strong>&lt;dt&gt;</strong> kiedy chcemy:</p>
+        <ul>
+            <li>zdefiniować nazwę pojęcia</li>
+            <li>tworzyć słowniki i opisy</li>
+            <li>przedstawiać pary termin–opis</li>
+        </ul>
+        <p>Każdy <code>&lt;dt&gt;</code> powinien mieć przypisany opis w <code>&lt;dd&gt;</code>.</p>
+    </section>
+
+    <section>
+    </section>
+
+    <section>
+        <p>Znaczenie semantyczne <code>&lt;dt&gt;</code> wskazuje, że jest to termin do wyjaśnienia. Czytniki ekranu
+            traktują go jako nazwę pojęcia, a <code>&lt;dd&gt;</code> jako jego opis.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Termin w liście definicji</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>tekst i elementy liniowe</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>dl</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>block</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz sprawdzić jak działa <code>&lt;dt&gt;</code> w relacji do <code>&lt;dd&gt;</code>.
+        </p>
+
+        <div class="sim-controls">
+
+            <label>
+                Wybierz styl terminu:
+                <select id="sim-dt-style">
+                    <option value="normal">normalny</option>
+                    <option value="bold">pogrubiony</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-dt"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-dt"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var sel = document.getElementById("sim-dt-style");
+                var kod = document.getElementById("sim-kod-dt");
+                var podgl = document.getElementById("sim-podglad-dt");
+
+                function aktualizuj() {
+
+                    var mode = sel.value;
+
+                    var data = [
+                        { t: "HTML", d: "Język znaczników" },
+                        { t: "CSS", d: "Język stylów" },
+                        { t: "JS", d: "Język programowania" }
+                    ];
+
+                    kod.textContent =
+                        "<dl><br>" +
+                        "  <dt>HTML</dt><br>" +
+                        "  <dd>Język znaczników</dd><br>" +
+                        "</dl>";
+
+                    podgl.innerHTML = "";
+
+                    var dl = document.createElement("dl");
+
+                    for (var i = 0; i < data.length; i++) {
+
+                        var dt = document.createElement("dt");
+                        dt.textContent = data[i].t;
+
+                        if (mode === "bold") {
+                            dt.style.fontWeight = "bold";
+                        }
+
+                        var dd = document.createElement("dd");
+                        dd.textContent = data[i].d;
+
+                        dl.appendChild(dt);
+                        dl.appendChild(dd);
+                    }
+
+                    podgl.appendChild(dl);
+
+                }
+
+                sel.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

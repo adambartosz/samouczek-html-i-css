@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>selektory podstawowe</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Czym są selektory?</h2>
+        <p>Selektory CSS określają, które elementy HTML mają otrzymać dane style. Są one pierwszą częścią każdej reguły
+            CSS.</p>
+
+        <p>Przykład:</p>
+
+        <pre><code>p {<br>
+    color: blue;<br>
+}</code></pre>
+
+        <p>W tym przypadku selektorem jest <code>p</code>, a styl zostanie zastosowany do wszystkich akapitów na
+            stronie.</p>
+
+        <p>Bez selektorów przeglądarka nie wiedziałaby, do których elementów przypisać konkretne właściwości CSS.</p>
+    </section>
+
+    <section>
+        <h2>Selektor typu (znacznika)</h2>
+
+        <p>Selektor typu wybiera wszystkie elementy o podanej nazwie znacznika.</p>
+
+        <p>Przykład dla akapitów:</p>
+
+        <pre><code>p {<br>
+    color: red;<br>
+}</code></pre>
+
+        <p>Wszystkie znaczniki <code>&lt;p&gt;</code> otrzymają czerwony kolor tekstu.</p>
+
+        <p>Przykład dla nagłówków:</p>
+
+        <pre><code>h1 {<br>
+    text-align: center;<br>
+}</code></pre>
+
+        <p>Każdy nagłówek <code>&lt;h1&gt;</code> zostanie wyśrodkowany.</p>
+
+        <p>Można używać dowolnych znaczników HTML jako selektorów:</p>
+
+        <ul>
+            <li><code>body</code></li>
+            <li><code>div</code></li>
+            <li><code>p</code></li>
+            <li><code>h1</code></li>
+            <li><code>img</code></li>
+            <li><code>table</code></li>
+            <li><code>a</code></li>
+            <li><code>button</code></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Selektor grupowy</h2>
+
+        <p>Selektor grupowy pozwala przypisać te same style do wielu różnych elementów jednocześnie.</p>
+
+        <p>Poszczególne selektory oddziela się przecinkami.</p>
+
+        <pre><code>h1, h2, h3 {<br>
+    color: navy;<br>
+}</code></pre>
+
+        <p>Wszystkie nagłówki <code>h1</code>, <code>h2</code> i <code>h3</code> otrzymają ten sam kolor.</p>
+
+        <p>Kolejny przykład:</p>
+
+        <pre><code>p, li, td {<br>
+    font-size: 18px;<br>
+}</code></pre>
+
+        <p>Akapity, elementy list i komórki tabel będą miały taki sam rozmiar tekstu.</p>
+
+        <p>Dzięki grupowaniu można znacząco skrócić kod CSS.</p>
+    </section>
+
+    <section>
+        <h2>Porównanie selektorów</h2>
+
+        <table>
+            <tr>
+                <th>Selektor</th>
+                <th>Przykład</th>
+                <th>Działanie</th>
+            </tr>
+
+            <tr>
+                <td>Typu</td>
+                <td>p</td>
+                <td>Wybiera wszystkie akapity</td>
+            </tr>
+
+            <tr>
+                <td>Typu</td>
+                <td>img</td>
+                <td>Wybiera wszystkie obrazki</td>
+            </tr>
+
+            <tr>
+                <td>Typu</td>
+                <td>table</td>
+                <td>Wybiera wszystkie tabele</td>
+            </tr>
+
+            <tr>
+                <td>Grupowy</td>
+                <td>h1, h2, h3</td>
+                <td>Wybiera kilka typów elementów jednocześnie</td>
+            </tr>
+
+            <tr>
+                <td>Grupowy</td>
+                <td>p, li, a</td>
+                <td>Styl dla różnych elementów naraz</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Zalety selektorów grupowych</h2>
+
+        <ul>
+            <li>mniej powtarzającego się kodu</li>
+            <li>łatwiejsza edycja stylów</li>
+            <li>czytelniejszy arkusz CSS</li>
+            <li>szybsze wprowadzanie zmian</li>
+            <li>mniejsze ryzyko pomyłek</li>
+        </ul>
+
+        <p>Zamiast pisać:</p>
+
+        <pre><code>h1 {<br>
+    color: blue;<br>
+}<br>
+<br>
+h2 {<br>
+    color: blue;<br>
+}<br>
+<br>
+h3 {<br>
+    color: blue;<br>
+}</code></pre>
+
+        <p>Można napisać:</p>
+
+        <pre><code>h1, h2, h3 {<br>
+    color: blue;<br>
+}</code></pre>
+
+        <p>Efekt będzie identyczny, ale kod będzie krótszy.</p>
+    </section>
+
+    <section>
+        <h2>Interaktywny przykład</h2>
+
+        <p>Poniżej można sprawdzić działanie selektora typu oraz grupowego.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Typ selektora:
+                <select id="sim-typ">
+                    <option value="typ">Typu</option>
+                    <option value="grupa">Grupowy</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+
+        </div>
+
+        <script>
+            (function () {
+                var typ = document.getElementById("sim-typ");
+                var kod = document.getElementById("sim-kod");
+                var podgl = document.getElementById("sim-podglad");
+
+                function aktualizuj() {
+
+                    podgl.innerHTML = "";
+
+                    if (typ.value === "typ") {
+
+                        kod.textContent = 'p {\n    color: blue;\n}';
+
+                        var p = document.createElement("p");
+                        p.textContent = "Akapit wybrany przez selektor p";
+                        p.style.color = "blue";
+
+                        var h = document.createElement("h3");
+                        h.textContent = "Nagłówek bez stylu";
+
+                        podgl.appendChild(h);
+                        podgl.appendChild(p);
+
+                    } else {
+
+                        kod.textContent = 'h3, p {\n    color: blue;\n}';
+
+                        var h = document.createElement("h3");
+                        h.textContent = "Nagłówek wybrany przez grupę";
+                        h.style.color = "blue";
+
+                        var p = document.createElement("p");
+                        p.textContent = "Akapit wybrany przez grupę";
+                        p.style.color = "blue";
+
+                        podgl.appendChild(h);
+                        podgl.appendChild(p);
+                    }
+
+                }
+
+                typ.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

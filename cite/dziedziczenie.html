@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>dziedziczenie</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to jest dziedziczenie?</h2>
+        <p>Dziedziczenie (inheritance) to mechanizm CSS, dzięki któremu niektóre właściwości ustawione dla elementu
+            nadrzędnego są automatycznie przejmowane przez jego elementy potomne.</p>
+
+        <p>Dzięki temu nie trzeba wielokrotnie powtarzać tych samych reguł dla każdego elementu osobno. Wystarczy
+            ustawić właściwość dla rodzica, a dzieci często otrzymają ją automatycznie.</p>
+
+        <p>Dziedziczenie jest jednym z najważniejszych mechanizmów działania CSS i pozwala pisać krótszy oraz bardziej
+            czytelny kod.</p>
+    </section>
+
+    <section>
+        <h2>Jak działa dziedziczenie?</h2>
+
+        <p>Załóżmy, że mamy taki kod HTML:</p>
+
+        <pre><code>&lt;div&gt;<br>
+    &lt;p&gt;Pierwszy akapit&lt;/p&gt;<br>
+    &lt;p&gt;Drugi akapit&lt;/p&gt;<br>
+&lt;/div&gt;</code></pre>
+
+        <p>Oraz taki CSS:</p>
+
+        <pre><code>div {<br>
+    color: blue;<br>
+}</code></pre>
+
+        <p>Oba akapity odziedziczą kolor tekstu od elementu <code>div</code> i zostaną wyświetlone na niebiesko.</p>
+
+        <p>Element nadrzędny nazywany jest rodzicem, a znajdujące się w nim elementy potomne nazywane są dziećmi.</p>
+    </section>
+
+    <section>
+        <h2>Właściwości dziedziczone</h2>
+
+        <p>Nie wszystkie właściwości CSS są dziedziczone automatycznie. Najczęściej dziedziczone są właściwości związane
+            z tekstem.</p>
+
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Dziedziczona</th>
+            </tr>
+
+            <tr>
+                <td>color</td>
+                <td>Tak</td>
+            </tr>
+
+            <tr>
+                <td>font-family</td>
+                <td>Tak</td>
+            </tr>
+
+            <tr>
+                <td>font-size</td>
+                <td>Tak</td>
+            </tr>
+
+            <tr>
+                <td>font-style</td>
+                <td>Tak</td>
+            </tr>
+
+            <tr>
+                <td>font-weight</td>
+                <td>Tak</td>
+            </tr>
+
+            <tr>
+                <td>line-height</td>
+                <td>Tak</td>
+            </tr>
+
+            <tr>
+                <td>text-align</td>
+                <td>Tak</td>
+            </tr>
+
+            <tr>
+                <td>visibility</td>
+                <td>Tak</td>
+            </tr>
+        </table>
+
+        <p>Najczęściej właśnie te właściwości ustawiamy dla elementu <code>body</code>, aby obowiązywały na całej
+            stronie.</p>
+    </section>
+
+    <section>
+        <h2>Właściwości niedziedziczone</h2>
+
+        <p>Wiele właściwości odpowiedzialnych za układ strony nie jest dziedziczonych automatycznie.</p>
+
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Dziedziczona</th>
+            </tr>
+
+            <tr>
+                <td>margin</td>
+                <td>Nie</td>
+            </tr>
+
+            <tr>
+                <td>padding</td>
+                <td>Nie</td>
+            </tr>
+
+            <tr>
+                <td>border</td>
+                <td>Nie</td>
+            </tr>
+
+            <tr>
+                <td>width</td>
+                <td>Nie</td>
+            </tr>
+
+            <tr>
+                <td>height</td>
+                <td>Nie</td>
+            </tr>
+
+            <tr>
+                <td>background-color</td>
+                <td>Nie</td>
+            </tr>
+
+            <tr>
+                <td>display</td>
+                <td>Nie</td>
+            </tr>
+
+            <tr>
+                <td>position</td>
+                <td>Nie</td>
+            </tr>
+        </table>
+
+        <p>Jeżeli ustawimy margines dla rodzica, dzieci nie otrzymają go automatycznie.</p>
+    </section>
+
+    <section>
+        <h2>Słowa kluczowe związane z dziedziczeniem</h2>
+
+        <p>CSS udostępnia kilka specjalnych wartości pozwalających sterować dziedziczeniem.</p>
+
+        <table>
+            <tr>
+                <th>Wartość</th>
+                <th>Działanie</th>
+            </tr>
+
+            <tr>
+                <td>inherit</td>
+                <td>Wymusza przejęcie wartości od rodzica</td>
+            </tr>
+
+            <tr>
+                <td>initial</td>
+                <td>Przywraca domyślną wartość właściwości</td>
+            </tr>
+
+            <tr>
+                <td>unset</td>
+                <td>Działa jak inherit lub initial w zależności od właściwości</td>
+            </tr>
+
+            <tr>
+                <td>revert</td>
+                <td>Przywraca wartość wynikającą ze stylów przeglądarki lub wcześniejszych reguł</td>
+            </tr>
+        </table>
+
+        <p>Przykład użycia:</p>
+
+        <pre><code>p {<br>
+    color: inherit;<br>
+}</code></pre>
+
+        <p>Kolor tekstu zostanie pobrany od elementu nadrzędnego.</p>
+    </section>
+
+    <section>
+        <h2>Przykłady praktyczne</h2>
+
+        <p>Dziedziczenie czcionki dla całej strony:</p>
+
+        <pre><code>body {<br>
+    font-family: Arial, sans-serif;<br>
+}</code></pre>
+
+        <p>Wszystkie elementy tekstowe odziedziczą ten krój pisma.</p>
+
+        <p>Dziedziczenie koloru:</p>
+
+        <pre><code>.menu {<br>
+    color: navy;<br>
+}</code></pre>
+
+        <p>Linki, akapity i inne elementy tekstowe znajdujące się w menu zwykle przejmą ten kolor.</p>
+
+        <p>Wymuszenie dziedziczenia:</p>
+
+        <pre><code>button {<br>
+    font-family: inherit;<br>
+}</code></pre>
+
+        <p>Przycisk użyje tej samej czcionki co jego rodzic.</p>
+    </section>
+
+    <section>
+        <h2>Drzewo dziedziczenia</h2>
+
+        <p>Dziedziczenie przebiega od elementów nadrzędnych do potomnych.</p>
+
+        <pre><code>body<br>
+ └── div.container<br>
+    .....├── h1<br>
+      .....├── p<br>
+      .....└── ul<br>
+           ..........├── li<br>
+           ..........└── li</code></pre>
+
+        <p>Jeżeli ustawimy kolor dla <code>body</code>, wszystkie elementy znajdujące się niżej w drzewie mogą go
+            odziedziczyć.</p>
+
+        <p>Im wyżej ustawiona właściwość dziedziczona, tym mniej kodu trzeba napisać.</p>
+    </section>
+
+
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

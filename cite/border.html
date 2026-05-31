@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>border</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="wlasciwosc">
+
+    <section>
+        <p>Właściwość <strong>border</strong> służy do ustawiania obramowania elementu w CSS. Dzięki niej możemy
+            kontrolować grubość, styl i kolor ramki wokół elementu.</p>
+
+        <p>Border jest częścią modelu pudełkowego i znajduje się między paddingiem a marginesem.</p>
+
+        <p>Może być prosty albo bardzo rozbudowany wizualnie, np. przerywany, podwójny albo zaokrąglony.</p>
+    </section>
+
+    <section>
+        <p>Składnia: <code>border: szerokość styl kolor;</code></p>
+
+        <table>
+            <tr>
+                <th>Wartość</th>
+                <th>Co robi</th>
+            </tr>
+
+            <tr>
+                <td>solid</td>
+                <td>ciągła linia</td>
+            </tr>
+
+            <tr>
+                <td>dashed</td>
+                <td>przerywana linia</td>
+            </tr>
+
+            <tr>
+                <td>dotted</td>
+                <td>kropkowana linia</td>
+            </tr>
+
+            <tr>
+                <td>double</td>
+                <td>podwójna linia</td>
+            </tr>
+
+            <tr>
+                <td>none</td>
+                <td>brak obramowania</td>
+            </tr>
+
+            <tr>
+                <td>hidden</td>
+                <td>ukryte obramowanie (różni się od none w tabelach)</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Domyślna wartość to brak obramowania, czyli <code>none</code>.</p>
+
+        <p>Jeśli nie ustawimy border, element nie ma widocznej ramki.</p>
+
+        <p>Wartość <code>initial</code> usuwa obramowanie, a <code>inherit</code> pobiera je od elementu rodzica.</p>
+    </section>
+
+    <section>
+        <p>Właściwość <code>border</code> nie jest dziedziczona automatycznie.</p>
+
+        <p>Jeśli ustawimy ramkę dla rodzica, dzieci jej nie przejmują.</p>
+
+        <pre><code>div {
+    border: 2px solid black;
+}</code></pre>
+
+        <p>Aby wymusić dziedziczenie, trzeba użyć:</p>
+
+        <pre><code>p {
+    border: inherit;
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Przykłady użycia:</p>
+
+        <p>Prosta ramka:</p>
+        <pre><code>div {
+    border: 1px solid black;
+}</code></pre>
+
+        <p>Przerywana ramka:</p>
+        <pre><code>div {
+    border: 2px dashed red;
+}</code></pre>
+
+        <p>Podwójna ramka:</p>
+        <pre><code>div {
+    border: 4px double blue;
+}</code></pre>
+
+        <p>Brak ramki:</p>
+        <pre><code>div {
+    border: none;
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Wybierz styl obramowania i zobacz efekt na żywo.</p>
+
+        <div class="sim-controls">
+            <label>
+                Styl border:
+                <select id="sim-border">
+                    <option value="0px solid black">none</option>
+                    <option value="2px solid black">solid</option>
+                    <option value="2px dashed red">dashed</option>
+                    <option value="2px dotted blue">dotted</option>
+                    <option value="4px double black">double</option>
+                    <option value="5px solid green">solid green</option>
+                    <option value="3px solid orange">solid orange</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var sel = document.getElementById("sim-border");
+                var kod = document.getElementById("sim-kod");
+                var pod = document.getElementById("sim-podglad");
+
+                function update() {
+                    var val = sel.value;
+
+                    kod.textContent = "border: " + val + ";";
+
+                    while (pod.firstChild) {
+                        pod.removeChild(pod.firstChild);
+                    }
+
+                    var box = document.createElement("div");
+                    box.textContent = "BOX";
+                    box.style.cssText =
+                        "padding:20px;background:#ddd;display:flex;align-items:center;justify-content:center;" +
+                        "border:" + val + ";";
+
+                    pod.appendChild(box);
+                }
+
+                sel.addEventListener("change", update);
+                update();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>flex</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="wlasciwosc">
+
+    <section>
+        <p>Właściwość <strong>display: flex</strong> włącza na elemencie tryb Flexbox. Sprawia, że dzieci tego elementu
+            (tzw. flex items) układają się w jednym kierunku – domyślnie w rzędzie – i możemy precyzyjnie kontrolować
+            ich rozmiar, kolejność i wyrównanie. To jeden z najczęściej używanych trybów układu w nowoczesnym CSS.</p>
+        <p>Sam element z <code>display: flex</code> zachowuje się jak blokowy – zajmuje całą szerokość rodzica. Jego
+            dzieci przestają być blokowe i liniowe – stają się elementami flex.</p>
+    </section>
+
+    <section>
+        <p>Składnia: <code>display: flex;</code></p>
+        <p>Po ustawieniu <code>display: flex</code> na kontenerze masz do dyspozycji zestaw dodatkowych właściwości CSS,
+            które go konfigurują:</p>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Przykładowe wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td><code>flex-direction</code></td>
+                <td>row, row-reverse, column, column-reverse</td>
+                <td>Kierunek układania dzieci (oś główna)</td>
+            </tr>
+            <tr>
+                <td><code>flex-wrap</code></td>
+                <td>nowrap, wrap, wrap-reverse</td>
+                <td>Czy dzieci mogą się zawijać do nowej linii</td>
+            </tr>
+            <tr>
+                <td><code>flex-flow</code></td>
+                <td>row wrap, column nowrap...</td>
+                <td>Skrót dla flex-direction + flex-wrap</td>
+            </tr>
+            <tr>
+                <td><code>justify-content</code></td>
+                <td>flex-start, flex-end, center, space-between, space-around, space-evenly</td>
+                <td>Wyrównanie dzieci wzdłuż osi głównej</td>
+            </tr>
+            <tr>
+                <td><code>align-items</code></td>
+                <td>stretch, flex-start, flex-end, center, baseline</td>
+                <td>Wyrównanie dzieci wzdłuż osi poprzecznej</td>
+            </tr>
+            <tr>
+                <td><code>align-content</code></td>
+                <td>flex-start, flex-end, center, space-between, space-around, space-evenly, stretch</td>
+                <td>Wyrównanie wierszy gdy jest ich kilka (działa tylko gdy flex-wrap: wrap)</td>
+            </tr>
+            <tr>
+                <td><code>gap</code></td>
+                <td>px, rem, %</td>
+                <td>Odstęp między dziećmi (row-gap i column-gap razem)</td>
+            </tr>
+            <tr>
+                <td><code>row-gap</code></td>
+                <td>px, rem, %</td>
+                <td>Odstęp między wierszami</td>
+            </tr>
+            <tr>
+                <td><code>column-gap</code></td>
+                <td>px, rem, %</td>
+                <td>Odstęp między kolumnami</td>
+            </tr>
+        </table>
+        <p>Na samych dzieciach (flex items) możesz ustawiać:</p>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Przykładowe wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td><code>flex-grow</code></td>
+                <td>0, 1, 2...</td>
+                <td>Jak bardzo element ma się rozciągać żeby wypełnić wolne miejsce</td>
+            </tr>
+            <tr>
+                <td><code>flex-shrink</code></td>
+                <td>0, 1, 2...</td>
+                <td>Jak bardzo element ma się kurczyć gdy brakuje miejsca</td>
+            </tr>
+            <tr>
+                <td><code>flex-basis</code></td>
+                <td>auto, px, %, rem</td>
+                <td>Bazowy rozmiar elementu przed rozciągnięciem/skurczeniem</td>
+            </tr>
+            <tr>
+                <td><code>flex</code></td>
+                <td>1, 0 1 auto, 1 1 200px</td>
+                <td>Skrót dla flex-grow + flex-shrink + flex-basis</td>
+            </tr>
+            <tr>
+                <td><code>align-self</code></td>
+                <td>auto, flex-start, flex-end, center, stretch, baseline</td>
+                <td>Nadpisuje align-items dla konkretnego dziecka</td>
+            </tr>
+            <tr>
+                <td><code>order</code></td>
+                <td>0, 1, -1...</td>
+                <td>Kolejność wyświetlania (domyślnie 0)</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Domyślna wartość <code>display</code> to <code>block</code> albo <code>inline</code> – zależy od znacznika.
+            Jeśli nie wpiszesz <code>display: flex</code>, dzieci układają się w normalnym przepływie dokumentu.</p>
+        <p><code>display: initial</code> przywraca domyślną wartość elementu. <code>display: inherit</code> dziedziczy
+            wartość od rodzica – ale normalnie <code>display</code> nie jest dziedziczone, więc to rzadki przypadek.</p>
+    </section>
+
+    <section>
+        <p>Właściwość <code>display</code> <strong>nie jest dziedziczona</strong>. To że rodzic ma <code>flex</code> nie
+            zmienia <code>display</code> dzieci – one stają się flex items, ale ich własna wartość <code>display</code>
+            nadal decyduje o tym jak układają swoje własne dzieci.</p>
+        <p><code>display: inherit</code> wymusza dziedziczenie, ale używa się tego bardzo rzadko.
+            <code>display: initial</code> przywraca domyślną wartość dla danego znacznika.
+        </p>
+    </section>
+
+    <section>
+        <p>Wyśrodkowanie elementu w pionie i poziomie – klasyczny przypadek:</p>
+        <pre><code>.kontener {<br>
+  display: flex;<br>
+  justify-content: center;<br>
+  align-items: center;<br>
+  height: 200px;<br>
+}</code></pre>
+
+        <p>Nawigacja pozioma z równymi odstępami:</p>
+        <pre><code>nav {<br>
+  display: flex;<br>
+  justify-content: space-between;<br>
+  align-items: center;<br>
+  gap: 16px;<br>
+}</code></pre>
+
+        <p>Karty w rzędzie, które zawijają się gdy nie mieszczą się w jednej linii:</p>
+        <pre><code>.karty {<br>
+  display: flex;<br>
+  flex-wrap: wrap;<br>
+  gap: 20px;<br>
+}<br>
+<br>
+.karta {<br>
+  flex: 1 1 200px;<br>
+}</code></pre>
+
+        <p>Układ kolumnowy – elementy w pionie:</p>
+        <pre><code>.sidebar {<br>
+  display: flex;<br>
+  flex-direction: column;<br>
+  gap: 8px;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Zmieniaj właściwości kontenera i dzieci. Możesz przełączać <code>flex-direction</code>,
+            <code>justify-content</code>, <code>align-items</code>, <code>flex-wrap</code>, <code>gap</code> oraz
+            <code>flex-grow</code> i <code>order</code> na poszczególnych dzieciach.
+        </p>
+
+        <div class="sim-controls" style="flex-direction: column; gap: 12px;">
+
+            <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:flex-end;">
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    flex-direction
+                    <select id="s-dir">
+                        <option value="row">row</option>
+                        <option value="row-reverse">row-reverse</option>
+                        <option value="column">column</option>
+                        <option value="column-reverse">column-reverse</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    justify-content
+                    <select id="s-jc">
+                        <option value="flex-start">flex-start</option>
+                        <option value="flex-end">flex-end</option>
+                        <option value="center">center</option>
+                        <option value="space-between">space-between</option>
+                        <option value="space-around">space-around</option>
+                        <option value="space-evenly">space-evenly</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    align-items
+                    <select id="s-ai">
+                        <option value="stretch">stretch</option>
+                        <option value="flex-start">flex-start</option>
+                        <option value="flex-end">flex-end</option>
+                        <option value="center">center</option>
+                        <option value="baseline">baseline</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    flex-wrap
+                    <select id="s-wrap">
+                        <option value="nowrap">nowrap</option>
+                        <option value="wrap">wrap</option>
+                        <option value="wrap-reverse">wrap-reverse</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    gap (px)
+                    <input id="s-gap" type="number" value="8" min="0" max="40" style="width:70px;">
+                </label>
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; gap:6px; align-items:center;">
+                <span style="font-size:13px; color:var(--color-text-secondary);">Zaznaczone dziecko:</span>
+                <div id="s-child-tabs" style="display:flex;gap:6px;"></div>
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:flex-end;">
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    flex-grow
+                    <input id="s-grow" type="number" value="0" min="0" max="5" style="width:70px;">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    flex-shrink
+                    <input id="s-shrink" type="number" value="1" min="0" max="5" style="width:70px;">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    flex-basis
+                    <select id="s-basis">
+                        <option value="auto">auto</option>
+                        <option value="0">0</option>
+                        <option value="80px">80px</option>
+                        <option value="120px">120px</option>
+                        <option value="200px">200px</option>
+                        <option value="50%">50%</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    align-self
+                    <select id="s-as">
+                        <option value="auto">auto</option>
+                        <option value="flex-start">flex-start</option>
+                        <option value="flex-end">flex-end</option>
+                        <option value="center">center</option>
+                        <option value="stretch">stretch</option>
+                        <option value="baseline">baseline</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    order
+                    <input id="s-order" type="number" value="0" min="-3" max="3" style="width:70px;">
+                </label>
+            </div>
+
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad" style="padding:0; overflow:hidden; min-height:160px;"></div>
+        </div>
+
+        <script>
+            (function () {
+
+                var sDir = document.getElementById("s-dir");
+                var sJc = document.getElementById("s-jc");
+                var sAi = document.getElementById("s-ai");
+                var sWrap = document.getElementById("s-wrap");
+                var sGap = document.getElementById("s-gap");
+                var sGrow = document.getElementById("s-grow");
+                var sShrink = document.getElementById("s-shrink");
+                var sBasis = document.getElementById("s-basis");
+                var sAs = document.getElementById("s-as");
+                var sOrder = document.getElementById("s-order");
+                var kodEl = document.getElementById("sim-kod");
+                var podglad = document.getElementById("sim-podglad");
+                var tabsCont = document.getElementById("s-child-tabs");
+
+                var kolory = [
+                    { bg: "#AFA9EC", fg: "#26215C", nazwa: "A" },
+                    { bg: "#9FE1CB", fg: "#085041", nazwa: "B" },
+                    { bg: "#FAC775", fg: "#412402", nazwa: "C" },
+                    { bg: "#F0997B", fg: "#4A1B0C", nazwa: "D" },
+                    { bg: "#F4C0D1", fg: "#4B1528", nazwa: "E" }
+                ];
+
+                var stanyDzieci = kolory.map(function () { return { grow: 0, shrink: 1, basis: "auto", as: "auto", order: 0 }; });
+                var aktywne = 0;
+                var tabs = [];
+                var itemEls = [];
+
+                kolory.forEach(function (k, i) {
+                    var b = document.createElement("button");
+                    b.textContent = k.nazwa;
+                    b.style.cssText = "padding:3px 12px; border-radius:5px; cursor:pointer; font-size:13px; font-weight:600; border:2px solid transparent; background:" + k.bg + "; color:" + k.fg + ";";
+                    b.addEventListener("click", function () { aktywne = i; zaladuj(); podswietlTabs(); });
+                    tabsCont.appendChild(b);
+                    tabs.push(b);
+                });
+
+                function podswietlTabs() {
+                    tabs.forEach(function (b, i) { b.style.borderColor = i === aktywne ? "#534AB7" : "transparent"; });
+                    itemEls.forEach(function (el, i) { el.style.outline = i === aktywne ? "2px solid #534AB7" : "none"; });
+                }
+
+                function zaladuj() {
+                    var s = stanyDzieci[aktywne];
+                    sGrow.value = s.grow;
+                    sShrink.value = s.shrink;
+                    sBasis.value = s.basis;
+                    sAs.value = s.as;
+                    sOrder.value = s.order;
+                }
+
+                function zapiszDziecko() {
+                    var s = stanyDzieci[aktywne];
+                    s.grow = parseInt(sGrow.value) || 0;
+                    s.shrink = parseInt(sShrink.value) >= 0 ? parseInt(sShrink.value) : 1;
+                    s.basis = sBasis.value;
+                    s.as = sAs.value;
+                    s.order = parseInt(sOrder.value) || 0;
+                }
+
+                function aktualizuj() {
+                    zapiszDziecko();
+
+                    var dir = sDir.value;
+                    var jc = sJc.value;
+                    var ai = sAi.value;
+                    var wrap = sWrap.value;
+                    var gap = (parseInt(sGap.value) || 0) + "px";
+
+                    var kontH = (dir === "column" || dir === "column-reverse") ? "340px" : "160px";
+
+                    podglad.innerHTML = "";
+
+                    var kont = document.createElement("div");
+                    kont.style.cssText = "display:flex; padding:10px; box-sizing:border-box; width:100%; min-height:" + kontH + "; background:#f5f4f0; border-radius:8px;";
+                    kont.style.flexDirection = dir;
+                    kont.style.justifyContent = jc;
+                    kont.style.alignItems = ai;
+                    kont.style.flexWrap = wrap;
+                    kont.style.gap = gap;
+
+                    itemEls = [];
+                    kolory.forEach(function (k, i) {
+                        var s = stanyDzieci[i];
+                        var el = document.createElement("div");
+                        el.style.cssText = "min-width:44px; min-height:44px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:600; padding:6px 10px; box-sizing:border-box; cursor:pointer; outline: none;";
+                        el.style.background = k.bg;
+                        el.style.color = k.fg;
+                        el.style.flexGrow = s.grow;
+                        el.style.flexShrink = s.shrink;
+                        el.style.flexBasis = s.basis;
+                        el.style.alignSelf = s.as;
+                        el.style.order = s.order;
+                        el.textContent = k.nazwa;
+                        el.addEventListener("click", function () { aktywne = i; zaladuj(); podswietlTabs(); });
+                        kont.appendChild(el);
+                        itemEls.push(el);
+                    });
+
+                    podglad.appendChild(kont);
+                    podswietlTabs();
+
+                    var kontCSS = ".kontener {\n  display: flex;\n  flex-direction: " + dir + ";\n  justify-content: " + jc + ";\n  align-items: " + ai + ";\n  flex-wrap: " + wrap + ";\n  gap: " + gap + ";\n}";
+                    var s = stanyDzieci[aktywne];
+                    var childCSS = "\n\n.dziecko-" + kolory[aktywne].nazwa + " {\n  flex-grow: " + s.grow + ";\n  flex-shrink: " + s.shrink + ";\n  flex-basis: " + s.basis + ";\n  align-self: " + s.as + ";\n  order: " + s.order + ";\n}";
+                    kodEl.textContent = kontCSS + childCSS;
+                }
+
+                [sDir, sJc, sAi, sWrap, sBasis, sAs].forEach(function (el) { el.addEventListener("change", aktualizuj); });
+                [sGap, sGrow, sShrink, sOrder].forEach(function (el) { el.addEventListener("input", aktualizuj); });
+
+                podswietlTabs();
+                zaladuj();
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

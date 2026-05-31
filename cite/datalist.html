@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>datalist</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;datalist&gt;</strong> służy do tworzenia listy podpowiedzi dla pola
+            <code>&lt;input&gt;</code>. Użytkownik może wpisać własną wartość albo wybrać jedną z propozycji.
+        </p>
+        <p>Sam <code>datalist</code> nie działa samodzielnie, musi być powiązany z inputem przez atrybut
+            <code>list</code>. To element wspierający formularze.
+        </p>
+        <p>Najczęściej używa się go do podpowiadania danych, ale bez ograniczania użytkownika.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>dodawać podpowiedzi w polach formularza</li>
+            <li>ułatwiać wpisywanie danych</li>
+            <li>proponować gotowe wartości</li>
+            <li>tworzyć inteligentne formularze</li>
+            <li>przyspieszać wybór użytkownika</li>
+            <li>unikać literówek</li>
+            <li>łączyć swobodny wpis z listą opcji</li>
+        </ul>
+        <p>Jeśli wybór ma być ograniczony, lepiej użyć <code>&lt;select&gt;</code>.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>tekst</td>
+                <td>Łączy datalist z inputem przez list</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;datalist&gt;</strong> nie ma dużego znaczenia semantycznego sam w sobie, ale wspiera
+            pole input.</p>
+        <p>Czytniki ekranu traktują go jako listę podpowiedzi, z której użytkownik może skorzystać, ale nie musi.</p>
+        <p>To element poprawiający wygodę wpisywania danych.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy (logiczny)</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Lista podpowiedzi dla input</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>option</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>body, form</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>none</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz sprawdzić jak działa <code>&lt;datalist&gt;</code> i jak input korzysta z listy
+            podpowiedzi przez atrybut <code>list</code>.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Tryb:
+                <select id="sim-datalist-mode">
+                    <option value="on">datalist włączony</option>
+                    <option value="off">datalist wyłączony</option>
+                </select>
+            </label>
+
+            <label>
+                Zestaw danych:
+                <select id="sim-datalist-set">
+                    <option value="pl">Polskie miasta</option>
+                    <option value="eu">Europejskie miasta</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-datalist"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-datalist"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var mode = document.getElementById("sim-datalist-mode");
+                var set = document.getElementById("sim-datalist-set");
+
+                var kod = document.getElementById("sim-kod-datalist");
+                var podglad = document.getElementById("sim-podglad-datalist");
+
+                var pl = ["Warszawa", "Kraków", "Gdańsk", "Wrocław", "Poznań", "Łódź"];
+                var eu = ["Berlin", "Paryż", "Rzym", "Madryt", "Praga", "Wiedeń"];
+
+                function aktualizuj() {
+
+                    podglad.innerHTML = "";
+
+                    var listId = "miasta-lista";
+                    var lista = set.value === "pl" ? pl : eu;
+
+                    var input = document.createElement("input");
+                    input.type = "text";
+
+                    var datalist = document.createElement("datalist");
+                    datalist.id = listId;
+
+                    for (var i = 0; i < lista.length; i++) {
+                        var opt = document.createElement("option");
+                        opt.value = lista[i];
+                        datalist.appendChild(opt);
+                    }
+
+                    if (mode.value === "on") {
+                        input.setAttribute("list", listId);
+                    }
+
+                    kod.textContent =
+                        '<input type="text" list="' + (mode.value === "on" ? listId : "") + '">\n' +
+                        '<datalist id="' + listId + '">\n' +
+                        lista.map(function (v) {
+                            return '  <option value="' + v + '">';
+                        }).join("\n") +
+                        '\n</datalist>';
+
+                    podglad.appendChild(input);
+                    podglad.appendChild(datalist);
+
+                }
+
+                mode.addEventListener("change", aktualizuj);
+                set.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

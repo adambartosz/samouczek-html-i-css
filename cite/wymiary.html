@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>height oraz width</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="wlasciwosc">
+
+    <section>
+        <p>Właściwości <strong>width</strong> oraz <strong>height</strong> służą do ustawiania szerokości i wysokości
+            elementu w CSS. Dzięki nim kontroluje się rozmiar pudełka w modelu blokowym.</p>
+        <p><code>width</code> to szerokość, a <code>height</code> to wysokość elementu. Obie wartości są podstawą przy
+            budowaniu layoutu strony.</p>
+        <p>Bez nich elementy mają domyślne dopasowanie do treści.</p>
+    </section>
+
+    <section>
+        <p>Składnia: <code>właściwość: wartość;</code></p>
+        <table>
+            <tr>
+                <th>Wartość</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>auto</td>
+                <td>automatyczne dopasowanie do treści</td>
+            </tr>
+            <tr>
+                <td>px</td>
+                <td>stały rozmiar w pikselach</td>
+            </tr>
+            <tr>
+                <td>%</td>
+                <td>procent względem rodzica</td>
+            </tr>
+            <tr>
+                <td>vw</td>
+                <td>procent szerokości okna</td>
+            </tr>
+            <tr>
+                <td>vh</td>
+                <td>procent wysokości okna</td>
+            </tr>
+            <tr>
+                <td>inherit</td>
+                <td>dziedziczenie wartości</td>
+            </tr>
+            <tr>
+                <td>initial</td>
+                <td>wartość domyślna</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Domyślnie <code>width</code> i <code>height</code> mają wartość <code>auto</code>. Oznacza to, że element sam
+            dopasowuje swój rozmiar.</p>
+        <p><code>initial</code> resetuje do domyślnego zachowania przeglądarki, a <code>inherit</code> pobiera wartość
+            od rodzica.</p>
+    </section>
+
+    <section>
+        <p>Te właściwości działają na elementach blokowych. Elementy liniowe ignorują
+            <code>height</code> oraz <code>width</code>.
+        </p>
+        <pre><code>div {
+    width: 200px;
+    height: 100px;
+}</code></pre>
+        <p>Dlatego często używa się <code>display: block</code> lub <code>flex</code>.</p>
+    </section>
+
+    <section>
+        <p>Przykłady użycia:</p>
+        <pre><code>.box {
+    width: 200px;
+    height: 120px;
+}</code></pre>
+
+        <pre><code>.container {
+    width: 80%;
+    height: auto;
+}</code></pre>
+
+        <pre><code>.full {
+    width: 100vw;
+    height: 100vh;
+}</code></pre>
+
+        <p>Te ustawienia pozwalają tworzyć responsywne strony.</p>
+    </section>
+
+    <section>
+        <p>Symulator: zmieniaj szerokość i wysokość i zobacz efekt na pudełku.</p>
+
+        <div class="sim-controls">
+            <label>
+                Width:
+                <select id="sim-width">
+                    <option value="100px">100px</option>
+                    <option value="200px">200px</option>
+                    <option value="300px">300px</option>
+                    <option value="50%">50%</option>
+                    <option value="80%">80%</option>
+                </select>
+            </label>
+
+            <label>
+                Height:
+                <select id="sim-height">
+                    <option value="80px">80px</option>
+                    <option value="120px">120px</option>
+                    <option value="160px">160px</option>
+                    <option value="50vh">50vh</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var w = document.getElementById("sim-width");
+                var h = document.getElementById("sim-height");
+                var kod = document.getElementById("sim-kod");
+                var pod = document.getElementById("sim-podglad");
+
+                function update() {
+                    var width = w.value;
+                    var height = h.value;
+
+                    kod.textContent = "width: " + width + ";\nheight: " + height + ";";
+
+                    while (pod.firstChild) {
+                        pod.removeChild(pod.firstChild);
+                    }
+
+                    var box = document.createElement("div");
+                    box.textContent = "BOX";
+                    box.style.cssText =
+                        "background:#ddd;border:2px solid black;display:flex;align-items:center;justify-content:center;" +
+                        "width:" + width + ";height:" + height + ";";
+
+                    pod.appendChild(box);
+                }
+
+                w.addEventListener("change", update);
+                h.addEventListener("change", update);
+                update();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

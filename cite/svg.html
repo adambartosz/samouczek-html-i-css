@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>svg</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;svg&gt;</strong> jest kontenerem przeznaczonym do umieszczania grafiki wektorowej w
+            dokumencie HTML. Sam nie rysuje żadnych kształtów, ale tworzy obszar roboczy, wewnątrz którego można
+            umieszczać inne elementy SVG.</p>
+        <p>Grafika SVG skaluje się bez utraty jakości, dlatego często wykorzystuje się ją do ikon, logotypów oraz
+            wykresów. Jest to element kontenerowy posiadający własny układ współrzędnych.</p>
+        <p>Bez znacznika <code>&lt;svg&gt;</code> nie można używać pozostałych elementów SVG bezpośrednio w kodzie
+            strony.</p>
+        <p><strong>UWAGA!</strong> znaczniki trzeba zamykać w taki sposób: <code>&lt;circle/&gt;</code>, ponieważ
+            wymagana jest '/'
+            na końcu, a inaczej nie zadziała.</p>
+    </section>
+
+    <section>
+        <p>Znacznik ten wykorzystuje się, gdy chcemy:</p>
+        <ul>
+            <li>utworzyć obszar przeznaczony na grafikę SVG</li>
+            <li>osadzać grafikę wektorową bez używania plików JPG lub PNG</li>
+            <li>tworzyć responsywne ikony i logotypy</li>
+            <li>skalować grafikę bez utraty jakości</li>
+            <li>tworzyć interaktywne elementy graficzne</li>
+            <li>korzystać z innych znaczników SVG, takich jak <code>&lt;circle&gt;</code>, <code>&lt;rect&gt;</code> czy
+                <code>&lt;line&gt;</code>
+            </li>
+            <li>tworzyć animacje SVG</li>
+        </ul>
+        <p>Sam znacznik nie wyświetli żadnego rysunku, dopóki nie zostaną dodane do niego odpowiednie elementy SVG.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>width</td>
+                <td>liczba, px, %, inne jednostki CSS</td>
+                <td>Określa szerokość obszaru SVG</td>
+            </tr>
+            <tr>
+                <td>height</td>
+                <td>liczba, px, %, inne jednostki CSS</td>
+                <td>Określa wysokość obszaru SVG</td>
+            </tr>
+            <tr>
+                <td>viewBox</td>
+                <td>min-x min-y szerokość wysokość</td>
+                <td>Definiuje układ współrzędnych grafiki</td>
+            </tr>
+            <tr>
+                <td>preserveAspectRatio</td>
+                <td>none, xMinYMin, xMidYMid, xMaxYMax i inne warianty</td>
+                <td>Kontroluje sposób skalowania grafiki</td>
+            </tr>
+            <tr>
+                <td>x</td>
+                <td>liczba lub jednostka</td>
+                <td>Pozycja pozioma kontenera SVG</td>
+            </tr>
+            <tr>
+                <td>y</td>
+                <td>liczba lub jednostka</td>
+                <td>Pozycja pionowa kontenera SVG</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;svg&gt;</strong> ma znaczenie semantyczne związane z grafiką wektorową. Informuje
+            przeglądarkę, że jego zawartość należy interpretować jako dokument SVG.</p>
+        <p>Dla wyszukiwarek oraz przeglądarek jest to jasna informacja, że wewnątrz znajduje się grafika wektorowa, a
+            nie zwykła treść HTML.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Kontener grafiki wektorowej SVG</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Elementy SVG, definicje, grupy, animacje i opisy</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>większości elementów HTML przechowujących treść</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Ten symulator pozwala sprawdzić najważniejsze atrybuty znacznika <code>&lt;svg&gt;</code>. Zmieniając
+            wartości można zobaczyć, jak zmienia się obszar roboczy SVG. W podglądzie znajduje się jedynie prosty
+            znacznik testowy potrzebny do pokazania działania kontenera.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Szerokość:
+                <select id="sim-width-svg">
+                    <option value="200">200px</option>
+                    <option value="300" selected>300px</option>
+                    <option value="400">400px</option>
+                    <option value="500">500px</option>
+                </select>
+            </label>
+
+            <label>
+                Wysokość:
+                <select id="sim-height-svg">
+                    <option value="100">100px</option>
+                    <option value="150">150px</option>
+                    <option value="200" selected>200px</option>
+                    <option value="300">300px</option>
+                </select>
+            </label>
+
+            <label>
+                viewBox:
+                <select id="sim-viewbox-svg">
+                    <option value="0 0 100 100">0 0 100 100</option>
+                    <option value="0 0 200 100">0 0 200 100</option>
+                    <option value="0 0 300 150">0 0 300 150</option>
+                </select>
+            </label>
+
+            <label>
+                preserveAspectRatio:
+                <select id="sim-ratio-svg">
+                    <option value="xMidYMid meet">xMidYMid meet</option>
+                    <option value="none">none</option>
+                    <option value="xMinYMin meet">xMinYMin meet</option>
+                    <option value="xMaxYMax meet">xMaxYMax meet</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-svg"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-svg"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var width = document.getElementById("sim-width-svg");
+                var height = document.getElementById("sim-height-svg");
+                var viewbox = document.getElementById("sim-viewbox-svg");
+                var ratio = document.getElementById("sim-ratio-svg");
+
+                var kod = document.getElementById("sim-kod-svg");
+                var podglad = document.getElementById("sim-podglad-svg");
+
+                function aktualizuj() {
+
+                    kod.textContent = '<svg width="' + width.value + '" height="' + height.value + '" viewBox="' + viewbox.value + '" preserveAspectRatio="' + ratio.value + '">...</svg>';
+
+                    podglad.innerHTML = "";
+
+                    var opis = document.createElement("p");
+                    opis.textContent = "Rozmiar kontenera SVG: " + width.value + " × " + height.value + " px";
+                    podglad.appendChild(opis);
+
+                    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+
+                    svg.setAttribute("width", width.value);
+                    svg.setAttribute("height", height.value);
+                    svg.setAttribute("viewBox", viewbox.value);
+                    svg.setAttribute("preserveAspectRatio", ratio.value);
+
+                    svg.style.border = "2px solid #555";
+                    svg.style.background = "#f5f5f5";
+
+                    var text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    text.setAttribute("x", "10");
+                    text.setAttribute("y", "30");
+                    text.setAttribute("font-size", "16");
+                    text.textContent = "Kontener SVG";
+
+                    svg.appendChild(text);
+
+                    podglad.appendChild(svg);
+
+                }
+
+                width.addEventListener("change", aktualizuj);
+                height.addEventListener("change", aktualizuj);
+                viewbox.addEventListener("change", aktualizuj);
+                ratio.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>

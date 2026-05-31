@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Selektor atrybutu</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to jest selektor atrybutu?</h2>
+
+        <p>Selektor atrybutu pozwala wybierać elementy HTML na podstawie ich atrybutów lub wartości tych atrybutów.</p>
+
+        <p>Dzięki niemu można stylować elementy bez używania klas i identyfikatorów. Przeglądarka sprawdza, czy element
+            posiada określony atrybut lub konkretną wartość.</p>
+
+        <p>Selektory atrybutów są często używane przy formularzach, linkach i elementach posiadających specjalne
+            właściwości.</p>
+    </section>
+
+    <section>
+        <h2>Podstawowa składnia</h2>
+
+        <p>Najprostsza forma sprawdza, czy element posiada dany atrybut.</p>
+
+        <pre><code>[disabled] {<br>
+    opacity: 0.5;<br>
+}</code></pre>
+
+        <p>Powyższa reguła wybierze wszystkie elementy posiadające atrybut <code>disabled</code>.</p>
+
+        <p>Można też sprawdzać konkretną wartość:</p>
+
+        <pre><code>input[type="email"] {<br>
+    border: 2px solid green;<br>
+}</code></pre>
+
+        <p>W tym przypadku zostaną wybrane tylko pola formularza z atrybutem <code>type="email"</code>.</p>
+    </section>
+
+    <section>
+        <h2>Rodzaje selektorów atrybutów</h2>
+
+        <table>
+            <tr>
+                <th>Selektor</th>
+                <th>Przykład</th>
+                <th>Działanie</th>
+            </tr>
+
+            <tr>
+                <td>[atrybut]</td>
+                <td>[disabled]</td>
+                <td>Element posiada wskazany atrybut</td>
+            </tr>
+
+            <tr>
+                <td>[atrybut="wartość"]</td>
+                <td>[type="text"]</td>
+                <td>Dokładnie określona wartość</td>
+            </tr>
+
+            <tr>
+                <td>[atrybut~="wartość"]</td>
+                <td>[class~="box"]</td>
+                <td>Zawiera słowo oddzielone spacjami</td>
+            </tr>
+
+            <tr>
+                <td>[atrybut|="wartość"]</td>
+                <td>[lang|="pl"]</td>
+                <td>Dokładna wartość lub wartość z myślnikiem</td>
+            </tr>
+
+            <tr>
+                <td>[atrybut^="wartość"]</td>
+                <td>[href^="https"]</td>
+                <td>Zaczyna się od podanego tekstu</td>
+            </tr>
+
+            <tr>
+                <td>[atrybut$="wartość"]</td>
+                <td>[href$=".pdf"]</td>
+                <td>Kończy się podanym tekstem</td>
+            </tr>
+
+            <tr>
+                <td>[atrybut*="wartość"]</td>
+                <td>[href*="google"]</td>
+                <td>Zawiera podany fragment</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Praktyczne przykłady</h2>
+
+        <p>Wyróżnienie wszystkich pól e-mail:</p>
+
+        <pre><code>input[type="email"] {<br>
+    border: 2px solid green;<br>
+}</code></pre>
+
+        <p>Stylowanie linków HTTPS:</p>
+
+        <pre><code>a[href^="https"] {<br>
+    font-weight: bold;<br>
+}</code></pre>
+
+        <p>Stylowanie plików PDF:</p>
+
+        <pre><code>a[href$=".pdf"] {<br>
+    color: red;<br>
+}</code></pre>
+
+        <p>Stylowanie wyłączonych pól:</p>
+
+        <pre><code>input[disabled] {<br>
+    opacity: 0.5;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Kiedy używać selektorów atrybutów?</h2>
+
+        <ul>
+            <li>gdy elementy mają wspólny atrybut</li>
+            <li>podczas stylowania formularzy</li>
+            <li>przy rozróżnianiu typów pól input</li>
+            <li>do wykrywania określonych rodzajów linków</li>
+            <li>gdy nie chcemy dodawać dodatkowych klas</li>
+            <li>do stylowania elementów disabled, required lub checked</li>
+        </ul>
+
+        <p>Selektory atrybutów są bardzo przydatne, ale zwykle są mniej czytelne od dobrze nazwanych klas CSS.</p>
+    </section>
+
+    <section>
+        <p>Wybierz typ selektora atrybutu i zobacz, które elementy zostaną zaznaczone.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Selektor:
+                <select id="sim-selektor">
+                    <option value="disabled">[disabled]</option>
+                    <option value="type">[type="email"]</option>
+                    <option value="start">[href^="https"]</option>
+                    <option value="end">[href$=".pdf"]</option>
+                    <option value="contains">[href*="google"]</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+
+        </div>
+
+        <script>
+            (function () {
+                var sel = document.getElementById("sim-selektor");
+                var kod = document.getElementById("sim-kod");
+                var podgl = document.getElementById("sim-podglad");
+
+                function aktualizuj() {
+
+                    while (podgl.firstChild) {
+                        podgl.removeChild(podgl.firstChild);
+                    }
+
+                    if (sel.value === "disabled") {
+
+                        kod.textContent = 'input[disabled] {\n    background: yellow;\n}';
+
+                        var a = document.createElement("input");
+                        a.value = "Aktywne pole";
+
+                        var b = document.createElement("input");
+                        b.value = "Wyłączone pole";
+                        b.disabled = true;
+                        b.style.backgroundColor = "yellow";
+
+                        podgl.appendChild(a);
+                        podgl.appendChild(document.createElement("br"));
+                        podgl.appendChild(document.createElement("br"));
+                        podgl.appendChild(b);
+
+                    }
+                    else if (sel.value === "type") {
+
+                        kod.textContent = 'input[type="email"] {\n    background: yellow;\n}';
+
+                        var a = document.createElement("input");
+                        a.type = "text";
+                        a.value = "Pole tekstowe";
+
+                        var b = document.createElement("input");
+                        b.type = "email";
+                        b.value = "email@example.com";
+                        b.style.backgroundColor = "yellow";
+
+                        podgl.appendChild(a);
+                        podgl.appendChild(document.createElement("br"));
+                        podgl.appendChild(document.createElement("br"));
+                        podgl.appendChild(b);
+
+                    }
+                    else if (sel.value === "start") {
+
+                        kod.textContent = 'a[href^="https"] {\n    font-weight: bold;\n}';
+
+                        var a = document.createElement("div");
+                        a.textContent = 'https://example.com ← pasuje';
+
+                        var b = document.createElement("div");
+                        b.textContent = 'http://example.com';
+
+                        a.style.fontWeight = "bold";
+
+                        podgl.appendChild(a);
+                        podgl.appendChild(b);
+
+                    }
+                    else if (sel.value === "end") {
+
+                        kod.textContent = 'a[href$=".pdf"] {\n    font-weight: bold;\n}';
+
+                        var a = document.createElement("div");
+                        a.textContent = 'instrukcja.pdf ← pasuje';
+
+                        var b = document.createElement("div");
+                        b.textContent = 'instrukcja.docx';
+
+                        a.style.fontWeight = "bold";
+
+                        podgl.appendChild(a);
+                        podgl.appendChild(b);
+
+                    }
+                    else {
+
+                        kod.textContent = 'a[href*="google"] {\n    font-weight: bold;\n}';
+
+                        var a = document.createElement("div");
+                        a.textContent = 'https://google.pl ← pasuje';
+
+                        var b = document.createElement("div");
+                        b.textContent = 'https://wikipedia.org';
+
+                        a.style.fontWeight = "bold";
+
+                        podgl.appendChild(a);
+                        podgl.appendChild(b);
+
+                    }
+
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

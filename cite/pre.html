@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>pre</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;pre&gt;</strong> służy do wyświetlania tekstu dokładnie tak, jak jest zapisany w kodzie
+            HTML. Zachowuje spacje, tabulatory i nowe linie.</p>
+        <p>To element <strong>blokowy</strong>, który najczęściej używa się do kodu źródłowego albo ASCII art.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>pokazać kod HTML, CSS lub JS</li>
+            <li>zachować formatowanie tekstu</li>
+            <li>wyświetlić drzewka katalogów</li>
+            <li>pokazać ASCII art</li>
+        </ul>
+        <p>Nie używa się go do zwykłego tekstu, bo łamie estetykę strony.</p>
+    </section>
+
+    <section>
+    </section>
+
+    <section>
+        <p>Znacznik <code>&lt;pre&gt;</code> ma znaczenie semantyczne tylko częściowo. Informuje, że tekst jest
+            wcześniej sformatowany.</p>
+        <p>Czytniki ekranu odczytują go jako blok tekstu z zachowaniem układu.</p>
+        <p>Google traktuje go często jako kod lub dane techniczne.</p>
+        <p>Nie powinno się go używać do robienia odstępów w zwykłym tekście.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Tekst preformatowany</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst i elementy liniowe</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Elementów blokowych</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>block</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz sprawdzić jak <code>&lt;pre&gt;</code> zachowuje spacje, tabulatory i nowe linie.
+        </p>
+
+        <div class="sim-controls">
+
+            <label>
+                Tryb tekstu:
+                <select id="sim-pre-mode">
+                    <option value="normal">normalny tekst</option>
+                    <option value="code">kod HTML</option>
+                    <option value="tree">drzewko</option>
+                    <option value="ascii">ASCII art</option>
+                </select>
+            </label>
+
+            <label>
+                Ilość wcięć:
+                <select id="sim-pre-indent">
+                    <option value="0">0</option>
+                    <option value="2">2 spacje</option>
+                    <option value="4" selected>4 spacje</option>
+                    <option value="tab">tab</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-pre"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-pre"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var mode = document.getElementById("sim-pre-mode");
+                var indent = document.getElementById("sim-pre-indent");
+
+                var kod = document.getElementById("sim-kod-pre");
+                var podglad = document.getElementById("sim-podglad-pre");
+
+                function getContent(m) {
+                    if (m === "code") {
+                        return "<div>\n    <p>Tekst</p>\n</div>";
+                    }
+                    if (m === "tree") {
+                        return "root\n ├── src\n │   ├── index.html\n │   └── style.css\n └── img";
+                    }
+                    if (m === "ascii") {
+                        return "  *\n ***\n*****\n ***\n  *";
+                    }
+                    return "To jest zwykły tekst w pre.\nZachowuje łamanie linii.\nI odstępy.";
+                }
+
+                function applyIndent(text, ind) {
+                    if (ind === "0") return text;
+                    if (ind === "2") return text.replace(/^/gm, "  ");
+                    if (ind === "4") return text.replace(/^/gm, "    ");
+                    if (ind === "tab") return text.replace(/^/gm, "\t");
+                    return text;
+                }
+
+                function aktualizuj() {
+
+                    var content = getContent(mode.value);
+                    var indented = applyIndent(content, indent.value);
+
+                    kod.textContent = "<pre>\n" + indented + "\n</pre>";
+
+                    podglad.innerHTML = "";
+
+                    var el = document.createElement("pre");
+                    el.textContent = indented;
+
+                    el.style.cssText =
+                        "background:rgba(0,0,0,0.05);" +
+                        "padding:10px;" +
+                        "border-left:3px solid #2a0060;" +
+                        "width:100%;" +
+                        "overflow:auto;";
+
+                    podglad.appendChild(el);
+
+                }
+
+                mode.addEventListener("change", aktualizuj);
+                indent.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

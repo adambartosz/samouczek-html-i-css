@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Zaawansowane selektory CSS</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Selektor uniwersalny</h2>
+
+        <p>Selektor <code>*</code> wybiera wszystkie elementy znajdujące się w dokumencie.</p>
+
+        <p>Najczęściej spotyka się go w arkuszach zerujących oraz przy ustawianiu wspólnych właściwości dla całej
+            strony.</p>
+
+        <pre><code>* {<br>
+    box-sizing: border-box;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Łączenie selektorów</h2>
+
+        <p>Można wskazać element, który jednocześnie spełnia kilka warunków.</p>
+
+        <pre><code>p.uwaga {<br>
+    color: red;<br>
+}</code></pre>
+
+        <p>Ten selektor wybierze tylko znaczniki <code>p</code> posiadające klasę <code>uwaga</code>.</p>
+
+        <pre><code>a.zewnetrzny {<br>
+    font-weight: bold;<br>
+}</code></pre>
+
+        <p>Zwykłe linki bez tej klasy nie zostaną wybrane.</p>
+    </section>
+
+    <section>
+        <h2>Wiele klas jednocześnie</h2>
+
+        <p>Element może posiadać kilka klas naraz.</p>
+
+        <pre><code>.przycisk.duzy {<br>
+    padding: 20px;<br>
+}</code></pre>
+
+        <p>Przeglądarka wybierze tylko elementy posiadające jednocześnie klasę <code>przycisk</code> oraz
+            <code>duzy</code>.
+        </p>
+
+        <pre><code>&lt;button class="przycisk duzy"&gt;<br>
+    Kliknij<br>
+&lt;/button&gt;</code></pre>
+    </section>
+
+    <section>
+        <h2>Selektor :root</h2>
+
+        <p>Pseudoklasa <code>:root</code> wskazuje główny element dokumentu.</p>
+
+        <p>W HTML jest nim znacznik <code>html</code>.</p>
+
+        <pre><code>:root {<br>
+    --kolor-glowny: blue;<br>
+}</code></pre>
+
+        <p>Najczęściej używa się jej podczas tworzenia własnych zmiennych CSS.</p>
+    </section>
+
+    <section>
+        <h2>Selektor :target</h2>
+
+        <p>Wybiera element, do którego prowadzi aktualny adres URL z kotwicą.</p>
+
+        <pre><code>#kontakt:target {<br>
+    border: 2px solid red;<br>
+}</code></pre>
+
+        <p>Jeżeli użytkownik przejdzie pod adres:</p>
+
+        <pre><code>strona.html#kontakt</code></pre>
+
+        <p>Element o identyfikatorze <code>kontakt</code> zostanie wybrany.</p>
+    </section>
+
+    <section>
+        <h2>Selektor :lang()</h2>
+
+        <p>Pozwala wybierać elementy zapisane w określonym języku.</p>
+
+        <pre><code>p:lang(pl) {<br>
+    font-style: italic;<br>
+}</code></pre>
+
+        <p>Zadziała tylko dla elementów oznaczonych jako język polski.</p>
+
+        <pre><code>&lt;p lang="pl"&gt;Tekst&lt;/p&gt;</code></pre>
+    </section>
+
+    <section>
+        <h2>Selektor :has()</h2>
+
+        <p>Jest jednym z najnowszych i najpotężniejszych selektorów CSS.</p>
+
+        <p>Pozwala wybierać element na podstawie tego, co znajduje się w jego wnętrzu.</p>
+
+        <pre><code>div:has(img) {<br>
+    border: 2px solid green;<br>
+}</code></pre>
+
+        <p>Zostaną wybrane tylko elementy <code>div</code>, które zawierają obrazek.</p>
+    </section>
+
+    <section>
+        <h2>Selektor :scope</h2>
+
+        <p>Odnosi się do aktualnego punktu odniesienia podczas wyszukiwania elementów.</p>
+
+        <pre><code>:scope &gt; p {<br>
+    color: blue;<br>
+}</code></pre>
+
+        <p>Najczęściej spotyka się go podczas pracy z JavaScriptem.</p>
+    </section>
+
+    <section>
+        <h2>Selektory formularzy</h2>
+
+        <p>CSS posiada wiele specjalnych selektorów przeznaczonych dla formularzy.</p>
+
+        <table>
+            <tr>
+                <th>Selektor</th>
+                <th>Działanie</th>
+            </tr>
+
+            <tr>
+                <td>:checked</td>
+                <td>Zaznaczony checkbox lub radio</td>
+            </tr>
+
+            <tr>
+                <td>:disabled</td>
+                <td>Wyłączone pole formularza</td>
+            </tr>
+
+            <tr>
+                <td>:enabled</td>
+                <td>Aktywne pole formularza</td>
+            </tr>
+
+            <tr>
+                <td>:required</td>
+                <td>Pole wymagane</td>
+            </tr>
+
+            <tr>
+                <td>:optional</td>
+                <td>Pole niewymagane</td>
+            </tr>
+
+            <tr>
+                <td>:valid</td>
+                <td>Poprawnie wypełnione pole</td>
+            </tr>
+
+            <tr>
+                <td>:invalid</td>
+                <td>Niepoprawnie wypełnione pole</td>
+            </tr>
+
+            <tr>
+                <td>:in-range</td>
+                <td>Wartość znajduje się w zakresie</td>
+            </tr>
+
+            <tr>
+                <td>:out-of-range</td>
+                <td>Wartość poza zakresem</td>
+            </tr>
+
+            <tr>
+                <td>:read-only</td>
+                <td>Pole tylko do odczytu</td>
+            </tr>
+
+            <tr>
+                <td>:read-write</td>
+                <td>Pole możliwe do edycji</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Selektory logiczne</h2>
+
+        <p>Nowoczesny CSS pozwala tworzyć bardziej zaawansowane warunki.</p>
+
+        <pre><code>:is(header, main, footer) {<br>
+    padding: 20px;<br>
+}</code></pre>
+
+        <p>Można grupować wiele selektorów.</p>
+
+        <pre><code>:where(nav ul li a) {<br>
+    text-decoration: none;<br>
+}</code></pre>
+
+        <p>Można także tworzyć bardzo rozbudowane zależności bez zwiększania specyficzności.</p>
+    </section>
+
+    <section>
+        <h2>Interaktywny symulator</h2>
+
+        <p>Wybierz selektor i zobacz, które elementy zostaną przez niego wybrane. Zaznaczone elementy są podświetlone.
+        </p>
+
+        <div class="sim-controls">
+            <label>
+                Selektor:
+                <select id="sim-zaawansowany">
+                    <option value="has">div:has(img)</option>
+                    <option value="checked">input:checked</option>
+                    <option value="disabled">input:disabled</option>
+                    <option value="required">input:required</option>
+                    <option value="not">div:not(.premium)</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+
+                var sel = document.getElementById("sim-zaawansowany");
+                var kod = document.getElementById("sim-kod");
+                var podgl = document.getElementById("sim-podglad");
+
+                function box(text, zaznacz) {
+                    var div = document.createElement("div");
+                    div.textContent = text;
+                    div.style.padding = "8px";
+                    div.style.margin = "4px 0";
+                    div.style.border = "1px solid #999";
+
+                    if (zaznacz) {
+                        div.style.backgroundColor = "#fff3b0";
+                        div.style.border = "2px solid orange";
+                    }
+
+                    return div;
+                }
+
+                function aktualizuj() {
+
+                    while (podgl.firstChild) {
+                        podgl.removeChild(podgl.firstChild);
+                    }
+
+                    if (sel.value === "has") {
+
+                        kod.textContent = 'div:has(img)';
+
+                        var d1 = box("Div bez obrazka", false);
+
+                        var d2 = box("Div zawierający obrazek", true);
+
+                        var img = document.createElement("img");
+                        img.src = "../img/html.png";
+                        img.alt = "HTML";
+                        img.style.display = "block";
+                        img.style.marginTop = "8px";
+
+                        d2.appendChild(img);
+
+                        podgl.appendChild(d1);
+                        podgl.appendChild(d2);
+
+                    }
+                    else if (sel.value === "checked") {
+
+                        kod.textContent = 'input:checked';
+
+                        var p = document.createElement("p");
+                        p.textContent = "Zaznaczone pola zostały wybrane przez selektor.";
+
+                        var c1 = document.createElement("input");
+                        c1.type = "checkbox";
+                        c1.checked = true;
+
+                        var l1 = document.createElement("span");
+                        l1.textContent = " Checkbox zaznaczony";
+
+                        var br1 = document.createElement("br");
+
+                        var c2 = document.createElement("input");
+                        c2.type = "checkbox";
+
+                        var l2 = document.createElement("span");
+                        l2.textContent = " Checkbox niezaznaczony";
+
+                        c1.style.outline = "2px solid orange";
+
+                        podgl.appendChild(p);
+                        podgl.appendChild(c1);
+                        podgl.appendChild(l1);
+                        podgl.appendChild(br1);
+                        podgl.appendChild(c2);
+                        podgl.appendChild(l2);
+
+                    }
+                    else if (sel.value === "disabled") {
+
+                        kod.textContent = 'input:disabled';
+
+                        var p = document.createElement("p");
+                        p.textContent = "Wybrane zostały wyłączone pola formularza.";
+
+                        var i1 = document.createElement("input");
+                        i1.value = "Aktywne pole";
+
+                        var br = document.createElement("br");
+
+                        var i2 = document.createElement("input");
+                        i2.value = "Wyłączone pole";
+                        i2.disabled = true;
+                        i2.style.border = "2px solid orange";
+
+                        podgl.appendChild(p);
+                        podgl.appendChild(i1);
+                        podgl.appendChild(br);
+                        podgl.appendChild(i2);
+
+                    }
+                    else if (sel.value === "required") {
+
+                        kod.textContent = 'input:required';
+
+                        var p = document.createElement("p");
+                        p.textContent = "Wybrane zostały pola wymagane.";
+
+                        var i1 = document.createElement("input");
+                        i1.placeholder = "Pole opcjonalne";
+
+                        var br = document.createElement("br");
+
+                        var i2 = document.createElement("input");
+                        i2.placeholder = "Pole wymagane";
+                        i2.required = true;
+                        i2.style.border = "2px solid orange";
+
+                        podgl.appendChild(p);
+                        podgl.appendChild(i1);
+                        podgl.appendChild(br);
+                        podgl.appendChild(i2);
+
+                    }
+                    else {
+
+                        kod.textContent = 'div:not(.premium)';
+
+                        var d1 = box("Konto standard", true);
+
+                        var d2 = box("Konto premium", false);
+
+                        var d3 = box("Konto standard", true);
+
+                        podgl.appendChild(d1);
+                        podgl.appendChild(d2);
+                        podgl.appendChild(d3);
+
+                    }
+
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

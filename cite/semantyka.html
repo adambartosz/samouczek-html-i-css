@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Semantyka HTML5</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to jest semantyka HTML5?</h2>
+
+        <p>Semantyka HTML5 to sposób pisania kodu HTML, w którym używa się znaczników nadających znaczenie treści, a nie
+            tylko jej wygląd.</p>
+
+        <p>Chodzi o to, żeby przeglądarka, Google i czytniki ekranu rozumiały co jest nagłówkiem, menu, artykułem czy
+            stopką.</p>
+
+        <p>Dzięki temu strona jest bardziej uporządkowana i łatwiejsza do zrozumienia.</p>
+    </section>
+
+    <section>
+        <h2>Dlaczego semantyka jest ważna?</h2>
+
+        <p>Semantyczne znaczniki pomagają w organizacji kodu i poprawiają dostępność strony.</p>
+
+        <ul>
+            <li>lepsze SEO (strona lepiej widoczna w Google)</li>
+            <li>łatwiejszy kod do czytania</li>
+            <li>lepsza obsługa czytników ekranu</li>
+            <li>łatwiejsze utrzymanie projektu</li>
+            <li>mniej divów „do wszystkiego”</li>
+        </ul>
+
+        <p>Bez semantyki kod szybko robi się chaotyczny.</p>
+    </section>
+
+    <section>
+        <h2>Przykłady znaczników semantycznych</h2>
+
+        <table>
+            <tr>
+                <th>Znacznik</th>
+                <th>Znaczenie</th>
+            </tr>
+
+            <tr>
+                <td>&lt;header&gt;</td>
+                <td>nagłówek strony lub sekcji</td>
+            </tr>
+
+            <tr>
+                <td>&lt;nav&gt;</td>
+                <td>nawigacja / menu</td>
+            </tr>
+
+            <tr>
+                <td>&lt;main&gt;</td>
+                <td>główna treść strony</td>
+            </tr>
+
+            <tr>
+                <td>&lt;section&gt;</td>
+                <td>sekcja tematyczna</td>
+            </tr>
+
+            <tr>
+                <td>&lt;article&gt;</td>
+                <td>samodzielny artykuł</td>
+            </tr>
+
+            <tr>
+                <td>&lt;aside&gt;</td>
+                <td>treść poboczna</td>
+            </tr>
+
+            <tr>
+                <td>&lt;footer&gt;</td>
+                <td>stopka strony</td>
+            </tr>
+
+        </table>
+    </section>
+
+    <section>
+        <h2>Semantyka a div i span</h2>
+
+        <p>Znaczniki <code>&lt;div&gt;</code> i <code>&lt;span&gt;</code> nie mają znaczenia semantycznego.</p>
+
+        <p>Są tylko pojemnikami do układu i stylowania.</p>
+
+        <p>Jeśli używasz tylko <code>div</code>, to przeglądarka nie wie co jest czym na stronie.</p>
+
+        <p>Dlatego HTML5 wprowadził znaczniki semantyczne, żeby kod był bardziej logiczny.</p>
+    </section>
+
+    <section>
+        <h2>Jak wygląda dobrze zbudowana strona?</h2>
+
+        <pre><code>&lt;header&gt;Logo i menu&lt;/header&gt;<br>
+&lt;nav&gt;Linki&lt;/nav&gt;<br>
+&lt;main&gt;<br>
+    &lt;article&gt;Treść artykułu&lt;/article&gt;<br>
+&lt;/main&gt;<br>
+&lt;footer&gt;Stopka&lt;/footer&gt;</code></pre>
+
+        <p>Taki układ jest czytelny zarówno dla człowieka, jak i dla przeglądarki.</p>
+    </section>
+
+    <section>
+        <h2>Najczęstsze błędy</h2>
+
+        <ul>
+            <li>używanie tylko divów do całej strony</li>
+            <li>brak nagłówków h1-h6</li>
+            <li>brak podziału na sekcje</li>
+            <li>nieużywanie nav dla menu</li>
+            <li>brak main dla głównej treści</li>
+        </ul>
+
+        <p>To powoduje, że strona jest trudna do zrozumienia dla robotów i użytkowników.</p>
+    </section>
+
+    <section>
+        <h2>Podsumowanie</h2>
+
+        <p>Semantyka HTML5 to nie wygląd, tylko znaczenie elementów.</p>
+
+        <p>Dobrze napisany HTML powinien mówić sam za siebie, bez patrzenia na CSS.</p>
+
+        <p>Im bardziej semantyczny kod, tym lepsza jakość strony.</p>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

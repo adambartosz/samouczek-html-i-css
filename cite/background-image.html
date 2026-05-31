@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>background-image</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="wlasciwosc">
+
+    <section>
+        <p>Właściwość <strong>background-image</strong> służy do ustawiania obrazka jako tła elementu w CSS. Dzięki niej
+            można zrobić tło strony albo konkretnego bloku.</p>
+
+        <p>Obrazek jest wyświetlany „pod” treścią elementu, a nie zamiast niej.</p>
+
+        <p>Najczęściej używa się plików JPG i PNG.</p>
+    </section>
+
+    <section>
+        <p>Składnia: <code>background-image: url("ścieżka");</code></p>
+
+        <table>
+            <tr>
+                <th>Wartość</th>
+                <th>Co robi</th>
+            </tr>
+
+            <tr>
+                <td>url("plik.jpg")</td>
+                <td>wstawia obrazek jako tło</td>
+            </tr>
+
+            <tr>
+                <td>none</td>
+                <td>brak tła obrazkowego</td>
+            </tr>
+
+            <tr>
+                <td>inherit</td>
+                <td>dziedziczy tło od rodzica</td>
+            </tr>
+
+            <tr>
+                <td>initial</td>
+                <td>usuwa tło (ustawia domyślne)</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Domyślnie <code>background-image</code> ma wartość <code>none</code>, czyli brak obrazka.</p>
+
+        <p>Jeśli nie ustawimy tej właściwości, element ma tylko zwykłe tło kolorowe lub przezroczyste.</p>
+
+        <p><code>inherit</code> powoduje przejęcie tła od rodzica, a <code>initial</code> je resetuje.</p>
+    </section>
+
+    <section>
+        <p>Ta właściwość nie zmienia rozmiaru elementu – tylko jego tło.</p>
+
+        <p>Obrazek może się powtarzać domyślnie, jeśli nie ustawimy <code>background-repeat</code>.</p>
+
+        <pre><code>div {
+    background-image: url("img/tlo.jpg");
+}</code></pre>
+
+        <p>Można też ustawić brak powtarzania:</p>
+
+        <pre><code>div {
+    background-image: url("img/tlo.jpg");
+    background-repeat: no-repeat;
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Przykłady użycia:</p>
+
+        <pre><code>body {
+    background-image: url("img/tlo.jpg");
+}</code></pre>
+
+        <pre><code>.box {
+    background-image: url("img/kot.png");
+}</code></pre>
+
+        <pre><code>header {
+    background-image: url("img/banner.jpg");
+}</code></pre>
+
+        <p>Najczęściej tło ustawia się na całej stronie albo w nagłówku.</p>
+    </section>
+
+    <section>
+        <p>Symulator: wybierz obrazek tła i zobacz efekt na elemencie.</p>
+
+        <div class="sim-controls">
+            <label>
+                Tło:
+                <select id="sim-bgimg">
+                    <option value="none">brak</option>
+                    <option value="../img/tlo1.jpg">tło 1</option>
+                    <option value="../img/tlo2.jpg">tło 2</option>
+                    <option value="../img/tlo3.jpg">tło 3</option>
+                    <option value="../img/tlo4.jpg">tło 4</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var sel = document.getElementById("sim-bgimg");
+                var kod = document.getElementById("sim-kod");
+                var pod = document.getElementById("sim-podglad");
+
+                function update() {
+                    var val = sel.value;
+
+                    kod.textContent = "background-image: url(\"" + val + "\");";
+
+                    while (pod.firstChild) {
+                        pod.removeChild(pod.firstChild);
+                    }
+
+                    var box = document.createElement("div");
+                    box.textContent = "BOX";
+                    box.style.cssText =
+                        "width:200px;height:120px;border:2px solid black;display:flex;align-items:center;justify-content:center;" +
+                        "background-image:url('" + val + "');background-size:cover;background-position:center;";
+
+                    if (val === "none") {
+                        box.style.backgroundImage = "none";
+                    }
+
+                    pod.appendChild(box);
+                }
+
+                sel.addEventListener("change", update);
+                update();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

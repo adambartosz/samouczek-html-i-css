@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>del</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;del&gt;</strong> oznacza tekst usunięty. Najczęściej używa się go do pokazania zmian w
+            treści.</p>
+        <p>Jest liniowy i działa w środku zdania.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy:</p>
+        <ul>
+            <li>coś zostało usunięte</li>
+            <li>pokazujemy poprawki</li>
+            <li>robimy wersje zmian tekstu</li>
+        </ul>
+        <p>Może być używany razem z <code>&lt;ins&gt;</code>.</p>
+    </section>
+
+    <section></section>
+
+    <section>
+        <p><code>&lt;del&gt;</code> pokazuje usuniętą treść.</p>
+        <p>Czytniki mogą pomijać taki tekst.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Liniowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Usunięta treść</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst i elementy liniowe</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Elementów blokowych i liniowych</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W symulatorze zobaczysz tekst przekreślony.</p>
+
+        <div class="sim-controls">
+            <label>
+                Tryb:
+                <select id="sim-del-mode">
+                    <option value="off">normalny</option>
+                    <option value="del">del</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-del"></pre>
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-del"></div>
+        </div>
+
+        <script>
+            (function () {
+
+                var mode = document.getElementById("sim-del-mode");
+                var kod = document.getElementById("sim-kod-del");
+                var podglad = document.getElementById("sim-podglad-del");
+
+                var tekst = "Ten tekst został przekreślony";
+
+                function aktualizuj() {
+
+                    podglad.innerHTML = "";
+
+                    var p = document.createElement("p");
+
+                    if (mode.value === "del") {
+                        p.innerHTML = "Ten tekst został <del>przekreślony</del>";
+                        kod.textContent = "<p>Ten tekst został <del>przekreślony</del></p>";
+                    } else {
+                        p.textContent = tekst;
+                        kod.textContent = "<p>" + tekst + "</p>";
+                    }
+
+                    podglad.appendChild(p);
+
+                }
+
+                mode.addEventListener("change", aktualizuj);
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

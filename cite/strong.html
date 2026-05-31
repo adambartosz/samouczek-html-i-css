@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>strong</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .sim-preview strong {
+            all: revert;
+            font-weight: revert;
+            font-size: revert;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;strong&gt;</strong> służy do wyróżniania bardzo ważnej treści w tekście. Przeglądarka
+            traktuje go jako coś istotnego, a nie tylko pogrubienie wizualne.</p>
+        <p>Jest elementem <strong>liniowym</strong>, więc nie łamie linii i działa wewnątrz akapitów.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>podkreślić ważne słowo w zdaniu</li>
+            <li>zaznaczyć kluczową informację</li>
+            <li>wyróżnić ostrzeżenie w tekście</li>
+            <li>poprawić dostępność strony</li>
+        </ul>
+        <p>Do samego wyglądu (bez znaczenia) lepiej użyć <code>&lt;b&gt;</code>.</p>
+    </section>
+
+    <section>
+
+    </section>
+
+    <section>
+        <p>Znacznik <code>&lt;strong&gt;</code> ma znaczenie semantyczne. Informuje, że dana treść jest ważna.</p>
+        <p>Czytniki ekranów mogą ją dodatkowo podkreślać lub zmieniać intonację podczas czytania.</p>
+        <p>Google traktuje takie fragmenty jako bardziej istotne w kontekście strony.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Liniowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Silne wyróżnienie tekstu</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst i elementy liniowe</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Elementów blokowych i liniowych</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz sprawdzić jak działa <code>strong</code>. Wyróżnia on tylko fragment tekstu, a nie
+            cały akapit.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Tryb wyróżnienia:
+                <select id="sim-strong-mode">
+                    <option value="off">bez wyróżnienia</option>
+                    <option value="strong">strong</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-strong"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-strong"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var mode = document.getElementById("sim-strong-mode");
+                var kod = document.getElementById("sim-kod-strong");
+                var podglad = document.getElementById("sim-podglad-strong");
+
+                var tekst = 'Uwaga: to jest bardzo ważna informacja w treści strony';
+
+                function aktualizuj() {
+
+                    podglad.innerHTML = "";
+
+                    var p = document.createElement("p");
+
+                    if (mode.value === "strong") {
+
+                        p.innerHTML = "<strong>Uwaga</strong>: to jest bardzo ważna informacja w treści strony";
+                        kod.textContent = "<p><strong>Uwaga</strong>: to jest bardzo ważna informacja w treści strony</p>";
+
+                    } else {
+
+                        p.textContent = tekst;
+                        kod.textContent = "<p>" + tekst + "</p>";
+
+                    }
+
+                    podglad.appendChild(p);
+
+                }
+
+                mode.addEventListener("change", aktualizuj);
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

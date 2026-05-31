@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>dl</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;dl&gt;</strong> to lista definicji. Służy do opisywania pojęć i ich wyjaśnień.</p>
+        <p>Jest elementem blokowym i zawsze zawiera w sobie pary <code>&lt;dt&gt;</code> oraz <code>&lt;dd&gt;</code>.
+        </p>
+    </section>
+
+    <section>
+        <p>Używamy <strong>&lt;dl&gt;</strong> kiedy chcemy:</p>
+        <ul>
+            <li>tworzyć słowniki pojęć</li>
+            <li>opisywać terminy i ich definicje</li>
+            <li>prezentować pary nazwa–opis</li>
+        </ul>
+        <p>Wewnątrz zawsze używa się <code>&lt;dt&gt;</code> (termin) oraz <code>&lt;dd&gt;</code> (opis).</p>
+    </section>
+
+
+    <section>
+    </section>
+
+    <section>
+        <p>Znaczenie semantyczne <code>&lt;dl&gt;</code> informuje przeglądarkę i czytniki ekranu, że mamy do czynienia
+            z listą definicji. Pomaga to w logicznym grupowaniu pojęć i ich opisów.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Lista definicji</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>dt, dd</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>body, section, article</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>block</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz zobaczyć jak działa <code>&lt;dl&gt;</code> oraz różnica między
+            <code>&lt;dt&gt;</code> i <code>&lt;dd&gt;</code>.
+        </p>
+
+        <div class="sim-controls">
+
+            <label>
+                Wybierz układ:
+                <select id="sim-dl">
+                    <option value="normal">normalny</option>
+                    <option value="compact">zwarty</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-dl"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-dl"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var sel = document.getElementById("sim-dl");
+                var kod = document.getElementById("sim-kod-dl");
+                var podgl = document.getElementById("sim-podglad-dl");
+
+                function aktualizuj() {
+
+                    var mode = sel.value;
+
+                    var data = [
+                        { t: "HTML", d: "Język znaczników do tworzenia stron internetowych" },
+                        { t: "CSS", d: "Język stylów do wyglądu strony" },
+                        { t: "JS", d: "Język programowania do interakcji" }
+                    ];
+
+                    kod.textContent =
+                        "<dl>\n" +
+                        "  <dt>HTML</dt>\n" +
+                        "  <dd>Język znaczników</dd>\n" +
+                        "  <dt>CSS</dt>\n" +
+                        "  <dd>Język stylów</dd>\n" +
+                        "</dl>";
+
+                    podgl.innerHTML = "";
+
+                    var dl = document.createElement("dl");
+
+                    if (mode === "compact") {
+                        dl.style.margin = "0";
+                        dl.style.lineHeight = "1.2";
+                    }
+
+                    for (var i = 0; i < data.length; i++) {
+
+                        var dt = document.createElement("dt");
+                        dt.textContent = data[i].t;
+
+                        var dd = document.createElement("dd");
+                        dd.textContent = data[i].d;
+
+                        dl.appendChild(dt);
+                        dl.appendChild(dd);
+                    }
+
+                    podgl.appendChild(dl);
+
+                }
+
+                sel.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

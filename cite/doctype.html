@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>DOCTYPE</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to jest DOCTYPE?</h2>
+        <p><strong>DOCTYPE</strong> (Document Type Declaration) to deklaracja umieszczana na samym początku dokumentu
+            HTML. Informuje przeglądarkę, jakiego standardu HTML używa dana strona.</p>
+
+        <p>Nie jest to zwykły znacznik HTML. Nie posiada znacznika zamykającego i nie wyświetla żadnej treści na
+            stronie.</p>
+
+        <p>Współcześnie praktycznie wszystkie strony internetowe korzystają z deklaracji HTML5:</p>
+
+        <pre><code>&lt;!DOCTYPE html&gt;</code></pre>
+
+        <p>Deklaracja ta powinna znajdować się jako pierwszy element dokumentu, jeszcze przed znacznikiem
+            <code>&lt;html&gt;</code>.
+        </p>
+    </section>
+
+    <section>
+        <h2>Po co używa się DOCTYPE?</h2>
+
+        <p>Głównym zadaniem DOCTYPE jest poinformowanie przeglądarki, że kod powinien być interpretowany zgodnie z
+            określonym standardem.</p>
+
+        <ul>
+            <li>włącza standardowy tryb renderowania strony</li>
+            <li>zapobiega przejściu przeglądarki w tryb zgodności ze starymi stronami</li>
+            <li>pomaga poprawnie interpretować HTML i CSS</li>
+            <li>zwiększa zgodność między różnymi przeglądarkami</li>
+            <li>jest wymagany przez walidatory HTML</li>
+            <li>ułatwia tworzenie nowoczesnych stron internetowych</li>
+        </ul>
+
+        <p>Brak deklaracji może powodować nieprzewidywalne zachowanie układu strony.</p>
+
+    </section>
+
+    <section>
+        <h2>Gdzie umieszcza się DOCTYPE?</h2>
+
+        <p>Poprawna struktura dokumentu HTML wygląda następująco:</p>
+
+        <pre><code>&lt;!DOCTYPE html&gt;<br>
+&lt;html lang="pl"&gt;<br>
+&lt;head&gt;<br>
+    &lt;meta charset="utf-8"&gt;<br>
+    &lt;title&gt;Moja strona&lt;/title&gt;<br>
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+    Treść strony<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;</code></pre>
+
+        <p>DOCTYPE zawsze znajduje się na pierwszej linii pliku HTML.</p>
+
+        <p>Nie należy umieszczać przed nim:</p>
+
+        <ul>
+            <li>spacji</li>
+            <li>komentarzy HTML</li>
+            <li>znaczników HTML</li>
+            <li>skryptów JavaScript</li>
+            <li>deklaracji CSS</li>
+        </ul>
+
+    </section>
+
+    <section>
+        <h2>Tryb standardowy i tryb zgodności</h2>
+
+        <p>Przeglądarki mogą interpretować stronę na dwa sposoby:</p>
+
+        <table>
+            <tr>
+                <th>Tryb</th>
+                <th>Opis</th>
+            </tr>
+
+            <tr>
+                <td>Standards Mode</td>
+                <td>Przeglądarka stosuje aktualne standardy HTML i CSS.</td>
+            </tr>
+
+            <tr>
+                <td>Quirks Mode</td>
+                <td>Przeglądarka próbuje zachowywać się jak bardzo stare wersje programów do przeglądania stron.</td>
+            </tr>
+
+        </table>
+
+        <p>Nowoczesny DOCTYPE HTML5 powoduje uruchomienie trybu standardowego.</p>
+
+        <p>Dzięki temu układ strony działa przewidywalnie w różnych przeglądarkach.</p>
+
+    </section>
+
+    <section>
+        <h2>Starsze deklaracje DOCTYPE</h2>
+
+        <p>Przed pojawieniem się HTML5 deklaracje były znacznie bardziej rozbudowane.</p>
+
+        <p>Przykład HTML 4.01 Transitional:</p>
+
+        <pre><code>&lt;!DOCTYPE HTML PUBLIC
+"-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd"&gt;</code></pre>
+
+        <p>Przykład XHTML 1.0 Strict:</p>
+
+        <pre><code>&lt;!DOCTYPE html PUBLIC
+"-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</code></pre>
+
+        <p>HTML5 znacząco uprościł zapis:</p>
+
+        <pre><code>&lt;!DOCTYPE html&gt;</code></pre>
+
+        <p>Dzięki temu kod jest krótszy, czytelniejszy i łatwiejszy do zapamiętania.</p>
+
+    </section>
+
+    <section>
+        <h2>Interaktywny symulator</h2>
+
+        <p>Wybierz wersję deklaracji i zobacz jej zapis.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Wersja:
+                <select id="sim-doctype">
+                    <option value="html5">HTML5</option>
+                    <option value="html4">HTML 4.01 Transitional</option>
+                    <option value="xhtml">XHTML 1.0 Strict</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod:</div>
+            <pre id="sim-kod-doctype"></pre>
+
+            <div class="sim-preview-label">Opis:</div>
+            <div class="sim-preview" id="sim-podglad-doctype"></div>
+
+        </div>
+
+        <script>
+            (function () {
+                var sel = document.getElementById("sim-doctype");
+                var kod = document.getElementById("sim-kod-doctype");
+                var podglad = document.getElementById("sim-podglad-doctype");
+
+                function aktualizuj() {
+
+                    var dane = {
+                        html5: {
+                            kod: "<!DOCTYPE html>",
+                            opis: "Nowoczesna deklaracja używana przez współczesne strony internetowe."
+                        },
+                        html4: {
+                            kod: '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">',
+                            opis: "Starsza deklaracja używana przed HTML5."
+                        },
+                        xhtml: {
+                            kod: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
+                            opis: "Deklaracja stosowana w XHTML."
+                        }
+                    };
+
+                    kod.textContent = dane[sel.value].kod;
+
+                    podglad.innerHTML = "";
+
+                    var p = document.createElement("p");
+                    p.textContent = dane[sel.value].opis;
+
+                    podglad.appendChild(p);
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

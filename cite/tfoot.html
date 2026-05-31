@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>tfoot</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;tfoot&gt;</strong> grupuje wiersze stopki tabeli - zazwyczaj to podsumowania, sumy,
+            średnie lub inne informacje podsumowujące dane z <code>&lt;tbody&gt;</code>.</p>
+        <p>Jest elementem <strong>blokowym</strong> na poziomie tabeli. W kodzie HTML piszemy go po
+            <code>&lt;tbody&gt;</code>, ale przeglądarka i tak wyrenderuje go na dole tabeli - pod danymi.
+        </p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>pokazać sumę, średnią lub inne podsumowanie kolumn tabeli</li>
+            <li>wyraźnie oddzielić wiersz podsumowujący od danych - czytelniejszy kod i lepsza semantyka</li>
+            <li>stylować stopkę osobno przez CSS: <code>tfoot { font-weight: bold; background: #f0f0f0; }</code></li>
+            <li>przy drukowaniu - podobnie jak <code>&lt;thead&gt;</code>, <code>&lt;tfoot&gt;</code> może być
+                powtarzany na dole każdej strony wydruku (zależy od przeglądarki)</li>
+            <li>w tabelach finansowych, raportach, fakturach - wszędzie gdzie tabela ma mieć wyraźną linię podsumowania
+            </li>
+        </ul>
+        <p>Jeśli tabela nie ma żadnego podsumowania - nie używaj <code>&lt;tfoot&gt;</code> na siłę. To nie jest wymóg,
+            tylko opcja.</p>
+    </section>
+
+    <section>
+    </section>
+
+    <section>
+        <p><code>&lt;tfoot&gt;</code> informuje przeglądarkę i czytniki ekranu, że dany wiersz to podsumowanie tabeli, a
+            nie kolejny wiersz danych. Czytnik ekranu może odczytać go jako "stopka tabeli" i zapowiadać użytkownikowi
+            że to wartości podsumowujące.</p>
+        <p>Ciekawostka historyczna: w starym HTML4 <code>&lt;tfoot&gt;</code> musiał być umieszczony w kodzie
+            <strong>przed</strong> <code>&lt;tbody&gt;</code> - przeglądarka musiała go znać zanim pobierze wszystkie
+            dane, żeby móc wydrukować stopkę zanim dotrą wszystkie wiersze (przy wolnym internecie miało to sens). W
+            HTML5 ta zasada już nie obowiązuje - piszemy go po <code>&lt;tbody&gt;</code> i to jest teraz poprawna
+            kolejność.
+        </p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy (poziom tabeli)</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Sekcja stopki tabeli - wiersze podsumowujące dane</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>tylko <code>&lt;tr&gt;</code></td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td><code>&lt;table&gt;</code> - po <code>&lt;tbody&gt;</code>; tylko jeden na tabelę</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>table-footer-group</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Sprawdź jak działa <code>&lt;tfoot&gt;</code> w tabeli z sumami. Zmień co ma być w stopce i jak jest
+            ostylowana.</p>
+
+        <div class="sim-controls">
+            <label>Zawartość tfoot:
+                <select id="sim-zawartosc">
+                    <option value="suma" selected>suma kolumny</option>
+                    <option value="srednia">średnia kolumny</option>
+                    <option value="liczba">liczba wierszy</option>
+                    <option value="brak">brak tfoot</option>
+                </select>
+            </label>
+            <label>Styl tfoot:
+                <select id="sim-styl">
+                    <option value="brak" selected>brak stylowania</option>
+                    <option value="pogrubiony">pogrubiony tekst</option>
+                    <option value="kolor">kolorowe tło</option>
+                    <option value="linia">gruba linia górna</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod"></pre>
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad" style="overflow:auto;"></div>
+        </div>
+
+        <script>
+            (function () {
+                var zawSel = document.getElementById("sim-zawartosc");
+                var stylSel = document.getElementById("sim-styl");
+                var kod = document.getElementById("sim-kod");
+                var podglad = document.getElementById("sim-podglad");
+
+                var dane = [
+                    ["Klawiatura", "150"],
+                    ["Mysz", "80"],
+                    ["Monitor", "900"],
+                    ["Kabel HDMI", "25"]
+                ];
+
+                function liczSume() {
+                    return dane.reduce(function (s, w) { return s + parseInt(w[1]); }, 0);
+                }
+                function liczSrednia() {
+                    return Math.round(liczSume() / dane.length);
+                }
+
+                function stopkaLabel(zaw) {
+                    if (zaw === "suma") return ["Suma:", liczSume() + " zł"];
+                    if (zaw === "srednia") return ["Średnia:", liczSrednia() + " zł"];
+                    if (zaw === "liczba") return ["Liczba produktów:", dane.length + " szt."];
+                    return null;
+                }
+
+                function tfootDOMStyle(styl) {
+                    if (styl === "pogrubiony") return "font-weight:bold;";
+                    if (styl === "kolor") return "background:#ede9fe; font-weight:bold;";
+                    if (styl === "linia") return "border-top:3px solid #7c3aed; font-weight:bold;";
+                    return "";
+                }
+
+                function aktualizuj() {
+                    var zaw = zawSel.value;
+                    var styl = stylSel.value;
+                    var info = stopkaLabel(zaw);
+
+                    var linie = [];
+                    linie.push("&lt;table&gt;");
+                    linie.push("  &lt;thead&gt;");
+                    linie.push("    &lt;tr&gt;&lt;th&gt;Produkt&lt;/th&gt;&lt;th&gt;Cena&lt;/th&gt;&lt;/tr&gt;");
+                    linie.push("  &lt;/thead&gt;");
+                    linie.push("  &lt;tbody&gt;");
+                    dane.forEach(function (w) {
+                        linie.push("    &lt;tr&gt;&lt;td&gt;" + w[0] + "&lt;/td&gt;&lt;td&gt;" + w[1] + " zł&lt;/td&gt;&lt;/tr&gt;");
+                    });
+                    linie.push("  &lt;/tbody&gt;");
+                    if (info) {
+                        linie.push("  &lt;tfoot&gt;");
+                        linie.push("    &lt;tr&gt;");
+                        linie.push("      &lt;td&gt;" + info[0] + "&lt;/td&gt;");
+                        linie.push("      &lt;td&gt;" + info[1] + "&lt;/td&gt;");
+                        linie.push("    &lt;/tr&gt;");
+                        linie.push("  &lt;/tfoot&gt;");
+                    }
+                    linie.push("&lt;/table&gt;");
+                    kod.innerHTML = linie.join("\n");
+
+                    podglad.innerHTML = "";
+                    var tbl = document.createElement("table");
+                    tbl.style.cssText = "border-collapse:collapse; width:100%;";
+
+                    var thead = document.createElement("thead");
+                    var trH = document.createElement("tr");
+                    ["Produkt", "Cena"].forEach(function (k) {
+                        var th = document.createElement("th");
+                        th.textContent = k;
+                        th.style.cssText = "border:2px solid #7c3aed; padding:8px 14px; background:#7c3aed; color:#fff;";
+                        trH.appendChild(th);
+                    });
+                    thead.appendChild(trH);
+                    tbl.appendChild(thead);
+
+                    var tbody = document.createElement("tbody");
+                    dane.forEach(function (w) {
+                        var tr = document.createElement("tr");
+                        [w[0], w[1] + " zł"].forEach(function (d) {
+                            var td = document.createElement("td");
+                            td.textContent = d;
+                            td.style.cssText = "border:1px solid #ccc; padding:8px 14px;";
+                            tr.appendChild(td);
+                        });
+                        tbody.appendChild(tr);
+                    });
+                    tbl.appendChild(tbody);
+
+                    if (info) {
+                        var tfoot = document.createElement("tfoot");
+                        var trF = document.createElement("tr");
+                        var tfStyle = tfootDOMStyle(styl);
+                        [info[0], info[1]].forEach(function (d, i) {
+                            var td = document.createElement("td");
+                            td.textContent = d;
+                            td.style.cssText = "border:1px solid #ccc; padding:8px 14px; " + tfStyle +
+                                (styl === "linia" && i === 0 ? " border-top:3px solid #7c3aed;" : "");
+                            trF.appendChild(td);
+                        });
+                        tfoot.appendChild(trF);
+                        tbl.appendChild(tfoot);
+                    }
+
+                    podglad.appendChild(tbl);
+
+                    var opis = document.createElement("p");
+                    opis.style.cssText = "margin-top:8px; font-size:0.82em; color:#666;";
+                    opis.textContent = info
+                        ? "Stopka zawiera: " + info[0] + " " + info[1] + ". Przeglądarka renderuje <tfoot> zawsze na dole tabeli niezależnie od miejsca w kodzie."
+                        : "Tabela bez <tfoot> - brak wiersza podsumowującego.";
+                    podglad.appendChild(opis);
+                }
+
+                zawSel.addEventListener("change", aktualizuj);
+                stylSel.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

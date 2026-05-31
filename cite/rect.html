@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>rect</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;rect&gt;</strong> służy do rysowania prostokątów i kwadratów w grafice SVG. Jest jednym
+            z najczęściej używanych elementów SVG podczas tworzenia ikon, diagramów i ilustracji.</p>
+        <p>Nie działa samodzielnie w zwykłym HTML i musi znajdować się wewnątrz znacznika <code>&lt;svg&gt;</code>.
+            Położenie oraz rozmiar prostokąta określa się za pomocą odpowiednich atrybutów.</p>
+        <p>Zaokrąglone rogi można uzyskać bez używania CSS, korzystając z dedykowanych atrybutów SVG.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>narysować prostokąt lub kwadrat</li>
+            <li>tworzyć przyciski i panele SVG</li>
+            <li>budować wykresy słupkowe</li>
+            <li>rysować tła elementów graficznych</li>
+            <li>tworzyć ramki i obramowania</li>
+            <li>projektować interfejsy użytkownika w SVG</li>
+            <li>przygotowywać animacje prostokątnych obiektów</li>
+        </ul>
+        <p>Jeżeli potrzebne jest koło, lepiej użyć <code>&lt;circle&gt;</code>. Jeżeli potrzebny jest wielokąt, można
+            użyć <code>&lt;polygon&gt;</code>.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>x</td>
+                <td>liczba lub jednostka długości</td>
+                <td>Położenie lewego górnego rogu w osi X</td>
+            </tr>
+            <tr>
+                <td>y</td>
+                <td>liczba lub jednostka długości</td>
+                <td>Położenie lewego górnego rogu w osi Y</td>
+            </tr>
+            <tr>
+                <td>width</td>
+                <td>liczba lub jednostka długości</td>
+                <td>Określa szerokość prostokąta</td>
+            </tr>
+            <tr>
+                <td>height</td>
+                <td>liczba lub jednostka długości</td>
+                <td>Określa wysokość prostokąta</td>
+            </tr>
+            <tr>
+                <td>rx</td>
+                <td>liczba lub jednostka długości</td>
+                <td>Poziomy promień zaokrąglenia rogów</td>
+            </tr>
+            <tr>
+                <td>ry</td>
+                <td>liczba lub jednostka długości</td>
+                <td>Pionowy promień zaokrąglenia rogów</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;rect&gt;</strong> ma znaczenie semantyczne wewnątrz dokumentu SVG. Informuje
+            przeglądarkę, że należy narysować prostokąt o określonym położeniu i wymiarach.</p>
+        <p>Nie jest znacznikiem semantycznym strony internetowej jak <code>&lt;main&gt;</code> czy
+            <code>&lt;article&gt;</code>, ale posiada konkretne znaczenie graficzne w SVG.
+        </p>
+        <p>Narzędzia analizujące grafikę SVG wiedzą dzięki temu, że dany element jest prostokątem, a nie dowolnym
+            kształtem.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Pusty</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Nie (niekontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Figura SVG reprezentująca prostokąt</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Żadnych elementów</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>svg, g, symbol, marker, pattern, mask, clipPath i innych kontenerów SVG</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze można przetestować wszystkie najważniejsze atrybuty znacznika <code>&lt;rect&gt;</code>.
+            Zmiany są od razu widoczne w wygenerowanym kodzie oraz w podglądzie SVG.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                x:
+                <select id="sim-x-rect">
+                    <option value="10">10</option>
+                    <option value="30" selected>30</option>
+                    <option value="50">50</option>
+                    <option value="70">70</option>
+                </select>
+            </label>
+
+            <label>
+                y:
+                <select id="sim-y-rect">
+                    <option value="10">10</option>
+                    <option value="30" selected>30</option>
+                    <option value="50">50</option>
+                    <option value="70">70</option>
+                </select>
+            </label>
+
+            <label>
+                width:
+                <select id="sim-width-rect">
+                    <option value="50">50</option>
+                    <option value="100" selected>100</option>
+                    <option value="140">140</option>
+                    <option value="180">180</option>
+                </select>
+            </label>
+
+            <label>
+                height:
+                <select id="sim-height-rect">
+                    <option value="40">40</option>
+                    <option value="80" selected>80</option>
+                    <option value="120">120</option>
+                    <option value="160">160</option>
+                </select>
+            </label>
+
+            <label>
+                rx:
+                <select id="sim-rx-rect">
+                    <option value="0">0</option>
+                    <option value="10" selected>10</option>
+                    <option value="20">20</option>
+                    <option value="40">40</option>
+                </select>
+            </label>
+
+            <label>
+                ry:
+                <select id="sim-ry-rect">
+                    <option value="0">0</option>
+                    <option value="10" selected>10</option>
+                    <option value="20">20</option>
+                    <option value="40">40</option>
+                </select>
+            </label>
+
+
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-rect"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-rect"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var x = document.getElementById("sim-x-rect");
+                var y = document.getElementById("sim-y-rect");
+                var width = document.getElementById("sim-width-rect");
+                var height = document.getElementById("sim-height-rect");
+                var rx = document.getElementById("sim-rx-rect");
+                var ry = document.getElementById("sim-ry-rect");
+                var pathLength = document.getElementById("sim-pathlength-rect");
+
+                var kod = document.getElementById("sim-kod-rect");
+                var podglad = document.getElementById("sim-podglad-rect");
+
+                function aktualizuj() {
+
+                    kod.textContent =
+                        '<svg width="250" height="250">\n' +
+                        '    <rect x="' + x.value +
+                        '" y="' + y.value +
+                        '" width="' + width.value +
+                        '" height="' + height.value +
+                        '" rx="' + rx.value +
+                        '" ry="' + ry.value +
+                        '"/>\n' +
+                        '</svg>';
+
+                    podglad.innerHTML = "";
+
+                    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                    svg.setAttribute("width", "250");
+                    svg.setAttribute("height", "250");
+
+                    var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+
+                    rect.setAttribute("x", x.value);
+                    rect.setAttribute("y", y.value);
+                    rect.setAttribute("width", width.value);
+                    rect.setAttribute("height", height.value);
+                    rect.setAttribute("rx", rx.value);
+                    rect.setAttribute("ry", ry.value);
+
+                    rect.setAttribute("fill", "orange");
+                    rect.setAttribute("stroke", "black");
+                    rect.setAttribute("stroke-width", "2");
+
+                    svg.appendChild(rect);
+                    podglad.appendChild(svg);
+
+                }
+
+                x.addEventListener("change", aktualizuj);
+                y.addEventListener("change", aktualizuj);
+                width.addEventListener("change", aktualizuj);
+                height.addEventListener("change", aktualizuj);
+                rx.addEventListener("change", aktualizuj);
+                ry.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

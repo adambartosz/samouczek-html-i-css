@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>h1 - 6</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .sim-preview h1,
+        .sim-preview h2,
+        .sim-preview h3,
+        .sim-preview h4,
+        .sim-preview h5,
+        .sim-preview h6 {
+            all: revert;
+            font-weight: revert;
+            font-size: revert;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znaczniki <strong>&lt;h1&gt;</strong> do <strong>&lt;h6&gt;</strong> służą do tworzenia nagłówków w HTML.
+            Określają one hierarchię treści na stronie internetowej.</p>
+
+        <p><code>&lt;h1&gt;</code> to najważniejszy nagłówek, a <code>&lt;h6&gt;</code> to najmniej ważny. Każdy kolejny
+            poziom ma mniejsze znaczenie.</p>
+
+        <p>To elementy <strong>blokowe</strong>, które zawsze zaczynają się od nowej linii.</p>
+    </section>
+
+    <section>
+        <p>Używamy nagłówków gdy chcemy:</p>
+
+        <ul>
+            <li>określić tytuł strony lub sekcji</li>
+            <li>podzielić treść na logiczne części</li>
+            <li>poprawić SEO strony</li>
+            <li>ułatwić czytanie treści</li>
+            <li>pomóc czytnikom ekranu w nawigacji</li>
+            <li>zbudować strukturę dokumentu</li>
+            <li>wyróżnić ważne fragmenty tekstu</li>
+            <li>tworzyć hierarchię informacji</li>
+        </ul>
+
+        <p>Nie powinno się używać nagłówków tylko do zmiany wyglądu tekstu.</p>
+    </section>
+
+    <section>
+    </section>
+
+    <section>
+        <p>Znaczniki nagłówków mają duże znaczenie semantyczne. Informują przeglądarkę i wyszukiwarki o strukturze
+            dokumentu.</p>
+
+        <p><code>&lt;h1&gt;</code> powinien być głównym tytułem strony. Na jednej stronie najlepiej używać tylko jednego
+            <code>h1</code>.
+        </p>
+
+        <p>Niższe poziomy <code>h2</code>, <code>h3</code> itd. tworzą podrozdziały i dalsze części struktury.</p>
+
+        <p>Czytniki ekranu używają nagłówków do szybkiej nawigacji po stronie.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Hierarchia nagłówków dokumentu</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst i elementy liniowe</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Elementów blokowych (np. section, article, body)</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>block</td>
+            </tr>
+        </table>
+    </section>
+    <section>
+        <p>W tym symulatorze możesz zobaczyć, jak działają nagłówki <code>h1</code> do <code>h6</code> po wyzerowaniu
+            stylów przez reset CSS (Meyer reset).</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Wybierz nagłówek:
+                <select id="sim-heading">
+                    <option value="h1">h1</option>
+                    <option value="h2">h2</option>
+                    <option value="h3">h3</option>
+                    <option value="h4">h4</option>
+                    <option value="h5">h5</option>
+                    <option value="h6">h6</option>
+                </select>
+            </label>
+
+            <label>
+                Tekst:
+                <select id="sim-heading-text">
+                    <option value="Nagłówek główny">Nagłówek główny</option>
+                    <option value="Sekcja">Sekcja</option>
+                    <option value="Podsekcja">Podsekcja</option>
+                    <option value="Element">Element</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-heading"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-heading"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var sel = document.getElementById("sim-heading");
+                var text = document.getElementById("sim-heading-text");
+
+                var kod = document.getElementById("sim-kod-heading");
+                var podglad = document.getElementById("sim-podglad-heading");
+
+                function getSize(tag) {
+                    if (tag === "h1") return "32px";
+                    if (tag === "h2") return "26px";
+                    if (tag === "h3") return "22px";
+                    if (tag === "h4") return "18px";
+                    if (tag === "h5") return "16px";
+                    return "14px";
+                }
+
+                function aktualizuj() {
+
+                    var tag = sel.value;
+                    var t = text.value;
+
+                    kod.textContent = "<" + tag + ">" + t + "</" + tag + ">";
+
+                    podglad.innerHTML = "";
+
+                    var el = document.createElement(tag);
+                    el.innerHTML = t;
+
+                    el.style.cssText =
+                        "font-size:" + getSize(tag) + ";" +
+                        "font-weight:bold;" +
+                        "margin:6px 0;";
+
+                    podglad.appendChild(el);
+
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                text.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

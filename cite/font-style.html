@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>font-style</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="wlasciwosc">
+
+    <section>
+        <p>Właściwość <strong>font-style</strong> określa styl wyświetlania tekstu. Najczęściej używa się jej do
+            włączania kursywy lub powrotu do zwykłego wyglądu liter.</p>
+
+        <p>Nie zmienia ona rozmiaru ani grubości czcionki. Wpływa wyłącznie na sposób rysowania znaków przez
+            przeglądarkę.</p>
+
+        <p>Jest często stosowana w cytatach, wyróżnieniach oraz elementach o charakterze pomocniczym.</p>
+    </section>
+
+    <section>
+        <p>Składnia: <code>font-style: wartość;</code></p>
+
+        <table>
+            <tr>
+                <th>Wartość</th>
+                <th>Co robi</th>
+            </tr>
+
+            <tr>
+                <td>normal</td>
+                <td>Standardowy wygląd tekstu bez kursywy</td>
+            </tr>
+
+            <tr>
+                <td>italic</td>
+                <td>Używa prawdziwej kursywy dostępnej w danej czcionce</td>
+            </tr>
+
+            <tr>
+                <td>oblique</td>
+                <td>Pochyla tekst. Jeśli czcionka nie ma kursywy, przeglądarka tworzy ją sztucznie</td>
+            </tr>
+
+            <tr>
+                <td>oblique 10deg</td>
+                <td>Pochyla tekst pod określonym kątem</td>
+            </tr>
+
+            <tr>
+                <td>oblique 20deg</td>
+                <td>Pochyla tekst pod wskazanym kątem od 0 do 90 stopni</td>
+            </tr>
+
+            <tr>
+                <td>inherit</td>
+                <td>Przejmuje wartość od elementu nadrzędnego</td>
+            </tr>
+
+            <tr>
+                <td>initial</td>
+                <td>Przywraca wartość początkową właściwości</td>
+            </tr>
+
+            <tr>
+                <td>unset</td>
+                <td>Działa jak inherit albo initial zależnie od sytuacji</td>
+            </tr>
+
+            <tr>
+                <td>revert</td>
+                <td>Przywraca styl wynikający z domyślnych arkuszy stylów</td>
+            </tr>
+
+            <tr>
+                <td>revert-layer</td>
+                <td>Przywraca wartość z wcześniejszej warstwy CSS</td>
+            </tr>
+
+        </table>
+
+        <pre><code>p {<br>
+    font-style: italic;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Domyślną wartością właściwości <code>font-style</code> jest <code>normal</code>. Oznacza to, że tekst jest
+            wyświetlany bez pochylenia.</p>
+
+        <p>Jeżeli nie ustawimy tej właściwości samodzielnie, przeglądarka użyje zwykłego stylu czcionki.</p>
+
+        <p>Wartość <code>initial</code> przywraca ustawienie <code>normal</code>, natomiast <code>inherit</code>
+            powoduje przejęcie wartości od elementu nadrzędnego.</p>
+
+        <pre><code>font-style: initial;</code></pre>
+
+        <pre><code>font-style: inherit;</code></pre>
+    </section>
+
+    <section>
+        <p>Właściwość <code>font-style</code> jest dziedziczona. Jeżeli ustawimy kursywę dla elementu nadrzędnego,
+            potomkowie również będą wyświetlani kursywą.</p>
+
+        <p>Dzięki temu można jednym zapisem zmienić wygląd większej części strony.</p>
+
+        <pre><code>article {<br>
+    font-style: italic;<br>
+}</code></pre>
+
+        <p>Wartość <code>inherit</code> wymusza pobranie ustawienia od rodzica. Wartość <code>initial</code> usuwa
+            dziedziczenie i przywraca zwykły styl tekstu.</p>
+
+        <pre><code>span {<br>
+    font-style: inherit;<br>
+}</code></pre>
+
+        <pre><code>span {<br>
+    font-style: initial;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Kursywa dla cytatów:</p>
+
+        <pre><code>blockquote {<br>
+    font-style: italic;<br>
+}</code></pre>
+
+        <p>Powrót do zwykłego stylu tekstu:</p>
+
+        <pre><code>p {<br>
+    font-style: normal;<br>
+}</code></pre>
+
+        <p>Pochylenie tekstu bez używania kursywy:</p>
+
+        <pre><code>.uwaga {<br>
+    font-style: oblique;<br>
+}</code></pre>
+
+        <p>Pochylenie pod konkretnym kątem:</p>
+
+        <pre><code>.efekt {<br>
+    font-style: oblique 15deg;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Wybierz wartość właściwości i sprawdź, jak zmienia się wygląd tekstu.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Styl czcionki:
+                <select id="sim-font-style">
+                    <option value="normal">normal</option>
+                    <option value="italic">italic</option>
+                    <option value="oblique">oblique</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod-font-style"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-font-style"></div>
+        </div>
+
+        <script>
+            (function () {
+                var select = document.getElementById("sim-font-style");
+                var kod = document.getElementById("sim-kod-font-style");
+                var podglad = document.getElementById("sim-podglad-font-style");
+
+                function aktualizuj() {
+                    var wartosc = select.value;
+
+                    kod.textContent = "font-family: monospace; \nfont-style: " + wartosc + ";";
+
+                    podglad.innerHTML = "";
+
+                    var naglowek = document.createElement("h3");
+                    naglowek.textContent = "Przykładowy nagłówek";
+                    naglowek.style.cssText = "font-style:" + wartosc + "; font-family: monospace";
+
+                    var akapit = document.createElement("p");
+                    akapit.textContent = "Zażółć gęślą jaźń. To przykładowy tekst pokazujący działanie właściwości font-style.";
+                    akapit.style.cssText = "font-style:" + wartosc + "; font-family: monospace";
+
+                    var drugi = document.createElement("p");
+                    drugi.textContent = "HTML i CSS są podstawą tworzenia stron internetowych.";
+                    drugi.style.cssText = "font-style:" + wartosc + "; font-family: monospace";
+
+                    podglad.appendChild(naglowek);
+                    podglad.appendChild(akapit);
+                    podglad.appendChild(drugi);
+                }
+
+                select.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

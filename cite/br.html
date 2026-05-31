@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>br</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;br&gt;</strong> służy do przejścia do nowej linii bez rozpoczynania nowego akapitu. Jest
+            używany głównie wewnątrz tekstu, gdy chcemy zachować konkretny układ treści.</p>
+        <p>Jest elementem <strong>pustym</strong>, więc nie posiada znacznika zamykającego i nie może zawierać żadnej
+            zawartości.</p>
+        <p>Po jego użyciu dalszy tekst zostanie wyświetlony od następnej linii.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>przenieść tekst do nowej linii bez tworzenia nowego akapitu</li>
+            <li>zapisać adres w kilku liniach</li>
+            <li>wyświetlić dane kontaktowe jedna pod drugą</li>
+            <li>zachować układ krótkiego wiersza lub tekstu piosenki</li>
+            <li>oddzielić krótkie informacje w obrębie jednego bloku tekstu</li>
+            <li>utworzyć prosty podział linii bez używania CSS</li>
+        </ul>
+        <p>Jeżeli tworzysz osobne myśli lub większe fragmenty tekstu, lepiej użyć znacznika <code>&lt;p&gt;</code>
+            zamiast wielu kolejnych <code>&lt;br&gt;</code>.</p>
+    </section>
+
+    <section>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;br&gt;</strong> przekazuje informację o podziale wiersza. Nie opisuje jednak znaczenia
+            treści tak jak znaczniki semantyczne, na przykład <code>&lt;header&gt;</code> czy
+            <code>&lt;article&gt;</code>.</p>
+        <p>Czytniki ekranu mogą poinformować użytkownika o przejściu do kolejnej linii. Dzięki temu tekst zachowuje
+            podobny układ jak ten widoczny na ekranie.</p>
+        <p>Dla wyszukiwarek internetowych jest to głównie informacja o złamaniu wiersza, a nie o strukturze dokumentu.
+        </p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Pusty</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Nie (niekontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Przejście do nowej linii w tekście</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Nie zawiera żadnych elementów ani tekstu</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Elementów zawierających tekst, np. p, div, span, td, li</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Ten symulator pozwala sprawdzić najczęstsze zastosowania znacznika <code>&lt;br&gt;</code>. Wybierz przykład
+            i zobacz wygenerowany kod HTML oraz efekt działania.</p>
+
+        <div class="sim-controls">
+            <label>
+                Przykład:
+                <select id="sim-tryb-br">
+                    <option value="pojedynczy">Jedno przejście do nowej linii</option>
+                    <option value="podwojny">Dwa znaczniki br</option>
+                    <option value="adres">Adres pocztowy</option>
+                    <option value="kontakt">Dane kontaktowe</option>
+                    <option value="wiersz">Fragment wiersza</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-br"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-br"></div>
+        </div>
+
+        <script>
+            (function () {
+                var sel = document.getElementById("sim-tryb-br");
+                var kod = document.getElementById("sim-kod-br");
+                var podglad = document.getElementById("sim-podglad-br");
+
+                function wyczysc() {
+                    while (podglad.firstChild) {
+                        podglad.removeChild(podglad.firstChild);
+                    }
+                }
+
+                function linia(tekst) {
+                    podglad.appendChild(document.createTextNode(tekst));
+                }
+
+                function nowaLinia() {
+                    podglad.appendChild(document.createElement("br"));
+                }
+
+                function aktualizuj() {
+                    wyczysc();
+
+                    if (sel.value === "pojedynczy") {
+                        kod.textContent = "Pierwsza linia<br>Druga linia";
+
+                        linia("Pierwsza linia");
+                        nowaLinia();
+                        linia("Druga linia");
+                    }
+
+                    if (sel.value === "podwojny") {
+                        kod.textContent = "Linia A<br><br>Linia B";
+
+                        linia("Linia A");
+                        nowaLinia();
+                        nowaLinia();
+                        linia("Linia B");
+                    }
+
+                    if (sel.value === "adres") {
+                        kod.textContent = "Jan Kowalski<br>ul. Szkolna 15<br>00-001 Warszawa";
+
+                        linia("Jan Kowalski");
+                        nowaLinia();
+                        linia("ul. Szkolna 15");
+                        nowaLinia();
+                        linia("00-001 Warszawa");
+                    }
+
+                    if (sel.value === "kontakt") {
+                        kod.textContent = "Telefon: 123 456 789<br>E-mail: uczen@technik.pl";
+
+                        linia("Telefon: 123 456 789");
+                        nowaLinia();
+                        linia("E-mail: uczen@technik.pl");
+                    }
+
+                    if (sel.value === "wiersz") {
+                        kod.textContent = "To jest pierwszy wers<br>To jest drugi wers<br>To jest trzeci wers";
+
+                        linia("To jest pierwszy wers");
+                        nowaLinia();
+                        linia("To jest drugi wers");
+                        nowaLinia();
+                        linia("To jest trzeci wers");
+                    }
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

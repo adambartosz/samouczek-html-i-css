@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Walidator HTML</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to jest walidator HTML?</h2>
+        <p>Walidator HTML to narzędzie sprawdzające, czy kod strony internetowej jest zgodny ze standardami HTML.
+            Analizuje dokument i wyszukuje błędy składniowe, niepoprawne znaczniki oraz problemy mogące wpływać na
+            działanie strony.</p>
+        <p>Walidator nie poprawia kodu automatycznie. Jego zadaniem jest wskazanie miejsc, które należy sprawdzić i
+            poprawić.</p>
+    </section>
+
+    <section>
+        <h2>Po co używa się walidatora?</h2>
+
+        <p>Podczas pisania kodu łatwo popełnić błąd. Czasami strona nadal działa, ale kod nie jest poprawny.</p>
+
+        <p>Walidator pomaga:</p>
+
+        <ul>
+            <li>znaleźć błędy składniowe</li>
+            <li>sprawdzić zgodność ze standardami HTML</li>
+            <li>unikać problemów w różnych przeglądarkach</li>
+            <li>tworzyć bardziej profesjonalny kod</li>
+            <li>łatwiej rozwijać projekt w przyszłości</li>
+            <li>uczyć się poprawnych praktyk programistycznych</li>
+        </ul>
+
+        <p>Dzięki regularnemu sprawdzaniu kodu można szybciej wykrywać pomyłki.</p>
+    </section>
+
+    <section>
+        <h2>Jak działa walidator?</h2>
+
+        <p>Walidator analizuje cały dokument HTML krok po kroku. Sprawdza między innymi znaczniki, atrybuty oraz
+            strukturę dokumentu.</p>
+
+        <p>Jeżeli znajdzie problem, wyświetla komunikat zawierający:</p>
+
+        <ul>
+            <li>numer linii z błędem</li>
+            <li>opis problemu</li>
+            <li>fragment kodu powodujący błąd</li>
+            <li>wskazówki dotyczące poprawy</li>
+        </ul>
+
+        <p>Dzięki temu programista może szybko odnaleźć problematyczne miejsce.</p>
+    </section>
+
+    <section>
+        <h2>Przykład poprawnego kodu</h2>
+
+        <p>Poniższy dokument jest zgodny z podstawowymi zasadami HTML:</p>
+
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pl"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Moja strona&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Witaj świecie!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+        <p>Taki kod nie powinien powodować błędów podczas walidacji.</p>
+    </section>
+
+    <section>
+        <h2>Przykład błędnego kodu</h2>
+
+        <p>Poniżej znajduje się przykład dokumentu zawierającego kilka problemów:</p>
+
+        <pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Moja strona&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Nagłówek
+&lt;p&gt;Tekst akapitu
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+        <p>W tym przykładzie brakuje między innymi zamknięcia niektórych elementów oraz deklaracji typu dokumentu.</p>
+    </section>
+
+    <section>
+        <h2>Najczęstsze błędy wykrywane przez walidator</h2>
+
+        <ul>
+            <li>brak znacznika zamykającego</li>
+            <li>niepoprawne zagnieżdżenie elementów</li>
+            <li>literówki w nazwach znaczników</li>
+            <li>nieprawidłowe atrybuty</li>
+            <li>brak wymaganych atrybutów</li>
+            <li>powielone identyfikatory id</li>
+            <li>niepoprawna struktura dokumentu</li>
+            <li>niezgodność ze standardem HTML</li>
+        </ul>
+
+        <p>Niektóre z tych błędów mogą być trudne do zauważenia podczas zwykłego przeglądania strony.</p>
+    </section>
+
+    <section>
+        <h2>Walidator W3C</h2>
+
+        <p>Najbardziej znanym walidatorem HTML jest narzędzie przygotowane przez organizację W3C. Pozwala ono sprawdzić
+            poprawność dokumentów zgodnie z obowiązującymi standardami.</p>
+
+        <p>Można zweryfikować:</p>
+
+        <ul>
+            <li>adres strony internetowej</li>
+            <li>przesłany plik HTML</li>
+            <li>wklejony fragment kodu</li>
+        </ul>
+
+        <p>Dzięki temu narzędzie jest wygodne zarówno podczas nauki, jak i pracy nad większym projektem.</p>
+    </section>
+
+    <section>
+        <h2>Ostrzeżenia a błędy</h2>
+
+        <p>Walidator może wyświetlać błędy oraz ostrzeżenia.</p>
+
+        <table>
+            <tr>
+                <th>Rodzaj komunikatu</th>
+                <th>Znaczenie</th>
+            </tr>
+
+            <tr>
+                <td>Błąd</td>
+                <td>Kod jest niepoprawny i wymaga poprawienia</td>
+            </tr>
+
+            <tr>
+                <td>Ostrzeżenie</td>
+                <td>Kod działa, ale może powodować problemy lub jest niezalecany</td>
+            </tr>
+        </table>
+
+        <p>Najpierw należy usuwać błędy, a następnie analizować ostrzeżenia.</p>
+    </section>
+
+    <section>
+        <h2>Czy strona bez błędów jest idealna?</h2>
+
+        <p>Niekoniecznie. Walidator sprawdza głównie poprawność techniczną kodu.</p>
+
+        <p>Nie ocenia na przykład:</p>
+
+        <ul>
+            <li>estetyki projektu</li>
+            <li>czytelności treści</li>
+            <li>jakości grafiki</li>
+            <li>wygody użytkowania</li>
+            <li>wartości merytorycznej strony</li>
+        </ul>
+
+        <p>Można więc mieć poprawny technicznie kod i jednocześnie słabą stronę internetową.</p>
+    </section>
+
+    <section>
+        <h2>Kiedy warto korzystać z walidatora?</h2>
+
+        <ul>
+            <li>po zakończeniu pisania strony</li>
+            <li>po większych zmianach w projekcie</li>
+            <li>przed publikacją witryny</li>
+            <li>podczas nauki HTML</li>
+            <li>gdy strona zachowuje się nieprawidłowo</li>
+        </ul>
+
+        <p>Regularna walidacja pozwala szybciej wykrywać błędy i utrzymywać wysoki poziom jakości kodu.</p>
+    </section>
+
+    <section>
+        <h2>Zalety korzystania z walidatora</h2>
+
+        <ul>
+            <li>większa zgodność ze standardami</li>
+            <li>łatwiejsze znajdowanie błędów</li>
+            <li>lepsza jakość kodu</li>
+            <li>mniejsza liczba problemów w przeglądarkach</li>
+            <li>szybsza nauka poprawnej składni</li>
+            <li>bardziej profesjonalne projekty</li>
+        </ul>
+
+        <p>Walidator jest jednym z podstawowych narzędzi każdego twórcy stron internetowych.</p>
+    </section>
+
+    <section>
+        <h2>Najważniejsze informacje do zapamiętania</h2>
+
+        <ul>
+            <li>walidator sprawdza poprawność kodu HTML</li>
+            <li>wykrywa błędy składniowe i problemy ze strukturą dokumentu</li>
+            <li>nie poprawia kodu automatycznie</li>
+            <li>pomaga tworzyć strony zgodne ze standardami</li>
+            <li>najbardziej znany walidator został przygotowany przez W3C</li>
+            <li>warto korzystać z niego regularnie podczas nauki i pracy</li>
+        </ul>
+
+        <p>Najprościej mówiąc: walidator HTML działa jak nauczyciel sprawdzający poprawność napisanego kodu i wskazujący
+            miejsca wymagające poprawy.</p>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

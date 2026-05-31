@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>span</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;span&gt;</strong> to mały kontener liniowy używany do zaznaczania fragmentów tekstu. Sam
+            w sobie nie zmienia wyglądu ani znaczenia treści.</p>
+
+        <p>Jest elementem <strong>liniowym</strong>, więc nie robi nowej linii i zajmuje tylko tyle miejsca, ile
+            potrzebuje zawartość.</p>
+
+        <p>Najczęściej używa się go do stylowania pojedynczych słów lub części tekstu.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+
+        <ul>
+            <li>wyróżnić fragment tekstu w zdaniu</li>
+            <li>nałożyć styl CSS na część tekstu</li>
+            <li>sterować fragmentem tekstu w JavaScript</li>
+            <li>oznaczyć część treści bez zmiany układu</li>
+            <li>tworzyć dynamiczne elementy w tekście</li>
+            <li>dodawać klasy do fragmentów tekstu</li>
+            <li>podmieniać tekst przez JS</li>
+            <li>budować małe komponenty tekstowe</li>
+        </ul>
+
+        <p>Jeśli potrzebujesz znaczenia semantycznego, lepiej użyć np. <code>&lt;strong&gt;</code>,
+            <code>&lt;em&gt;</code> lub innych znaczników HTML.</p>
+    </section>
+
+    <section>
+    </section>
+
+    <section>
+        <p>Znacznik <code>&lt;span&gt;</code> nie ma żadnego znaczenia semantycznego. Dla przeglądarki i czytników
+            ekranu jest neutralnym fragmentem tekstu.</p>
+
+        <p>Nie opisuje struktury dokumentu ani nie przekazuje informacji o treści.</p>
+
+        <p>Używanie go powinno być ograniczone do sytuacji, gdy potrzebujesz stylowania lub JavaScript bez wpływu na
+            układ strony.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Liniowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Brak - neutralny fragment tekstu</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst oraz elementy liniowe</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Elementów blokowych i liniowych tam gdzie dozwolone</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz sprawdzić, jak <code>&lt;span&gt;</code> działa w tekście i jak zmienia się jego
+            wygląd po dodaniu różnych stylów inline przez atrybut style.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Styl span:
+                <select id="sim-span-style">
+                    <option value="none">brak stylu</option>
+                    <option value="color:red;">kolor czerwony</option>
+                    <option value="font-weight:bold;">pogrubienie</option>
+                    <option value="background:yellow;">żółte tło</option>
+                    <option value="font-style:italic;">kursywa</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-span"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-span"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var sel = document.getElementById("sim-span-style");
+                var kod = document.getElementById("sim-kod-span");
+                var podglad = document.getElementById("sim-podglad-span");
+
+                function aktualizuj() {
+
+                    var v = sel.value;
+
+                    kod.textContent = '<p>To jest <span style="' + v + '">fragment</span> tekstu.</p>';
+
+                    while (podglad.firstChild) {
+                        podglad.removeChild(podglad.firstChild);
+                    }
+
+                    var p = document.createElement("p");
+                    p.innerHTML = 'To jest <span>fragment</span> tekstu.';
+
+                    var span = p.querySelector("span");
+
+                    if (v !== "none") {
+                        span.style.cssText = v;
+                    }
+
+                    podglad.appendChild(p);
+
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

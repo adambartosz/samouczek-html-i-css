@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>polygon</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;polygon&gt;</strong> służy do rysowania wielokątów w SVG. Tworzy się go przez podanie
+            listy punktów, które są ze sobą łączone liniami w zamknięty kształt.</p>
+        <p>Jest to element SVG, więc działa tylko wewnątrz <code>&lt;svg&gt;</code>. Przeglądarka automatycznie łączy
+            ostatni punkt z pierwszym, dzięki czemu powstaje pełny kształt.</p>
+        <p>Można nim tworzyć zarówno proste trójkąty, jak i bardziej złożone figury geometryczne.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>narysować trójkąty, pięciokąty i inne wielokąty</li>
+            <li>tworzyć ikony SVG o niestandardowych kształtach</li>
+            <li>budować wykresy i diagramy</li>
+            <li>rysować strzałki i wskaźniki</li>
+            <li>tworzyć elementy interfejsu w SVG</li>
+            <li>projektować proste ilustracje wektorowe</li>
+            <li>tworzyć kształty do animacji</li>
+        </ul>
+        <p>Jeżeli potrzebna jest linia zamiast zamkniętego kształtu, lepiej użyć <code>&lt;polyline&gt;</code>.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>points</td>
+                <td>lista współrzędnych x,y</td>
+                <td>Określa kolejne punkty wielokąta</td>
+            </tr>
+            <tr>
+                <td>fill-rule</td>
+                <td>nonzero, evenodd</td>
+                <td>Określa sposób wypełniania kształtu</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;polygon&gt;</strong> ma znaczenie graficzne w SVG. Informuje przeglądarkę, że należy
+            narysować zamknięty wielokąt na podstawie podanych punktów.</p>
+        <p>Nie jest to znacznik HTML semantyczny, ale w SVG opisuje konkretny kształt geometryczny.</p>
+        <p>Narzędzia graficzne interpretują go jako zbiór połączonych odcinków tworzących zamkniętą figurę.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Pusty</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Nie (niekontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Figura SVG – wielokąt</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Żadnych elementów</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>svg, g, symbol, marker, pattern, mask, clipPath i innych kontenerów SVG</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz zmieniać punkty wielokąta. Wpisz współrzędne, a zobaczysz jak zmienia się kształt
+            SVG oraz kod HTML.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Punkty:
+                <select id="sim-points-polygon">
+                    <option value="50,10 90,90 10,90">trójkąt</option>
+                    <option value="20,20 80,20 80,80 20,80">kwadrat</option>
+                    <option value="50,10 90,40 70,90 30,90 10,40">pięciokąt</option>
+                </select>
+            </label>
+
+            <label>
+                Kolor wypełnienia:
+                <select id="sim-fill-polygon">
+                    <option value="orange">pomarańczowy</option>
+                    <option value="dodgerblue">niebieski</option>
+                    <option value="limegreen">zielony</option>
+                    <option value="tomato">czerwony</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-polygon"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-polygon"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var points = document.getElementById("sim-points-polygon");
+                var fill = document.getElementById("sim-fill-polygon");
+
+                var kod = document.getElementById("sim-kod-polygon");
+                var podglad = document.getElementById("sim-podglad-polygon");
+
+                function aktualizuj() {
+
+                    kod.textContent =
+                        '<svg width="200" height="200">\n' +
+                        '    <polygon points="' + points.value + '" fill="' + fill.value + '"/>\n' +
+                        '</svg>';
+
+                    podglad.innerHTML = "";
+
+                    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                    svg.setAttribute("width", "200");
+                    svg.setAttribute("height", "200");
+
+                    var polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+                    polygon.setAttribute("points", points.value);
+                    polygon.setAttribute("fill", fill.value);
+                    polygon.setAttribute("stroke", "black");
+                    polygon.setAttribute("stroke-width", "2");
+
+                    svg.appendChild(polygon);
+                    podglad.appendChild(svg);
+
+                }
+
+                points.addEventListener("change", aktualizuj);
+                fill.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

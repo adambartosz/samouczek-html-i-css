@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>td</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;td&gt;</strong> to zwykła komórka danych w tabeli HTML. W niej znajdują się konkretne
+            wartości, teksty albo liczby, które tworzą wiersze tabeli.</p>
+        <p>Jest zawsze używany wewnątrz <code>&lt;tr&gt;</code> i razem z nim buduje całą strukturę tabeli. Nie jest
+            nagłówkiem — od tego jest <code>&lt;th&gt;</code>.</p>
+        <p>Najważniejsze w <code>&lt;td&gt;</code> są atrybuty <code>colspan</code> i <code>rowspan</code>, które
+            pozwalają łączyć komórki.</p>
+    </section>
+
+    <section>
+        <p>Używamy <code>&lt;td&gt;</code> kiedy chcemy:</p>
+        <ul>
+            <li>wpisać dane do tabeli</li>
+            <li>tworzyć zwykłe komórki z wartościami</li>
+            <li>budować wiersze rekordów</li>
+            <li>łączyć komórki w poziomie i pionie</li>
+            <li>robić bardziej złożone układy tabel</li>
+        </ul>
+        <p>Jeśli komórka ma być opisem kolumny lub wiersza, wtedy używamy <code>&lt;th&gt;</code>.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>colspan</td>
+                <td>liczba całkowita (np. 2, 3, 4...)</td>
+                <td>Łączy komórkę w poziomie na kilka kolumn</td>
+            </tr>
+            <tr>
+                <td>rowspan</td>
+                <td>liczba całkowita (np. 2, 3, 4...)</td>
+                <td>Łączy komórkę w pionie na kilka wierszy</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;td&gt;</strong> sam w sobie nie niesie znaczenia semantycznego — to tylko komórka
+            danych.</p>
+        <p>Jego znaczenie wynika z kontekstu tabeli oraz nagłówków <code>&lt;th&gt;</code>, które opisują dane.</p>
+        <p>Atrybuty <code>colspan</code> i <code>rowspan</code> nie zmieniają semantyki, ale zmieniają układ tabeli i
+            sposób prezentacji danych.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Komórka tabeli</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Reprezentuje dane w tabeli</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>tekst, inline elements, obrazy, linki</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>tr</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>table-cell</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Symulator pokazuje działanie atrybutów <code>colspan</code> i <code>rowspan</code>. Możesz ustawić jak
+            komórka łączy się z innymi w tabeli.</p>
+
+        <div class="sim-controls">
+            <label>
+                Typ łączenia:
+                <select id="sim-type">
+                    <option value="none" selected>brak</option>
+                    <option value="colspan">colspan</option>
+                    <option value="rowspan">rowspan</option>
+                </select>
+            </label>
+
+            <label>
+                Wartość (ile łączy):
+                <select id="sim-value">
+                    <option value="1">1</option>
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </label>
+
+            <label>
+                Układ tabeli:
+                <select id="sim-size">
+                    <option value="2">2x2</option>
+                    <option value="3" selected>3x3</option>
+                    <option value="4">4x4</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var type = document.getElementById("sim-type");
+                var value = document.getElementById("sim-value");
+                var size = document.getElementById("sim-size");
+                var kod = document.getElementById("sim-kod");
+                var podglad = document.getElementById("sim-podglad");
+
+                function aktualizuj() {
+                    var t = type.value;
+                    var v = parseInt(value.value);
+                    var s = parseInt(size.value);
+
+                    var html = '<table border="1">\n';
+
+                    for (var i = 1; i <= s; i++) {
+                        html += '    <tr>\n';
+                        for (var j = 1; j <= s; j++) {
+
+                            if (i === 1 && j === 1) {
+                                if (t === 'colspan') {
+                                    html += '        <td colspan="' + v + '">TD</td>\n';
+                                    j += v - 1;
+                                } else if (t === 'rowspan') {
+                                    html += '        <td rowspan="' + v + '">TD</td>\n';
+                                } else {
+                                    html += '        <td>TD</td>\n';
+                                }
+                            } else {
+                                html += '        <td>' + i + '-' + j + '</td>\n';
+                            }
+
+                        }
+                        html += '    </tr>\n';
+                    }
+
+                    html += '</table>';
+
+                    kod.textContent = html;
+
+                    podglad.innerHTML = '';
+
+                    var table = document.createElement('table');
+                    table.border = '1';
+
+                    for (var i2 = 1; i2 <= s; i2++) {
+                        var tr = document.createElement('tr');
+
+                        for (var j2 = 1; j2 <= s; j2++) {
+
+                            if (i2 === 1 && j2 === 1) {
+                                var td = document.createElement('td');
+
+                                if (t === 'colspan') {
+                                    td.colSpan = v;
+                                    td.textContent = 'TD (colspan ' + v + ')';
+                                    j2 += v - 1;
+                                } else if (t === 'rowspan') {
+                                    td.rowSpan = v;
+                                    td.textContent = 'TD (rowspan ' + v + ')';
+                                }
+
+                                tr.appendChild(td);
+
+                            } else {
+                                var td2 = document.createElement('td');
+                                td2.textContent = i2 + '-' + j2;
+                                tr.appendChild(td2);
+                            }
+
+                        }
+
+                        table.appendChild(tr);
+                    }
+
+                    podglad.appendChild(table);
+                }
+
+                type.addEventListener("change", aktualizuj);
+                value.addEventListener("change", aktualizuj);
+                size.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

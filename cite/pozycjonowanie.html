@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>pozycjonowanie</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="wlasciwosc">
+
+    <section>
+        <p>Właściwość <strong>position</strong> określa, w jaki sposób element jest umieszczony w układzie strony.
+            Decyduje o tym, czy element uczestniczy w normalnym przepływie dokumentu, czy jest z niego wyrwany i
+            pozycjonowany ręcznie za pomocą <code>top</code>, <code>right</code>, <code>bottom</code>,
+            <code>left</code>. Bez niej elementy układają się jeden pod drugim zgodnie z kolejnością w HTML.
+        </p>
+    </section>
+
+    <section>
+        <p>Składnia: <code>position: wartość;</code></p>
+        <p>Samo <code>position</code> decyduje o trybie. Żeby faktycznie przesunąć element, potrzebujesz jeszcze
+            <code>top</code>, <code>left</code>, <code>right</code> lub <code>bottom</code> – działają tylko gdy
+            <code>position</code> jest inne niż <code>static</code>. <code>z-index</code> kontroluje kolejność
+            nakładania i też wymaga pozycjonowania innego niż <code>static</code>.
+        </p>
+        <table>
+            <tr>
+                <th>Wartość</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td><code>static</code></td>
+                <td>Domyślne. Element uczestniczy w normalnym przepływie. top/right/bottom/left i z-index nie mają
+                    żadnego efektu.</td>
+            </tr>
+            <tr>
+                <td><code>relative</code></td>
+                <td>Element zostaje w normalnym przepływie, ale możesz go przesunąć względem jego oryginalnej pozycji.
+                    Miejsce po nim zostaje zarezerwowane.</td>
+            </tr>
+            <tr>
+                <td><code>absolute</code></td>
+                <td>Element wyrywa się z przepływu. Pozycjonuje się względem najbliższego przodka z
+                    <code>position</code> innym niż <code>static</code>. Jeśli takiego nie ma – względem
+                    <code>&lt;html&gt;</code>.
+                </td>
+            </tr>
+            <tr>
+                <td><code>fixed</code></td>
+                <td>Element wyrywa się z przepływu. Przykleja się do okna przeglądarki i nie rusza przy scrollowaniu.
+                </td>
+            </tr>
+            <tr>
+                <td><code>sticky</code></td>
+                <td>Zachowuje się jak <code>relative</code> dopóki nie doscrolluje do progu (np. <code>top: 0</code>),
+                    potem przykleja się jak <code>fixed</code> – ale tylko w obrębie swojego kontenera.</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Domyślna wartość to <code>static</code>. Dopóki nie wpiszesz <code>position</code>, element siedzi w
+            normalnym przepływie i żadne przesunięcia nie działają. <code>position: initial</code> jawnie przywraca tę
+            wartość. <code>position: inherit</code> powoduje dziedziczenie od rodzica – ale normalnie
+            <code>position</code> nie jest dziedziczone.
+        </p>
+    </section>
+
+    <section>
+        <p>Właściwość <code>position</code> <strong>nie jest dziedziczona</strong>. Każdy element domyślnie ma
+            <code>static</code>, nawet jeśli rodzic ma <code>relative</code> czy <code>absolute</code>. Jedynym
+            wyjątkiem jest jawne użycie <code>position: inherit</code>.
+        </p>
+    </section>
+
+    <section>
+        <p>Klasyczny układ: kontener z <code>relative</code> + dziecko z <code>absolute</code>:</p>
+        <pre><code>.karta {<br>
+  position: relative;<br>
+}<br>
+<br>
+.badge {<br>
+  position: absolute;<br>
+  top: 8px;<br>
+  right: 8px;<br>
+}</code></pre>
+        <p>Przyklejona nawigacja:</p>
+        <pre><code>nav {<br>
+  position: sticky;<br>
+  top: 0;<br>
+  z-index: 100;<br>
+}</code></pre>
+        <p>Przycisk zawsze w rogu ekranu:</p>
+        <pre><code>.btn-top {<br>
+  position: fixed;<br>
+  bottom: 24px;<br>
+  right: 24px;<br>
+  z-index: 999;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Kliknij na dowolny div, żeby go zaznaczyć, a potem zmieniaj jego właściwości. Scrolluj podgląd, żeby zobaczyć
+            działanie <code>sticky</code> i <code>fixed</code>. Kontener podglądu ma <code>position: relative</code>,
+            więc <code>absolute</code> liczy się względem niego.</p>
+
+        <div class="sim-controls" style="flex-direction: column; gap: 10px;">
+
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                <span style="font-size: 13px; color: var(--color-text-secondary);">Zaznaczony:</span>
+                <div id="s-tabs" style="display: flex; gap: 6px;"></div>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-end;">
+                <label style="display:flex; flex-direction:column; gap:4px; font-size:13px;">
+                    position
+                    <select id="s-pos" style="width: 110px;"></select>
+                </label>
+                <label style="display:flex; flex-direction:column; gap:4px; font-size:13px;">
+                    top (px)
+                    <input id="s-top" type="number" value="0" style="width:70px;">
+                </label>
+                <label style="display:flex; flex-direction:column; gap:4px; font-size:13px;">
+                    left (px)
+                    <input id="s-left" type="number" value="0" style="width:70px;">
+                </label>
+                <label style="display:flex; flex-direction:column; gap:4px; font-size:13px;">
+                    z-index
+                    <input id="s-z" type="number" value="0" style="width:70px;">
+                </label>
+            </div>
+
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS zaznaczonego elementu:</div>
+            <pre id="sim-kod"></pre>
+            <div class="sim-preview-label">Podgląd (scrolluj!):</div>
+            <div id="sim-arena"
+                style="height: 320px; overflow-y: auto; overflow-x: hidden; position: relative; background: #f5f4f0; border-radius: 8px; border: 1px solid rgba(0,0,0,0.08);">
+            </div>
+        </div>
+
+        <script>
+            (function () {
+
+                var kolory = [
+                    { bg: "#AFA9EC", fg: "#26215C", nazwa: "A" },
+                    { bg: "#9FE1CB", fg: "#085041", nazwa: "B" },
+                    { bg: "#FAC775", fg: "#412402", nazwa: "C" },
+                    { bg: "#F0997B", fg: "#4A1B0C", nazwa: "D" }
+                ];
+
+                var stany = kolory.map(function () { return { pos: "static", top: 0, left: 0, z: 0 }; });
+                var aktywny = 0;
+                var divy = [];
+                var tabs = [];
+
+                var sPos = document.getElementById("s-pos");
+                var sTop = document.getElementById("s-top");
+                var sLeft = document.getElementById("s-left");
+                var sZ = document.getElementById("s-z");
+                var kodEl = document.getElementById("sim-kod");
+                var arena = document.getElementById("sim-arena");
+                var tabsCont = document.getElementById("s-tabs");
+
+                ["static", "relative", "absolute", "fixed", "sticky"].forEach(function (v) {
+                    var o = document.createElement("option");
+                    o.value = v; o.textContent = v;
+                    sPos.appendChild(o);
+                });
+
+                var wnetrze = document.createElement("div");
+                wnetrze.style.cssText = "position: relative; min-height: 900px; padding: 16px; box-sizing: border-box;";
+                arena.appendChild(wnetrze);
+
+                var notka = document.createElement("div");
+                notka.style.cssText = "font-size: 11px; color: #aaa; margin-bottom: 12px;";
+                notka.textContent = "kontener: position: relative  |  scrolluj w dół ↓";
+                wnetrze.appendChild(notka);
+
+                for (var bg = 0; bg < 6; bg++) {
+                    var szary = document.createElement("div");
+                    szary.style.cssText = "width:100%; height:36px; border-radius:5px; background:#dddcd7; display:flex; align-items:center; padding:0 10px; box-sizing:border-box; font-size:12px; color:#888; margin-bottom:8px;";
+                    szary.textContent = "szary blok " + (bg + 1);
+                    wnetrze.appendChild(szary);
+                    if (bg === 1) {
+                        kolory.forEach(function (k, i) {
+                            var d = document.createElement("div");
+                            d.style.cssText = "width:130px; height:46px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:600; cursor:pointer; user-select:none; box-sizing:border-box; margin-bottom:8px; border: 2px solid transparent;";
+                            d.style.background = k.bg;
+                            d.style.color = k.fg;
+                            d.textContent = "Div " + k.nazwa;
+                            d.addEventListener("click", function () { aktywny = i; zaladuj(); podswietl(); });
+                            wnetrze.appendChild(d);
+                            divy.push(d);
+                        });
+                    }
+                }
+
+                var metka = document.createElement("div");
+                metka.style.cssText = "font-size:11px; color:#aaa; margin-top:8px;";
+                metka.textContent = "↑ koniec kontenera";
+                wnetrze.appendChild(metka);
+
+                kolory.forEach(function (k, i) {
+                    var b = document.createElement("button");
+                    b.textContent = "Div " + k.nazwa;
+                    b.style.cssText = "padding:4px 14px; border-radius:5px; cursor:pointer; font-size:13px; font-weight:600; border: 2px solid transparent; background:" + k.bg + "; color:" + k.fg + ";";
+                    b.addEventListener("click", function () { aktywny = i; zaladuj(); podswietl(); });
+                    tabsCont.appendChild(b);
+                    tabs.push(b);
+                });
+
+                function podswietl() {
+                    divy.forEach(function (d, i) { d.style.borderColor = i === aktywny ? "#534AB7" : "transparent"; });
+                    tabs.forEach(function (b, i) { b.style.borderColor = i === aktywny ? "#534AB7" : "transparent"; });
+                }
+
+                function disableInputs(dis) {
+                    [sTop, sLeft, sZ].forEach(function (inp) {
+                        inp.disabled = dis;
+                        inp.style.opacity = dis ? "0.35" : "1";
+                    });
+                }
+
+                function zaladuj() {
+                    var s = stany[aktywny];
+                    sPos.value = s.pos;
+                    sTop.value = s.top;
+                    sLeft.value = s.left;
+                    sZ.value = s.z;
+                    disableInputs(s.pos === "static");
+                    aktualizujKod();
+                }
+
+                function zastosuj() {
+                    var s = stany[aktywny];
+                    s.pos = sPos.value;
+                    s.top = parseInt(sTop.value) || 0;
+                    s.left = parseInt(sLeft.value) || 0;
+                    s.z = parseInt(sZ.value) || 0;
+                    disableInputs(s.pos === "static");
+
+                    divy.forEach(function (d, i) {
+                        var st = stany[i];
+                        if (st.pos === "static") {
+                            d.style.position = "";
+                            d.style.top = "";
+                            d.style.left = "";
+                            d.style.zIndex = "";
+                        } else {
+                            d.style.position = st.pos;
+                            d.style.top = st.top + "px";
+                            d.style.left = st.left + "px";
+                            d.style.zIndex = st.z;
+                        }
+                    });
+
+                    aktualizujKod();
+                }
+
+                function aktualizujKod() {
+                    var s = stany[aktywny];
+                    var n = ".div" + kolory[aktywny].nazwa.toLowerCase();
+                    if (s.pos === "static") {
+                        kodEl.textContent = n + " {\n  position: static;\n  /* top/left/z-index nie działają */\n}";
+                    } else {
+                        kodEl.textContent = n + " {\n  position: " + s.pos + ";\n  top:  " + s.top + "px;\n  left: " + s.left + "px;\n  z-index: " + s.z + ";\n}";
+                    }
+                }
+
+                sPos.addEventListener("change", zastosuj);
+                sTop.addEventListener("input", zastosuj);
+                sLeft.addEventListener("input", zastosuj);
+                sZ.addEventListener("input", zastosuj);
+
+                podswietl();
+                zaladuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

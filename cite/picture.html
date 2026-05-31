@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>picture</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+
+    <section>
+        <p>Znacznik <strong>&lt;picture&gt;</strong> służy do wstawiania obrazków, które mogą się zmieniać w
+            zależności od rozdzielczości ekranu albo warunków przeglądarki. W środku zawsze musi być
+            <code>&lt;img&gt;</code> jako fallback.
+        </p>
+        <p>Dzięki temu można robić responsywne grafiki, które lepiej dopasowują się do urządzenia.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>wyświetlać inne obrazki na telefonie i komputerze</li>
+            <li>oszczędzać transfer przez mniejsze pliki</li>
+            <li>dopasować jakość obrazu do ekranu</li>
+            <li>robić responsywne strony</li>
+        </ul>
+        <p>Jeśli nie potrzebujesz różnych wersji obrazka, zwykły <code>&lt;img&gt;</code> wystarczy.</p>
+    </section>
+
+    <section>
+    </section>
+
+    <section>
+        <p><code>&lt;picture&gt;</code> ma znaczenie semantyczne techniczne – nie opisuje treści, ale pozwala
+            przeglądarce wybrać najlepszy obraz. Czytniki ekranu i tak czytają tylko <code>&lt;img&gt;</code>.</p>
+        <p>To bardziej mechanizm optymalizacji niż semantyki treści.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Kontener wyboru obrazów responsywnych</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>source, img</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>figure, div, section</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W symulatorze możesz sprawdzić jak <code>&lt;picture&gt;</code> wybiera obraz na podstawie szerokości
+            (media query).</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Tryb ekranu:
+                <select id="sim-pic-mode">
+                    <option value="desktop">komputer</option>
+                    <option value="mobile">telefon</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-pic"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-pic"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var mode = document.getElementById("sim-pic-mode");
+                var kod = document.getElementById("sim-kod-pic");
+                var podglad = document.getElementById("sim-podglad-pic");
+
+                function aktualizuj() {
+
+                    var m = mode.value;
+
+                    podglad.innerHTML = "";
+
+                    var picture = document.createElement("picture");
+
+                    var source = document.createElement("source");
+                    var img = document.createElement("img");
+
+                    if (m === "mobile") {
+                        source.media = "(max-width: 600px)";
+                        source.srcset = "https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png";
+                        img.src = "https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg";
+                    } else {
+                        source.media = "(min-width: 601px)";
+                        source.srcset = "https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg";
+                        img.src = "https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png";
+                    }
+
+                    img.style.maxWidth = "100%";
+
+                    picture.appendChild(source);
+                    picture.appendChild(img);
+
+                    kod.textContent =
+                        '<picture>\n' +
+                        '  <source media="' + source.media + '" srcset="...">\n' +
+                        '  <img src="' + img.src + '">\n' +
+                        '</picture>';
+
+                    podglad.appendChild(picture);
+
+                }
+
+                mode.addEventListener("change", aktualizuj);
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

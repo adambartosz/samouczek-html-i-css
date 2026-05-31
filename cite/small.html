@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>small</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;small&gt;</strong> zmniejsza tekst wizualnie. Używa się go do mniej ważnych informacji,
+            np. dopisków.</p>
+        <p>Jest liniowy i działa w środku tekstu.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy:</p>
+        <ul>
+            <li>dodajemy dopiski</li>
+            <li>piszemy mniej ważne informacje</li>
+            <li>robimy przypisy</li>
+        </ul>
+        <p>To nadal tekst, tylko mniejszy.</p>
+    </section>
+
+    <section></section>
+
+    <section>
+        <p><code>&lt;small&gt;</code> nie zmienia znaczenia, tylko wygląd.</p>
+        <p>Czytniki mogą traktować go jako mniej ważny fragment.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Liniowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Mniej ważna treść</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst i elementy liniowe</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Elementów blokowych i liniowych</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W symulatorze zobaczysz mały tekst.</p>
+
+        <div class="sim-controls">
+            <label>
+                Tryb:
+                <select id="sim-small-mode">
+                    <option value="off">normalny</option>
+                    <option value="small">small</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-small"></pre>
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-small"></div>
+        </div>
+
+        <script>
+            (function () {
+
+                var mode = document.getElementById("sim-small-mode");
+                var kod = document.getElementById("sim-kod-small");
+                var podglad = document.getElementById("sim-podglad-small");
+
+                var tekst = "Przykładowy mały tekst";
+
+                function aktualizuj() {
+
+                    podglad.innerHTML = "";
+
+                    var p = document.createElement("p");
+
+                    if (mode.value === "small") {
+                        p.innerHTML = "Przykładowy <small>mały</small> tekst";
+                        kod.textContent = "<p>Przykładowy <small>mały</small> tekst</p>";
+                    } else {
+                        p.textContent = tekst;
+                        kod.textContent = "<p>" + tekst + "</p>";
+                    }
+
+                    podglad.appendChild(p);
+
+                }
+
+                mode.addEventListener("change", aktualizuj);
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

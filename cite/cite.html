@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>cite</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;cite&gt;</strong> służy do oznaczania tytułów dzieł, książek, filmów, artykułów albo
+            innych źródeł. Używa się go wtedy, gdy chcemy wskazać nazwę publikacji.</p>
+        <p>Jest elementem <strong>liniowym</strong>, więc nie robi nowej linii i działa w środku tekstu.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>oznaczyć tytuł książki lub filmu</li>
+            <li>podkreślić nazwę artykułu</li>
+            <li>wskazać źródło cytatu</li>
+        </ul>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>cite</td>
+                <td>URL</td>
+                <td>Wskazuje źródło lub odniesienie do materiału, z którego pochodzi cytowana treść</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik ma znaczenie semantyczne. Informuje przeglądarkę i czytniki ekranu, że to tytuł dzieła lub źródło.
+            Może być używany w bibliografiach i cytowaniach.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Liniowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Tytuł dzieła lub źródło</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Elementów blokowych i liniowych</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Sprawdź jak działa atrybut <code>cite</code> w znaczniku &lt;cite&gt;.</p>
+
+        <div class="sim-controls">
+            <label>
+                Źródło (cite):
+                <select id="sim-cite">
+                    <option value="">brak</option>
+                    <option value="https://example.com">https://example.com</option>
+                    <option value="https://wikipedia.org">https://wikipedia.org</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-cite"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-cite"></div>
+        </div>
+
+        <script>
+            (function () {
+                var sel = document.getElementById("sim-cite");
+                var kod = document.getElementById("sim-kod-cite");
+                var podgl = document.getElementById("sim-podglad-cite");
+
+                function aktualizuj() {
+                    var v = sel.value;
+
+                    podgl.innerHTML = "";
+
+                    var el = document.createElement("cite");
+                    el.textContent = "Przykładowe źródło";
+
+                    if (v !== "") {
+                        el.title = v;
+                        kod.textContent = "<cite cite=\"" + v + "\">Przykładowe źródło</cite>";
+                    } else {
+                        kod.textContent = "<cite>Przykładowe źródło</cite>";
+                    }
+
+                    podgl.appendChild(el);
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

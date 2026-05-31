@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>text-align</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="wlasciwosc">
+
+    <section>
+        <p>Właściwość <strong>text-align</strong> służy do ustawiania wyrównania tekstu w poziomie. Dzięki niej możemy
+            zdecydować, czy tekst będzie po lewej, prawej stronie, wyśrodkowany albo rozciągnięty.</p>
+
+        <p>Najczęściej używa się jej w akapitach, nagłówkach i blokach tekstowych. Nie działa na elementy liniowe
+            pojedynczo, tylko na kontener tekstu.</p>
+
+        <p>Jest bardzo ważna przy tworzeniu czytelnych układów stron.</p>
+    </section>
+
+    <section>
+        <p>Składnia: <code>text-align: wartość;</code></p>
+
+        <table>
+            <tr>
+                <th>Wartość</th>
+                <th>Co robi</th>
+            </tr>
+
+            <tr>
+                <td>left</td>
+                <td>Wyrównuje tekst do lewej strony</td>
+            </tr>
+
+            <tr>
+                <td>right</td>
+                <td>Wyrównuje tekst do prawej strony</td>
+            </tr>
+
+            <tr>
+                <td>center</td>
+                <td>Wyśrodkowuje tekst</td>
+            </tr>
+
+            <tr>
+                <td>justify</td>
+                <td>Rozciąga tekst na całą szerokość bloku</td>
+            </tr>
+
+            <tr>
+                <td>start</td>
+                <td>Wyrównanie zależne od kierunku pisania (LTR/RTL)</td>
+            </tr>
+
+            <tr>
+                <td>end</td>
+                <td>Wyrównanie do końca linii</td>
+            </tr>
+
+            <tr>
+                <td>inherit</td>
+                <td>Dziedziczy wartość od elementu nadrzędnego</td>
+            </tr>
+
+            <tr>
+                <td>initial</td>
+                <td>Przywraca wartość domyślną</td>
+            </tr>
+
+            <tr>
+                <td>unset</td>
+                <td>Działa jak inherit lub initial zależnie od kontekstu</td>
+            </tr>
+        </table>
+
+        <pre><code>p {<br>
+    text-align: center;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Domyślna wartość to <code>left</code>, czyli wyrównanie do lewej strony.</p>
+
+        <p>Jeśli nie ustawimy tej właściwości, tekst w językach takich jak polski będzie automatycznie wyrównany do
+            lewej.</p>
+
+        <p>Wartość <code>initial</code> przywraca domyślne wyrównanie, a <code>inherit</code> przejmuje ustawienie od
+            rodzica.</p>
+    </section>
+
+    <section>
+        <p>Właściwość <code>text-align</code> nie zawsze jest dziedziczona bezpośrednio, ale w praktyce zachowuje się
+            jak dziedziczona dla bloków tekstowych.</p>
+
+        <p>Jeśli ustawimy wyrównanie dla <code>div</code>, jego elementy potomne często będą wyglądały tak samo.</p>
+
+        <pre><code>div {<br>
+    text-align: center;<br>
+}</code></pre>
+
+        <p>Możemy nadpisać to w dzieciach:</p>
+
+        <pre><code>p {<br>
+    text-align: left;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Przykłady użycia:</p>
+
+        <p>Wyśrodkowany nagłówek:</p>
+        <pre><code>h1 {<br>
+    text-align: center;<br>
+}</code></pre>
+
+        <p>Tekst wyrównany do prawej:</p>
+        <pre><code>.prawa {<br>
+    text-align: right;<br>
+}</code></pre>
+
+        <p>Tekst wyjustowany:</p>
+        <pre><code>p {<br>
+    text-align: justify;<br>
+}</code></pre>
+
+        <p>Domyślne wyrównanie:</p>
+        <pre><code>body {<br>
+    text-align: left;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Wybierz wyrównanie tekstu i zobacz jak zmienia się układ akapitu.</p>
+
+        <div class="sim-controls">
+            <label>
+                Wyrównanie:
+                <select id="sim-align">
+                    <option value="left">left</option>
+                    <option value="right">right</option>
+                    <option value="center">center</option>
+                    <option value="justify">justify</option>
+                    <option value="start">start</option>
+                    <option value="end">end</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var select = document.getElementById("sim-align");
+                var kod = document.getElementById("sim-kod");
+                var podglad = document.getElementById("sim-podglad");
+
+                function aktualizuj() {
+                    var val = select.value;
+
+                    kod.textContent = "text-align: " + val + ";";
+
+                    while (podglad.firstChild) {
+                        podglad.removeChild(podglad.firstChild);
+                    }
+
+                    var box = document.createElement("div");
+                    box.style.cssText = "width:100%;";
+
+                    var h = document.createElement("h3");
+                    h.textContent = "Przykładowy nagłówek";
+                    h.style.textAlign = val;
+
+                    var p = document.createElement("p");
+                    p.textContent = "Zażółć gęślą jaźń. To jest przykładowy tekst do testowania wyrównania.";
+                    p.style.textAlign = val;
+
+                    var p2 = document.createElement("p");
+                    p2.textContent = "HTML i CSS pozwalają kontrolować wygląd strony internetowej.";
+                    p2.style.textAlign = val;
+
+                    box.appendChild(h);
+                    box.appendChild(p);
+                    box.appendChild(p2);
+
+                    podglad.appendChild(box);
+                }
+
+                select.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

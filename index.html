@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Samouczek HTML i CSS - materiały do nauki przed egzaminem zawodowym">
+    <meta name="author" content="Adam Bartosz">
+    <title>Samouczek HTML i CSS</title>
+    <link rel="stylesheet" href="css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* style tylko dla strony głównej */
+
+        .index-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 24px 32px;
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.13);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(30px) scale(0.97);
+            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .index-hero.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .index-hero h1 {
+            font-size: clamp(28px, 5vw, 52px);
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+            margin-bottom: 14px;
+        }
+
+        .index-hero h1 span {
+            color: rgba(255, 255, 255, 0.55);
+            font-weight: 300;
+        }
+
+        .index-hero p {
+            font-size: clamp(14px, 2vw, 17px);
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.65;
+            margin-bottom: 0;
+            width: 100%;
+        }
+
+        .index-divider {
+            width: 60px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 2px;
+            margin: 18px auto;
+        }
+
+        .index-card {
+            background: rgba(255, 255, 255, 0.93);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 22px 20px 18px;
+            opacity: 0;
+            transform: translateY(28px) scale(0.96);
+            transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 2px 14px rgba(0, 0, 0, 0.13);
+        }
+
+        .index-card.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .index-card-ikona {
+            font-size: 28px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .index-card h2 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #2a0060;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 8px;
+            padding-bottom: 7px;
+            border-bottom: 2px solid rgba(42, 0, 96, 0.1);
+        }
+
+        .index-card p {
+            font-size: 13px;
+            color: rgba(0, 0, 0, 0.62);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .index-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .index-card ul li {
+            font-size: 12.5px;
+            color: rgba(0, 0, 0, 0.55);
+            padding: 3px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .index-card ul li::before {
+            content: "";
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: rgba(42, 0, 96, 0.3);
+            flex-shrink: 0;
+        }
+
+        .index-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .index-card .wiecej {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 5px 14px;
+            background: #2a0060;
+            color: #fff;
+            border-radius: 999px;
+            font-size: 12px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            transition: background 0.15s;
+        }
+
+        .index-card .wiecej:hover {
+            background: #3d0090;
+        }
+
+        /* info na dole */
+        .index-info {
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 16px 22px;
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out 0.3s, transform 0.5s ease-out 0.3s;
+        }
+
+        .index-info.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .index-info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .index-info-item strong {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .index-info-item span {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.65);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        /* kontener na indeksie - inna siatka */
+        body .container {
+            grid-template-columns: repeat(3, 1fr);
+            align-items: start;
+        }
+
+        @media (max-width: 1200px) {
+            body .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            body .container {
+                grid-template-columns: 1fr;
+            }
+
+            .index-hero,
+            .index-info {
+                grid-column: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="index-hero" id="hero">
+        <h1>Samouczek <span>/</span> HTML i CSS</h1>
+        <div class="index-divider"></div>
+        <p>
+            Wszystko, co warto znać i wiedzieć o HTML i CSS przed egzaminem zawodowym
+        </p>
+    </div>
+
+    <div class="index-card" id="karta-podstawy">
+        <span class="index-card-ikona">&#127760;</span>
+        <h2>Podstawy internetu i HTML</h2>
+        <p>Historia, standardy, narzędzia i zasady tworzenia poprawnych dokumentów HTML.</p>
+        <ul>
+            <li>HTML – wprowadzenie i historia</li>
+            <li>W3C, standardy, DOCTYPE</li>
+            <li>Walidator, Lorem Ipsum, XML</li>
+            <li>Strona a witryna, portal, wortal</li>
+            <li>Składnia, zasady, drzewo elementów</li>
+        </ul>
+        <button class="wiecej" onclick="przejdzDoKategorii(0)">Przeglądaj dział</button>
+    </div>
+
+    <div class="index-card" id="karta-znaczniki">
+        <span class="index-card-ikona">&#128196;</span>
+        <h2>Znaczniki HTML</h2>
+        <p>Wszystkie znaczniki z podstawy programowej – opis, atrybuty i interaktywne przykłady.</p>
+        <ul>
+            <li>Struktura: html, head, body, meta, div, span</li>
+            <li>Tekst: nagłówki, akapity, formatowanie, cytaty</li>
+            <li>Listy: ul, ol, dl i zagnieżdżanie</li>
+            <li>Tabele: thead, tbody, colspan, rowspan</li>
+            <li>Linki, obrazki, multimedia, SVG</li>
+            <li>Formularze: input, select, fieldset, datalist</li>
+            <li>Semantyka HTML5 i dostępność</li>
+        </ul>
+        <button class="wiecej" onclick="przejdzDoKategorii(1)">Przeglądaj dział</button>
+    </div>
+
+    <div class="index-card" id="karta-css">
+        <span class="index-card-ikona">&#127912;</span>
+        <h2>CSS</h2>
+        <p>Arkusze stylów od podstaw – selektory, box model, layouty i animacje.</p>
+        <ul>
+            <li>Selektory, pseudoklasy, pseudoelementy</li>
+            <li>Czcionki, kolory, tło, dekoracje tekstu</li>
+            <li>Model pudełkowy, jednostki, wymiary</li>
+            <li>Float, pozycjonowanie, overflow</li>
+            <li>Flexbox i Grid</li>
+            <li>Menu poziome, pionowe i rozwijane</li>
+            <li>Responsywność, animacje, gradienty</li>
+        </ul>
+        <button class="wiecej" onclick="przejdzDoKategorii(2)">Przeglądaj dział</button>
+    </div>
+
+    <div class="index-info" id="info-pasek">
+        <div class="index-info-item">
+            <strong>3</strong>
+            <span>działy</span>
+        </div>
+        <div class="index-info-item">
+            <strong>100+</strong>
+            <span>tematów</span>
+        </div>
+        <div class="index-info-item">
+            <strong>HTML5</strong>
+            <span>standard</span>
+        </div>
+        <div class="index-info-item">
+            <strong>egzamin</strong>
+            <span>INF 03</span>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+
+    <script>
+        function przejdzDoKategorii(index) {
+            var przyciski = document.querySelectorAll(".nav-rzad:first-child .nav-kat-btn");
+            if (przyciski && przyciski[index]) {
+                przyciski[index].click();
+                document.querySelector("nav").scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        }
+
+        window.addEventListener("load", function () {
+            setTimeout(function () {
+                var hero = document.getElementById("hero");
+                if (hero) hero.classList.add("show");
+            }, 200);
+            ["karta-podstawy", "karta-znaczniki", "karta-css"].forEach(function (id, i) {
+                setTimeout(function () {
+                    var el = document.getElementById(id);
+                    if (el) el.classList.add("show");
+                }, 350 + i * 100);
+            });
+            setTimeout(function () {
+                var info = document.getElementById("info-pasek");
+                if (info) info.classList.add("show");
+            }, 700);
+        });
+    </script>
+
+</body>
+
+</html>

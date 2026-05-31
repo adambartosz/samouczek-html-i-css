@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Stylowanie tabel CSS</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Dlaczego tabele wymagają specjalnego stylowania?</h2>
+        <p>Domyślna tabela HTML wygląda brzydko - brak obramowania, brak odstępów, komórki kleją się do siebie. Do
+            sensownego wyglądu potrzebujesz kilku właściwości CSS, które działają specyficznie dla tabel i nie mają
+            odpowiedników w innych elementach.</p>
+        <p>Najważniejsze z nich to <strong><code>border-collapse</code></strong> i
+            <strong><code>border-spacing</code></strong> - kontrolują czy obramowania komórek się łączą czy są osobne.
+            Reszta to standardowe CSS: tło, padding, kolory, czcionka.</p>
+    </section>
+
+    <section>
+        <h2>border-collapse - najważniejsza właściwość</h2>
+        <p>Domyślnie każda komórka tabeli ma <strong>własne</strong> obramowanie, co powoduje podwójne linie między
+            komórkami. <code>border-collapse: collapse</code> scala te obramowania w jedno - i to pierwsza rzecz którą
+            ustawiasz przy każdej tabeli.</p>
+        <pre><code>table {<br>
+  border-collapse: collapse;<br>
+}<br>
+<br>
+table {<br>
+  border-collapse: separate;<br>
+  border-spacing: 4px;<br>
+}</code></pre>
+        <p>Wartości:</p>
+        <table>
+            <tr>
+                <th>Wartość</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>collapse</td>
+                <td>Obramowania sąsiednich komórek łączą się w jedną linię - wygląda schludnie</td>
+            </tr>
+            <tr>
+                <td>separate</td>
+                <td>Każda komórka ma swoje własne obramowanie, między nimi jest odstęp kontrolowany przez border-spacing
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Obramowania komórek</h2>
+        <p>Border ustawiasz na <code>th</code> i <code>td</code>, nie na <code>table</code> - bo border na table daje
+            tylko zewnętrzną ramkę całej tabeli, bez linii między komórkami.</p>
+        <pre><code>th, td {<br>
+  border: 1px solid #ccc;<br>
+}<br>
+<br>
+table {<br>
+  border-collapse: collapse;<br>
+}</code></pre>
+        <p>Możesz też robić selektywne obramowania - np. tylko poziome linie (styl "liniowy"):</p>
+        <pre><code>th, td {<br>
+  border-bottom: 1px solid #e0e0e0;<br>
+  border-top: none;<br>
+  border-left: none;<br>
+  border-right: none;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Padding, wyrównanie, szerokości</h2>
+        <p>Bez paddingu tekst w komórkach przylega do krawędzi i jest nieczytelny. Dodaj go zawsze:</p>
+        <pre><code>th, td {<br>
+  padding: 10px 16px;<br>
+}</code></pre>
+        <p>Wyrównanie tekstu - domyślnie <code>&lt;th&gt;</code> jest wyśrodkowany i pogrubiony, <code>&lt;td&gt;</code>
+            jest do lewej. Możesz to zmienić:</p>
+        <pre><code>th {<br>
+  text-align: left;<br>
+}<br>
+<br>
+td:last-child {<br>
+  text-align: right;<br>
+}</code></pre>
+        <p>Szerokości kolumn - tabela domyślnie dopasowuje szerokość do treści. Możesz to kontrolować:</p>
+        <pre><code>table {<br>
+  width: 100%;<br>
+  table-layout: fixed;<br>
+}<br>
+<br>
+td:first-child {<br>
+  width: 40%;<br>
+}</code></pre>
+        <p><code>table-layout: fixed</code> sprawia że przeglądarka nie oblicza szerokości na podstawie treści tylko
+            respektuje Twoje wartości - tabela renderuje się szybciej i kolumny mają przewidywalne szerokości.</p>
+    </section>
+
+    <section>
+        <h2>Kolory, naprzemienne wiersze, hover</h2>
+        <p>Najczęstsze techniki stylowania wierszy:</p>
+        <pre><code>thead {<br>
+  background: #333;<br>
+  color: #fff;<br>
+}<br>
+<br>
+tbody tr:nth-child(even) {<br>
+  background: #f5f5f5;<br>
+}<br>
+<br>
+tbody tr:hover {<br>
+  background: #e8e0ff;<br>
+}</code></pre>
+        <p><code>:nth-child(even)</code> zaznacza co drugi wiersz - tzw. efekt zebry. <code>:hover</code> podświetla
+            wiersz po najechaniu myszą - przydatne w tabelach z dużą ilością danych.</p>
+        <p>Stylowanie konkretnej sekcji - <code>thead</code>, <code>tbody</code>, <code>tfoot</code> jako selektory CSS:
+        </p>
+        <pre><code>tfoot {<br>
+  border-top: 2px solid #333;<br>
+  font-weight: bold;<br>
+  background: #f0f0f0;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Interaktywny symulator stylowania tabeli</h2>
+        <p>Ustaw różne kombinacje stylów i obserwuj jak zmienia się wygląd tabeli oraz jaki kod CSS jest potrzebny.</p>
+
+        <div class="sim-controls">
+            <label>border-collapse:
+                <select id="sim-bc">
+                    <option value="collapse" selected>collapse</option>
+                    <option value="separate">separate</option>
+                </select>
+            </label>
+            <label>Styl obramowania:
+                <select id="sim-border">
+                    <option value="pelne" selected>pełne (wszystkie krawędzie)</option>
+                    <option value="poziome">tylko poziome linie</option>
+                    <option value="zewnetrzne">tylko zewnętrzna ramka</option>
+                    <option value="brak">brak obramowania</option>
+                </select>
+            </label>
+            <label>Styl nagłówka (thead):
+                <option value="brak" selected>brak</option>
+                <select id="sim-thead">
+                    <option value="ciemny" selected>ciemne tło</option>
+                    <option value="fioletowy">fioletowe tło</option>
+                    <option value="brak">brak stylowania</option>
+                </select>
+            </label>
+            <label>Styl wierszy (tbody):
+                <select id="sim-rows">
+                    <option value="brak" selected>brak</option>
+                    <option value="zebra">naprzemienne kolory</option>
+                    <option value="hover">podświetlanie hover</option>
+                    <option value="oba">zebra + hover</option>
+                </select>
+            </label>
+            <label>Styl stopki (tfoot):
+                <select id="sim-tfoot">
+                    <option value="brak" selected>brak</option>
+                    <option value="pogrubiony">pogrubiony + linia</option>
+                    <option value="kolor">szare tło</option>
+                </select>
+            </label>
+            <label>Padding komórek:
+                <select id="sim-padding">
+                    <option value="4px 8px">mały (4px 8px)</option>
+                    <option value="10px 16px" selected>normalny (10px 16px)</option>
+                    <option value="16px 24px">duży (16px 24px)</option>
+                </select>
+            </label>
+            <label>table-layout:
+                <select id="sim-layout">
+                    <option value="auto" selected>auto</option>
+                    <option value="fixed">fixed</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad" style="overflow:auto;"></div>
+        </div>
+
+        <script>
+            (function () {
+                var bcSel = document.getElementById("sim-bc");
+                var borderSel = document.getElementById("sim-border");
+                var theadSel = document.getElementById("sim-thead");
+                var rowsSel = document.getElementById("sim-rows");
+                var tfootSel = document.getElementById("sim-tfoot");
+                var paddingSel = document.getElementById("sim-padding");
+                var layoutSel = document.getElementById("sim-layout");
+                var kod = document.getElementById("sim-kod");
+                var podglad = document.getElementById("sim-podglad");
+
+                var kolumny = ["Produkt", "Ilość", "Cena"];
+                var dane = [
+                    ["Laptop", "1", "3500 zł"],
+                    ["Mysz", "2", "160 zł"],
+                    ["Klawiatura", "1", "150 zł"],
+                    ["Monitor", "1", "900 zł"]
+                ];
+                var suma = "4710 zł";
+
+                function aktualizuj() {
+                    var bc = bcSel.value;
+                    var border = borderSel.value;
+                    var thead = theadSel.value;
+                    var rows = rowsSel.value;
+                    var tfoot = tfootSel.value;
+                    var pad = paddingSel.value;
+                    var layout = layoutSel.value;
+
+                    var css = [];
+                    css.push("table {");
+                    css.push("  border-collapse: " + bc + ";");
+                    if (bc === "separate") css.push("  border-spacing: 4px;");
+                    css.push("  width: 100%;");
+                    if (layout === "fixed") css.push("  table-layout: fixed;");
+                    css.push("}");
+                    css.push("");
+                    css.push("th, td {");
+                    css.push("  padding: " + pad + ";");
+                    if (border === "pelne") { css.push("  border: 1px solid #ccc;"); }
+                    else if (border === "poziome") { css.push("  border-bottom: 1px solid #ddd;"); css.push("  border-top: none;"); css.push("  border-left: none;"); css.push("  border-right: none;"); }
+                    else if (border === "zewnetrzne") { css.push("  border: none;"); }
+                    css.push("}");
+                    if (border === "zewnetrzne") {
+                        css.push("");
+                        css.push("table {");
+                        css.push("  border: 2px solid #333;");
+                        css.push("}");
+                    }
+                    if (thead !== "brak") {
+                        css.push("");
+                        css.push("thead {");
+                        if (thead === "ciemny") { css.push("  background: #333;"); css.push("  color: #fff;"); }
+                        if (thead === "fioletowy") { css.push("  background: #7c3aed;"); css.push("  color: #fff;"); }
+                        css.push("}");
+                    }
+                    if (rows === "zebra" || rows === "oba") {
+                        css.push("");
+                        css.push("tbody tr:nth-child(even) {");
+                        css.push("  background: #f5f5f5;");
+                        css.push("}");
+                    }
+                    if (rows === "hover" || rows === "oba") {
+                        css.push("");
+                        css.push("tbody tr:hover {");
+                        css.push("  background: #e8e0ff;");
+                        css.push("}");
+                    }
+                    if (tfoot !== "brak") {
+                        css.push("");
+                        css.push("tfoot {");
+                        if (tfoot === "pogrubiony") { css.push("  font-weight: bold;"); css.push("  border-top: 2px solid #333;"); }
+                        if (tfoot === "kolor") { css.push("  background: #f0f0f0;"); css.push("  font-weight: bold;"); }
+                        css.push("}");
+                    }
+                    kod.innerHTML = css.map(function (l) { return l.replace(/</g, "&lt;").replace(/>/g, "&gt;"); }).join("\n");
+
+                    podglad.innerHTML = "";
+
+                    var tbl = document.createElement("table");
+                    var tblStyle = "border-collapse:" + bc + "; width:100%;";
+                    if (bc === "separate") tblStyle += " border-spacing:4px;";
+                    if (layout === "fixed") tblStyle += " table-layout:fixed;";
+                    if (border === "zewnetrzne") tblStyle += " border:2px solid #333;";
+                    tbl.style.cssText = tblStyle;
+
+                    var tdBorderStyle = "";
+                    if (border === "pelne") tdBorderStyle = "border:1px solid #ccc;";
+                    else if (border === "poziome") tdBorderStyle = "border-bottom:1px solid #ddd;";
+                    else if (border === "zewnetrzne") tdBorderStyle = "";
+
+                    var theadBg = "", theadColor = "";
+                    if (thead === "ciemny") { theadBg = "#333"; theadColor = "#fff"; }
+                    if (thead === "fioletowy") { theadBg = "#7c3aed"; theadColor = "#fff"; }
+
+                    var theadEl = document.createElement("thead");
+                    var trH = document.createElement("tr");
+                    kolumny.forEach(function (k) {
+                        var th = document.createElement("th");
+                        th.textContent = k;
+                        th.style.cssText = "padding:" + pad + "; " + tdBorderStyle +
+                            (theadBg ? " background:" + theadBg + "; color:" + theadColor + ";" : "");
+                        trH.appendChild(th);
+                    });
+                    theadEl.appendChild(trH);
+                    tbl.appendChild(theadEl);
+
+                    var tbodyEl = document.createElement("tbody");
+                    dane.forEach(function (w, idx) {
+                        var tr = document.createElement("tr");
+                        var zebraBg = ((rows === "zebra" || rows === "oba") && idx % 2 === 1) ? "#f5f5f5" : "#fff";
+                        tr.style.background = zebraBg;
+                        if (rows === "hover" || rows === "oba") {
+                            var origBg = zebraBg;
+                            tr.addEventListener("mouseover", function () { this.style.background = "#e8e0ff"; });
+                            tr.addEventListener("mouseout", function () { this.style.background = origBg; });
+                        }
+                        w.forEach(function (d) {
+                            var td = document.createElement("td");
+                            td.textContent = d;
+                            td.style.cssText = "padding:" + pad + "; " + tdBorderStyle;
+                            tr.appendChild(td);
+                        });
+                        tbodyEl.appendChild(tr);
+                    });
+                    tbl.appendChild(tbodyEl);
+
+                    var tfootEl = document.createElement("tfoot");
+                    var trF = document.createElement("tr");
+                    var tfStyle = "";
+                    if (tfoot === "pogrubiony") tfStyle = "font-weight:bold; border-top:2px solid #333;";
+                    if (tfoot === "kolor") tfStyle = "font-weight:bold; background:#f0f0f0;";
+                    ["Razem:", "", suma].forEach(function (d, i) {
+                        var td = document.createElement("td");
+                        td.textContent = d;
+                        td.style.cssText = "padding:" + pad + "; " + tdBorderStyle + " " + tfStyle;
+                        trF.appendChild(td);
+                    });
+                    tfootEl.appendChild(trF);
+                    tbl.appendChild(tfootEl);
+
+                    podglad.appendChild(tbl);
+                }
+
+                bcSel.addEventListener("change", aktualizuj);
+                borderSel.addEventListener("change", aktualizuj);
+                theadSel.addEventListener("change", aktualizuj);
+                rowsSel.addEventListener("change", aktualizuj);
+                tfootSel.addEventListener("change", aktualizuj);
+                paddingSel.addEventListener("change", aktualizuj);
+                layoutSel.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

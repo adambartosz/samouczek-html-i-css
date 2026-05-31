@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>figure>, &lt;figcaption</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+
+    <section>
+        <p>Znacznik <strong>&lt;figure&gt;</strong> służy do grupowania obrazka albo innej treści graficznej razem z
+            opisem. Najczęściej działa w parze z <code>&lt;figcaption&gt;</code>.</p>
+        <p>To element blokowy, który ma sens semantyczny, bo łączy obraz i jego podpis w jedną całość.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>połączyć obrazek z podpisem</li>
+            <li>dodać opis do ilustracji w artykule</li>
+            <li>zrobić galerie z opisami</li>
+            <li>oznaczyć grafikę jako osobny „blok treści”</li>
+        </ul>
+        <p>Zamiast samego tekstu pod obrazkiem lepiej użyć <code>&lt;figcaption&gt;</code>.</p>
+    </section>
+
+    <section>
+    </section>
+
+    <section>
+        <p>Znacznik <code>&lt;figure&gt;</code> ma znaczenie semantyczne. Przeglądarka i czytniki ekranu rozumieją,
+            że obraz i podpis to jedna całość.</p>
+        <p><code>&lt;figcaption&gt;</code> opisuje zawartość <code>&lt;figure&gt;</code> i jest z nią logicznie
+            powiązany.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Grupa treści graficznej z opisem</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>img, figcaption, tekst, inne elementy blokowe</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>section, article, div</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>block</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz sprawdzić jak działa <code>&lt;figure&gt;</code> i
+            <code>&lt;figcaption&gt;</code>. Możesz zmieniać obraz i podpis.
+        </p>
+
+        <div class="sim-controls">
+
+            <label>
+                Obraz:
+                <select id="sim-fig-img">
+                    <option value="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg">Góry
+                    </option>
+                    <option value="https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png">Logo
+                    </option>
+                </select>
+            </label>
+
+            <label>
+                Podpis:
+                <select id="sim-fig-cap">
+                    <option value="Widok gór">Widok gór</option>
+                    <option value="Logo aplikacji">Logo aplikacji</option>
+                    <option value="">brak podpisu</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-fig"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-fig"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var imgSel = document.getElementById("sim-fig-img");
+                var capSel = document.getElementById("sim-fig-cap");
+
+                var kod = document.getElementById("sim-kod-fig");
+                var podglad = document.getElementById("sim-podglad-fig");
+
+                function aktualizuj() {
+
+                    var img = imgSel.value;
+                    var cap = capSel.value;
+
+                    podglad.innerHTML = "";
+
+                    var figure = document.createElement("figure");
+                    figure.style.cssText = "margin:0;display:flex;flex-direction:column;gap:6px;align-items:flex-start;";
+
+                    var image = document.createElement("img");
+                    image.src = img;
+                    image.style.maxWidth = "100%";
+
+                    figure.appendChild(image);
+
+                    var capEl;
+
+                    if (cap && cap.trim() !== "") {
+                        capEl = document.createElement("figcaption");
+                        capEl.textContent = cap;
+                        figure.appendChild(capEl);
+                    }
+
+                    kod.textContent =
+                        '<figure>\n  <img src="' + img + '">\n' +
+                        (cap && cap.trim() !== "" ? '  <figcaption>' + cap + '</figcaption>\n' : '') +
+                        '</figure>';
+
+                    podglad.appendChild(figure);
+
+                }
+
+                imgSel.addEventListener("change", aktualizuj);
+                capSel.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

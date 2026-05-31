@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>code</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .sim-preview code {
+            all: revert;
+            font-weight: revert;
+            font-size: revert;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;code&gt;</strong> służy do oznaczania fragmentów kodu komputerowego w tekście. Zmienia
+            sposób wyświetlania tekstu na monospace.</p>
+        <p>Jest elementem <strong>liniowym</strong>.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>pokazać kod HTML, CSS lub JS</li>
+            <li>wyróżnić nazwę funkcji</li>
+            <li>opisać komendy techniczne</li>
+        </ul>
+    </section>
+
+    <section>
+    </section>
+
+    <section>
+        <p>Znacznik ma znaczenie semantyczne – informuje, że tekst to kod. Czytniki ekranów mogą zmieniać sposób odczytu
+            takiego fragmentu.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Liniowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Fragment kodu komputerowego</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Blokowych i liniowych</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Sprawdź jak wygląda <code>&lt;code&gt;</code> w tekście.</p>
+
+        <div class="sim-controls">
+            <label>
+                Tryb:
+                <select id="sim-code">
+                    <option value="on">code</option>
+                    <option value="off">plain</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-code"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-code"></div>
+        </div>
+
+        <script>
+            (function () {
+                var sel = document.getElementById("sim-code");
+                var kod = document.getElementById("sim-kod-code");
+                var podgl = document.getElementById("sim-podglad-code");
+
+                function aktualizuj() {
+                    var v = sel.value;
+
+                    podgl.innerHTML = "";
+
+                    var el = document.createElement("p");
+
+                    if (v === "on") {
+                        var c = document.createElement("code");
+                        c.textContent = "console.log('hello world')";
+                        el.appendChild(c);
+                        kod.textContent = "<code>console.log('hello world')</code>";
+                    } else {
+                        el.textContent = "console.log('hello world')";
+                        kod.textContent = "<p>console.log('hello world')</p>";
+                    }
+
+                    podgl.appendChild(el);
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Zagnieżdżone tabele</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Czym są zagnieżdżone tabele?</h2>
+        <p>Zagnieżdżona tabela to zwykła tabela HTML wstawiona wewnątrz komórki <code>&lt;td&gt;</code> lub
+            <code>&lt;th&gt;</code> innej tabeli. Zewnętrzna tabela wyznacza ogólny układ, a wewnętrzna służy do
+            pokazania bardziej szczegółowych, powiązanych danych w konkretnej komórce.
+        </p>
+        <p>Każda zagnieżdżona tabela jest całkowicie niezależna od tabeli nadrzędnej - ma własne wiersze, kolumny,
+            nagłówki i atrybuty. To co dzieje się w środku nie wpływa na to co na zewnątrz.</p>
+    </section>
+
+    <section>
+        <h2>Kiedy tego używać?</h2>
+        <p>Zagnieżdżone tabele mają sens kiedy:</p>
+        <ul>
+            <li>dane w jednej kolumnie same w sobie mają strukturę tabelaryczną - np. lista zamówień wewnątrz wiersza
+                klienta</li>
+            <li>chcesz pokazać dane hierarchiczne - np. firma → oddziały → pracownicy</li>
+            <li>tworzysz maile HTML - klienty pocztowe (Outlook, Gmail) słabo obsługują Flexbox i Grid, więc
+                zagnieżdżone tabele to tam standard do budowania układu</li>
+            <li>colspan i rowspan nie wystarczają do opisania złożonej struktury danych</li>
+        </ul>
+        <p>Kiedy <strong>nie</strong> używać zagnieżdżonych tabel:</p>
+        <ul>
+            <li>do tworzenia układu strony internetowej - od tego jest Flexbox i Grid, tabele to narzędzie do danych
+                tabelarycznych, nie do layoutu</li>
+            <li>kiedy tę samą strukturę można opisać przez colspan lub rowspan w jednej tabeli - zagnieżdżanie
+                niepotrzebnie komplikuje kod i utrudnia czytniki ekranu</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Jak to wygląda w kodzie?</h2>
+        <p>Tabela wewnętrzna trafia bezpośrednio do środka <code>&lt;td&gt;</code>. Może tam być sama albo razem z inną
+            treścią - tekst, nagłówek, cokolwiek.</p>
+        <pre><code>&lt;table&gt;<br>
+  &lt;tr&gt;<br>
+    &lt;th&gt;Klient&lt;/th&gt;<br>
+    &lt;th&gt;Zamówienia&lt;/th&gt;<br>
+  &lt;/tr&gt;<br>
+  &lt;tr&gt;<br>
+    &lt;td&gt;Jan Kowalski&lt;/td&gt;<br>
+    &lt;td&gt;<br>
+      &lt;table&gt;<br>
+        &lt;tr&gt;<br>
+          &lt;th&gt;Produkt&lt;/th&gt;<br>
+          &lt;th&gt;Ilość&lt;/th&gt;<br>
+          &lt;th&gt;Cena&lt;/th&gt;<br>
+        &lt;/tr&gt;<br>
+        &lt;tr&gt;<br>
+          &lt;td&gt;Klawiatura&lt;/td&gt;<br>
+          &lt;td&gt;1&lt;/td&gt;<br>
+          &lt;td&gt;150 zł&lt;/td&gt;<br>
+        &lt;/tr&gt;<br>
+        &lt;tr&gt;<br>
+          &lt;td&gt;Mysz&lt;/td&gt;<br>
+          &lt;td&gt;2&lt;/td&gt;<br>
+          &lt;td&gt;80 zł&lt;/td&gt;<br>
+        &lt;/tr&gt;<br>
+      &lt;/table&gt;<br>
+    &lt;/td&gt;<br>
+  &lt;/tr&gt;<br>
+&lt;/table&gt;</code></pre>
+        <p>Zewnętrzna tabela ma 2 kolumny: "Klient" i "Zamówienia". W komórce "Zamówienia" siedzi cała oddzielna tabela
+            z 3 kolumnami - Produkt, Ilość, Cena. Wewnętrzna tabela nie "wie" nic o zewnętrznej i odwrotnie.</p>
+    </section>
+
+    <section>
+        <h2>Głębsze zagnieżdżanie</h2>
+        <p>Technicznie możesz zagnieżdżać tabele wielokrotnie - tabela w tabeli w tabeli. W praktyce rzadko kiedy
+            potrzebujesz więcej niż dwa poziomy, bo kod robi się bardzo nieczytelny i trudny w utrzymaniu.</p>
+        <pre><code>&lt;table&gt;<br>
+  &lt;tr&gt;<br>
+    &lt;td&gt;<br>
+      &lt;table&gt;<br>
+        &lt;tr&gt;<br>
+          &lt;td&gt;<br>
+            &lt;table&gt;<br>
+              &lt;tr&gt;&lt;td&gt;Trzeci poziom&lt;/td&gt;&lt;/tr&gt;<br>
+            &lt;/table&gt;<br>
+          &lt;/td&gt;<br>
+        &lt;/tr&gt;<br>
+      &lt;/table&gt;<br>
+    &lt;/td&gt;<br>
+  &lt;/tr&gt;<br>
+&lt;/table&gt;</code></pre>
+        <p>Przy takim kodzie bardzo łatwo się pomylić z zamykaniem znaczników. Jak już musisz zagnieżdżać głębiej, to
+            pisz każdy poziom z wyraźnymi wcięciami i komentarzami (w normalnym projekcie, nie tutaj - tu komentarze są
+            zabronione przez zasady).</p>
+    </section>
+
+    <section>
+        <h2>Zagnieżdżone tabele a semantyka i dostępność</h2>
+        <p>Czytniki ekranu (np. NVDA, JAWS używane przez niewidomych) interpretują tabele jako struktury danych. Przy
+            zagnieżdżonych tabelach czytnik "wchodzi" do wewnętrznej tabeli, odczytuje ją jako osobną strukturę, a potem
+            wraca do zewnętrznej. To może dezorientować użytkownika jeśli nie ma sensu logicznego - dlatego zagnieżdżaj
+            tylko kiedy dane naprawdę mają taką strukturę.</p>
+        <p>Jeśli tabela zewnętrzna służy tylko do wizualnego układu (np. żeby coś było obok siebie), a nie niesie danych
+            - to jest to błąd semantyczny. Taka "tabela layoutowa" była normalna w latach 90., ale dziś jest złą
+            praktyką.</p>
+    </section>
+
+    <section>
+        <h2>Interaktywny symulator</h2>
+        <p>Zbuduj zagnieżdżoną tabelę. Ustaw liczbę wierszy i kolumn tabeli wewnętrznej, wybierz w której komórce
+            zewnętrznej ma siedzieć, a do zewnętrznej tabeli możesz dodać colspan i rowspan. Zobaczysz kod HTML i
+            podgląd na żywo.</p>
+
+        <div class="sim-controls">
+            <label>Wiersze wewn. tabeli:
+                <select id="sim-in-rows">
+                    <option value="1">1</option>
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                </select>
+            </label>
+            <label>Kolumny wewn. tabeli:
+                <select id="sim-in-cols">
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                </select>
+            </label>
+            <label>colspan komórki z tabelą:
+                <select id="sim-cs">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </label>
+            <label>rowspan komórki z tabelą:
+                <select id="sim-rs">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </label>
+        </div>
+        <div class="label">Podgląd:</div>
+        <div id="sim-podglad"></div>
+        <div class="label">Kod HTML:</div>
+        <pre id="sim-kod"></pre>
+
+        <script>
+            (function () {
+                var inRows = document.getElementById("sim-in-rows");
+                var inCols = document.getElementById("sim-in-cols");
+                var csSel = document.getElementById("sim-cs");
+                var rsSel = document.getElementById("sim-rs");
+                var kod = document.getElementById("sim-kod");
+                var podglad = document.getElementById("sim-podglad");
+
+                // Zewnętrzna tabela jest zawsze 3x3 (stała siatka)
+                // Komórka z zagnieżdżoną tabelą zawsze siedzi w [0][0] (lewy górny róg)
+                // colspan i rowspan określają ile tej siatki pochłania
+
+                var OUTER_ROWS = 3;
+                var OUTER_COLS = 3;
+
+                function cellStyle(highlight) {
+                    return "border:2px solid " + (highlight ? "#7c3aed" : "#999") +
+                        "; padding:6px; vertical-align:top; min-width:80px; min-height:40px;" +
+                        (highlight ? " background:#f5f3ff;" : " background:#fafafa;");
+                }
+
+                function buildInnerDOM(rows, cols) {
+                    var tbl = document.createElement("table");
+                    tbl.style.cssText = "border-collapse:collapse; width:100%; min-width:160px;";
+                    var trH = document.createElement("tr");
+                    for (var c = 0; c < cols; c++) {
+                        var th = document.createElement("th");
+                        th.textContent = "Kol " + (c + 1);
+                        th.style.cssText = "border:1px solid #059669; background:#d1fae5; padding:6px 10px; font-size:0.85em; white-space:nowrap;";
+                        trH.appendChild(th);
+                    }
+                    tbl.appendChild(trH);
+                    for (var r = 0; r < rows; r++) {
+                        var tr = document.createElement("tr");
+                        for (var c2 = 0; c2 < cols; c2++) {
+                            var td = document.createElement("td");
+                            td.textContent = "W" + (r + 1) + "K" + (c2 + 1);
+                            td.style.cssText = "border:1px solid #059669; padding:6px 10px; font-size:0.85em; text-align:center; background:#ecfdf5;";
+                            tr.appendChild(td);
+                        }
+                        tbl.appendChild(tr);
+                    }
+                    return tbl;
+                }
+
+                function aktualizuj() {
+                    var iRows = parseInt(inRows.value);
+                    var iCols = parseInt(inCols.value);
+                    var cs = parseInt(csSel.value);
+                    var rs = parseInt(rsSel.value);
+
+                    // Ogranicz colspan/rowspan do rozmiarów siatki
+                    if (cs > OUTER_COLS) cs = OUTER_COLS;
+                    if (rs > OUTER_ROWS) rs = OUTER_ROWS;
+
+                    // Buduj podgląd DOM
+                    podglad.innerHTML = "";
+                    var outerTbl = document.createElement("table");
+                    outerTbl.style.cssText = "border-collapse:collapse; table-layout:fixed;";
+
+                    // Śledź które komórki są "zajęte" przez rowspan/colspan
+                    // Komórka [0][0] zajmuje wiersze 0..rs-1, kolumny 0..cs-1
+                    function isOccupied(r, c) {
+                        return r < rs && c < cs;
+                    }
+
+                    for (var r = 0; r < OUTER_ROWS; r++) {
+                        var tr = document.createElement("tr");
+                        for (var c = 0; c < OUTER_COLS; c++) {
+                            if (r === 0 && c === 0) {
+                                // Komórka z zagnieżdżoną tabelą
+                                var tdNested = document.createElement("td");
+                                tdNested.colSpan = cs;
+                                tdNested.rowSpan = rs;
+                                tdNested.style.cssText = "border:3px solid #7c3aed; padding:8px; vertical-align:top; background:#f5f3ff;";
+                                tdNested.appendChild(buildInnerDOM(iRows, iCols));
+                                var lbl = document.createElement("div");
+                                lbl.textContent = "← zagnieżdżona tabela (colspan=" + cs + ", rowspan=" + rs + ")";
+                                lbl.style.cssText = "font-size:0.72em; color:#7c3aed; margin-top:4px; font-style:italic;";
+                                tdNested.appendChild(lbl);
+                                tr.appendChild(tdNested);
+                                // Przeskocz kolumny zajęte przez colspan w tym wierszu
+                                c += cs - 1;
+                            } else if (isOccupied(r, c)) {
+                                // Pominięta przez rowspan - nie dodajemy komórki
+                                continue;
+                            } else {
+                                var tdNorm = document.createElement("td");
+                                tdNorm.textContent = "W" + (r + 1) + "K" + (c + 1);
+                                tdNorm.style.cssText = "border:2px solid #999; padding:8px; text-align:center; vertical-align:middle; background:#fafafa; min-width:80px; min-height:40px; color:#555;";
+                                tr.appendChild(tdNorm);
+                            }
+                        }
+                        outerTbl.appendChild(tr);
+                    }
+
+                    podglad.appendChild(outerTbl);
+                    var legenda = document.createElement("p");
+                    legenda.style.cssText = "margin-top:8px; font-size:0.78em; color:#666;";
+                    legenda.textContent = "Fioletowa ramka = komórka zewnętrznej tabeli z colspan/rowspan. Zielona = zagnieżdżona tabela w środku.";
+                    podglad.appendChild(legenda);
+
+                    // Buduj kod
+                    var csAttr = cs > 1 ? ' colspan="' + cs + '"' : '';
+                    var rsAttr = rs > 1 ? ' rowspan="' + rs + '"' : '';
+                    var lines = [];
+                    lines.push("&lt;table&gt;");
+                    for (var row = 0; row < OUTER_ROWS; row++) {
+                        lines.push("  &lt;tr&gt;");
+                        for (var col = 0; col < OUTER_COLS; col++) {
+                            if (row === 0 && col === 0) {
+                                lines.push("    &lt;td" + csAttr + rsAttr + "&gt;");
+                                lines.push("      &lt;table&gt;");
+                                lines.push("        &lt;tr&gt;");
+                                for (var hc = 0; hc < iCols; hc++) {
+                                    lines.push("          &lt;th&gt;Kol " + (hc + 1) + "&lt;/th&gt;");
+                                }
+                                lines.push("        &lt;/tr&gt;");
+                                for (var ir = 0; ir < iRows; ir++) {
+                                    lines.push("        &lt;tr&gt;");
+                                    for (var ic = 0; ic < iCols; ic++) {
+                                        lines.push("          &lt;td&gt;W" + (ir + 1) + "K" + (ic + 1) + "&lt;/td&gt;");
+                                    }
+                                    lines.push("        &lt;/tr&gt;");
+                                }
+                                lines.push("      &lt;/table&gt;");
+                                lines.push("    &lt;/td&gt;");
+                                col += cs - 1;
+                            } else if (isOccupied(row, col)) {
+                                continue;
+                            } else {
+                                lines.push("    &lt;td&gt;W" + (row + 1) + "K" + (col + 1) + "&lt;/td&gt;");
+                            }
+                        }
+                        lines.push("  &lt;/tr&gt;");
+                    }
+                    lines.push("&lt;/table&gt;");
+                    kod.innerHTML = lines.join("\n");
+                }
+
+                inRows.addEventListener("change", aktualizuj);
+                inCols.addEventListener("change", aktualizuj);
+                csSel.addEventListener("change", aktualizuj);
+                rsSel.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

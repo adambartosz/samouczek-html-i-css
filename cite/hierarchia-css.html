@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>hierarchia selektorów</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to jest hierarchia selektorów?</h2>
+
+        <p>Hierarchia selektorów określa relacje pomiędzy elementami HTML. Dzięki niej można wybierać elementy
+            znajdujące się wewnątrz innych elementów.</p>
+
+        <p>Takie selektory są nazywane selektorami złożonymi lub relacyjnymi. Pozwalają bardzo dokładnie wskazać, które
+            elementy mają zostać ostylowane.</p>
+
+        <p>Zamiast wybierać wszystkie elementy danego typu, można wybrać tylko te znajdujące się w określonym miejscu
+            dokumentu.</p>
+    </section>
+
+    <section>
+        <h2>Selektor potomka</h2>
+
+        <p>Selektor potomka wybiera wszystkie elementy znajdujące się wewnątrz innego elementu, niezależnie od poziomu
+            zagnieżdżenia.</p>
+
+        <pre><code>div p {<br>
+    color: blue;<br>
+}</code></pre>
+
+        <p>Przeglądarka wybierze wszystkie akapity znajdujące się gdziekolwiek wewnątrz elementu <code>div</code>.</p>
+
+        <p>Przykład HTML:</p>
+
+        <pre><code>&lt;div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;section&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Tekst&lt;/p&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/section&gt;<br>
+&lt;/div&gt;</code></pre>
+
+        <p>Akapit zostanie zaznaczony, mimo że nie jest bezpośrednim dzieckiem elementu <code>div</code>.</p>
+    </section>
+
+    <section>
+        <h2>Selektor dziecka</h2>
+
+        <p>Selektor dziecka wybiera tylko elementy znajdujące się bezpośrednio wewnątrz wskazanego rodzica.</p>
+
+        <pre><code>div &gt; p {<br>
+    color: red;<br>
+}</code></pre>
+
+        <p>Zostaną wybrane wyłącznie akapity będące bezpośrednimi dziećmi elementu <code>div</code>.</p>
+
+        <p>Przykład:</p>
+
+        <pre><code>&lt;div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Pasuje&lt;/p&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;section&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Nie pasuje&lt;/p&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/section&gt;<br>
+&lt;/div&gt;</code></pre>
+
+        <p>Wybrany zostanie tylko pierwszy akapit.</p>
+    </section>
+
+    <section>
+        <h2>Selektor sąsiedniego rodzeństwa</h2>
+
+        <p>Selektor <code>+</code> wybiera pierwszy element znajdujący się bezpośrednio po innym elemencie.</p>
+
+        <pre><code>h2 + p {<br>
+    font-weight: bold;<br>
+}</code></pre>
+
+        <p>Wybrany zostanie pierwszy akapit występujący zaraz po nagłówku <code>h2</code>.</p>
+
+        <p>Przykład:</p>
+
+        <pre><code>&lt;h2&gt;Tytuł&lt;/h2&gt;<br>
+&lt;p&gt;Pasuje&lt;/p&gt;<br>
+&lt;p&gt;Nie pasuje&lt;/p&gt;</code></pre>
+
+        <p>Tylko pierwszy akapit otrzyma styl.</p>
+    </section>
+
+    <section>
+        <h2>Selektor ogólnego rodzeństwa</h2>
+
+        <p>Selektor <code>~</code> wybiera wszystkie elementy znajdujące się później na tym samym poziomie
+            zagnieżdżenia.</p>
+
+        <pre><code>h2 ~ p {<br>
+    color: green;<br>
+}</code></pre>
+
+        <p>Wybrane zostaną wszystkie akapity znajdujące się po nagłówku <code>h2</code>.</p>
+
+        <p>Przykład:</p>
+
+        <pre><code>&lt;h2&gt;Tytuł&lt;/h2&gt;<br>
+&lt;p&gt;Pasuje&lt;/p&gt;<br>
+&lt;p&gt;Pasuje&lt;/p&gt;<br>
+&lt;div&gt;&lt;/div&gt;<br>
+&lt;p&gt;Pasuje&lt;/p&gt;</code></pre>
+
+        <p>Każdy akapit znajdujący się po nagłówku zostanie wybrany.</p>
+    </section>
+
+    <section>
+        <h2>Porównanie selektorów hierarchicznych</h2>
+
+        <table>
+            <tr>
+                <th>Selektor</th>
+                <th>Przykład</th>
+                <th>Działanie</th>
+            </tr>
+
+            <tr>
+                <td>Potomek</td>
+                <td>div p</td>
+                <td>Wszystkie akapity wewnątrz div</td>
+            </tr>
+
+            <tr>
+                <td>Dziecko</td>
+                <td>div &gt; p</td>
+                <td>Tylko bezpośrednie dzieci</td>
+            </tr>
+
+            <tr>
+                <td>Sąsiednie rodzeństwo</td>
+                <td>h2 + p</td>
+                <td>Pierwszy element po wskazanym</td>
+            </tr>
+
+            <tr>
+                <td>Ogólne rodzeństwo</td>
+                <td>h2 ~ p</td>
+                <td>Wszystkie późniejsze elementy tego samego poziomu</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Drzewo dokumentu HTML</h2>
+
+        <p>Hierarchię elementów można traktować jak drzewo.</p>
+
+        <pre><code>body<br>
+├── div<br>
+│&nbsp;&nbsp;&nbsp;├── h2<br>
+│&nbsp;&nbsp;&nbsp;└── p<br>
+└── section<br>
+&nbsp;&nbsp;&nbsp;&nbsp;└── p</code></pre>
+
+        <p>W takim układzie:</p>
+
+        <ul>
+            <li><code>body</code> jest rodzicem dla <code>div</code> i <code>section</code></li>
+            <li><code>div</code> jest rodzicem dla <code>h2</code> i <code>p</code></li>
+            <li><code>h2</code> i <code>p</code> są rodzeństwem</li>
+            <li>wszystkie elementy są potomkami <code>body</code></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Kiedy stosować poszczególne selektory?</h2>
+
+        <ul>
+            <li><code>div p</code> gdy interesują nas wszystkie potomki</li>
+            <li><code>div &gt; p</code> gdy interesują nas tylko bezpośrednie dzieci</li>
+            <li><code>h2 + p</code> gdy chcemy ostylować pierwszy element po nagłówku</li>
+            <li><code>h2 ~ p</code> gdy chcemy ostylować wszystkie kolejne elementy tego samego poziomu</li>
+        </ul>
+
+        <p>Dzięki tym selektorom można pisać bardziej precyzyjny i krótszy kod CSS.</p>
+    </section>
+
+    <section>
+        <p>Wybierz rodzaj relacji między elementami i zobacz, które elementy zostaną wybrane przez dany selektor.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Selektor:
+                <select id="sim-relacja">
+                    <option value="potomek">div p</option>
+                    <option value="dziecko">div > p</option>
+                    <option value="plus">h2 + p</option>
+                    <option value="tylda">h2 ~ p</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var sel = document.getElementById("sim-relacja");
+                var kod = document.getElementById("sim-kod");
+                var podgl = document.getElementById("sim-podglad");
+
+                function aktualizuj() {
+
+                    while (podgl.firstChild) {
+                        podgl.removeChild(podgl.firstChild);
+                    }
+
+                    if (sel.value === "potomek") {
+
+                        kod.textContent = 'div p {\n    background-color: yellow;\n}';
+
+                        var opis = document.createElement("p");
+                        opis.textContent = "Wszystkie akapity znajdujące się wewnątrz div zostaną zaznaczone.";
+
+                        var div = document.createElement("div");
+                        div.style.border = "1px solid black";
+                        div.style.padding = "10px";
+
+                        var p1 = document.createElement("p");
+                        p1.textContent = "Akapit bezpośrednio w div";
+                        p1.style.backgroundColor = "yellow";
+
+                        var section = document.createElement("section");
+
+                        var p2 = document.createElement("p");
+                        p2.textContent = "Akapit w section znajdującym się w div";
+                        p2.style.backgroundColor = "yellow";
+
+                        section.appendChild(p2);
+
+                        div.appendChild(p1);
+                        div.appendChild(section);
+
+                        podgl.appendChild(opis);
+                        podgl.appendChild(div);
+
+                    }
+                    else if (sel.value === "dziecko") {
+
+                        kod.textContent = 'div > p {\n    background-color: yellow;\n}';
+
+                        var opis = document.createElement("p");
+                        opis.textContent = "Zaznaczony zostanie tylko bezpośredni element dziecka.";
+
+                        var div = document.createElement("div");
+                        div.style.border = "1px solid black";
+                        div.style.padding = "10px";
+
+                        var p1 = document.createElement("p");
+                        p1.textContent = "Bezpośrednie dziecko div";
+                        p1.style.backgroundColor = "yellow";
+
+                        var section = document.createElement("section");
+
+                        var p2 = document.createElement("p");
+                        p2.textContent = "Potomek znajdujący się głębiej";
+
+                        section.appendChild(p2);
+
+                        div.appendChild(p1);
+                        div.appendChild(section);
+
+                        podgl.appendChild(opis);
+                        podgl.appendChild(div);
+
+                    }
+                    else if (sel.value === "plus") {
+
+                        kod.textContent = 'h2 + p {\n    background-color: yellow;\n}';
+
+                        var opis = document.createElement("p");
+                        opis.textContent = "Zaznaczony zostanie tylko pierwszy akapit po nagłówku.";
+
+                        var h2 = document.createElement("h3");
+                        h2.textContent = "Nagłówek";
+
+                        var p1 = document.createElement("p");
+                        p1.textContent = "Pierwszy akapit po nagłówku";
+                        p1.style.backgroundColor = "yellow";
+
+                        var p2 = document.createElement("p");
+                        p2.textContent = "Drugi akapit po nagłówku";
+
+                        podgl.appendChild(opis);
+                        podgl.appendChild(h2);
+                        podgl.appendChild(p1);
+                        podgl.appendChild(p2);
+
+                    }
+                    else {
+
+                        kod.textContent = 'h2 ~ p {\n    background-color: yellow;\n}';
+
+                        var opis = document.createElement("p");
+                        opis.textContent = "Zaznaczone zostaną wszystkie akapity znajdujące się po nagłówku.";
+
+                        var h2 = document.createElement("h3");
+                        h2.textContent = "Nagłówek";
+
+                        var p1 = document.createElement("p");
+                        p1.textContent = "Pierwszy akapit";
+                        p1.style.backgroundColor = "yellow";
+
+                        var p2 = document.createElement("p");
+                        p2.textContent = "Drugi akapit";
+                        p2.style.backgroundColor = "yellow";
+
+                        var p3 = document.createElement("p");
+                        p3.textContent = "Trzeci akapit";
+                        p3.style.backgroundColor = "yellow";
+
+                        podgl.appendChild(opis);
+                        podgl.appendChild(h2);
+                        podgl.appendChild(p1);
+                        podgl.appendChild(p2);
+                        podgl.appendChild(p3);
+
+                    }
+
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

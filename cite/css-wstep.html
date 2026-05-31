@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>css-wprowadzenie</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to jest CSS?</h2>
+        <p>CSS (Cascading Style Sheets) to język służący do opisywania wyglądu elementów HTML. Dzięki niemu można
+            zmieniać kolory, rozmiary, odstępy, położenie elementów oraz sposób ich wyświetlania.</p>
+        <p>HTML odpowiada za strukturę strony, natomiast CSS za jej wygląd. Bez CSS większość stron internetowych
+            wyglądałaby bardzo prosto i mało atrakcyjnie.</p>
+        <p>Przeglądarka najpierw odczytuje dokument HTML, a następnie stosuje do niego reguły zapisane w arkuszach
+            stylów.</p>
+    </section>
+
+    <section>
+        <h2>Po co używa się CSS?</h2>
+        <p>Najważniejsze zastosowania CSS:</p>
+        <ul>
+            <li>zmiana kolorów tekstu i tła</li>
+            <li>ustalanie rozmiarów elementów</li>
+            <li>tworzenie układów stron</li>
+            <li>ustawianie marginesów i odstępów</li>
+            <li>dodawanie animacji i efektów przejść</li>
+            <li>dostosowywanie strony do telefonów i tabletów</li>
+            <li>oddzielenie wyglądu od struktury HTML</li>
+        </ul>
+        <p>Dzięki temu sam kod HTML jest prostszy i bardziej czytelny.</p>
+    </section>
+
+    <section>
+        <h2>Sposoby dodawania CSS</h2>
+        <p>Style można dodawać na trzy podstawowe sposoby.</p>
+
+        <h3>1. Styl lokalny</h3>
+        <p>Reguła znajduje się bezpośrednio w znaczniku HTML.</p>
+
+        <pre><code>&lt;p style="color:red;"&gt;Czerwony tekst&lt;/p&gt;</code></pre>
+
+        <p>Ten sposób jest prosty, ale przy większych projektach niewygodny.</p>
+
+        <h3>2. Styl wewnętrzny</h3>
+
+        <pre><code>&lt;style&gt;<br>
+p {<br>
+    color: red;<br>
+}<br>
+&lt;/style&gt;</code></pre>
+
+        <p>Reguły zapisuje się w sekcji <code>&lt;head&gt;</code>.</p>
+
+        <h3>3. Zewnętrzny arkusz stylów</h3>
+
+        <pre><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></pre>
+
+        <p>To najczęściej używane rozwiązanie. Wszystkie style znajdują się w osobnym pliku CSS.</p>
+    </section>
+
+    <section>
+        <h2>Budowa reguły CSS</h2>
+
+        <p>Każda reguła składa się z selektora oraz deklaracji.</p>
+
+        <pre><code>p {<br>
+    color: blue;<br>
+    font-size: 20px;<br>
+}</code></pre>
+
+        <p>W tym przykładzie:</p>
+
+        <ul>
+            <li><code>p</code> - selektor</li>
+            <li><code>color</code> - właściwość</li>
+            <li><code>blue</code> - wartość właściwości</li>
+            <li><code>font-size</code> - kolejna właściwość</li>
+            <li><code>20px</code> - wartość tej właściwości</li>
+        </ul>
+
+        <p>Jedna reguła może zawierać wiele właściwości.</p>
+    </section>
+
+    <section>
+        <h2>Najpopularniejsze selektory</h2>
+
+        <table>
+            <tr>
+                <th>Selektor</th>
+                <th>Przykład</th>
+                <th>Działanie</th>
+            </tr>
+
+            <tr>
+                <td>Znacznik</td>
+                <td>p</td>
+                <td>Wybiera wszystkie akapity</td>
+            </tr>
+
+            <tr>
+                <td>Klasa</td>
+                <td>.menu</td>
+                <td>Wybiera elementy z klasą menu</td>
+            </tr>
+
+            <tr>
+                <td>Id</td>
+                <td>#naglowek</td>
+                <td>Wybiera element o podanym identyfikatorze</td>
+            </tr>
+
+            <tr>
+                <td>*</td>
+                <td>*</td>
+                <td>Wybiera wszystkie elementy</td>
+            </tr>
+
+            <tr>
+                <td>Potomek</td>
+                <td>nav a</td>
+                <td>Linki znajdujące się w nav</td>
+            </tr>
+
+            <tr>
+                <td>Dziecko</td>
+                <td>ul &gt; li</td>
+                <td>Bezpośrednie elementy li w ul</td>
+            </tr>
+        </table>
+
+        <p>Selektory określają, które elementy HTML mają otrzymać dany styl.</p>
+    </section>
+
+    <section>
+        <h2>Jednostki używane w CSS</h2>
+
+        <p>W CSS bardzo często korzysta się z różnych jednostek.</p>
+
+        <table>
+            <tr>
+                <th>Jednostka</th>
+                <th>Znaczenie</th>
+            </tr>
+
+            <tr>
+                <td>px</td>
+                <td>Piksele</td>
+            </tr>
+
+            <tr>
+                <td>%</td>
+                <td>Procent wartości rodzica</td>
+            </tr>
+
+            <tr>
+                <td>em</td>
+                <td>Wielokrotność rozmiaru czcionki rodzica</td>
+            </tr>
+
+            <tr>
+                <td>rem</td>
+                <td>Wielokrotność rozmiaru czcionki elementu html</td>
+            </tr>
+
+            <tr>
+                <td>vw</td>
+                <td>Procent szerokości okna przeglądarki</td>
+            </tr>
+
+            <tr>
+                <td>vh</td>
+                <td>Procent wysokości okna przeglądarki</td>
+            </tr>
+        </table>
+
+        <p>Najczęściej początkujący używają jednostki <code>px</code>, ale warto znać również pozostałe.</p>
+    </section>
+
+    <section>
+        <h2>Kaskadowość stylów</h2>
+
+        <p>Słowo Cascading oznacza kaskadowość. Jeżeli kilka reguł dotyczy tego samego elementu, przeglądarka musi
+            zdecydować, która ma zostać użyta.</p>
+
+        <p>Przykład:</p>
+
+        <pre><code>p {<br>
+    color: blue;<br>
+}<br>
+<br>
+p {<br>
+    color: red;<br>
+}</code></pre>
+
+        <p>Tekst będzie czerwony, ponieważ druga reguła znajduje się niżej.</p>
+
+        <p>Na wynik wpływają również:</p>
+
+        <ul>
+            <li>kolejność reguł</li>
+            <li>specyficzność selektorów</li>
+            <li>użycie <code>!important</code></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Najczęściej spotykane właściwości</h2>
+
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Zastosowanie</th>
+            </tr>
+
+            <tr>
+                <td>color</td>
+                <td>Kolor tekstu</td>
+            </tr>
+
+            <tr>
+                <td>background-color</td>
+                <td>Kolor tła</td>
+            </tr>
+
+            <tr>
+                <td>font-size</td>
+                <td>Rozmiar tekstu</td>
+            </tr>
+
+            <tr>
+                <td>font-family</td>
+                <td>Krój pisma</td>
+            </tr>
+
+            <tr>
+                <td>width</td>
+                <td>Szerokość</td>
+            </tr>
+
+            <tr>
+                <td>height</td>
+                <td>Wysokość</td>
+            </tr>
+
+            <tr>
+                <td>margin</td>
+                <td>Margines zewnętrzny</td>
+            </tr>
+
+            <tr>
+                <td>padding</td>
+                <td>Odstęp wewnętrzny</td>
+            </tr>
+
+            <tr>
+                <td>border</td>
+                <td>Obramowanie</td>
+            </tr>
+
+            <tr>
+                <td>display</td>
+                <td>Sposób wyświetlania elementu</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Przykład kompletnej strony</h2>
+
+        <pre><code>&lt;!DOCTYPE html&gt;<br>
+&lt;html lang="pl"&gt;<br>
+&lt;head&gt;<br>
+    &lt;meta charset="utf-8"&gt;<br>
+    &lt;title&gt;Przykład&lt;/title&gt;<br>
+    &lt;link rel="stylesheet" href="style.css"&gt;<br>
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+    &lt;h1&gt;Witaj świecie!&lt;/h1&gt;<br>
+    &lt;p&gt;To jest przykładowa strona.&lt;/p&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;</code></pre>
+
+        <p>Plik CSS:</p>
+
+        <pre><code>body {<br>
+    font-family: Arial, sans-serif;<br>
+}<br>
+<br>
+h1 {<br>
+    color: navy;<br>
+}<br>
+<br>
+p {<br>
+    color: gray;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Dobre praktyki</h2>
+
+        <ul>
+            <li>stosuj zewnętrzne arkusze stylów</li>
+            <li>nazywaj klasy w sposób zrozumiały</li>
+            <li>unikaj nadmiernego używania id</li>
+            <li>dbaj o czytelne wcięcia kodu</li>
+            <li>grupuj podobne reguły razem</li>
+            <li>nie używaj zbyt wielu stylów lokalnych</li>
+            <li>testuj stronę na różnych urządzeniach</li>
+            <li>kompresuj i porządkuj CSS przy większych projektach</li>
+        </ul>
+
+        <p>Dzięki tym zasadom kod jest łatwiejszy do rozwijania i poprawiania.</p>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

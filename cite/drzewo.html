@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Rodzice, dzieci, wnukowie</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co oznaczają rodzice, dzieci i wnukowie?</h2>
+
+        <p>W HTML elementy są połączone ze sobą w strukturę przypominającą drzewo. Dlatego często używa się określeń
+            <strong>rodzic</strong>, <strong>dziecko</strong> oraz <strong>wnuk</strong>.
+        </p>
+
+        <p>Dzięki temu łatwiej zrozumieć budowę strony, działanie CSS oraz JavaScript.</p>
+
+        <p>Relacje te wynikają z zagnieżdżania elementów wewnątrz innych elementów.</p>
+
+    </section>
+
+    <section>
+        <h2>Element rodzic</h2>
+
+        <p>Rodzicem nazywamy element, który zawiera w sobie inne elementy.</p>
+
+        <pre><code>&lt;div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Tekst&lt;/p&gt;<br>
+&lt;/div&gt;</code></pre>
+
+        <p>W tym przykładzie:</p>
+
+        <ul>
+            <li><code>&lt;div&gt;</code> jest rodzicem</li>
+            <li><code>&lt;p&gt;</code> jest dzieckiem</li>
+        </ul>
+
+        <p>Jeden rodzic może mieć wiele dzieci.</p>
+
+    </section>
+
+    <section>
+        <h2>Element dziecko</h2>
+
+        <p>Dzieckiem nazywamy element znajdujący się bezpośrednio wewnątrz rodzica.</p>
+
+        <pre><code>&lt;section&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Tytuł&lt;/h1&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Treść&lt;/p&gt;<br>
+&lt;/section&gt;</code></pre>
+
+        <p>W tym przypadku:</p>
+
+        <ul>
+            <li><code>&lt;section&gt;</code> jest rodzicem</li>
+            <li><code>&lt;h1&gt;</code> jest dzieckiem</li>
+            <li><code>&lt;p&gt;</code> jest dzieckiem</li>
+        </ul>
+
+        <p>Oba elementy znajdują się dokładnie jeden poziom niżej od rodzica.</p>
+
+    </section>
+
+    <section>
+        <h2>Element wnuk</h2>
+
+        <p>Wnuk to element znajdujący się wewnątrz dziecka.</p>
+
+        <pre><code>&lt;div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;section&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Tekst&lt;/p&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/section&gt;<br>
+&lt;/div&gt;</code></pre>
+
+        <p>Relacje wyglądają następująco:</p>
+
+        <ul>
+            <li><code>&lt;div&gt;</code> - rodzic</li>
+            <li><code>&lt;section&gt;</code> - dziecko</li>
+            <li><code>&lt;p&gt;</code> - wnuk</li>
+        </ul>
+
+        <p>Element <code>&lt;p&gt;</code> nie jest bezpośrednim dzieckiem elementu <code>&lt;div&gt;</code>, ponieważ
+            pomiędzy nimi znajduje się jeszcze <code>&lt;section&gt;</code>.</p>
+
+    </section>
+
+    <section>
+        <h2>Przykład drzewa HTML</h2>
+
+        <p>Poniższy kod tworzy prostą strukturę dokumentu.</p>
+
+        <pre><code>&lt;body&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;header&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Tytuł&lt;/h1&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/header&gt;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;main&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;section&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Treść&lt;/p&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/section&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/main&gt;<br>
+&lt;/body&gt;</code></pre>
+
+        <p>Drzewo tego dokumentu:</p>
+
+        <pre><code>body<br>
+├── header<br>
+│&nbsp;&nbsp;&nbsp;└── h1<br>
+└── main<br>
+&nbsp;&nbsp;&nbsp;&nbsp;└── section<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── p</code></pre>
+
+    </section>
+
+    <section>
+        <h2>Rodzeństwo elementów</h2>
+
+        <p>Jeżeli dwa elementy mają tego samego rodzica, są względem siebie rodzeństwem.</p>
+
+        <pre><code>&lt;ul&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;HTML&lt;/li&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;CSS&lt;/li&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;JavaScript&lt;/li&gt;<br>
+&lt;/ul&gt;</code></pre>
+
+        <p>W tym przykładzie wszystkie znaczniki <code>&lt;li&gt;</code> są rodzeństwem, ponieważ mają wspólnego rodzica
+            <code>&lt;ul&gt;</code>.
+        </p>
+
+    </section>
+
+    <section>
+        <h2>Dlaczego jest to ważne?</h2>
+
+        <p>Znajomość tych relacji jest bardzo ważna podczas pisania CSS.</p>
+
+        <p>Przykład selektora wybierającego dzieci:</p>
+
+        <pre><code>div &gt; p {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;color: red;<br>
+}</code></pre>
+
+        <p>Powyższy zapis wybierze tylko akapity będące bezpośrednimi dziećmi elementu <code>div</code>.</p>
+
+        <p>Relacje rodzinne są również wykorzystywane w JavaScript podczas poruszania się po strukturze DOM.</p>
+
+    </section>
+
+    <section>
+        <h2>Najczęściej używane relacje DOM w JavaScript</h2>
+
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Znaczenie</th>
+            </tr>
+
+            <tr>
+                <td>parentElement</td>
+                <td>Pobiera rodzica elementu.</td>
+            </tr>
+
+            <tr>
+                <td>children</td>
+                <td>Pobiera wszystkie dzieci.</td>
+            </tr>
+
+            <tr>
+                <td>firstElementChild</td>
+                <td>Pierwsze dziecko.</td>
+            </tr>
+
+            <tr>
+                <td>lastElementChild</td>
+                <td>Ostatnie dziecko.</td>
+            </tr>
+
+            <tr>
+                <td>nextElementSibling</td>
+                <td>Następne rodzeństwo.</td>
+            </tr>
+
+            <tr>
+                <td>previousElementSibling</td>
+                <td>Poprzednie rodzeństwo.</td>
+            </tr>
+
+        </table>
+
+    </section>
+
+    <section>
+        <h2>Interaktywny symulator</h2>
+
+        <p>Wybierz element i zobacz jego położenie w drzewie HTML.</p>
+
+        <div class="sim-controls">
+            <label>
+                Element:
+                <select id="sim-relacja">
+                    <option value="div">div</option>
+                    <option value="section">section</option>
+                    <option value="p">p</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Opis:</div>
+            <pre id="sim-kod-relacje"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-relacje"></div>
+        </div>
+
+        <script>
+            (function () {
+
+                var sel = document.getElementById("sim-relacja");
+                var kod = document.getElementById("sim-kod-relacje");
+                var podglad = document.getElementById("sim-podglad-relacje");
+
+                function aktualizuj() {
+
+                    while (podglad.firstChild) {
+                        podglad.removeChild(podglad.firstChild);
+                    }
+
+                    if (sel.value === "div") {
+                        kod.textContent = "div = rodzic";
+                    }
+
+                    if (sel.value === "section") {
+                        kod.textContent = "section = dziecko elementu div";
+                    }
+
+                    if (sel.value === "p") {
+                        kod.textContent = "p = wnuk elementu div";
+                    }
+
+                    var p = document.createElement("p");
+                    p.style.whiteSpace = `pre-wrap`;
+                    p.textContent = "<div>\n\t<section>\n\t\t<p>Akapit</p>\n\t/section>\n</div>";
+                    podglad.appendChild(p);
+
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>float</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="wlasciwosc">
+
+    <section>
+        <p>Właściwość <strong>float</strong> służy do „wypływania” elementu w lewo albo w prawo, żeby tekst lub inne
+            elementy mogły go opływać.</p>
+
+        <p>Kiedyś używało się jej do robienia layoutów, ale teraz częściej zastępuje ją flexbox i grid.</p>
+
+        <p>Nadal jest przydatna np. do obrazków w tekście.</p>
+        <p>Ważne! element z tą właściwością traci wysokość!</p>
+    </section>
+
+    <section>
+        <p>Składnia: <code>float: wartość;</code></p>
+
+        <table>
+            <tr>
+                <th>Wartość</th>
+                <th>Co robi</th>
+            </tr>
+
+            <tr>
+                <td>left</td>
+                <td>ustawia element po lewej stronie</td>
+            </tr>
+
+            <tr>
+                <td>right</td>
+                <td>ustawia element po prawej stronie</td>
+            </tr>
+
+            <tr>
+                <td>none</td>
+                <td>brak „wypływania”, normalny układ</td>
+            </tr>
+
+            <tr>
+                <td>inline-start</td>
+                <td>start strony (zależnie od języka)</td>
+            </tr>
+
+            <tr>
+                <td>inline-end</td>
+                <td>koniec strony (zależnie od języka)</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Domyślna wartość to <code>none</code>, czyli element zachowuje się normalnie.</p>
+
+        <p>Jeśli ustawimy <code>left</code> lub <code>right</code>, element zaczyna „uciekać” z normalnego układu.</p>
+
+        <p><code>initial</code> resetuje float, a <code>inherit</code> przejmuje od rodzica.</p>
+    </section>
+
+    <section>
+        <p><code>float</code> nie jest dziedziczone automatycznie.</p>
+
+        <p>Elementy obok mogą opływać float, co czasem psuje układ strony jeśli nie użyje się <code>clear</code>.</p>
+
+        <pre><code>img {
+    float: left;
+    margin-right: 10px;
+}</code></pre>
+
+        <pre><code>div {
+    float: right;
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Przykłady użycia:</p>
+
+        <pre><code>img {
+    float: left;
+}</code></pre>
+
+        <pre><code>.box {
+    float: right;
+}</code></pre>
+
+        <pre><code>p img {
+    float: left;
+    margin: 10px;
+}</code></pre>
+
+        <pre><code>nav {
+    float: right;
+}</code></pre>
+
+        <p>Dzięki temu tekst może „obchodzić” element.</p>
+    </section>
+
+    <section>
+        <p>Symulator: sprawdzisz jak element zachowuje się przy float.</p>
+
+        <div class="sim-controls">
+            <label>
+                Float:
+                <select id="sim-float">
+                    <option value="none">none</option>
+                    <option value="left">left</option>
+                    <option value="right">right</option>
+                </select>
+            </label>
+
+            <label>
+                Szerokość:
+                <select id="sim-width">
+                    <option value="120px">120px</option>
+                    <option value="160px">160px</option>
+                    <option value="200px">200px</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var f = document.getElementById("sim-float");
+                var w = document.getElementById("sim-width");
+                var kod = document.getElementById("sim-kod");
+                var pod = document.getElementById("sim-podglad");
+
+                function update() {
+                    var fv = f.value;
+                    var wv = w.value;
+
+                    kod.textContent =
+                        "float: " + fv + ";\n" +
+                        "width: " + wv + ";";
+
+                    while (pod.firstChild) {
+                        pod.removeChild(pod.firstChild);
+                    }
+
+                    var box = document.createElement("div");
+                    box.style.cssText =
+                        "width:" + wv + ";height:80px;background:#ffd966;border:2px solid black;margin:10px;float:" + fv + ";";
+
+                    box.textContent = "FLOAT";
+
+                    var text = document.createElement("p");
+                    text.textContent = "To jest przykładowy tekst, który opływa element float i pokazuje jak działa układ.";
+
+                    pod.appendChild(box);
+                    pod.appendChild(text);
+                }
+
+                f.addEventListener("change", update);
+                w.addEventListener("change", update);
+                update();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

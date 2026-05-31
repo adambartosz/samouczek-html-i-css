@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>th</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;th&gt;</strong> tworzy komórki nagłówkowe w tabeli HTML. To one opisują, co znajduje się
+            w danej kolumnie albo wierszu.</p>
+        <p>Domyślnie są pogrubione i wyśrodkowane, żeby od razu było widać, że to nagłówki, a nie zwykłe dane.</p>
+        <p>Stosuje się je razem z <code>&lt;tr&gt;</code> i <code>&lt;td&gt;</code>, żeby tabela miała sens i była
+            czytelna.</p>
+    </section>
+
+    <section>
+        <p>Używamy <code>&lt;th&gt;</code> kiedy chcemy:</p>
+        <ul>
+            <li>opisać kolumny w tabeli</li>
+            <li>opisać wiersze w tabeli</li>
+            <li>poprawić czytelność danych</li>
+            <li>ułatwić działanie czytnikom ekranu</li>
+            <li>zrobić bardziej semantyczną tabelę</li>
+        </ul>
+        <p>Nie używa się go do zwykłych danych — do tego jest <code>&lt;td&gt;</code>.</p>
+    </section>
+
+    <section></section>
+
+    <section>
+        <p>Znacznik <strong>&lt;th&gt;</strong> ma znaczenie semantyczne. Oznacza nagłówek, więc przeglądarka i czytniki
+            ekranu traktują go jako opis danych w tabeli.</p>
+        <p>Może działać jako nagłówek kolumny lub wiersza w zależności od atrybutu <code>scope</code>.</p>
+        <p>Dzięki temu użytkownik wie, co oznaczają dane w danym miejscu tabeli.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Komórka tabeli</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Nagłówek tabeli (kolumny lub wiersza)</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>tekst, elementy inline</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>tr</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>table-cell</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Symulator pokazuje jak <code>&lt;th&gt;</code> wpływa na strukturę tabeli. Możesz przełączać między
+            nagłówkami kolumn i wierszy oraz edytować dane w tabeli.</p>
+
+        <div class="sim-controls">
+            <label>
+                Tryb nagłówków:
+                <select id="sim-mode">
+                    <option value="col" selected>kolumny (thead)</option>
+                    <option value="row">wiersze (pierwsza kolumna)</option>
+                </select>
+            </label>
+
+            <label>
+                Liczba wierszy:
+                <select id="sim-rows">
+                    <option value="2">2</option>
+                    <option value="3" selected>3</option>
+                    <option value="4">4</option>
+                </select>
+            </label>
+
+            <label>
+                Liczba kolumn:
+                <select id="sim-cols">
+                    <option value="2">2</option>
+                    <option value="3" selected>3</option>
+                    <option value="4">4</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var mode = document.getElementById("sim-mode");
+                var rows = document.getElementById("sim-rows");
+                var cols = document.getElementById("sim-cols");
+                var kod = document.getElementById("sim-kod");
+                var podglad = document.getElementById("sim-podglad");
+
+                function aktualizuj() {
+                    var r = parseInt(rows.value);
+                    var c = parseInt(cols.value);
+                    var m = mode.value;
+
+                    var html = '<table>\n';
+
+                    if (m === 'col') {
+                        html += '    <tr>\n';
+                        for (var i = 1; i <= c; i++) {
+                            html += '        <th>Kol ' + i + '</th>\n';
+                        }
+                        html += '    </tr>\n';
+                        for (var j = 1; j <= r; j++) {
+                            html += '    <tr>\n';
+                            for (var k = 1; k <= c; k++) {
+                                html += '        <td>D' + j + '-' + k + '</td>\n';
+                            }
+                            html += '    </tr>\n';
+                        }
+                    } else {
+                        for (var a = 1; a <= r; a++) {
+                            html += '    <tr>\n';
+                            for (var b = 1; b <= c; b++) {
+                                if (b === 1) {
+                                    html += '        <th>R' + a + '</th>\n';
+                                } else {
+                                    html += '        <td>D' + a + '-' + b + '</td>\n';
+                                }
+                            }
+                            html += '    </tr>\n';
+                        }
+                    }
+
+                    html += '</table>';
+
+                    kod.textContent = html;
+
+                    podglad.innerHTML = '';
+
+                    var table = document.createElement('table');
+
+                    if (m === 'col') {
+                        var trh = document.createElement('tr');
+
+                        for (var i2 = 1; i2 <= c; i2++) {
+                            var th = document.createElement('th');
+                            th.textContent = 'Kol ' + i2;
+                            trh.appendChild(th);
+                        }
+
+                        table.appendChild(trh);
+
+                        for (var j2 = 1; j2 <= r; j2++) {
+                            var tr = document.createElement('tr');
+
+                            for (var k2 = 1; k2 <= c; k2++) {
+                                var td = document.createElement('td');
+                                td.textContent = 'D' + j2 + '-' + k2;
+                                tr.appendChild(td);
+                            }
+
+                            table.appendChild(tr);
+                        }
+
+                    } else {
+                        for (var a2 = 1; a2 <= r; a2++) {
+                            var tr2 = document.createElement('tr');
+
+                            for (var b2 = 1; b2 <= c; b2++) {
+                                if (b2 === 1) {
+                                    var th2 = document.createElement('th');
+                                    th2.textContent = 'R' + a2;
+                                    tr2.appendChild(th2);
+                                } else {
+                                    var td2 = document.createElement('td');
+                                    td2.textContent = 'D' + a2 + '-' + b2;
+                                    tr2.appendChild(td2);
+                                }
+                            }
+
+                            table.appendChild(tr2);
+                        }
+                    }
+
+                    podglad.appendChild(table);
+                }
+
+                mode.addEventListener("change", aktualizuj);
+                rows.addEventListener("change", aktualizuj);
+                cols.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

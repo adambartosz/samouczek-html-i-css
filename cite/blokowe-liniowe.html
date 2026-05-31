@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Blokowe i liniowe</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co oznaczają elementy blokowe i liniowe?</h2>
+
+        <p>W HTML każdy element ma domyślny sposób wyświetlania. Najczęściej spotykamy dwa typy elementów:
+            <strong>blokowe</strong> oraz <strong>liniowe</strong>.
+        </p>
+
+        <p>Różnica między nimi wpływa na układ strony, rozmieszczenie elementów i sposób działania CSS.</p>
+
+        <p>Zrozumienie tej różnicy jest bardzo ważne podczas nauki HTML i CSS.</p>
+
+    </section>
+
+    <section>
+        <h2>Elementy blokowe</h2>
+
+        <p>Element blokowy rozpoczyna się od nowej linii i domyślnie zajmuje całą dostępną szerokość swojego rodzica.
+        </p>
+
+        <p>Jeżeli obok siebie umieścimy kilka elementów blokowych, każdy pojawi się w osobnym wierszu.</p>
+
+        <pre><code>&lt;h1&gt;Nagłówek&lt;/h1&gt;<br>
+&lt;p&gt;Pierwszy akapit&lt;/p&gt;<br>
+&lt;p&gt;Drugi akapit&lt;/p&gt;</code></pre>
+
+        <p>Efekt:</p>
+
+        <pre><code>Nagłówek<br>
+Pierwszy akapit<br>
+Drugi akapit</code></pre>
+
+        <p>Każdy element zostanie umieszczony pod poprzednim.</p>
+
+    </section>
+
+    <section>
+        <h2>Najpopularniejsze elementy blokowe</h2>
+
+        <table>
+            <tr>
+                <th>Znacznik</th>
+                <th>Zastosowanie</th>
+            </tr>
+
+            <tr>
+                <td>div</td>
+                <td>Uniwersalny kontener</td>
+            </tr>
+
+            <tr>
+                <td>p</td>
+                <td>Akapit tekstu</td>
+            </tr>
+
+            <tr>
+                <td>h1 - h6</td>
+                <td>Nagłówki</td>
+            </tr>
+
+            <tr>
+                <td>section</td>
+                <td>Sekcja strony</td>
+            </tr>
+
+            <tr>
+                <td>article</td>
+                <td>Artykuł lub wpis</td>
+            </tr>
+
+            <tr>
+                <td>header</td>
+                <td>Nagłówek strony lub sekcji</td>
+            </tr>
+
+            <tr>
+                <td>footer</td>
+                <td>Stopka</td>
+            </tr>
+
+            <tr>
+                <td>main</td>
+                <td>Główna treść strony</td>
+            </tr>
+
+            <tr>
+                <td>nav</td>
+                <td>Nawigacja</td>
+            </tr>
+
+            <tr>
+                <td>aside</td>
+                <td>Treść poboczna</td>
+            </tr>
+
+            <tr>
+                <td>ul</td>
+                <td>Lista punktowana</td>
+            </tr>
+
+            <tr>
+                <td>ol</td>
+                <td>Lista numerowana</td>
+            </tr>
+
+            <tr>
+                <td>li</td>
+                <td>Element listy</td>
+            </tr>
+
+            <tr>
+                <td>table</td>
+                <td>Tabela</td>
+            </tr>
+
+        </table>
+
+    </section>
+
+    <section>
+        <h2>Elementy liniowe</h2>
+
+        <p>Element liniowy nie rozpoczyna nowej linii. Zajmuje tylko tyle miejsca, ile potrzebuje jego zawartość.</p>
+
+        <p>Może znajdować się obok innych elementów w tym samym wierszu.</p>
+
+        <pre><code>&lt;p&gt;<br>
+To jest &lt;strong&gt;ważny&lt;/strong&gt; tekst.<br>
+&lt;/p&gt;</code></pre>
+
+        <p>Element <code>&lt;strong&gt;</code> nie przenosi tekstu do nowej linii.</p>
+
+        <p>Wyświetla się dokładnie tam, gdzie został umieszczony.</p>
+
+    </section>
+
+    <section>
+        <h2>Najpopularniejsze elementy liniowe</h2>
+
+        <table>
+            <tr>
+                <th>Znacznik</th>
+                <th>Zastosowanie</th>
+            </tr>
+
+            <tr>
+                <td>span</td>
+                <td>Uniwersalny element liniowy</td>
+            </tr>
+
+            <tr>
+                <td>a</td>
+                <td>Odnośnik</td>
+            </tr>
+
+            <tr>
+                <td>strong</td>
+                <td>Ważny tekst</td>
+            </tr>
+
+            <tr>
+                <td>em</td>
+                <td>Wyróżnienie tekstu</td>
+            </tr>
+
+            <tr>
+                <td>b</td>
+                <td>Pogrubienie</td>
+            </tr>
+
+            <tr>
+                <td>i</td>
+                <td>Kursywa</td>
+            </tr>
+
+            <tr>
+                <td>mark</td>
+                <td>Podświetlenie tekstu</td>
+            </tr>
+
+            <tr>
+                <td>small</td>
+                <td>Mniejszy tekst</td>
+            </tr>
+
+            <tr>
+                <td>sup</td>
+                <td>Indeks górny</td>
+            </tr>
+
+            <tr>
+                <td>sub</td>
+                <td>Indeks dolny</td>
+            </tr>
+
+            <tr>
+                <td>code</td>
+                <td>Fragment kodu</td>
+            </tr>
+
+        </table>
+
+    </section>
+
+    <section>
+        <h2>Porównanie elementów blokowych i liniowych</h2>
+
+        <table>
+            <tr>
+                <th>Cecha</th>
+                <th>Blokowy</th>
+                <th>Liniowy</th>
+            </tr>
+
+            <tr>
+                <td>Nowa linia</td>
+                <td>Tak</td>
+                <td>Nie</td>
+            </tr>
+
+            <tr>
+                <td>Szerokość</td>
+                <td>Cała szerokość rodzica</td>
+                <td>Tylko tyle ile potrzeba</td>
+            </tr>
+
+            <tr>
+                <td>Możliwość ustawienia width</td>
+                <td>Tak</td>
+                <td>Ograniczona</td>
+            </tr>
+
+            <tr>
+                <td>Możliwość ustawienia height</td>
+                <td>Tak</td>
+                <td>Ograniczona</td>
+            </tr>
+
+            <tr>
+                <td>Zastosowanie</td>
+                <td>Budowa układu strony</td>
+                <td>Formatowanie fragmentów treści</td>
+            </tr>
+
+        </table>
+
+    </section>
+
+    <section>
+        <h2>Przykład elementu blokowego</h2>
+
+        <pre><code>&lt;div&gt;Pierwszy blok&lt;/div&gt;<br>
+&lt;div&gt;Drugi blok&lt;/div&gt;<br>
+&lt;div&gt;Trzeci blok&lt;/div&gt;</code></pre>
+
+        <p>Przeglądarka wyświetli je jeden pod drugim.</p>
+
+        <pre><code>Pierwszy blok<br>
+Drugi blok<br>
+Trzeci blok</code></pre>
+
+        <p>Dzieje się tak, ponieważ każdy element <code>div</code> jest blokowy.</p>
+
+    </section>
+
+    <section>
+        <h2>Przykład elementu liniowego</h2>
+
+        <pre><code>&lt;span&gt;HTML&lt;/span&gt;<br>
+&lt;span&gt;CSS&lt;/span&gt;<br>
+&lt;span&gt;JavaScript&lt;/span&gt;</code></pre>
+
+        <p>Przeglądarka wyświetli je obok siebie.</p>
+
+        <pre><code>HTML CSS JavaScript</code></pre>
+
+        <p>Znaczniki <code>span</code> są elementami liniowymi.</p>
+
+    </section>
+
+    <section>
+        <h2>Display i zmiana zachowania elementów</h2>
+
+        <p>Za pomocą CSS można zmienić sposób wyświetlania elementu.</p>
+
+        <p>Element liniowy można zmienić w blokowy:</p>
+
+        <pre><code>span {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;display: block;<br>
+}</code></pre>
+
+        <p>Element blokowy można zmienić w liniowy:</p>
+
+        <pre><code>div {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;display: inline;<br>
+}</code></pre>
+
+        <p>Istnieje także wartość <code>inline-block</code>, która łączy cechy obu typów.</p>
+
+    </section>
+
+    <section>
+        <h2>Inline-block</h2>
+
+        <p>Element typu <code>inline-block</code> zachowuje się jak element liniowy, ale można ustawiać jego szerokość i
+            wysokość.</p>
+
+        <pre><code>.box {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;display: inline-block;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;width: 150px;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;height: 50px;<br>
+}</code></pre>
+
+        <p>Jest to bardzo często wykorzystywane przy tworzeniu menu, przycisków i prostych układów.</p>
+
+    </section>
+
+    <section>
+        <h2>Najczęstsze błędy początkujących</h2>
+
+        <ul>
+            <li>używanie wielu elementów br zamiast CSS</li>
+            <li>mylenie div i span</li>
+            <li>nieznajomość domyślnego display elementów</li>
+            <li>próba ustawiania width na zwykłych elementach inline</li>
+            <li>ignorowanie semantycznych znaczników HTML</li>
+        </ul>
+
+        <p>Większość problemów z układem strony wynika właśnie z nieznajomości różnic między elementami blokowymi i
+            liniowymi.</p>
+
+    </section>
+
+    <section>
+        <h2>Interaktywny symulator</h2>
+
+        <p>Zmieniaj wartość <code>display</code> dla rodzica, dziecka i wnuka. Dzięki temu łatwo zobaczysz różnicę
+            między elementami blokowymi, liniowymi oraz inline-block.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Rodzic:
+                <select id="sim-display-parent">
+                    <option value="block">block</option>
+                    <option value="inline">inline</option>
+                    <option value="inline-block">inline-block</option>
+                </select>
+            </label>
+
+            <label>
+                Dziecko:
+                <select id="sim-display-child">
+                    <option value="block">block</option>
+                    <option value="inline">inline</option>
+                    <option value="inline-block">inline-block</option>
+                </select>
+            </label>
+
+            <label>
+                Wnuk:
+                <select id="sim-display-grandchild">
+                    <option value="block">block</option>
+                    <option value="inline">inline</option>
+                    <option value="inline-block">inline-block</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod-display"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-display"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var parentSel = document.getElementById("sim-display-parent");
+                var childSel = document.getElementById("sim-display-child");
+                var grandSel = document.getElementById("sim-display-grandchild");
+
+                var kod = document.getElementById("sim-kod-display");
+                var podglad = document.getElementById("sim-podglad-display");
+
+                function aktualizuj() {
+
+                    kod.textContent =
+                        ".rodzic {\n" +
+                        "    display: " + parentSel.value + ";\n" +
+                        "}\n\n" +
+                        ".dziecko {\n" +
+                        "    display: " + childSel.value + ";\n" +
+                        "}\n\n" +
+                        ".wnuk {\n" +
+                        "    display: " + grandSel.value + ";\n" +
+                        "}";
+
+                    while (podglad.firstChild) {
+                        podglad.removeChild(podglad.firstChild);
+                    }
+
+                    var rodzic = document.createElement("div");
+                    var dziecko = document.createElement("div");
+                    var wnuk = document.createElement("div");
+
+                    rodzic.textContent = "RODZIC ";
+                    dziecko.textContent = "DZIECKO ";
+                    wnuk.textContent = "WNUK";
+
+                    rodzic.style.cssText =
+                        "display:" + parentSel.value + ";" +
+                        "border:3px solid #2563eb;" +
+                        "padding:10px;" +
+                        "margin:5px;" +
+                        "background:#dbeafe;";
+
+                    dziecko.style.cssText =
+                        "display:" + childSel.value + ";" +
+                        "border:3px solid #16a34a;" +
+                        "padding:10px;" +
+                        "margin:5px;" +
+                        "background:#dcfce7;";
+
+                    wnuk.style.cssText =
+                        "display:" + grandSel.value + ";" +
+                        "border:3px solid #dc2626;" +
+                        "padding:10px;" +
+                        "margin:5px;" +
+                        "background:#fee2e2;";
+
+                    dziecko.appendChild(wnuk);
+                    rodzic.appendChild(dziecko);
+
+                    var obok = document.createElement("div");
+                    obok.textContent = "SĄSIAD";
+                    obok.style.cssText =
+                        "display:inline-block;" +
+                        "border:3px solid #9333ea;" +
+                        "padding:10px;" +
+                        "margin:5px;" +
+                        "background:#f3e8ff;";
+
+                    podglad.appendChild(rodzic);
+                    podglad.appendChild(obok);
+
+                }
+
+                parentSel.addEventListener("change", aktualizuj);
+                childSel.addEventListener("change", aktualizuj);
+                grandSel.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

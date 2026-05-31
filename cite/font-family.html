@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>font-family</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="wlasciwosc">
+
+    <section>
+        <p>Właściwość <strong>font-family</strong> służy do określenia, jaką czcionką ma być wyświetlany tekst na
+            stronie internetowej. Jest jedną z najczęściej używanych właściwości związanych z typografią. Możemy podać
+            jedną czcionkę albo całą listę zapasowych czcionek używanych wtedy, gdy poprzednia nie jest dostępna.</p>
+
+        <p>Dzięki tej właściwości możemy wpływać na wygląd nagłówków, akapitów, menu i wszystkich innych elementów
+            zawierających tekst.</p>
+    </section>
+
+    <section>
+        <p>Składnia: <code>font-family: wartość;</code></p>
+
+        <p>Najczęściej podaje się kilka czcionek oddzielonych przecinkami:</p>
+
+        <pre><code>font-family: Arial, Helvetica, sans-serif;</code></pre>
+
+        <table>
+            <tr>
+                <th>Wartość</th>
+                <th>Co robi</th>
+            </tr>
+
+            <tr>
+                <td>nazwa konkretnej czcionki</td>
+                <td>Używa wskazanej czcionki, np. Arial, Verdana, Roboto, Georgia</td>
+            </tr>
+
+            <tr>
+                <td>serif</td>
+                <td>Rodzina czcionek z ozdobnymi zakończeniami liter</td>
+            </tr>
+
+            <tr>
+                <td>sans-serif</td>
+                <td>Rodzina czcionek bez ozdobników, bardzo popularna w internecie</td>
+            </tr>
+
+            <tr>
+                <td>monospace</td>
+                <td>Każdy znak ma tę samą szerokość</td>
+            </tr>
+
+            <tr>
+                <td>cursive</td>
+                <td>Czcionki przypominające pismo odręczne</td>
+            </tr>
+
+            <tr>
+                <td>fantasy</td>
+                <td>Czcionki dekoracyjne i ozdobne</td>
+            </tr>
+
+            <tr>
+                <td>system-ui</td>
+                <td>Używa domyślnej czcionki systemu operacyjnego</td>
+            </tr>
+
+            <tr>
+                <td>inherit</td>
+                <td>Przejmuje wartość od elementu nadrzędnego</td>
+            </tr>
+
+            <tr>
+                <td>initial</td>
+                <td>Przywraca wartość początkową właściwości</td>
+            </tr>
+
+            <tr>
+                <td>unset</td>
+                <td>Zachowuje się jak inherit albo initial w zależności od typu właściwości</td>
+            </tr>
+
+            <tr>
+                <td>revert</td>
+                <td>Przywraca wartość wynikającą z arkusza stylów przeglądarki</td>
+            </tr>
+
+            <tr>
+                <td>revert-layer</td>
+                <td>Przywraca wartość z wcześniejszej warstwy CSS</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Domyślna wartość właściwości to zależna od przeglądarki i systemu rodzina czcionek. Jeśli nie ustawimy
+            <code>font-family</code>, tekst zostanie wyświetlony przy użyciu domyślnej czcionki użytkownika.</p>
+
+        <p>Wartość <code>initial</code> przywraca wartość początkową określoną przez specyfikację CSS. W praktyce często
+            będzie to domyślna czcionka przeglądarki.</p>
+
+        <p>Wartość <code>inherit</code> powoduje przejęcie ustawienia od elementu nadrzędnego.</p>
+
+        <pre><code>font-family: initial;</code></pre>
+
+        <pre><code>font-family: inherit;</code></pre>
+    </section>
+
+    <section>
+        <p>Właściwość <code>font-family</code> jest dziedziczona. Oznacza to, że jeśli ustawimy ją dla elementu
+            nadrzędnego, jego potomkowie zwykle również będą korzystać z tej samej czcionki.</p>
+
+        <p>Przykładowo ustawienie czcionki dla znacznika <code>body</code> spowoduje, że większość elementów na stronie
+            odziedziczy tę wartość automatycznie.</p>
+
+        <pre><code>body {<br>
+    font-family: Arial, sans-serif;<br>
+}</code></pre>
+
+        <p>Wartość <code>inherit</code> wymusza dziedziczenie nawet wtedy, gdy element ma własne ustawienia. Wartość
+            <code>initial</code> usuwa dziedziczenie i przywraca wartość początkową.</p>
+    </section>
+
+    <section>
+        <p>Ustawienie podstawowej czcionki dla całej strony:</p>
+
+        <pre><code>body {<br>
+    font-family: Arial, sans-serif;<br>
+}</code></pre>
+
+        <p>Użycie klasycznej czcionki szeryfowej w artykule:</p>
+
+        <pre><code>article {<br>
+    font-family: Georgia, serif;<br>
+}</code></pre>
+
+        <p>Użycie czcionki programistycznej dla kodu:</p>
+
+        <pre><code>code {<br>
+    font-family: Consolas, monospace;<br>
+}</code></pre>
+
+        <p>Użycie czcionki pobranej z Google Fonts:</p>
+
+        <pre><code>body {<br>
+    font-family: "Roboto", sans-serif;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Wybierz rodzinę czcionki i zobacz, jak zmienia się wygląd tekstu.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Rodzina czcionki:
+                <select id="sim-font-family">
+                    <option value="Arial, sans-serif">Arial</option>
+                    <option value="Verdana, sans-serif">Verdana</option>
+                    <option value="Georgia, serif">Georgia</option>
+                    <option value="'Times New Roman', serif">Times New Roman</option>
+                    <option value="'Courier New', monospace">Courier New</option>
+                    <option value="monospace">monospace</option>
+                    <option value="cursive">cursive</option>
+                    <option value="fantasy">fantasy</option>
+                    <option value="system-ui">system-ui</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod-font-family"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-font-family"></div>
+        </div>
+
+        <script>
+            (function () {
+                var select = document.getElementById("sim-font-family");
+                var kod = document.getElementById("sim-kod-font-family");
+                var podglad = document.getElementById("sim-podglad-font-family");
+
+                function aktualizuj() {
+                    var wartosc = select.value;
+
+                    kod.textContent = "font-family: " + wartosc + ";";
+
+                    podglad.innerHTML = "";
+
+                    var naglowek = document.createElement("h3");
+                    naglowek.textContent = "Przykładowy nagłówek";
+                    naglowek.style.fontFamily = wartosc;
+
+                    var akapit = document.createElement("p");
+                    akapit.textContent = "Zażółć gęślą jaźń. To przykładowy tekst pokazujący wygląd wybranej czcionki.";
+                    akapit.style.fontFamily = wartosc;
+
+                    var kodTekst = document.createElement("p");
+                    kodTekst.textContent = "1234567890 ABCDEFG abcdefg";
+                    kodTekst.style.fontFamily = wartosc;
+
+                    podglad.appendChild(naglowek);
+                    podglad.appendChild(akapit);
+                    podglad.appendChild(kodTekst);
+                }
+
+                select.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

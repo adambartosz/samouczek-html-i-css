@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>tbody</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;tbody&gt;</strong> grupuje wiersze z właściwymi danymi tabeli - to "ciało" tabeli, czyli
+            ta część, która niesie informacje, w odróżnieniu od nagłówka (<code>&lt;thead&gt;</code>) i stopki
+            (<code>&lt;tfoot&gt;</code>).</p>
+        <p>Jest elementem <strong>blokowym</strong> na poziomie tabeli. Warto wiedzieć, że przeglądarka dodaje
+            <code>&lt;tbody&gt;</code> automatycznie nawet jeśli go nie napiszesz - można to zobaczyć w narzędziach
+            deweloperskich.
+        </p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy chcemy:</p>
+        <ul>
+            <li>jawnie oddzielić wiersze z danymi od nagłówka i stopki - lepsza czytelność kodu</li>
+            <li>stylować tylko wiersze danych przez CSS: <code>tbody tr:nth-child(even) { background: #f5f5f5; }</code>
+                - naprzemienne kolory wierszy</li>
+            <li>obsłużyć przewijanie tylko ciała tabeli przy zamrożonym nagłówku -
+                <code>tbody { display: block; overflow-y: auto; }</code>
+            </li>
+            <li>użyć JavaScript do dynamicznego dodawania lub usuwania wierszy danych bez ruszania nagłówka</li>
+            <li>w jednej tabeli umieścić kilka <code>&lt;tbody&gt;</code> - każdy to osobna sekcja danych np.
+                "zamówienia zrealizowane" i "zamówienia w toku"</li>
+        </ul>
+    </section>
+
+    <section>
+    </section>
+
+    <section>
+        <p><code>&lt;tbody&gt;</code> sam w sobie nie ma dużego znaczenia semantycznego dla czytników ekranu - jego rola
+            to głównie strukturyzacja i podział kodu. Jednak w połączeniu z <code>&lt;thead&gt;</code> i
+            <code>&lt;tfoot&gt;</code> tworzy kompletną semantyczną strukturę tabeli.
+        </p>
+        <p>Możliwość użycia <strong>kilku</strong> <code>&lt;tbody&gt;</code> w jednej tabeli jest wyjątkowa - żaden
+            inny element tabelaryczny tego nie pozwala. Każdy <code>&lt;tbody&gt;</code> może grupować tematycznie inne
+            dane np. produkty z różnych kategorii w jednej tabeli cenowej.</p>
+        <p>Przeglądarka zawsze wstawia <code>&lt;tbody&gt;</code> w modelu DOM nawet jeśli go pominiesz w kodzie HTML -
+            to jedyny element HTML który przeglądarka dodaje automatycznie w ten sposób.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy (poziom tabeli)</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Sekcja danych tabeli - główna treść</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>tylko <code>&lt;tr&gt;</code></td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td><code>&lt;table&gt;</code> - po <code>&lt;thead&gt;</code>, przed <code>&lt;tfoot&gt;</code>; można
+                    użyć kilku</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>table-row-group</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Wypróbuj jak działa jeden <code>&lt;tbody&gt;</code> kontra kilka, oraz jak łatwo stylować naprzemienne
+            wiersze tylko w obrębie ciała tabeli.</p>
+
+        <div class="sim-controls">
+            <label>Tryb tbody:
+                <select id="sim-tryb">
+                    <option value="jeden" selected>jeden &lt;tbody&gt;</option>
+                    <option value="dwa">dwa &lt;tbody&gt; (dwie sekcje)</option>
+                    <option value="brak">bez &lt;tbody&gt;</option>
+                </select>
+            </label>
+            <label>Styl wierszy:
+                <select id="sim-zebra">
+                    <option value="nie" selected>bez stylowania</option>
+                    <option value="tak">naprzemienne kolory (zebra)</option>
+                    <option value="hover">podświetlanie po najechaniu</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod"></pre>
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad" style="overflow:auto;"></div>
+        </div>
+
+        <script>
+            (function () {
+                var trybSel = document.getElementById("sim-tryb");
+                var zebraSel = document.getElementById("sim-zebra");
+                var kod = document.getElementById("sim-kod");
+                var podglad = document.getElementById("sim-podglad");
+
+                var kolumny = ["Produkt", "Kategoria", "Cena"];
+                var sekcja1 = [["Laptop", "Elektronika", "3500 zł"], ["Mysz", "Elektronika", "80 zł"], ["Klawiatura", "Elektronika", "150 zł"]];
+                var sekcja2 = [["Biurko", "Meble", "600 zł"], ["Krzesło", "Meble", "400 zł"]];
+
+                function tdStyle(zebra, idx, hover) {
+                    var bg = "";
+                    if (zebra && idx % 2 === 1) bg = "background:#f0edff;";
+                    return "border:1px solid #ccc; padding:8px 14px; " + bg;
+                }
+
+                function budujTr(wiersz, idx, zebra, hover) {
+                    var tr = document.createElement("tr");
+                    var bg = (zebra && idx % 2 === 1) ? "#f0edff" : "#fff";
+                    tr.style.cssText = "background:" + bg + ";";
+                    if (hover) {
+                        tr.addEventListener("mouseover", function () { this.style.background = "#ede9fe"; });
+                        tr.addEventListener("mouseout", function () { this.style.background = (zebra && idx % 2 === 1) ? "#f0edff" : "#fff"; });
+                    }
+                    wiersz.forEach(function (d) {
+                        var td = document.createElement("td");
+                        td.textContent = d;
+                        td.style.cssText = "border:1px solid #ccc; padding:8px 14px;";
+                        tr.appendChild(td);
+                    });
+                    return tr;
+                }
+
+                function aktualizuj() {
+                    var tryb = trybSel.value;
+                    var zebra = zebraSel.value === "tak";
+                    var hover = zebraSel.value === "hover";
+
+                    var linie = [];
+                    linie.push("&lt;table&gt;");
+                    linie.push("  &lt;thead&gt;");
+                    linie.push("    &lt;tr&gt;");
+                    kolumny.forEach(function (k) { linie.push("      &lt;th&gt;" + k + "&lt;/th&gt;"); });
+                    linie.push("    &lt;/tr&gt;");
+                    linie.push("  &lt;/thead&gt;");
+
+                    if (tryb === "jeden") {
+                        linie.push("  &lt;tbody&gt;");
+                        sekcja1.concat(sekcja2).forEach(function (w) {
+                            linie.push("    &lt;tr&gt;");
+                            w.forEach(function (d) { linie.push("      &lt;td&gt;" + d + "&lt;/td&gt;"); });
+                            linie.push("    &lt;/tr&gt;");
+                        });
+                        linie.push("  &lt;/tbody&gt;");
+                    } else if (tryb === "dwa") {
+                        linie.push("  &lt;tbody&gt;");
+                        sekcja1.forEach(function (w) {
+                            linie.push("    &lt;tr&gt;");
+                            w.forEach(function (d) { linie.push("      &lt;td&gt;" + d + "&lt;/td&gt;"); });
+                            linie.push("    &lt;/tr&gt;");
+                        });
+                        linie.push("  &lt;/tbody&gt;");
+                        linie.push("  &lt;tbody&gt;");
+                        sekcja2.forEach(function (w) {
+                            linie.push("    &lt;tr&gt;");
+                            w.forEach(function (d) { linie.push("      &lt;td&gt;" + d + "&lt;/td&gt;"); });
+                            linie.push("    &lt;/tr&gt;");
+                        });
+                        linie.push("  &lt;/tbody&gt;");
+                    } else {
+                        sekcja1.concat(sekcja2).forEach(function (w) {
+                            linie.push("  &lt;tr&gt;");
+                            w.forEach(function (d) { linie.push("    &lt;td&gt;" + d + "&lt;/td&gt;"); });
+                            linie.push("  &lt;/tr&gt;");
+                        });
+                    }
+                    linie.push("&lt;/table&gt;");
+                    kod.innerHTML = linie.join("\n");
+
+                    podglad.innerHTML = "";
+                    var tbl = document.createElement("table");
+                    tbl.style.cssText = "border-collapse:collapse; width:100%;";
+
+                    var thead = document.createElement("thead");
+                    var trH = document.createElement("tr");
+                    kolumny.forEach(function (k) {
+                        var th = document.createElement("th");
+                        th.textContent = k;
+                        th.style.cssText = "border:2px solid #7c3aed; padding:8px 14px; background:#7c3aed; color:#fff;";
+                        trH.appendChild(th);
+                    });
+                    thead.appendChild(trH);
+                    tbl.appendChild(thead);
+
+                    var wszytkieDane = sekcja1.concat(sekcja2);
+
+                    if (tryb === "dwa") {
+                        var sep = document.createElement("tr");
+                        var sepTd = document.createElement("td");
+                        sepTd.colSpan = 3;
+                        sepTd.textContent = "── Sekcja 1: Elektronika ──";
+                        sepTd.style.cssText = "font-size:0.8em; color:#7c3aed; padding:4px 14px; background:#f5f3ff; font-style:italic; border:1px solid #ccc;";
+
+                        var body1 = document.createElement("tbody");
+                        body1.style.cssText = "border-top:2px solid #7c3aed;";
+                        var sepRow = document.createElement("tr");
+                        var sepCell = document.createElement("td");
+                        sepCell.colSpan = 3;
+                        sepCell.textContent = "Sekcja 1: Elektronika";
+                        sepCell.style.cssText = "font-size:0.8em; color:#7c3aed; padding:4px 14px; background:#f5f3ff; font-style:italic; border:1px solid #ccc;";
+                        sepRow.appendChild(sepCell);
+                        body1.appendChild(sepRow);
+                        sekcja1.forEach(function (w, i) {
+                            body1.appendChild(budujTr(w, i, zebra, hover));
+                        });
+                        tbl.appendChild(body1);
+
+                        var body2 = document.createElement("tbody");
+                        body2.style.cssText = "border-top:2px dashed #7c3aed;";
+                        var sepRow2 = document.createElement("tr");
+                        var sepCell2 = document.createElement("td");
+                        sepCell2.colSpan = 3;
+                        sepCell2.textContent = "Sekcja 2: Meble";
+                        sepCell2.style.cssText = "font-size:0.8em; color:#7c3aed; padding:4px 14px; background:#f5f3ff; font-style:italic; border:1px solid #ccc;";
+                        sepRow2.appendChild(sepCell2);
+                        body2.appendChild(sepRow2);
+                        sekcja2.forEach(function (w, i) {
+                            body2.appendChild(budujTr(w, i, zebra, hover));
+                        });
+                        tbl.appendChild(body2);
+                    } else if (tryb === "jeden") {
+                        var body = document.createElement("tbody");
+                        wszytkieDane.forEach(function (w, i) {
+                            body.appendChild(budujTr(w, i, zebra, hover));
+                        });
+                        tbl.appendChild(body);
+                    } else {
+                        wszytkieDane.forEach(function (w, i) {
+                            tbl.appendChild(budujTr(w, i, zebra, hover));
+                        });
+                    }
+
+                    podglad.appendChild(tbl);
+
+                    var info = document.createElement("p");
+                    info.style.cssText = "margin-top:8px; font-size:0.82em; color:#666;";
+                    if (tryb === "dwa") {
+                        info.textContent = "Dwa osobne <tbody> - każdy to osobna sekcja danych. Przeglądarka renderuje je jako całość, ale można je stylować niezależnie.";
+                    } else if (tryb === "brak") {
+                        info.textContent = "Bez <tbody> w kodzie - przeglądarka i tak doda go automatycznie w DOM. Możesz to sprawdzić w DevTools (F12).";
+                    } else {
+                        info.textContent = "Jeden <tbody> - wszystkie wiersze danych w jednym bloku.";
+                    }
+                    podglad.appendChild(info);
+                }
+
+                trybSel.addEventListener("change", aktualizuj);
+                zebraSel.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

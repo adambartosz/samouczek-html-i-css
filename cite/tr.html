@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>tr</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;tr&gt;</strong> służy do tworzenia pojedynczego wiersza w tabeli HTML. Wewnątrz niego
+            umieszcza się komórki danych <code>&lt;td&gt;</code> lub komórki nagłówkowe <code>&lt;th&gt;</code>.</p>
+        <p>Jest specjalnym elementem tabeli i działa wyłącznie wewnątrz struktur tabelarycznych. Każdy wiersz
+            reprezentuje jeden poziomy rekord danych.</p>
+        <p>Bez znaczników <code>&lt;tr&gt;</code> nie można poprawnie budować tabel składających się z wielu wierszy.
+        </p>
+    </section>
+
+    <section>
+        <p>Najczęstsze zastosowania znacznika:</p>
+        <ul>
+            <li>tworzenie kolejnych wierszy danych w tabeli</li>
+            <li>budowanie nagłówków tabeli</li>
+            <li>tworzenie list ocen lub wyników</li>
+            <li>organizowanie danych w układzie poziomym</li>
+            <li>oddzielanie kolejnych rekordów danych</li>
+            <li>tworzenie planów lekcji i harmonogramów</li>
+            <li>przygotowywanie raportów i zestawień</li>
+        </ul>
+        <p>Znacznik ten zawsze powinien znajdować się wewnątrz <code>&lt;table&gt;</code>, <code>&lt;thead&gt;</code>,
+            <code>&lt;tbody&gt;</code> lub <code>&lt;tfoot&gt;</code>.</p>
+    </section>
+
+    <section></section>
+
+    <section>
+        <p>Znacznik <strong>&lt;tr&gt;</strong> posiada znaczenie semantyczne. Informuje przeglądarkę oraz technologie
+            wspomagające, że zawartość reprezentuje pojedynczy wiersz tabeli.</p>
+        <p>Czytniki ekranu wykorzystują tę informację do określania relacji pomiędzy komórkami oraz nagłówkami tabeli.
+        </p>
+        <p>Sam znacznik nie określa rodzaju danych. Za znaczenie poszczególnych komórek odpowiadają znaczniki
+            <code>&lt;th&gt;</code> oraz <code>&lt;td&gt;</code>.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Reprezentuje pojedynczy wiersz tabeli</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>th, td</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>table, thead, tbody, tfoot</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>table-row</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze można sprawdzić, jak zmienia się zawartość pojedynczego wiersza tabeli. Możesz wybrać
+            liczbę komórek oraz ich typ.</p>
+
+        <div class="sim-controls">
+            <label>
+                Typ komórek:
+                <select id="sim-typ">
+                    <option value="td" selected>td</option>
+                    <option value="th">th</option>
+                </select>
+            </label>
+
+            <label>
+                Liczba komórek:
+                <select id="sim-ilosc">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3" selected>3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var typ = document.getElementById("sim-typ");
+                var ilosc = document.getElementById("sim-ilosc");
+                var kod = document.getElementById("sim-kod");
+                var podglad = document.getElementById("sim-podglad");
+
+                function aktualizuj() {
+                    var t = typ.value;
+                    var i = parseInt(ilosc.value);
+
+                    var html = '<table>\n';
+                    html += '    <tr>\n';
+
+                    for (var x = 1; x <= i; x++) {
+                        html += '        <' + t + '>Komórka ' + x + '</' + t + '>\n';
+                    }
+
+                    html += '    </tr>\n';
+                    html += '</table>';
+
+                    kod.textContent = html;
+
+                    podglad.innerHTML = '';
+
+                    var tabela = document.createElement('table');
+                    tabela.border = '1';
+
+                    var tr = document.createElement('tr');
+
+                    for (var y = 1; y <= i; y++) {
+                        var komorka = document.createElement(t);
+                        komorka.textContent = 'Komórka ' + y;
+                        tr.appendChild(komorka);
+                    }
+
+                    tabela.appendChild(tr);
+                    podglad.appendChild(tabela);
+                }
+
+                typ.addEventListener('change', aktualizuj);
+                ilosc.addEventListener('change', aktualizuj);
+
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

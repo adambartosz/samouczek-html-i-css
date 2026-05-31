@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Adresowanie względne i bezwzględne</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <section>
+            <h2>Adresowanie w HTML</h2>
+            <p>Adresowanie w HTML to sposób zapisywania ścieżek do plików i stron. Najczęściej używa się tego w
+                atrybucie <code>href</code> i <code>src</code>.</p>
+            <p>Są dwa główne typy: adresowanie względne i bezwzględne. Różnią się tym, skąd liczą ścieżkę.</p>
+        </section>
+
+        <section>
+            <h2>Adresowanie względne</h2>
+            <p>Adres względny działa względem aktualnego pliku, w którym piszemy kod. Nie zawiera pełnego adresu strony.
+            </p>
+
+            <ul>
+                <li>odwołanie do pliku w tym samym folderze: <code>obraz.jpg</code></li>
+                <li>wejście do folderu: <code>img/obraz.jpg</code></li>
+                <li>wyjście folder wyżej: <code>../obraz.jpg</code></li>
+                <li>kilka poziomów: <code>../img/zdjecia/foto.png</code></li>
+            </ul>
+
+            <p>Stosuje się to głównie w projektach lokalnych, bo łatwo przenosić foldery bez psucia linków.</p>
+        </section>
+
+        <section>
+            <h2>Adresowanie bezwzględne</h2>
+            <p>Adres bezwzględny to pełny adres URL, który zawsze zaczyna się od protokołu, np. <code>https://</code>.
+            </p>
+
+            <ul>
+                <li>https://www.google.com</li>
+                <li>https://pl.wikipedia.org</li>
+                <li>https://example.com/img/obraz.jpg</li>
+            </ul>
+
+            <p>Taki adres działa zawsze, niezależnie od tego gdzie znajduje się plik HTML.</p>
+        </section>
+
+        <section>
+            <h2>Różnice</h2>
+            <table>
+                <tr>
+                    <th>Cecha</th>
+                    <th>Względne</th>
+                    <th>Bezwzględne</th>
+                </tr>
+                <tr>
+                    <td>Struktura</td>
+                    <td>bez domeny</td>
+                    <td>pełny URL</td>
+                </tr>
+                <tr>
+                    <td>Zależność od miejsca pliku</td>
+                    <td>tak</td>
+                    <td>nie</td>
+                </tr>
+                <tr>
+                    <td>Użycie</td>
+                    <td>projekty lokalne</td>
+                    <td>linki zewnętrzne</td>
+                </tr>
+                <tr>
+                    <td>Przenoszenie projektu</td>
+                    <td>łatwe</td>
+                    <td>może się zepsuć</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Przykłady w kodzie</h2>
+            <p>Przykład użycia w <code>&lt;a&gt;</code> i <code>&lt;img&gt;</code>:</p>
+
+            <pre><code>&lt;a href="kontakt.html"&gt;Kontakt&lt;/a&gt;<br>
+&lt;a href="../index.html"&gt;Strona główna&lt;/a&gt;<br>
+&lt;a href="https://www.google.com"&gt;Google&lt;/a&gt;<br>
+&lt;img src="img/foto.jpg" alt="zdjęcie"&gt;<br>
+&lt;img src="https://example.com/foto.jpg" alt="obraz"&gt;</code></pre>
+        </section>
+
+        <section>
+            <h2>Symulator</h2>
+            <p>Sprawdź jak zmienia się link przy adresie względnym i bezwzględnym.</p>
+
+            <div class="sim-controls">
+
+
+                <label>
+                    Wybór linku:
+                    <select id="sim-link">
+                        <option value="img/foto.jpg">img/foto.jpg</option>
+                        <option value="../index.html">../index.html</option>
+                        <option value="https://google.com">https://google.com</option>
+                        <option value="https://example.com/img.png">https://example.com/img.png</option>
+                    </select>
+                </label>
+
+            </div>
+
+            <div class="sim-output">
+
+                <div class="sim-preview-label">Kod HTML:</div>
+                <pre id="sim-kod"></pre>
+
+                <div class="sim-preview-label">Podgląd:</div>
+                <div class="sim-preview" id="sim-podglad"></div>
+
+            </div>
+
+            <script>
+                (function () {
+
+                    var link = document.getElementById("sim-link");
+                    var kod = document.getElementById("sim-kod");
+                    var podglad = document.getElementById("sim-podglad");
+
+                    function aktualizuj() {
+
+                        var v = link.value;
+
+                        kod.textContent = '<a href="' + v + '">Link</a>';
+
+                        podglad.innerHTML = "";
+
+                        var a = document.createElement("a");
+                        a.textContent = "Link";
+                        a.href = v;
+
+                        podglad.appendChild(a);
+
+                    }
+
+                    link.addEventListener("change", aktualizuj);
+
+                    aktualizuj();
+
+                })();
+            </script>
+
+        </section>
+
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

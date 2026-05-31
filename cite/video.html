@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>video</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;video&gt;</strong> służy do osadzania materiałów wideo bezpośrednio na stronie
+            internetowej. Dzięki niemu można wyświetlać filmy, nagrania z kamer, prezentacje oraz inne multimedia bez
+            korzystania z dodatkowych wtyczek.</p>
+        <p>Element ten obsługuje własny odtwarzacz przeglądarki oraz może być sterowany za pomocą JavaScript. Do
+            wskazania pliku można użyć atrybutu <code>src</code> albo jednego lub wielu znaczników
+            <code>&lt;source&gt;</code>.
+        </p>
+        <p>Nowoczesne przeglądarki obsługują między innymi formaty MP4, WebM oraz Ogg Video.</p>
+    </section>
+
+    <section>
+        <p>Najczęstsze zastosowania znacznika:</p>
+        <ul>
+            <li>publikowanie filmów instruktażowych</li>
+            <li>osadzanie materiałów edukacyjnych</li>
+            <li>prezentowanie reklam wideo</li>
+            <li>udostępnianie nagrań z wydarzeń</li>
+            <li>tworzenie galerii filmów</li>
+            <li>umieszczanie prezentacji i demonstracji produktów</li>
+            <li>tworzenie prostych odtwarzaczy multimedialnych</li>
+        </ul>
+        <p>Jeżeli potrzebny jest wyłącznie dźwięk, lepszym rozwiązaniem będzie użycie znacznika
+            <code>&lt;audio&gt;</code>.
+        </p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>src</td>
+                <td>URL lub ścieżka do pliku</td>
+                <td>Określa źródło filmu</td>
+            </tr>
+            <tr>
+                <td>controls</td>
+                <td>controls</td>
+                <td>Wyświetla przyciski odtwarzacza</td>
+            </tr>
+            <tr>
+                <td>autoplay</td>
+                <td>autoplay</td>
+                <td>Automatycznie uruchamia odtwarzanie</td>
+            </tr>
+            <tr>
+                <td>loop</td>
+                <td>loop</td>
+                <td>Odtwarza film w pętli</td>
+            </tr>
+            <tr>
+                <td>muted</td>
+                <td>muted</td>
+                <td>Uruchamia film bez dźwięku</td>
+            </tr>
+            <tr>
+                <td>preload</td>
+                <td>none, metadata, auto</td>
+                <td>Określa sposób wstępnego ładowania filmu</td>
+            </tr>
+            <tr>
+                <td>poster</td>
+                <td>URL obrazu</td>
+                <td>Wyświetla obraz przed rozpoczęciem odtwarzania</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;video&gt;</strong> ma znaczenie semantyczne, ponieważ określa, że w danym miejscu
+            znajduje się materiał filmowy.</p>
+        <p>Przeglądarki, czytniki ekranu oraz inne technologie wspomagające mogą rozpoznać obecność odtwarzacza i
+            poinformować użytkownika o dostępnych kontrolkach.</p>
+        <p>Wyszukiwarki internetowe również otrzymują informację, że dana część strony zawiera treści multimedialne w
+            postaci filmu.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Osadzony materiał wideo</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>source, track, tekst alternatywny</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>większości elementów HTML przechowujących treść</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze można przetestować najważniejsze atrybuty znacznika <code>&lt;video&gt;</code>. Podgląd
+            korzysta z publicznego filmu MP4 dostępnego w internecie, więc odtwarzacz działa od razu po otwarciu strony.
+        </p>
+
+        <div class="sim-controls">
+
+            <label>
+                Kontrolki:
+                <select id="sim-controls-video">
+                    <option value="0">Wyłączone</option>
+                    <option value="1" selected>Włączone</option>
+                </select>
+            </label>
+
+            <label>
+                Autoplay:
+                <select id="sim-autoplay-video">
+                    <option value="0" selected>Nie</option>
+                    <option value="1">Tak</option>
+                </select>
+            </label>
+
+            <label>
+                Loop:
+                <select id="sim-loop-video">
+                    <option value="0" selected>Nie</option>
+                    <option value="1">Tak</option>
+                </select>
+            </label>
+
+            <label>
+                Muted:
+                <select id="sim-muted-video">
+                    <option value="0" selected>Nie</option>
+                    <option value="1">Tak</option>
+                </select>
+            </label>
+
+            <label>
+                Preload:
+                <select id="sim-preload-video">
+                    <option value="none">none</option>
+                    <option value="metadata">metadata</option>
+                    <option value="auto" selected>auto</option>
+                </select>
+            </label>
+
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-video"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-video"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var controls = document.getElementById("sim-controls-video");
+                var autoplay = document.getElementById("sim-autoplay-video");
+                var loop = document.getElementById("sim-loop-video");
+                var muted = document.getElementById("sim-muted-video");
+                var preload = document.getElementById("sim-preload-video");
+
+                var kod = document.getElementById("sim-kod-video");
+                var podglad = document.getElementById("sim-podglad-video");
+
+                var plik = "https://www.w3schools.com/html/mov_bbb.mp4";
+                var poster = "https://www.w3schools.com/html/pic_trulli.jpg";
+
+                function aktualizuj() {
+
+                    var atrybuty = 'src="' + plik + '"';
+
+                    if (controls.value === "1") {
+                        atrybuty += " controls";
+                    }
+
+                    if (autoplay.value === "1") {
+                        atrybuty += " autoplay";
+                    }
+
+                    if (loop.value === "1") {
+                        atrybuty += " loop";
+                    }
+
+                    if (muted.value === "1") {
+                        atrybuty += " muted";
+                    }
+
+                    atrybuty += ' preload="' + preload.value + '"';
+                    atrybuty += ' poster="' + poster + '"';
+
+                    kod.textContent = "<video " + atrybuty + "></video>";
+
+                    podglad.innerHTML = "";
+
+                    var video = document.createElement("video");
+
+                    video.src = plik;
+                    video.poster = poster;
+                    video.preload = preload.value;
+
+                    if (controls.value === "1") {
+                        video.controls = true;
+                    }
+
+                    if (autoplay.value === "1") {
+                        video.autoplay = true;
+                    }
+
+                    if (loop.value === "1") {
+                        video.loop = true;
+                    }
+
+                    if (muted.value === "1") {
+                        video.muted = true;
+                    }
+
+                    podglad.appendChild(video);
+
+                }
+
+                controls.addEventListener("change", aktualizuj);
+                autoplay.addEventListener("change", aktualizuj);
+                loop.addEventListener("change", aktualizuj);
+                muted.addEventListener("change", aktualizuj);
+                preload.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>

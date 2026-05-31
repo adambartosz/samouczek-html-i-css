@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>source</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;source&gt;</strong> służy do definiowania źródeł danych dla elementów multimedialnych.
+            Najczęściej używa się go wewnątrz znaczników <code>&lt;audio&gt;</code>, <code>&lt;video&gt;</code> oraz
+            <code>&lt;picture&gt;</code>.
+        </p>
+        <p>Jest elementem <strong>pustym</strong>, czyli nie posiada znacznika zamykającego i nie zawiera własnej
+            treści. Przeglądarka analizuje kolejne źródła i wybiera pierwsze, które potrafi obsłużyć.</p>
+        <p>Dzięki temu można przygotować kilka wersji tego samego pliku i zwiększyć zgodność strony z różnymi
+            urządzeniami oraz przeglądarkami.</p>
+    </section>
+
+    <section>
+        <p>Najczęstsze zastosowania znacznika:</p>
+        <ul>
+            <li>podawanie kilku formatów plików audio dla znacznika <code>&lt;audio&gt;</code></li>
+            <li>podawanie kilku formatów plików wideo dla znacznika <code>&lt;video&gt;</code></li>
+            <li>tworzenie responsywnych obrazów z użyciem <code>&lt;picture&gt;</code></li>
+            <li>dostosowywanie obrazów do szerokości ekranu</li>
+            <li>dostarczanie nowoczesnych formatów grafik, takich jak WebP</li>
+            <li>zwiększanie kompatybilności multimediów pomiędzy przeglądarkami</li>
+        </ul>
+        <p>Jeżeli wystarcza tylko jeden plik multimedialny, można użyć bezpośrednio atrybutu <code>src</code> w
+            znaczniku <code>&lt;audio&gt;</code> lub <code>&lt;video&gt;</code>.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td>src</td>
+                <td>URL lub ścieżka do pliku</td>
+                <td>Wskazuje źródło danych</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>typ MIME, np. audio/mpeg, video/mp4, image/webp</td>
+                <td>Określa typ pliku</td>
+            </tr>
+            <tr>
+                <td>media</td>
+                <td>media query CSS</td>
+                <td>Pozwala użyć źródła tylko przy określonych warunkach</td>
+            </tr>
+            <tr>
+                <td>srcset</td>
+                <td>lista obrazów i rozdzielczości</td>
+                <td>Definiuje alternatywne wersje obrazu</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znacznik <strong>&lt;source&gt;</strong> ma znaczenie semantyczne związane z multimediami. Informuje
+            przeglądarkę, że zawiera alternatywne źródło pliku dla elementu nadrzędnego.</p>
+        <p>Samodzielnie nie wyświetla żadnej treści użytkownikowi. Jego zadaniem jest dostarczenie informacji
+            potrzebnych do poprawnego wyboru pliku przez przeglądarkę.</p>
+        <p>Czytniki ekranu nie odczytują znacznika bezpośrednio, ponieważ jest on elementem technicznym wykorzystywanym
+            przez inne znaczniki.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Pusty</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Nie (niekontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Źródło danych dla audio, video lub picture</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Żadnych elementów</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>audio, video, picture</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>none</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Ten symulator pokazuje, jak działa znacznik <code>&lt;source&gt;</code> wewnątrz elementu
+            <code>&lt;video&gt;</code>. Można zmieniać atrybuty <code>src</code> i <code>type</code>, a następnie
+            zobaczyć wygenerowany kod HTML oraz działający odtwarzacz.
+        </p>
+
+        <div class="sim-controls">
+
+            <label>
+                Plik:
+                <select id="sim-src-source">
+                    <option value="https://www.w3schools.com/html/mov_bbb.mp4">MP4 (Big Buck Bunny)</option>
+                    <option value="https://www.w3schools.com/html/movie.mp4">MP4 (Bear)</option>
+                </select>
+            </label>
+
+            <label>
+                Typ MIME:
+                <select id="sim-type-source">
+                    <option value="video/mp4">video/mp4</option>
+                    <option value="video/webm">video/webm</option>
+                </select>
+            </label>
+
+            <label>
+                Kontrolki:
+                <select id="sim-controls-source">
+                    <option value="1">Włączone</option>
+                    <option value="0">Wyłączone</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-source"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-source"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var src = document.getElementById("sim-src-source");
+                var type = document.getElementById("sim-type-source");
+                var controls = document.getElementById("sim-controls-source");
+
+                var kod = document.getElementById("sim-kod-source");
+                var podglad = document.getElementById("sim-podglad-source");
+
+                function aktualizuj() {
+
+                    var html = '<video width="480"';
+
+                    if (controls.value === "1") {
+                        html += ' controls';
+                    }
+
+                    html += '><br>';
+                    html += '    &lt;source src="' + src.value + '" type="' + type.value + '"&gt;<br>';
+                    html += '    Twoja przeglądarka nie obsługuje wideo.<br>';
+                    html += '&lt;/video&gt;';
+
+                    kod.innerHTML = html;
+
+                    podglad.innerHTML = "";
+
+                    var video = document.createElement("video");
+                    video.width = 480;
+
+                    if (controls.value === "1") {
+                        video.controls = true;
+                    }
+
+                    var source = document.createElement("source");
+                    source.src = src.value;
+                    source.type = type.value;
+
+                    video.appendChild(source);
+
+                    podglad.appendChild(video);
+
+                }
+
+                src.addEventListener("change", aktualizuj);
+                type.addEventListener("change", aktualizuj);
+                controls.addEventListener("change", aktualizuj);
+
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>display: grid</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="wlasciwosc">
+
+    <section>
+        <p>Właściwość <strong>display: grid</strong> włącza na elemencie tryb siatki. Dzieci kontenera rozmieszczają się
+            w dwuwymiarowym układzie kolumn i wierszy, który sam definiujesz. W przeciwieństwie do Flexboxa, Grid działa
+            jednocześnie w obu kierunkach – poziomym i pionowym.</p>
+        <p>Sam element z <code>display: grid</code> zachowuje się jak blokowy. Jego dzieci stają się elementami siatki i
+            można je precyzyjnie umieszczać w konkretnych komórkach lub rozciągać na wiele kolumn i wierszy.</p>
+    </section>
+
+    <section>
+        <p>Składnia: <code>display: grid;</code></p>
+        <p>Po ustawieniu <code>display: grid</code> konfigurujesz siatkę właściwościami na kontenerze:</p>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Przykładowe wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td><code>grid-template-columns</code></td>
+                <td>200px 1fr, repeat(3, 1fr), auto 1fr 2fr</td>
+                <td>Definiuje liczbę i szerokości kolumn siatki</td>
+            </tr>
+            <tr>
+                <td><code>grid-template-rows</code></td>
+                <td>100px auto, repeat(2, 150px)</td>
+                <td>Definiuje liczbę i wysokości wierszy siatki</td>
+            </tr>
+            <tr>
+                <td><code>grid-template-areas</code></td>
+                <td>"header header" "nav main"</td>
+                <td>Nazywa obszary siatki – przypisujesz je dzieciom przez <code>grid-area</code></td>
+            </tr>
+            <tr>
+                <td><code>grid-template</code></td>
+                <td>100px / 1fr 2fr</td>
+                <td>Skrót dla <code>grid-template-rows</code> / <code>grid-template-columns</code></td>
+            </tr>
+            <tr>
+                <td><code>grid-auto-columns</code></td>
+                <td>px, fr, auto, minmax()</td>
+                <td>Rozmiar kolumn tworzonych automatycznie, poza zdefiniowaną siatką</td>
+            </tr>
+            <tr>
+                <td><code>grid-auto-rows</code></td>
+                <td>px, fr, auto, minmax()</td>
+                <td>Rozmiar wierszy tworzonych automatycznie</td>
+            </tr>
+            <tr>
+                <td><code>grid-auto-flow</code></td>
+                <td>row, column, row dense, column dense</td>
+                <td>Kierunek automatycznego umieszczania elementów. <code>dense</code> wypełnia luki</td>
+            </tr>
+            <tr>
+                <td><code>gap</code></td>
+                <td>8px, 1rem</td>
+                <td>Odstęp między komórkami – skrót dla <code>row-gap</code> i <code>column-gap</code></td>
+            </tr>
+            <tr>
+                <td><code>row-gap</code></td>
+                <td>px, rem, %</td>
+                <td>Odstęp tylko między wierszami</td>
+            </tr>
+            <tr>
+                <td><code>column-gap</code></td>
+                <td>px, rem, %</td>
+                <td>Odstęp tylko między kolumnami</td>
+            </tr>
+            <tr>
+                <td><code>justify-items</code></td>
+                <td>start, end, center, stretch</td>
+                <td>Wyrównanie dzieci w poziomie wewnątrz ich komórek</td>
+            </tr>
+            <tr>
+                <td><code>align-items</code></td>
+                <td>start, end, center, stretch, baseline</td>
+                <td>Wyrównanie dzieci w pionie wewnątrz ich komórek</td>
+            </tr>
+            <tr>
+                <td><code>justify-content</code></td>
+                <td>start, end, center, space-between, space-around, space-evenly</td>
+                <td>Wyrównanie całej siatki w poziomie wewnątrz kontenera (gdy siatka jest węższa niż kontener)</td>
+            </tr>
+            <tr>
+                <td><code>align-content</code></td>
+                <td>start, end, center, space-between, space-around, space-evenly, stretch</td>
+                <td>Wyrównanie całej siatki w pionie wewnątrz kontenera</td>
+            </tr>
+        </table>
+
+        <p>Na samych dzieciach (grid items) możesz ustawiać:</p>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Przykładowe wartości</th>
+                <th>Co robi</th>
+            </tr>
+            <tr>
+                <td><code>grid-column</code></td>
+                <td>1 / 3, 2 / span 2, 1 / -1</td>
+                <td>Skrót dla <code>grid-column-start</code> / <code>grid-column-end</code></td>
+            </tr>
+            <tr>
+                <td><code>grid-row</code></td>
+                <td>1 / 3, 2 / span 2</td>
+                <td>Skrót dla <code>grid-row-start</code> / <code>grid-row-end</code></td>
+            </tr>
+            <tr>
+                <td><code>grid-column-start</code></td>
+                <td>1, 2, span 2</td>
+                <td>Linia startowa kolumny (linie numerowane od 1)</td>
+            </tr>
+            <tr>
+                <td><code>grid-column-end</code></td>
+                <td>3, -1, span 3</td>
+                <td>Linia końcowa kolumny. <code>-1</code> = ostatnia linia. <code>span N</code> = rozciągnij przez N
+                    kolumn</td>
+            </tr>
+            <tr>
+                <td><code>grid-row-start</code></td>
+                <td>1, 2, span 2</td>
+                <td>Linia startowa wiersza</td>
+            </tr>
+            <tr>
+                <td><code>grid-row-end</code></td>
+                <td>3, -1, span 2</td>
+                <td>Linia końcowa wiersza</td>
+            </tr>
+            <tr>
+                <td><code>grid-area</code></td>
+                <td>header, nav, main</td>
+                <td>Przypisuje element do nazwanego obszaru z <code>grid-template-areas</code></td>
+            </tr>
+            <tr>
+                <td><code>justify-self</code></td>
+                <td>start, end, center, stretch</td>
+                <td>Nadpisuje <code>justify-items</code> dla konkretnego dziecka</td>
+            </tr>
+            <tr>
+                <td><code>align-self</code></td>
+                <td>start, end, center, stretch, baseline</td>
+                <td>Nadpisuje <code>align-items</code> dla konkretnego dziecka</td>
+            </tr>
+            <tr>
+                <td><code>order</code></td>
+                <td>0, 1, -1</td>
+                <td>Kolejność wyświetlania w automatycznym przepływie</td>
+            </tr>
+        </table>
+
+        <p>Jednostka <code>fr</code> (fraction) oznacza ułamek dostępnej wolnej przestrzeni. <code>repeat(3, 1fr)</code>
+            to skrót dla <code>1fr 1fr 1fr</code>.</p>
+        <p>Funkcja <code>minmax(min, max)</code> definiuje zakres rozmiaru kolumny lub wiersza. Kolumna nie będzie
+            węższa niż <code>min</code> i nie szersza niż <code>max</code>. Możesz mieszać jednostki:</p>
+        <table>
+            <tr>
+                <th>Przykład</th>
+                <th>Co oznacza</th>
+            </tr>
+            <tr>
+                <td><code>minmax(100px, 1fr)</code></td>
+                <td>Minimum 100px, ale rośnie proporcjonalnie do wolnego miejsca</td>
+            </tr>
+            <tr>
+                <td><code>minmax(200px, auto)</code></td>
+                <td>Minimum 200px, ale może rosnąć gdy treść jest szersza</td>
+            </tr>
+            <tr>
+                <td><code>minmax(0, 1fr)</code></td>
+                <td>Może się skurczyć do 0, ale proporcjonalnie zajmuje wolne miejsce – używane gdy <code>1fr</code>
+                    powoduje przepełnienie</td>
+            </tr>
+            <tr>
+                <td><code>minmax(auto, 300px)</code></td>
+                <td>Minimum = rozmiar treści, maksimum 300px</td>
+            </tr>
+        </table>
+        <p>Klasyczny wzorzec responsywnej siatki bez media queries: <code>repeat(auto-fit, minmax(200px, 1fr))</code> –
+            tworzy tyle kolumn ile się mieści, każda minimum 200px.</p>
+        <p><code>auto-fit</code> vs <code>auto-fill</code>: oba automatycznie tworzą kolumny. Różnią się gdy elementów
+            jest mniej niż kolumn – <code>auto-fit</code> zwija puste kolumny i rozciąga istniejące,
+            <code>auto-fill</code> zostawia puste miejsca.</p>
+    </section>
+
+    <section>
+        <p>Domyślna wartość <code>display</code> to <code>block</code> albo <code>inline</code> zależnie od znacznika.
+            Jeśli nie wpiszesz <code>display: grid</code>, dzieci układają się w normalnym przepływie.</p>
+        <p><code>display: initial</code> przywraca domyślną wartość elementu. <code>display: inherit</code> dziedziczy
+            po rodzicu – ale normalnie <code>display</code> nie jest dziedziczone.</p>
+    </section>
+
+    <section>
+        <p>Właściwość <code>display</code> <strong>nie jest dziedziczona</strong>. To że rodzic ma <code>grid</code> nie
+            zmienia <code>display</code> dzieci – stają się grid items, ale ich własne dzieci układają się już normalnie
+            (chyba że im też ustawisz <code>display: grid</code>).</p>
+        <p><code>display: inherit</code> wymusza dziedziczenie, ale używa się tego bardzo rzadko.
+            <code>display: initial</code> przywraca domyślną wartość dla danego znacznika.
+        </p>
+    </section>
+
+    <section>
+        <p>Trzy równe kolumny:</p>
+        <pre><code>.siatka {<br>
+  display: grid;<br>
+  grid-template-columns: repeat(3, 1fr);<br>
+  gap: 16px;<br>
+}</code></pre>
+
+        <p>Klasyczny layout strony z nazwanymi obszarami:</p>
+        <pre><code>.strona {<br>
+  display: grid;<br>
+  grid-template-columns: 200px 1fr;<br>
+  grid-template-rows: auto 1fr auto;<br>
+  grid-template-areas:<br>
+    "header header"<br>
+    "nav    main"<br>
+    "footer footer";<br>
+  gap: 12px;<br>
+}<br>
+<br>
+header { grid-area: header; }<br>
+nav    { grid-area: nav; }<br>
+main   { grid-area: main; }<br>
+footer { grid-area: footer; }</code></pre>
+
+        <p>Element rozciągnięty na całą szerokość siatki:</p>
+        <pre><code>.baner {<br>
+  grid-column: 1 / -1;<br>
+}</code></pre>
+
+        <p>Responsywna siatka kart bez media queries:</p>
+        <pre><code>.karty {<br>
+  display: grid;<br>
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));<br>
+  gap: 20px;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <p>Konfiguruj siatkę i właściwości poszczególnych dzieci. Kliknij na element żeby go zaznaczyć i zmienić jego
+            <code>grid-column</code>, <code>grid-row</code> oraz <code>align-self</code>.
+        </p>
+
+        <div class="sim-controls" style="flex-direction: column; gap: 12px;">
+
+            <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:flex-end;">
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    grid-template-columns
+                    <select id="s-cols">
+                        <option value="repeat(2, 1fr)">repeat(2, 1fr)</option>
+                        <option value="repeat(3, 1fr)" selected>repeat(3, 1fr)</option>
+                        <option value="repeat(4, 1fr)">repeat(4, 1fr)</option>
+                        <option value="1fr 2fr">1fr 2fr</option>
+                        <option value="200px 1fr">200px 1fr</option>
+                        <option value="repeat(3, minmax(80px,1fr))">repeat(3, minmax(80px,1fr))</option>
+                        <option value="auto auto auto">auto auto auto</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    grid-template-rows
+                    <select id="s-rows">
+                        <option value="auto" selected>auto</option>
+                        <option value="repeat(2, 80px)">repeat(2, 80px)</option>
+                        <option value="80px auto">80px auto</option>
+                        <option value="repeat(3, 60px)">repeat(3, 60px)</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    gap (px)
+                    <input id="s-gap" type="number" value="8" min="0" max="32" style="width:65px;">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    justify-items
+                    <select id="s-ji">
+                        <option value="stretch" selected>stretch</option>
+                        <option value="start">start</option>
+                        <option value="end">end</option>
+                        <option value="center">center</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    align-items
+                    <select id="s-ai">
+                        <option value="stretch" selected>stretch</option>
+                        <option value="start">start</option>
+                        <option value="end">end</option>
+                        <option value="center">center</option>
+                    </select>
+                </label>
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; gap:6px; align-items:center;">
+                <span style="font-size:13px; color:var(--color-text-secondary);">Zaznaczone dziecko:</span>
+                <div id="s-child-tabs" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:flex-end;">
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    grid-column
+                    <select id="s-gc">
+                        <option value="auto" selected>auto</option>
+                        <option value="1 / 2">1 / 2</option>
+                        <option value="1 / 3">1 / 3</option>
+                        <option value="1 / 4">1 / 4</option>
+                        <option value="1 / -1">1 / -1 (cała szerokość)</option>
+                        <option value="2 / 4">2 / 4</option>
+                        <option value="span 2">span 2</option>
+                        <option value="span 3">span 3</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    grid-row
+                    <select id="s-gr">
+                        <option value="auto" selected>auto</option>
+                        <option value="1 / 2">1 / 2</option>
+                        <option value="1 / 3">1 / 3</option>
+                        <option value="span 2">span 2</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    align-self
+                    <select id="s-as">
+                        <option value="auto" selected>auto</option>
+                        <option value="start">start</option>
+                        <option value="end">end</option>
+                        <option value="center">center</option>
+                        <option value="stretch">stretch</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    justify-self
+                    <select id="s-js">
+                        <option value="auto" selected>auto</option>
+                        <option value="start">start</option>
+                        <option value="end">end</option>
+                        <option value="center">center</option>
+                        <option value="stretch">stretch</option>
+                    </select>
+                </label>
+            </div>
+
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad" style="padding:0; overflow:hidden; min-height:200px;"></div>
+        </div>
+
+        <script>
+            (function () {
+
+                var sCols = document.getElementById("s-cols");
+                var sRows = document.getElementById("s-rows");
+                var sGap = document.getElementById("s-gap");
+                var sJi = document.getElementById("s-ji");
+                var sAi = document.getElementById("s-ai");
+                var sGc = document.getElementById("s-gc");
+                var sGr = document.getElementById("s-gr");
+                var sAs = document.getElementById("s-as");
+                var sJs = document.getElementById("s-js");
+                var kodEl = document.getElementById("sim-kod");
+                var podglad = document.getElementById("sim-podglad");
+                var tabsCont = document.getElementById("s-child-tabs");
+
+                var kolory = [
+                    { bg: "#AFA9EC", fg: "#26215C", nazwa: "A" },
+                    { bg: "#9FE1CB", fg: "#085041", nazwa: "B" },
+                    { bg: "#FAC775", fg: "#412402", nazwa: "C" },
+                    { bg: "#F0997B", fg: "#4A1B0C", nazwa: "D" },
+                    { bg: "#F4C0D1", fg: "#4B1528", nazwa: "E" },
+                    { bg: "#B5D4F4", fg: "#042C53", nazwa: "F" }
+                ];
+
+                var stany = kolory.map(function () { return { gc: "auto", gr: "auto", as: "auto", js: "auto" }; });
+                var aktywne = 0;
+                var tabs = [];
+                var itemEls = [];
+
+                kolory.forEach(function (k, i) {
+                    var b = document.createElement("button");
+                    b.textContent = k.nazwa;
+                    b.style.cssText = "padding:3px 12px; border-radius:5px; cursor:pointer; font-size:13px; font-weight:600; border:2px solid transparent; background:" + k.bg + "; color:" + k.fg + ";";
+                    b.addEventListener("click", function () { aktywne = i; zaladuj(); podswietl(); });
+                    tabsCont.appendChild(b);
+                    tabs.push(b);
+                });
+
+                function podswietl() {
+                    tabs.forEach(function (b, i) { b.style.borderColor = i === aktywne ? "#534AB7" : "transparent"; });
+                    itemEls.forEach(function (el, i) { el.style.outline = i === aktywne ? "2.5px solid #534AB7" : "none"; el.style.outlineOffset = "2px"; });
+                }
+
+                function zaladuj() {
+                    var s = stany[aktywne];
+                    sGc.value = s.gc;
+                    sGr.value = s.gr;
+                    sAs.value = s.as;
+                    sJs.value = s.js;
+                }
+
+                function zapisz() {
+                    var s = stany[aktywne];
+                    s.gc = sGc.value;
+                    s.gr = sGr.value;
+                    s.as = sAs.value;
+                    s.js = sJs.value;
+                }
+
+                function aktualizuj() {
+                    zapisz();
+
+                    var cols = sCols.value;
+                    var rows = sRows.value;
+                    var gap = (parseInt(sGap.value) || 0) + "px";
+                    var ji = sJi.value;
+                    var ai = sAi.value;
+
+                    podglad.innerHTML = "";
+
+                    var kont = document.createElement("div");
+                    kont.style.cssText = "display:grid; padding:10px; box-sizing:border-box; width:100%; min-height:200px; background:#f5f4f0; border-radius:8px;";
+                    kont.style.gridTemplateColumns = cols;
+                    kont.style.gridTemplateRows = rows;
+                    kont.style.gap = gap;
+                    kont.style.justifyItems = ji;
+                    kont.style.alignItems = ai;
+
+                    itemEls = [];
+                    kolory.forEach(function (k, i) {
+                        var s = stany[i];
+                        var el = document.createElement("div");
+                        el.style.cssText = "min-height:52px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:600; padding:6px; box-sizing:border-box; cursor:pointer; outline:none; width:100%;";
+                        el.style.background = k.bg;
+                        el.style.color = k.fg;
+                        el.style.gridColumn = s.gc;
+                        el.style.gridRow = s.gr;
+                        el.style.alignSelf = s.as;
+                        el.style.justifySelf = s.js;
+                        el.textContent = k.nazwa;
+                        el.addEventListener("click", function () { aktywne = i; zaladuj(); podswietl(); });
+                        kont.appendChild(el);
+                        itemEls.push(el);
+                    });
+
+                    podglad.appendChild(kont);
+                    podswietl();
+
+                    var s = stany[aktywne];
+                    var kontCSS = ".siatka {\n  display: grid;\n  grid-template-columns: " + cols + ";\n  grid-template-rows: " + rows + ";\n  gap: " + gap + ";\n  justify-items: " + ji + ";\n  align-items: " + ai + ";\n}";
+                    var childCSS = "\n\n.dziecko-" + kolory[aktywne].nazwa + " {\n  grid-column: " + s.gc + ";\n  grid-row: " + s.gr + ";\n  align-self: " + s.as + ";\n  justify-self: " + s.js + ";\n}";
+                    kodEl.textContent = kontCSS + childCSS;
+                }
+
+                [sCols, sRows, sJi, sAi, sGc, sGr, sAs, sJs].forEach(function (el) { el.addEventListener("change", aktualizuj); });
+                sGap.addEventListener("input", aktualizuj);
+
+                zaladuj();
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

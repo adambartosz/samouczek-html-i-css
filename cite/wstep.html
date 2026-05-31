@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML - wprowadzenie</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to jest HTML?</h2>
+        <p>HTML (HyperText Markup Language) to język do tworzenia stron internetowych. Służy do opisywania struktury
+            strony, czyli tego co jest nagłówkiem, tekstem, obrazem albo linkiem.</p>
+        <p>To nie jest język programowania tylko znaczników. Przeglądarka czyta HTML i na jego podstawie pokazuje
+            stronę.</p>
+    </section>
+
+    <section>
+        <h2>Do czego służy HTML?</h2>
+        <p>HTML używa się do budowania każdej strony internetowej. Dzięki niemu można tworzyć układ treści.</p>
+        <ul>
+            <li>nagłówki i akapity tekstu</li>
+            <li>linki do innych stron</li>
+            <li>obrazy i multimedia</li>
+            <li>listy i tabele</li>
+            <li>formularze do wpisywania danych</li>
+            <li>podział strony na sekcje</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Podstawowa struktura strony</h2>
+        <p>Każdy plik HTML ma podobny szkielet. Najważniejsze są elementy <code>&lt;html&gt;</code>,
+            <code>&lt;head&gt;</code> i <code>&lt;body&gt;</code>.
+        </p>
+
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pl"&gt;<br>
+&lt;head&gt;<br>
+&lt;meta charset="utf-8"&gt;<br>
+&lt;title&gt;Moja strona&lt;/title&gt;<br>
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+&lt;h1&gt;Witaj!&lt;/h1&gt;<br>
+&lt;p&gt;To moja strona HTML&lt;/p&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;</code></pre>
+    </section>
+
+    <section>
+        <h2>Najważniejsze znaczniki</h2>
+
+        <table>
+            <tr>
+                <th>Znacznik</th>
+                <th>Opis</th>
+            </tr>
+            <tr>
+                <td>&lt;h1&gt; - &lt;h6&gt;</td>
+                <td>Nagłówki</td>
+            </tr>
+            <tr>
+                <td>&lt;p&gt;</td>
+                <td>Akapit tekstu</td>
+            </tr>
+            <tr>
+                <td>&lt;a&gt;</td>
+                <td>Link</td>
+            </tr>
+            <tr>
+                <td>&lt;img&gt;</td>
+                <td>Obrazek</td>
+            </tr>
+            <tr>
+                <td>&lt;div&gt;</td>
+                <td>Kontener blokowy</td>
+            </tr>
+            <tr>
+                <td>&lt;span&gt;</td>
+                <td>Kontener liniowy</td>
+            </tr>
+            <tr>
+                <td>&lt;ul&gt;</td>
+                <td>Lista punktowana</td>
+            </tr>
+            <tr>
+                <td>&lt;ol&gt;</td>
+                <td>Lista numerowana</td>
+            </tr>
+            <tr>
+                <td>&lt;table&gt;</td>
+                <td>Tabela</td>
+            </tr>
+        </table>
+
+    </section>
+
+    <section>
+        <h2>HTML a CSS</h2>
+        <p>HTML odpowiada za strukturę strony, a CSS za wygląd. HTML mówi co jest na stronie, a CSS jak to wygląda.</p>
+
+        <pre><code>&lt;p class="tekst"&gt;Przykład tekstu&lt;/p&gt;</code></pre>
+
+        <pre><code>.tekst {
+color: blue;
+font-size: 18px;
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Interaktywny przykład</h2>
+
+        <p>Wybierz element HTML i zobacz jak wygląda jego kod oraz działanie.</p>
+
+        <div class="sim-controls">
+            <label>
+                Element:
+                <select id="sim-html">
+                    <option value="h1">Nagłówek h1</option>
+                    <option value="p">Akapit p</option>
+                    <option value="a">Link a</option>
+                    <option value="ul">Lista ul</option>
+                    <option value="img">Obraz img</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var sel = document.getElementById("sim-html");
+                var kod = document.getElementById("sim-kod");
+                var podgl = document.getElementById("sim-podglad");
+
+                function aktualizuj() {
+                    while (podgl.firstChild) {
+                        podgl.removeChild(podgl.firstChild);
+                    }
+
+                    if (sel.value === "h1") {
+                        kod.textContent = "<h1>Witaj świecie</h1>";
+                        var el = document.createElement("h1");
+                        el.textContent = "Witaj świecie";
+                        podgl.appendChild(el);
+                    }
+                    else if (sel.value === "p") {
+                        kod.textContent = "<p>Przykładowy tekst</p>";
+                        var el2 = document.createElement("p");
+                        el2.textContent = "Przykładowy tekst";
+                        podgl.appendChild(el2);
+                    }
+                    else if (sel.value === "a") {
+                        kod.textContent = '<a href="https://example.com">Link</a>';
+                        var el3 = document.createElement("a");
+                        el3.href = "#";
+                        el3.textContent = "Link";
+                        podgl.appendChild(el3);
+                    }
+                    else if (sel.value === "ul") {
+                        kod.textContent = "<ul><li>HTML</li><li>CSS</li></ul>";
+                        var ul = document.createElement("ul");
+                        var li1 = document.createElement("li");
+                        var li2 = document.createElement("li");
+                        li1.textContent = "HTML";
+                        li2.textContent = "CSS";
+                        ul.appendChild(li1);
+                        ul.appendChild(li2);
+                        podgl.appendChild(ul);
+                    }
+                    else {
+                        kod.textContent = '<img src="../img/html.jpg" alt="HTML">';
+                        var p = document.createElement("p");
+                        p.textContent = "Obrazek HTML (podgląd tekstowy)";
+                        podgl.appendChild(p);
+                    }
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

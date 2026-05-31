@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>i</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;i&gt;</strong> zmienia styl tekstu na kursywę, ale bez znaczenia semantycznego. Często
+            używa się go do nazw, obcych słów albo myśli.</p>
+        <p>Jest liniowy i działa w środku tekstu.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy:</p>
+        <ul>
+            <li>chcemy kursywę bez znaczenia</li>
+            <li>oznaczamy obce słowa</li>
+            <li>wyróżniamy tytuły</li>
+        </ul>
+        <p>Do znaczenia lepsze jest <code>&lt;em&gt;</code>.</p>
+    </section>
+
+    <section></section>
+
+    <section>
+        <p><code>&lt;i&gt;</code> nie niesie znaczenia semantycznego.</p>
+        <p>Czytniki traktują go tylko jako styl.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Liniowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Brak - styl kursywy</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst i elementy liniowe</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Elementów blokowych i liniowych</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W symulatorze sprawdzisz kursywę.</p>
+
+        <div class="sim-controls">
+            <label>
+                Tryb:
+                <select id="sim-i-mode">
+                    <option value="off">normalny</option>
+                    <option value="i">i</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-i"></pre>
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-i"></div>
+        </div>
+
+        <script>
+            (function () {
+
+                var mode = document.getElementById("sim-i-mode");
+                var kod = document.getElementById("sim-kod-i");
+                var podglad = document.getElementById("sim-podglad-i");
+
+                var tekst = "Przykładowy tekst kursywą";
+
+                function aktualizuj() {
+
+                    podglad.innerHTML = "";
+
+                    var p = document.createElement("p");
+
+                    if (mode.value === "i") {
+                        p.innerHTML = "Przykładowy tekst <i>kursywą</i>";
+                        kod.textContent = "<p>Przykładowy tekst <i>kursywą</i></p>";
+                    } else {
+                        p.textContent = tekst;
+                        kod.textContent = "<p>" + tekst + "</p>";
+                    }
+
+                    podglad.appendChild(p);
+
+                }
+
+                mode.addEventListener("change", aktualizuj);
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

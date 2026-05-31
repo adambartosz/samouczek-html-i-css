@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>b</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;b&gt;</strong> służy do pogrubienia tekstu, ale bez dodatkowego znaczenia semantycznego.
+            To tylko wizualne wyróżnienie fragmentu. Nie mówi przeglądarce, że coś jest ważne.</p>
+        <p>Jest elementem <strong>liniowym</strong>, więc działa w środku zdania.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy:</p>
+        <ul>
+            <li>chcemy pogrubić tekst bez znaczenia</li>
+            <li>robimy wizualne wyróżnienie</li>
+            <li>oznaczamy słowa kluczowe w stylu</li>
+        </ul>
+        <p>Lepiej użyć <code>&lt;strong&gt;</code>, jeśli tekst ma być ważny.</p>
+    </section>
+
+    <section></section>
+
+    <section>
+        <p><code>&lt;b&gt;</code> nie ma znaczenia semantycznego. To tylko wygląd.</p>
+        <p>Czytniki ekranu nie traktują go jako ważnego elementu.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Liniowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Brak - tylko styl</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst i elementy liniowe</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Elementów blokowych i liniowych</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W symulatorze możesz sprawdzić pogrubienie tekstu.</p>
+
+        <div class="sim-controls">
+            <label>
+                Tryb:
+                <select id="sim-b-mode">
+                    <option value="off">normalny</option>
+                    <option value="b">b</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-b"></pre>
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-b"></div>
+        </div>
+
+        <script>
+            (function () {
+
+                var mode = document.getElementById("sim-b-mode");
+                var kod = document.getElementById("sim-kod-b");
+                var podglad = document.getElementById("sim-podglad-b");
+
+                var tekst = "To jest przykładowy tekst do pogrubienia";
+
+                function aktualizuj() {
+
+                    podglad.innerHTML = "";
+
+                    var p = document.createElement("p");
+
+                    if (mode.value === "b") {
+                        p.innerHTML = "To jest przykładowy tekst do <b>pogrubienia</b>";
+                        kod.textContent = "<p>To jest przykładowy tekst do <b>pogrubienia</b></p>";
+                    } else {
+                        p.textContent = tekst;
+                        kod.textContent = "<p>" + tekst + "</p>";
+                    }
+
+                    podglad.appendChild(p);
+
+                }
+
+                mode.addEventListener("change", aktualizuj);
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

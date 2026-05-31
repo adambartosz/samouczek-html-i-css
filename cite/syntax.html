@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Składnia HTML</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to jest składnia HTML?</h2>
+
+        <p>Składnia HTML to zbiór zasad określających sposób zapisywania kodu strony internetowej. Dzięki niej
+            przeglądarka wie, które elementy są nagłówkami, akapitami, obrazami, linkami czy formularzami.</p>
+
+        <p>HTML składa się głównie ze znaczników zapisanych w nawiasach ostrych. Większość znaczników posiada część
+            otwierającą i zamykającą.</p>
+
+        <p>Przykład prostego znacznika:</p>
+
+        <pre><code>&lt;p&gt;To jest akapit.&lt;/p&gt;</code></pre>
+
+        <p>Przeglądarka wyświetli wtedy zwykły akapit tekstu.</p>
+
+    </section>
+
+    <section>
+        <h2>Budowa znacznika HTML</h2>
+
+        <p>Większość elementów HTML składa się z trzech części:</p>
+
+        <ul>
+            <li>znacznika otwierającego</li>
+            <li>zawartości</li>
+            <li>znacznika zamykającego</li>
+        </ul>
+
+        <pre><code>&lt;h1&gt;Mój tytuł&lt;/h1&gt;</code></pre>
+
+        <table>
+            <tr>
+                <th>Element</th>
+                <th>Znaczenie</th>
+            </tr>
+            <tr>
+                <td>&lt;h1&gt;</td>
+                <td>Znacznik otwierający</td>
+            </tr>
+            <tr>
+                <td>Mój tytuł</td>
+                <td>Zawartość elementu</td>
+            </tr>
+            <tr>
+                <td>&lt;/h1&gt;</td>
+                <td>Znacznik zamykający</td>
+            </tr>
+        </table>
+
+        <p>Znacznik zamykający różni się od otwierającego ukośnikiem <code>/</code>.</p>
+
+    </section>
+
+    <section>
+        <h2>Pełna struktura dokumentu HTML</h2>
+
+        <p>Każda strona internetowa powinna mieć podstawową strukturę.</p>
+
+        <pre><code>&lt;!DOCTYPE html&gt;<br>
+&lt;html lang="pl"&gt;<br>
+&lt;head&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta charset="utf-8"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Moja strona&lt;/title&gt;<br>
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Witaj świecie&lt;/h1&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;</code></pre>
+
+        <p>Poszczególne elementy mają konkretne zadania:</p>
+
+        <table>
+            <tr>
+                <th>Element</th>
+                <th>Zastosowanie</th>
+            </tr>
+            <tr>
+                <td>DOCTYPE</td>
+                <td>Informuje o użyciu HTML5.</td>
+            </tr>
+            <tr>
+                <td>html</td>
+                <td>Główny kontener dokumentu.</td>
+            </tr>
+            <tr>
+                <td>head</td>
+                <td>Ustawienia strony.</td>
+            </tr>
+            <tr>
+                <td>meta</td>
+                <td>Dodatkowe informacje o dokumencie.</td>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td>Tytuł karty przeglądarki.</td>
+            </tr>
+            <tr>
+                <td>body</td>
+                <td>Widoczna część strony.</td>
+            </tr>
+        </table>
+
+    </section>
+
+    <section>
+        <h2>Atrybuty w HTML</h2>
+
+        <p>Atrybuty przekazują dodatkowe informacje do znaczników.</p>
+
+        <p>Umieszcza się je wewnątrz znacznika otwierającego.</p>
+
+        <pre><code>&lt;a href="https://google.pl"&gt;Google&lt;/a&gt;</code></pre>
+
+        <p>W tym przykładzie:</p>
+
+        <ul>
+            <li><code>href</code> jest nazwą atrybutu</li>
+            <li><code>"https://google.pl"</code> jest jego wartością</li>
+        </ul>
+
+        <p>Znacznik może mieć więcej niż jeden atrybut.</p>
+
+        <pre><code>&lt;img src="obraz.jpg" alt="Zdjęcie" width="300"&gt;</code></pre>
+
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Przykład</th>
+            </tr>
+            <tr>
+                <td>href</td>
+                <td>Adres linku</td>
+            </tr>
+            <tr>
+                <td>src</td>
+                <td>Źródło obrazka</td>
+            </tr>
+            <tr>
+                <td>alt</td>
+                <td>Opis obrazka</td>
+            </tr>
+            <tr>
+                <td>width</td>
+                <td>Szerokość elementu</td>
+            </tr>
+            <tr>
+                <td>height</td>
+                <td>Wysokość elementu</td>
+            </tr>
+        </table>
+
+    </section>
+
+    <section>
+        <h2>Elementy kontenerowe i pojedyncze</h2>
+
+        <p>W HTML występują dwa podstawowe rodzaje elementów.</p>
+
+        <h3>Elementy kontenerowe</h3>
+
+        <p>Posiadają znacznik otwierający i zamykający.</p>
+
+        <pre><code>&lt;strong&gt;Pogrubiony tekst&lt;/strong&gt;</code></pre>
+
+        <p>Przykłady:</p>
+
+        <ul>
+            <li>p</li>
+            <li>div</li>
+            <li>span</li>
+            <li>h1</li>
+            <li>section</li>
+            <li>article</li>
+            <li>strong</li>
+        </ul>
+
+        <h3>Elementy pojedyncze</h3>
+
+        <p>Nie posiadają znacznika zamykającego.</p>
+
+        <pre><code>&lt;br&gt;</code></pre>
+
+        <pre><code>&lt;img src="foto.jpg" alt="Zdjęcie"&gt;</code></pre>
+
+        <p>Przykłady:</p>
+
+        <ul>
+            <li>br</li>
+            <li>img</li>
+            <li>hr</li>
+            <li>meta</li>
+            <li>link</li>
+            <li>input</li>
+        </ul>
+
+    </section>
+
+    <section>
+        <h2>Zagnieżdżanie elementów</h2>
+
+        <p>Elementy HTML można umieszczać wewnątrz innych elementów.</p>
+
+        <pre><code>&lt;p&gt;<br>
+To jest &lt;strong&gt;ważny&lt;/strong&gt; tekst.<br>
+&lt;/p&gt;</code></pre>
+
+        <p>Ważne jest zachowanie poprawnej kolejności zamykania znaczników.</p>
+
+        <p>Poprawnie:</p>
+
+        <pre><code>&lt;p&gt;&lt;strong&gt;Tekst&lt;/strong&gt;&lt;/p&gt;</code></pre>
+
+        <p>Niepoprawnie:</p>
+
+        <pre><code>&lt;p&gt;&lt;strong&gt;Tekst&lt;/p&gt;&lt;/strong&gt;</code></pre>
+
+        <p>Znacznik otwarty jako ostatni powinien zostać zamknięty jako pierwszy.</p>
+
+    </section>
+
+    <section>
+        <h2>Wcięcia i czytelność kodu</h2>
+
+        <p>Przeglądarka nie wymaga wcięć, ale programiści stosują je dla czytelności.</p>
+
+        <p>Czytelny kod:</p>
+
+        <pre><code>&lt;body&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;header&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Strona&lt;/h1&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/header&gt;<br>
+&lt;/body&gt;</code></pre>
+
+        <p>Nieczytelny kod:</p>
+
+        <pre><code>&lt;body&gt;&lt;header&gt;&lt;h1&gt;Strona&lt;/h1&gt;&lt;/header&gt;&lt;/body&gt;</code></pre>
+
+        <p>Przy większych projektach odpowiednie formatowanie kodu bardzo ułatwia pracę.</p>
+
+    </section>
+
+    <section>
+        <h2>Najczęstsze błędy początkujących</h2>
+
+        <ul>
+            <li>brak znacznika zamykającego</li>
+            <li>literówki w nazwach znaczników</li>
+            <li>niepoprawne zagnieżdżanie elementów</li>
+            <li>brak atrybutu alt przy obrazach</li>
+            <li>pomijanie DOCTYPE</li>
+            <li>umieszczanie elementów body wewnątrz head</li>
+            <li>powtarzanie tych samych identyfikatorów id</li>
+            <li>zapominanie o cudzysłowach przy atrybutach</li>
+        </ul>
+
+        <p>Większość takich błędów można wykryć przy pomocy walidatora HTML.</p>
+
+    </section>
+
+    <section>
+        <h2>Drzewo dokumentu HTML</h2>
+
+        <p>Przeglądarka traktuje stronę jak strukturę drzewa.</p>
+
+        <pre><code>html<br>
+├── head<br>
+│&nbsp;&nbsp;&nbsp;├── meta<br>
+│&nbsp;&nbsp;&nbsp;└── title<br>
+└── body<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── header<br>
+&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└── h1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── main<br>
+&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── section<br>
+&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└── article<br>
+&nbsp;&nbsp;&nbsp;&nbsp;└── footer</code></pre>
+
+        <p>Takie drzewo jest później zamieniane na model DOM wykorzystywany przez JavaScript.</p>
+
+    </section>
+
+    <section>
+        <h2>Interaktywny symulator składni HTML</h2>
+
+        <p>Wybierz typ elementu i zobacz wygenerowany kod HTML oraz jego opis.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Typ elementu:
+                <select id="sim-html-typ">
+                    <option value="naglowek">Nagłówek</option>
+                    <option value="akapit">Akapit</option>
+                    <option value="link">Link</option>
+                    <option value="obraz">Obraz</option>
+                    <option value="lista">Lista</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-html"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-html"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var typ = document.getElementById("sim-html-typ");
+                var kod = document.getElementById("sim-kod-html");
+                var podglad = document.getElementById("sim-podglad-html");
+
+                function aktualizuj() {
+
+                    kod.textContent = "";
+
+                    while (podglad.firstChild) {
+                        podglad.removeChild(podglad.firstChild);
+                    }
+
+                    if (typ.value === "naglowek") {
+                        kod.textContent = "<h1>Przykładowy nagłówek</h1>";
+
+                        var h = document.createElement("h1");
+                        h.textContent = "Przykładowy nagłówek";
+                        podglad.appendChild(h);
+                    }
+
+                    if (typ.value === "akapit") {
+                        kod.textContent = "<p>Przykładowy akapit.</p>";
+
+                        var p = document.createElement("p");
+                        p.textContent = "Przykładowy akapit.";
+                        podglad.appendChild(p);
+                    }
+
+                    if (typ.value === "link") {
+                        kod.textContent = '<a href="https://google.pl">Google</a>';
+
+                        var a = document.createElement("a");
+                        a.href = "https://google.pl";
+                        a.textContent = "Google";
+                        a.target = "_blank";
+                        podglad.appendChild(a);
+                    }
+
+                    if (typ.value === "obraz") {
+                        kod.textContent = '<img src="../img/przyklad.png" alt="Przykład">';
+
+                        var p2 = document.createElement("p");
+                        p2.textContent = "Tutaj zostałby wyświetlony obraz z folderu img.";
+                        podglad.appendChild(p2);
+                    }
+
+                    if (typ.value === "lista") {
+                        kod.style.whiteSpace = `pre-wrap`;
+                        kod.textContent = "<ul>\n\t<li>Element 1</li>\n\t<li>Element 2</li>\n</ul>";
+
+                        var ul = document.createElement("ul");
+
+                        var li1 = document.createElement("li");
+                        li1.textContent = "Element 1";
+
+                        var li2 = document.createElement("li");
+                        li2.textContent = "Element 2";
+
+                        ul.appendChild(li1);
+                        ul.appendChild(li2);
+
+                        podglad.appendChild(ul);
+                    }
+
+                }
+
+                typ.addEventListener("change", aktualizuj);
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>table</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;table&gt;</strong> służy do tworzenia tabel w HTML. Pozwala przedstawiać dane w postaci
+            wierszy i kolumn, dzięki czemu są one czytelne i łatwe do porównania.</p>
+        <p>Jest elementem <strong>blokowym</strong>. Sam nie przechowuje bezpośrednio danych - wykorzystuje do tego inne
+            znaczniki tabeli, takie jak <code>&lt;tr&gt;</code>, <code>&lt;td&gt;</code> oraz <code>&lt;th&gt;</code>.
+        </p>
+        <p>Tabele są przeznaczone do prezentowania danych tabelarycznych, a nie do budowania układu całej strony
+            internetowej.</p>
+    </section>
+
+    <section>
+        <p>Najczęstsze zastosowania znacznika:</p>
+        <ul>
+            <li>przedstawianie ocen uczniów</li>
+            <li>tworzenie planów lekcji</li>
+            <li>wyświetlanie harmonogramów</li>
+            <li>prezentowanie cenników produktów i usług</li>
+            <li>pokazywanie wyników zawodów sportowych</li>
+            <li>porównywanie parametrów urządzeń</li>
+            <li>wyświetlanie statystyk i raportów</li>
+            <li>organizowanie danych w przejrzyste kolumny i wiersze</li>
+        </ul>
+        <p>Jeżeli dane nie mają formy tabelarycznej, lepiej użyć zwykłych elementów HTML, takich jak
+            <code>&lt;div&gt;</code>, <code>&lt;section&gt;</code> lub list.</p>
+    </section>
+
+    <section></section>
+
+    <section>
+        <p>Znacznik <strong>&lt;table&gt;</strong> ma znaczenie semantyczne. Informuje przeglądarkę, wyszukiwarki oraz
+            technologie wspomagające, że zawartość stanowi tabelę danych.</p>
+        <p>Czytniki ekranu potrafią rozpoznawać nagłówki kolumn i wierszy, dzięki czemu użytkownicy mogą łatwiej
+            zrozumieć zależności pomiędzy komórkami.</p>
+        <p>Roboty wyszukiwarek również interpretują taki układ jako dane tabelaryczne, a nie zwykły tekst.</p>
+        <p>Dostępność tabel można dodatkowo poprawić stosując znaczniki <code>&lt;caption&gt;</code>,
+            <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code> oraz
+            <code>&lt;th&gt;</code>.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Reprezentuje dane zapisane w formie tabeli</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>caption, colgroup, thead, tbody, tfoot, tr</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>body oraz większości elementów przepływu dokumentu</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>table</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze można sprawdzić podstawową strukturę tabeli. Możesz zmieniać liczbę kolumn oraz włączać lub
+            wyłączać wiersz nagłówkowy, aby zobaczyć jak wygląda kod HTML i wynik działania znacznika
+            <code>&lt;table&gt;</code>.</p>
+
+        <div class="sim-controls">
+            <label>
+                Liczba kolumn:
+                <select id="sim-kolumny">
+                    <option value="2">2</option>
+                    <option value="3" selected>3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </label>
+
+            <label>
+                Nagłówki:
+                <select id="sim-naglowki">
+                    <option value="tak" selected>Tak</option>
+                    <option value="nie">Nie</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+        </div>
+
+        <script>
+            (function () {
+                var kolumny = document.getElementById("sim-kolumny");
+                var naglowki = document.getElementById("sim-naglowki");
+                var kod = document.getElementById("sim-kod");
+                var podglad = document.getElementById("sim-podglad");
+
+                function aktualizuj() {
+                    var k = parseInt(kolumny.value);
+                    var n = naglowki.value;
+
+                    var html = '<table>\n';
+
+                    if (n === 'tak') {
+                        html += '    <tr>\n';
+                        for (var i = 1; i <= k; i++) {
+                            html += '        <th>Nagłówek ' + i + '</th>\n';
+                        }
+                        html += '    </tr>\n';
+                    }
+
+                    html += '    <tr>\n';
+                    for (var j = 1; j <= k; j++) {
+                        html += '        <td>Dane ' + j + '</td>\n';
+                    }
+                    html += '    </tr>\n';
+
+                    html += '</table>';
+
+                    kod.textContent = html;
+
+                    podglad.innerHTML = '';
+
+                    var tabela = document.createElement('table');
+                    tabela.border = '1';
+
+                    if (n === 'tak') {
+                        var trNag = document.createElement('tr');
+
+                        for (var a = 1; a <= k; a++) {
+                            var th = document.createElement('th');
+                            th.textContent = 'Nagłówek ' + a;
+                            trNag.appendChild(th);
+                        }
+
+                        tabela.appendChild(trNag);
+                    }
+
+                    var tr = document.createElement('tr');
+
+                    for (var b = 1; b <= k; b++) {
+                        var td = document.createElement('td');
+                        td.textContent = 'Dane ' + b;
+                        tr.appendChild(td);
+                    }
+
+                    tabela.appendChild(tr);
+
+                    podglad.appendChild(tabela);
+                }
+
+                kolumny.addEventListener('change', aktualizuj);
+                naglowki.addEventListener('change', aktualizuj);
+
+                aktualizuj();
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

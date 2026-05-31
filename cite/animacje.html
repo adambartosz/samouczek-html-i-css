@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Animacje CSS</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to są animacje CSS?</h2>
+        <p>CSS daje dwa sposoby na ożywienie elementów: <strong>transition</strong> i <strong>animation</strong>.
+            Transition to płynne przejście między dwoma stanami – np. zmiana koloru przy hoverze. Animation to
+            pełnoprawna animacja z klatkami kluczowymi, która może się zapętlać i działać bez interakcji użytkownika.
+        </p>
+        <p>Obie właściwości działają bez JavaScriptu – przeglądarka sama oblicza pośrednie klatki.</p>
+    </section>
+
+    <section>
+        <h2>Transition</h2>
+        <p>Składnia:</p>
+        <pre><code>transition: właściwość czas funkcja opóźnienie;</code></pre>
+        <pre><code>button {<br>
+  background: #333;<br>
+  transition: background 0.3s ease;<br>
+}<br>
+<br>
+button:hover {<br>
+  background: #0066cc;<br>
+}</code></pre>
+        <p>Parametry <code>transition</code>:</p>
+        <ul>
+            <li><code>właściwość</code> – co animować: <code>background</code>, <code>color</code>,
+                <code>transform</code>, <code>opacity</code>, <code>all</code> itp.</li>
+            <li><code>czas</code> – jak długo trwa przejście, np. <code>0.3s</code>, <code>200ms</code></li>
+            <li><code>funkcja</code> – krzywa przyspieszenia (patrz niżej)</li>
+            <li><code>opóźnienie</code> – ile czekać przed startem, np. <code>0.1s</code></li>
+        </ul>
+        <p>Można animować kilka właściwości jednocześnie:</p>
+        <pre><code>transition: background 0.3s ease, transform 0.2s ease, opacity 0.3s;</code></pre>
+        <p>Nie wszystkie właściwości CSS da się animować. Działają te, które mają wartości numeryczne – kolory,
+            rozmiary, pozycje, opacity, transform. Nie działają np. <code>display</code> ani <code>font-family</code>.
+        </p>
+    </section>
+
+    <section>
+        <h2>Funkcje czasowe (timing functions)</h2>
+        <p>Funkcja czasowa określa jak zmienia się prędkość animacji w czasie:</p>
+        <ul>
+            <li><code>linear</code> – stała prędkość przez cały czas</li>
+            <li><code>ease</code> – wolno, potem szybko, potem wolno (domyślna)</li>
+            <li><code>ease-in</code> – zaczyna wolno, przyspiesza</li>
+            <li><code>ease-out</code> – zaczyna szybko, zwalnia</li>
+            <li><code>ease-in-out</code> – wolno na starcie i końcu, szybko w środku</li>
+            <li><code>cubic-bezier(x1, y1, x2, y2)</code> – własna krzywa Béziera, pełna kontrola</li>
+            <li><code>steps(n)</code> – animacja skokowa, n kroków bez płynnego przejścia</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Animation i @keyframes</h2>
+        <p>Animacja działa bez interakcji – wystarczy załadowanie strony. Definiujesz ją w dwóch miejscach:
+            <code>@keyframes</code> opisuje co się dzieje w kolejnych momentach, a właściwość <code>animation</code>
+            przypisuje ją do elementu:</p>
+        <pre><code>@keyframes wskok {<br>
+  0%   { transform: translateY(-30px); opacity: 0; }<br>
+  100% { transform: translateY(0);     opacity: 1; }<br>
+}<br>
+<br>
+.box {<br>
+  animation: wskok 0.5s ease-out forwards;<br>
+}</code></pre>
+        <p>Parametry <code>animation</code>:</p>
+        <ul>
+            <li><code>nazwa</code> – nazwa z <code>@keyframes</code></li>
+            <li><code>czas trwania</code> – np. <code>1s</code>, <code>400ms</code></li>
+            <li><code>funkcja czasowa</code> – tak samo jak w transition</li>
+            <li><code>opóźnienie</code> – np. <code>0.2s</code></li>
+            <li><code>liczba powtórzeń</code> – liczba lub <code>infinite</code></li>
+            <li><code>kierunek</code> – <code>normal</code>, <code>reverse</code>, <code>alternate</code>,
+                <code>alternate-reverse</code></li>
+            <li><code>fill-mode</code> – <code>forwards</code> (zostań na końcowej klatce), <code>backwards</code>,
+                <code>both</code>, <code>none</code></li>
+            <li><code>play-state</code> – <code>running</code> lub <code>paused</code></li>
+        </ul>
+        <pre><code>@keyframes obrót {<br>
+  from { transform: rotate(0deg); }<br>
+  to   { transform: rotate(360deg); }<br>
+}<br>
+<br>
+.loader {<br>
+  animation: obrót 1s linear infinite;<br>
+}</code></pre>
+        <p>Klatki kluczowe można definiować przez <code>from/to</code> albo przez procenty – możesz mieć tyle klatek ile
+            chcesz:</p>
+        <pre><code>@keyframes puls {<br>
+  0%   { transform: scale(1); }<br>
+  50%  { transform: scale(1.15); }<br>
+  100% { transform: scale(1); }<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Kierunek animacji (animation-direction)</h2>
+        <p>Kierunek decyduje w którą stronę odtwarzana jest animacja i jak zachowuje się przy kolejnych powtórzeniach:
+        </p>
+        <ul>
+            <li><code>normal</code> – od 0% do 100%, za każdym razem od początku (domyślny)</li>
+            <li><code>reverse</code> – od 100% do 0%, animacja odtwarzana wspak</li>
+            <li><code>alternate</code> – pierwsze powtórzenie normalnie (0%→100%), drugie wspak (100%→0%), trzecie
+                normalnie itd. Przydatne do efektu wahadła</li>
+            <li><code>alternate-reverse</code> – jak alternate, ale zaczyna od wspak (100%→0%)</li>
+        </ul>
+        <pre><code>.wahadlo {<br>
+  animation: ruch 1s ease-in-out infinite alternate;<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Transform</h2>
+        <p>Właściwość <code>transform</code> to najczęściej animowana rzecz w CSS, bo nie powoduje przeliczania layoutu
+            (jest wydajna). Funkcje transform:</p>
+        <ul>
+            <li><code>translateX(px)</code>, <code>translateY(px)</code>, <code>translate(x, y)</code> – przesunięcie
+            </li>
+            <li><code>scaleX(n)</code>, <code>scaleY(n)</code>, <code>scale(n)</code> – skalowanie, gdzie 1 = normalny
+                rozmiar</li>
+            <li><code>rotate(deg)</code> – obrót w stopniach</li>
+            <li><code>skewX(deg)</code>, <code>skewY(deg)</code> – pochylenie</li>
+            <li><code>translateZ(px)</code>, <code>rotateX(deg)</code>, <code>rotateY(deg)</code> – efekty 3D (potrzeba
+                <code>perspective</code> na rodzicu)</li>
+        </ul>
+        <p>Można łączyć kilka funkcji naraz:</p>
+        <pre><code>transform: translateY(-4px) scale(1.05);</code></pre>
+        <p>Punkt, względem którego działa transform, ustawia <code>transform-origin</code> (domyślnie środek elementu):
+        </p>
+        <pre><code>transform-origin: top left;<br>
+transform-origin: 50% 100%;</code></pre>
+    </section>
+
+    <section>
+        <h2>Interaktywny symulator</h2>
+        <p>Wybierz typ animacji i dostosuj parametry. Box przesuwa się przez całą szerokość podglądu.</p>
+
+        <div class="sim-controls" style="flex-direction:column; gap:12px; align-items:center;">
+            <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:flex-end; justify-content:center;">
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    Typ animacji
+                    <select id="sim-typ">
+                        <option value="fade-in">fade in (opacity)</option>
+                        <option value="wskok">wskok (translateY)</option>
+                        <option value="zoom">zoom (scale)</option>
+                        <option value="obrot">obrót (rotate)</option>
+                        <option value="puls">puls (scale)</option>
+                        <option value="slajd">slajd z lewej (translateX)</option>
+                        <option value="trzesienie">trzęsienie (translateX)</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    Czas trwania
+                    <select id="sim-czas">
+                        <option value="0.2s">0.2s (błyskawiczna)</option>
+                        <option value="0.4s">0.4s (szybka)</option>
+                        <option value="0.8s" selected>0.8s (normalna)</option>
+                        <option value="1.5s">1.5s (wolna)</option>
+                        <option value="3s">3s (bardzo wolna)</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    Funkcja czasowa
+                    <select id="sim-easing">
+                        <option value="linear">linear</option>
+                        <option value="ease" selected>ease</option>
+                        <option value="ease-in">ease-in</option>
+                        <option value="ease-out">ease-out</option>
+                        <option value="ease-in-out">ease-in-out</option>
+                        <option value="cubic-bezier(0.34,1.56,0.64,1)">cubic-bezier (sprężyna)</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    Powtórzenia
+                    <select id="sim-iter">
+                        <option value="1" selected>1 (raz)</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="infinite">infinite</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    Kierunek
+                    <select id="sim-dir">
+                        <option value="normal" selected>normal</option>
+                        <option value="reverse">reverse</option>
+                        <option value="alternate">alternate</option>
+                        <option value="alternate-reverse">alternate-reverse</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"
+                style="padding:32px 16px; display:flex; flex-direction:column; align-items:flex-start; gap:20px; min-height:180px; overflow:hidden; position:relative;">
+                <div id="sim-track" style="width:100%; position:relative; height:100px;">
+                    <div id="sim-box"
+                        style="width:80px; height:80px; background:#0066cc; border-radius:8px; display:flex; align-items:center; justify-content:center; color:white; font-size:12px; font-weight:bold; position:absolute; left:0; top:10px;">
+                        box</div>
+                </div>
+                <button id="sim-btn"
+                    style="padding:8px 20px; background:#333; color:white; border:none; border-radius:4px; cursor:pointer; font-size:13px; align-self:center;">▶
+                    Odtwórz ponownie</button>
+            </div>
+            <div class="sim-preview-label" style="margin-top:12px;">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+        </div>
+
+        <style id="sim-style"></style>
+
+        <script>
+            (function () {
+
+                var sTyp = document.getElementById("sim-typ");
+                var sCzas = document.getElementById("sim-czas");
+                var sEasing = document.getElementById("sim-easing");
+                var sIter = document.getElementById("sim-iter");
+                var sDir = document.getElementById("sim-dir");
+                var box = document.getElementById("sim-box");
+                var track = document.getElementById("sim-track");
+                var btn = document.getElementById("sim-btn");
+                var kodEl = document.getElementById("sim-kod");
+                var styleEl = document.getElementById("sim-style");
+
+                function getTrackW() {
+                    return track.offsetWidth - 80;
+                }
+
+                var animacje = {
+                    "fade-in": function (tw) {
+                        return {
+                            keyframes: "@keyframes sim-anim {\n  0%   { left: 0;    opacity: 0; }\n  100% { left: " + tw + "px; opacity: 1; }\n}",
+                            cssKod: "@keyframes sim-anim {\n  from { opacity: 0; }\n  to   { opacity: 1; }\n}"
+                        };
+                    },
+                    "wskok": function (tw) {
+                        return {
+                            keyframes: "@keyframes sim-anim {\n  0%   { left: 0;    transform: translateY(-40px); opacity: 0; }\n  100% { left: " + tw + "px; transform: translateY(0);     opacity: 1; }\n}",
+                            cssKod: "@keyframes sim-anim {\n  from { transform: translateY(-40px); opacity: 0; }\n  to   { transform: translateY(0);     opacity: 1; }\n}"
+                        };
+                    },
+                    "zoom": function (tw) {
+                        return {
+                            keyframes: "@keyframes sim-anim {\n  0%   { left: 0;    transform: scale(0.3); opacity: 0; }\n  100% { left: " + tw + "px; transform: scale(1);   opacity: 1; }\n}",
+                            cssKod: "@keyframes sim-anim {\n  from { transform: scale(0.3); opacity: 0; }\n  to   { transform: scale(1);   opacity: 1; }\n}"
+                        };
+                    },
+                    "obrot": function (tw) {
+                        return {
+                            keyframes: "@keyframes sim-anim {\n  0%   { left: 0;    transform: rotate(0deg); }\n  100% { left: " + tw + "px; transform: rotate(360deg); }\n}",
+                            cssKod: "@keyframes sim-anim {\n  from { transform: rotate(0deg); }\n  to   { transform: rotate(360deg); }\n}"
+                        };
+                    },
+                    "puls": function (tw) {
+                        var q = Math.round(tw * 0.25);
+                        var h = Math.round(tw * 0.5);
+                        var t = Math.round(tw * 0.75);
+                        return {
+                            keyframes: "@keyframes sim-anim {\n  0%   { left: 0;    transform: scale(1); }\n  25%  { left: " + q + "px; transform: scale(1.25); }\n  50%  { left: " + h + "px; transform: scale(1); }\n  75%  { left: " + t + "px; transform: scale(1.25); }\n  100% { left: " + tw + "px; transform: scale(1); }\n}",
+                            cssKod: "@keyframes sim-anim {\n  0%   { transform: scale(1); }\n  50%  { transform: scale(1.2); }\n  100% { transform: scale(1); }\n}"
+                        };
+                    },
+                    "slajd": function (tw) {
+                        return {
+                            keyframes: "@keyframes sim-anim {\n  0%   { left: 0;    opacity: 0; }\n  15%  { opacity: 1; }\n  100% { left: " + tw + "px; opacity: 1; }\n}",
+                            cssKod: "@keyframes sim-anim {\n  from { transform: translateX(-60px); opacity: 0; }\n  to   { transform: translateX(0);     opacity: 1; }\n}"
+                        };
+                    },
+                    "trzesienie": function (tw) {
+                        var s = Math.round(tw / 6);
+                        return {
+                            keyframes: "@keyframes sim-anim {\n  0%   { left: 0;         transform: translateX(0); }\n  15%  { left: " + (s * 1) + "px;  transform: translateX(-8px); }\n  30%  { left: " + (s * 2) + "px;  transform: translateX(8px); }\n  45%  { left: " + (s * 3) + "px;  transform: translateX(-6px); }\n  60%  { left: " + (s * 4) + "px;  transform: translateX(6px); }\n  80%  { left: " + (s * 5) + "px;  transform: translateX(-3px); }\n  100% { left: " + tw + "px;  transform: translateX(0); }\n}",
+                            cssKod: "@keyframes sim-anim {\n  0%   { transform: translateX(0); }\n  20%  { transform: translateX(-8px); }\n  40%  { transform: translateX(8px); }\n  60%  { transform: translateX(-6px); }\n  80%  { transform: translateX(6px); }\n  100% { transform: translateX(0); }\n}"
+                        };
+                    }
+                };
+
+                function odtworz() {
+                    var typ = sTyp.value;
+                    var czas = sCzas.value;
+                    var easing = sEasing.value;
+                    var iter = sIter.value;
+                    var dir = sDir.value;
+                    var tw = getTrackW();
+                    var def = animacje[typ](tw);
+                    var fillMode = (iter === "infinite") ? "none" : "forwards";
+
+                    styleEl.textContent = def.keyframes;
+
+                    box.style.animation = "none";
+                    box.style.left = "0";
+                    box.offsetWidth;
+                    box.style.animation = "sim-anim " + czas + " " + easing + " 0s " + iter + " " + dir + " " + fillMode;
+
+                    kodEl.textContent =
+                        def.cssKod + "\n\n" +
+                        ".box {\n" +
+                        "  animation: sim-anim " + czas + " " + easing + " " + iter + " " + dir + " " + fillMode + ";\n" +
+                        "}";
+                }
+
+                btn.addEventListener("click", odtworz);
+                [sTyp, sCzas, sEasing, sIter, sDir].forEach(function (el) {
+                    el.addEventListener("change", odtworz);
+                });
+                window.addEventListener("resize", odtworz);
+
+                odtworz();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

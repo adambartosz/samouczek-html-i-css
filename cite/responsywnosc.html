@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Responsywność</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to jest responsywność?</h2>
+        <p>Responsywność (RWD – Responsive Web Design) to podejście do tworzenia stron, w którym strona dopasowuje swój
+            wygląd do rozmiaru ekranu urządzenia. Ta sama strona ma wyglądać dobrze na monitorze, tablecie i telefonie.
+        </p>
+        <p>Osiąga się to głównie przez CSS – używamy elastycznych jednostek, Flexboxa, Grida i media queries, które
+            pozwalają zmieniać style w zależności od szerokości okna przeglądarki.</p>
+    </section>
+
+    <section>
+        <h2>Viewport i znacznik meta</h2>
+        <p>Pierwsza rzecz, bez której nic nie działa – znacznik <code>&lt;meta name="viewport"&gt;</code> w
+            <code>&lt;head&gt;</code>:
+        </p>
+        <pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+        <p>Bez niego mobilna przeglądarka udaje, że ekran ma ~980px szerokości i skaluje całą stronę w dół. Z tym
+            znacznikiem szerokość strony równa się faktycznej szerokości ekranu urządzenia.</p>
+        <ul>
+            <li><code>width=device-width</code> – szerokość viewportu równa szerokości ekranu</li>
+            <li><code>initial-scale=1.0</code> – brak domyślnego powiększenia przy ładowaniu</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Media queries</h2>
+        <p>Media queries to warunki w CSS – jeśli ekran spełnia warunek, stosuj te style:</p>
+        <pre><code>@media (max-width: 768px) {<br>
+  .kolumny {<br>
+    flex-direction: column;<br>
+  }<br>
+}</code></pre>
+        <p>Najczęstsze warunki:</p>
+        <ul>
+            <li><code>max-width</code> – style aktywne gdy ekran jest <strong>węższy</strong> niż podana wartość</li>
+            <li><code>min-width</code> – style aktywne gdy ekran jest <strong>szerszy</strong> niż podana wartość</li>
+            <li>Można łączyć: <code>@media (min-width: 600px) and (max-width: 900px)</code></li>
+        </ul>
+        <p>Typowe punkty graniczne (breakpointy):</p>
+        <pre><code>/* telefony */
+@media (max-width: 576px) { ... }<br>
+<br>
+/* tablety */
+@media (max-width: 768px) { ... }<br>
+<br>
+/* małe laptopy */
+@media (max-width: 992px) { ... }<br>
+<br>
+/* duże ekrany */
+@media (max-width: 1200px) { ... }</code></pre>
+        <p>To nie są sztywne zasady – breakpointy ustawiasz tam, gdzie Twój layout zaczyna wyglądać źle.</p>
+    </section>
+
+    <section>
+        <h2>Mobile first vs desktop first</h2>
+        <p>Są dwa podejścia do pisania responsywnego CSS:</p>
+        <p><strong>Desktop first</strong> – piszesz style dla dużego ekranu, a potem nadpisujesz dla mniejszych przez
+            <code>max-width</code>:
+        </p>
+        <pre><code>.kolumny {<br>
+  display: flex;<br>
+  gap: 20px;<br>
+}<br>
+<br>
+@media (max-width: 768px) {<br>
+  .kolumny {<br>
+    flex-direction: column;<br>
+  }<br>
+}</code></pre>
+        <p><strong>Mobile first</strong> – piszesz style dla telefonu, a potem dodajesz dla większych ekranów przez
+            <code>min-width</code>. To podejście jest zalecane, bo telefony to dziś większość ruchu:
+        </p>
+        <pre><code>.kolumny {<br>
+  display: flex;<br>
+  flex-direction: column;<br>
+  gap: 20px;<br>
+}<br>
+<br>
+@media (min-width: 768px) {<br>
+  .kolumny {<br>
+    flex-direction: row;<br>
+  }<br>
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Elastyczne jednostki</h2>
+        <p>Zamiast stałych pikseli warto używać jednostek, które same się skalują:</p>
+        <ul>
+            <li><code>%</code> – procent szerokości rodzica. <code>width: 50%</code> to połowa rodzica</li>
+            <li><code>vw</code> – procent szerokości okna przeglądarki. <code>100vw</code> = pełna szerokość okna</li>
+            <li><code>vh</code> – procent wysokości okna. <code>100vh</code> = pełna wysokość okna</li>
+            <li><code>em</code> – wielokrotność rozmiaru czcionki rodzica. Jeśli rodzic ma <code>font-size: 16px</code>,
+                to <code>1em = 16px</code></li>
+            <li><code>rem</code> – wielokrotność rozmiaru czcionki elementu <code>&lt;html&gt;</code>. Bardziej
+                przewidywalne niż <code>em</code></li>
+        </ul>
+        <p>Do szerokości kontenerów przydaje się też <code>max-width</code>:</p>
+        <pre><code>.kontener {<br>
+  width: 100%;<br>
+  max-width: 1200px;<br>
+  margin: 0 auto;<br>
+}</code></pre>
+        <p>Kontener zajmuje całą szerokość, ale nie rozciągnie się powyżej 1200px. <code>margin: 0 auto</code>
+            wyśrodkowuje go na szerokich ekranach.</p>
+    </section>
+
+    <section>
+        <h2>Responsywne obrazki</h2>
+        <p>Obrazek bez responsywności wyłazi poza kontener na wąskim ekranie. Podstawowa reguła:</p>
+        <pre><code>img {<br>
+  max-width: 100%;<br>
+  height: auto;<br>
+}</code></pre>
+        <p><code>max-width: 100%</code> sprawia że obrazek nigdy nie będzie szerszy niż jego kontener.
+            <code>height: auto</code> zachowuje proporcje.
+        </p>
+        <p>Jeśli chcesz serwować różne rozmiary obrazka dla różnych ekranów, użyj atrybutu <code>srcset</code>:</p>
+        <pre><code>&lt;img<br>
+  src="zdjecie-duze.jpg"<br>
+  srcset="zdjecie-male.jpg 480w, zdjecie-srednie.jpg 768w, zdjecie-duze.jpg 1200w"<br>
+  sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, 1200px"<br>
+  alt="opis zdjecia"<br>
+&gt;</code></pre>
+    </section>
+
+    <section>
+        <h2>Interaktywny symulator</h2>
+        <p>Przeciągnij prawy dolny róg okna podglądu żeby zmienić jego szerokość i zobaczyć jak reaguje układ.</p>
+
+        <div class="sim-controls" style="flex-direction:column; gap:12px; align-items:center;">
+            <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:flex-end; justify-content:center;">
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    Breakpoint
+                    <select id="sim-bp">
+                        <option value="480">480px</option>
+                        <option value="576">576px</option>
+                        <option value="768" selected>768px</option>
+                        <option value="992">992px</option>
+                    </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;font-size:13px;">
+                    Kolumny na desktop
+                    <select id="sim-cols">
+                        <option value="2">2 kolumny</option>
+                        <option value="3" selected>3 kolumny</option>
+                        <option value="4">4 kolumny</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Podgląd – przeciągnij za prawy dolny róg:</div>
+            <div id="sim-podglad" class="sim-preview"
+                style="padding:12px; resize:horizontal; overflow:auto; min-width:220px; width:100%; box-sizing:border-box; min-height:260px;">
+
+                <div id="sim-nav-wrap"
+                    style="background:#222; padding:8px 12px; border-radius:4px; display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+                    <span style="color:white; font-weight:bold; font-size:14px;">Logo</span>
+                    <div id="sim-nav-links" style="display:flex; gap:6px;">
+                        <a
+                            style="padding:6px 12px; background:#444; color:#fff; text-decoration:none; border-radius:3px; font-size:13px; cursor:pointer;">Strona
+                            główna</a>
+                        <a
+                            style="padding:6px 12px; background:#444; color:#fff; text-decoration:none; border-radius:3px; font-size:13px; cursor:pointer;">Oferta</a>
+                        <a
+                            style="padding:6px 12px; background:#444; color:#fff; text-decoration:none; border-radius:3px; font-size:13px; cursor:pointer;">Kontakt</a>
+                    </div>
+                    <div id="sim-burger"
+                        style="display:none; color:white; font-size:20px; cursor:pointer; padding:4px 8px; background:#444; border-radius:3px; user-select:none;">
+                        ☰</div>
+                </div>
+
+                <div id="sim-mobile-menu" style="display:none; flex-direction:column; gap:4px; margin-bottom:12px;">
+                    <a
+                        style="padding:8px 12px; background:#444; color:#fff; text-decoration:none; border-radius:3px; font-size:13px; cursor:pointer;">Strona
+                        główna</a>
+                    <a
+                        style="padding:8px 12px; background:#444; color:#fff; text-decoration:none; border-radius:3px; font-size:13px; cursor:pointer;">Oferta</a>
+                    <a
+                        style="padding:8px 12px; background:#444; color:#fff; text-decoration:none; border-radius:3px; font-size:13px; cursor:pointer;">Kontakt</a>
+                </div>
+
+                <div id="sim-grid" style="display:flex; flex-wrap:wrap; gap:10px;"></div>
+
+                <div id="sim-info"
+                    style="margin-top:10px; font-size:12px; color:#888; text-align:center; padding:4px 0;"></div>
+            </div>
+
+            <div class="sim-preview-label" style="margin-top:12px;">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+        </div>
+
+        <script>
+            (function () {
+
+                var sBp = document.getElementById("sim-bp");
+                var sCols = document.getElementById("sim-cols");
+                var podglad = document.getElementById("sim-podglad");
+                var navLinks = document.getElementById("sim-nav-links");
+                var burger = document.getElementById("sim-burger");
+                var mobileMenu = document.getElementById("sim-mobile-menu");
+                var grid = document.getElementById("sim-grid");
+                var info = document.getElementById("sim-info");
+                var kodEl = document.getElementById("sim-kod");
+
+                var kolory = ["#4a90d9", "#e67e22", "#2ecc71", "#9b59b6", "#e74c3c", "#1abc9c"];
+                var nazwy = ["Sekcja 1", "Sekcja 2", "Sekcja 3", "Sekcja 4", "Sekcja 5", "Sekcja 6"];
+                var menuOtwarte = false;
+
+                grid.innerHTML = "";
+                kolory.forEach(function (kolor, i) {
+                    var div = document.createElement("div");
+                    div.className = "sim-karta";
+                    div.textContent = nazwy[i];
+                    div.style.cssText = "background:" + kolor + "; color:white; padding:20px 14px; border-radius:4px; box-sizing:border-box; font-size:13px; font-weight:bold; text-align:center;";
+                    grid.appendChild(div);
+                });
+
+                var karty = grid.querySelectorAll(".sim-karta");
+
+                burger.addEventListener("click", function () {
+                    menuOtwarte = !menuOtwarte;
+                    mobileMenu.style.display = menuOtwarte ? "flex" : "none";
+                    burger.textContent = menuOtwarte ? "✕" : "☰";
+                });
+
+                function aktualizujUklad() {
+                    var w = podglad.offsetWidth;
+                    var bp = parseInt(sBp.value);
+                    var cols = parseInt(sCols.value);
+                    var isMobile = w <= bp;
+
+                    navLinks.style.display = isMobile ? "none" : "flex";
+                    burger.style.display = isMobile ? "block" : "none";
+
+                    if (!isMobile) {
+                        menuOtwarte = false;
+                        mobileMenu.style.display = "none";
+                        burger.textContent = "☰";
+                    }
+
+                    var actualCols = isMobile ? 1 : cols;
+                    var gapTotal = 10 * (actualCols - 1);
+                    var cardW = "calc(" + (100 / actualCols) + "% - " + (gapTotal / actualCols).toFixed(1) + "px)";
+                    karty.forEach(function (k) {
+                        k.style.flex = "0 0 " + cardW;
+                    });
+
+                    info.textContent = w + "px — " + (isMobile ? "📱 mobilny (≤ " + bp + "px)" : "🖥 desktop (> " + bp + "px)");
+                }
+
+                function aktualizujKod() {
+                    var bp = parseInt(sBp.value);
+                    var cols = parseInt(sCols.value);
+                    var gapTotal = 10 * (cols - 1);
+
+                    kodEl.textContent =
+                        ".kontener {\n" +
+                        "  display: flex;\n" +
+                        "  flex-wrap: wrap;\n" +
+                        "  gap: 10px;\n" +
+                        "}\n\n" +
+                        ".karta {\n" +
+                        "  flex: 0 0 calc(" + (100 / cols).toFixed(2) + "% - " + (gapTotal / cols).toFixed(1) + "px);\n" +
+                        "}\n\n" +
+                        "nav ul { display: flex; }\n" +
+                        ".hamburger { display: none; }\n" +
+                        ".mobile-menu { display: none; }\n\n" +
+                        "@media (max-width: " + bp + "px) {\n" +
+                        "  .karta {\n" +
+                        "    flex: 0 0 100%;\n" +
+                        "  }\n\n" +
+                        "  nav ul {\n" +
+                        "    display: none;\n" +
+                        "  }\n\n" +
+                        "  .hamburger {\n" +
+                        "    display: block;\n" +
+                        "  }\n\n" +
+                        "  .mobile-menu.otwarte {\n" +
+                        "    display: flex;\n" +
+                        "    flex-direction: column;\n" +
+                        "  }\n" +
+                        "}";
+                }
+
+                var observer = new ResizeObserver(function () {
+                    aktualizujUklad();
+                });
+                observer.observe(podglad);
+
+                [sBp, sCols].forEach(function (el) {
+                    el.addEventListener("change", function () {
+                        aktualizujUklad();
+                        aktualizujKod();
+                    });
+                });
+
+                aktualizujUklad();
+                aktualizujKod();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

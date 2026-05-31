@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>pseudoelementy</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <section>
+        <h2>Co to są pseudoelementy?</h2>
+
+        <p>Pseudoelementy CSS pozwalają stylować fragment elementu lub tworzyć dodatkową zawartość bez dodawania nowych
+            znaczników HTML.</p>
+
+        <p>Rozpoznaje się je po podwójnym dwukropku <code>::</code>. Przeglądarka traktuje je jak specjalne części
+            elementu.</p>
+
+        <p>Dzięki pseudoelementom można dodawać tekst, ozdobniki, zmieniać wygląd pierwszej litery lub zaznaczonego
+            tekstu.</p>
+    </section>
+
+    <section>
+        <h2>Składnia pseudoelementów</h2>
+
+        <p>Pseudoelement dopisuje się na końcu selektora.</p>
+
+        <pre><code>p::first-letter {<br>
+    font-size: 200%;<br>
+}</code></pre>
+
+        <p>W tym przykładzie pierwsza litera każdego akapitu będzie większa od pozostałych.</p>
+
+        <p>Przykład dodawania treści:</p>
+
+        <pre><code>.uwaga::before {<br>
+    content: "Uwaga: ";<br>
+}</code></pre>
+
+        <p>Przeglądarka doda wskazany tekst przed zawartością elementu.</p>
+    </section>
+
+    <section>
+        <h2>Najpopularniejsze pseudoelementy</h2>
+
+        <table>
+            <tr>
+                <th>Pseudoelement</th>
+                <th>Działanie</th>
+            </tr>
+
+            <tr>
+                <td>::before</td>
+                <td>Dodaje zawartość przed elementem</td>
+            </tr>
+
+            <tr>
+                <td>::after</td>
+                <td>Dodaje zawartość za elementem</td>
+            </tr>
+
+            <tr>
+                <td>::first-letter</td>
+                <td>Wybiera pierwszą literę</td>
+            </tr>
+
+            <tr>
+                <td>::first-line</td>
+                <td>Wybiera pierwszy wiersz tekstu</td>
+            </tr>
+
+            <tr>
+                <td>::selection</td>
+                <td>Styluje zaznaczony tekst</td>
+            </tr>
+
+            <tr>
+                <td>::marker</td>
+                <td>Styluje punktory list</td>
+            </tr>
+
+            <tr>
+                <td>::placeholder</td>
+                <td>Styluje tekst podpowiedzi w formularzu</td>
+            </tr>
+
+            <tr>
+                <td>::file-selector-button</td>
+                <td>Styluje przycisk pola typu file</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Pseudoelementy before i after</h2>
+
+        <p>Są to najczęściej używane pseudoelementy.</p>
+
+        <p>Dodanie tekstu przed elementem:</p>
+
+        <pre><code>.info::before {<br>
+    content: "[INFO] ";<br>
+}</code></pre>
+
+        <p>Dodanie tekstu po elemencie:</p>
+
+        <pre><code>.nowosc::after {<br>
+    content: " NOWOŚĆ";<br>
+}</code></pre>
+
+        <p>Pseudoelementy te często wykorzystuje się do ikon, etykiet, dekoracji i efektów wizualnych.</p>
+
+        <p>Aby działały poprawnie, zwykle trzeba ustawić właściwość <code>content</code>.</p>
+    </section>
+
+    <section>
+        <h2>Pozostałe przydatne pseudoelementy</h2>
+
+        <p>Pierwsza litera akapitu:</p>
+
+        <pre><code>p::first-letter {<br>
+    font-size: 32px;<br>
+}</code></pre>
+
+        <p>Pierwsza linia tekstu:</p>
+
+        <pre><code>p::first-line {<br>
+    font-weight: bold;<br>
+}</code></pre>
+
+
+        <p>Tekst podpowiedzi formularza:</p>
+
+        <pre><code>input::placeholder {<br>
+    color: gray;<br>
+}</code></pre>
+
+    </section>
+
+    <section>
+        <p>Wybierz pseudoelement i zobacz efekt jego działania.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Pseudoelement:
+                <select id="sim-pseudoel">
+                    <option value="before">::before</option>
+                    <option value="after">::after</option>
+                    <option value="firstletter">::first-letter</option>
+                    <option value="placeholder">::placeholder</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod CSS:</div>
+            <pre id="sim-kod"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var sel = document.getElementById("sim-pseudoel");
+                var kod = document.getElementById("sim-kod");
+                var podgl = document.getElementById("sim-podglad");
+
+                function aktualizuj() {
+
+                    while (podgl.firstChild) {
+                        podgl.removeChild(podgl.firstChild);
+                    }
+
+                    if (sel.value === "before") {
+
+                        kod.textContent = '.info::before {\n    content: "[INFO] ";\n}';
+
+                        var p = document.createElement("p");
+                        p.textContent = '[INFO] Przykładowa wiadomość';
+
+                        podgl.appendChild(p);
+
+                    }
+                    else if (sel.value === "after") {
+
+                        kod.textContent = '.nowosc::after {\n    content: " NOWOŚĆ";\n}';
+
+                        var p = document.createElement("p");
+                        p.textContent = 'Produkt NOWOŚĆ';
+
+                        podgl.appendChild(p);
+
+                    }
+                    else if (sel.value === "firstletter") {
+
+                        kod.textContent = 'p::first-letter {\n    font-size: 32px;\n}';
+
+                        var p = document.createElement("p");
+
+                        var span = document.createElement("span");
+                        span.textContent = "P";
+                        span.style.fontSize = "32px";
+
+                        p.appendChild(span);
+                        p.appendChild(document.createTextNode("rzykładowy akapit z powiększoną pierwszą literą."));
+
+                        podgl.appendChild(p);
+
+                    }
+                    else if (sel.value === "placeholder") {
+
+                        kod.textContent = 'input::placeholder {\n    color: gray;\n}';
+
+                        var input = document.createElement("input");
+                        input.placeholder = "Wpisz swoje imię";
+
+                        podgl.appendChild(input);
+
+                    }
+
+                }
+
+                sel.addEventListener("change", aktualizuj);
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

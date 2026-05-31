@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>sub</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znacznik <strong>&lt;sub&gt;</strong> służy do indeksu dolnego. Używa się go np. w chemii i matematyce.</p>
+        <p>Jest liniowy i działa w środku tekstu.</p>
+    </section>
+
+    <section>
+        <p>Używamy go kiedy:</p>
+        <ul>
+            <li>piszemy wzory chemiczne</li>
+            <li>tworzymy indeks dolny</li>
+            <li>opisujemy formuły matematyczne</li>
+        </ul>
+        <p>Przykład: H<sub>2</sub>O</p>
+    </section>
+
+    <section></section>
+
+    <section>
+        <p><code>&lt;sub&gt;</code> obniża tekst względem linii bazowej.</p>
+        <p>Czytniki czytają go normalnie jako część słowa.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Liniowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Indeks dolny</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>Tekst</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>Elementów blokowych i liniowych</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>inline</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W symulatorze zobaczysz indeks dolny.</p>
+
+        <div class="sim-controls">
+            <label>
+                Tryb:
+                <select id="sim-sub-mode">
+                    <option value="off">normalny</option>
+                    <option value="sub">sub</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="sim-output">
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-sub"></pre>
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-sub"></div>
+        </div>
+
+        <script>
+            (function () {
+
+                var mode = document.getElementById("sim-sub-mode");
+                var kod = document.getElementById("sim-kod-sub");
+                var podglad = document.getElementById("sim-podglad-sub");
+
+                var tekst = "H2O przykład tekstu";
+
+                function aktualizuj() {
+
+                    podglad.innerHTML = "";
+
+                    var p = document.createElement("p");
+
+                    if (mode.value === "sub") {
+                        p.innerHTML = "H<sub>2</sub>O przykład tekstu";
+                        kod.textContent = "<p>H<sub>2</sub>O przykład tekstu</p>";
+                    } else {
+                        p.textContent = tekst;
+                        kod.textContent = "<p>" + tekst + "</p>";
+                    }
+
+                    podglad.appendChild(p);
+
+                }
+
+                mode.addEventListener("change", aktualizuj);
+                aktualizuj();
+
+            })();
+        </script>
+
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

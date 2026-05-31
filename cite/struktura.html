@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>html&gt;, &lt;head&gt;, &lt;body</title>
+    <link rel="stylesheet" href="../css/arkuszzerujacy.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="znacznik">
+
+    <section>
+        <p>Znaczniki <strong>&lt;html&gt;</strong>, <strong>&lt;head&gt;</strong> i <strong>&lt;body&gt;</strong> tworzą
+            podstawowy szkielet każdej strony internetowej. Bez nich dokument HTML byłby niekompletny i trudniejszy do
+            poprawnego interpretowania przez przeglądarkę.</p>
+
+        <p><code>&lt;html&gt;</code> jest korzeniem całego dokumentu, <code>&lt;head&gt;</code> przechowuje informacje o
+            stronie, a <code>&lt;body&gt;</code> zawiera treść widoczną dla użytkownika.</p>
+
+        <p>Są to elementy <strong>blokowe</strong> i kontenerowe, które organizują całą strukturę dokumentu.</p>
+    </section>
+
+    <section>
+        <p>Te znaczniki wykorzystujemy gdy chcemy:</p>
+
+        <ul>
+            <li>utworzyć poprawny dokument HTML</li>
+            <li>określić język strony</li>
+            <li>ustawić kodowanie znaków</li>
+            <li>nadać tytuł karcie przeglądarki</li>
+            <li>podłączyć arkusze CSS</li>
+            <li>podłączyć pliki JavaScript</li>
+            <li>umieścić treść strony internetowej</li>
+            <li>zbudować strukturę zgodną ze standardami HTML</li>
+            <li>umożliwić poprawne działanie wyszukiwarek i czytników ekranu</li>
+            <li>przygotować stronę do walidacji</li>
+        </ul>
+
+        <p>Nie istnieje praktyczna alternatywa dla tych elementów, ponieważ są one podstawą każdego dokumentu HTML.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Atrybut</th>
+                <th>Wartości</th>
+                <th>Co robi</th>
+            </tr>
+
+            <tr>
+                <td>lang (html)</td>
+                <td>pl, en, de, fr, es, it i inne kody języków</td>
+                <td>Określa główny język dokumentu</td>
+            </tr>
+
+            <tr>
+                <td>xmlns (html)</td>
+                <td>adres przestrzeni nazw XML</td>
+                <td>Używany głównie w dokumentach XHTML</td>
+            </tr>
+
+            <tr>
+                <td>profile (head - przestarzały)</td>
+                <td>adres URL</td>
+                <td>Dawniej określał metadane dokumentu</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>Znaczniki te mają bardzo duże znaczenie semantyczne.</p>
+
+        <p><code>&lt;html&gt;</code> informuje przeglądarkę, gdzie rozpoczyna się dokument HTML. Atrybut
+            <code>lang</code> pomaga czytnikom ekranu poprawnie odczytywać treść oraz wspiera tłumaczenia automatyczne.
+        </p>
+
+        <p><code>&lt;head&gt;</code> przechowuje metadane dokumentu, czyli informacje o stronie. Nie są one wyświetlane
+            bezpośrednio użytkownikowi, ale są wykorzystywane przez przeglądarki, wyszukiwarki oraz różne narzędzia.</p>
+
+        <p><code>&lt;body&gt;</code> oznacza główną część dokumentu zawierającą treść widoczną na stronie. Czytniki
+            ekranu rozpoczynają analizę strony właśnie od zawartości tego elementu.</p>
+    </section>
+
+    <section>
+        <table>
+            <tr>
+                <th>Właściwość</th>
+                <th>Wartość</th>
+            </tr>
+            <tr>
+                <td>Typ elementu</td>
+                <td>Blokowy</td>
+            </tr>
+            <tr>
+                <td>Znacznik zamykający</td>
+                <td>Tak (kontenerowy)</td>
+            </tr>
+            <tr>
+                <td>Semantyka</td>
+                <td>Podstawowa struktura dokumentu HTML</td>
+            </tr>
+            <tr>
+                <td>Może zawierać</td>
+                <td>html: head i body, head: meta, title, link, script, body: większość elementów HTML</td>
+            </tr>
+            <tr>
+                <td>Może być wewnątrz</td>
+                <td>html po DOCTYPE, head i body wewnątrz html</td>
+            </tr>
+            <tr>
+                <td>Domyślny display</td>
+                <td>block</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <p>W tym symulatorze możesz sprawdzić wpływ atrybutu <code>lang</code> znacznika <code>&lt;html&gt;</code> oraz
+            zobaczyć podstawową strukturę dokumentu.</p>
+
+        <div class="sim-controls">
+
+            <label>
+                Język dokumentu:
+                <select id="sim-lang-html">
+                    <option value="pl">pl - polski</option>
+                    <option value="en">en - angielski</option>
+                    <option value="de">de - niemiecki</option>
+                    <option value="fr">fr - francuski</option>
+                    <option value="es">es - hiszpański</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="sim-output">
+
+            <div class="sim-preview-label">Kod HTML:</div>
+            <pre id="sim-kod-html-struktura"></pre>
+
+            <div class="sim-preview-label">Podgląd:</div>
+            <div class="sim-preview" id="sim-podglad-html-struktura"></div>
+
+        </div>
+
+        <script>
+            (function () {
+
+                var lang = document.getElementById("sim-lang-html");
+                var kod = document.getElementById("sim-kod-html-struktura");
+                var podglad = document.getElementById("sim-podglad-html-struktura");
+
+
+                function aktualizuj() {
+                    document.querySelector("html").lang = lang.value;
+
+                    kod.textContent =
+                        '<!DOCTYPE html>\n' +
+                        '<html lang="' + lang.value + '">\n' +
+                        '  <head>\n' +
+                        '    <meta charset="utf-8">\n' +
+                        '    <title>Moja strona</title>\n' +
+                        '  </head>\n' +
+                        '  <body>\n' +
+                        '    Treść strony\n' +
+                        '  </body>\n' +
+                        '</html>';
+
+                    while (podglad.firstChild) {
+                        podglad.removeChild(podglad.firstChild);
+                    }
+
+                    var html = document.createElement("div");
+                    html.textContent = "<html lang=\"" + lang.value + "\">";
+                    html.style.cssText = "border:3px solid #2563eb;padding:10px;margin:5px;background:#dbeafe;";
+
+                    var head = document.createElement("div");
+                    head.textContent = "<head>";
+                    head.style.cssText = "border:3px solid #16a34a;padding:10px;margin:10px;background:#dcfce7;";
+
+                    var body = document.createElement("div");
+                    body.textContent = "<body>";
+                    body.style.cssText = "border:3px solid #dc2626;padding:10px;margin:10px;background:#fee2e2;";
+
+                    var opis = document.createElement("p");
+                    opis.textContent = "Wybrany język dokumentu: " + lang.value;
+
+                    html.appendChild(head);
+                    html.appendChild(body);
+
+                    podglad.appendChild(html);
+                    podglad.appendChild(opis);
+
+                }
+
+                lang.addEventListener("change", aktualizuj);
+                aktualizuj();
+
+            })();
+        </script>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
