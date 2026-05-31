@@ -53,7 +53,7 @@
         layout.appendChild(nav);
 
         const header = document.createElement("header");
-        header.innerHTML = `<h1>document.title</h1>`;
+        header.innerHTML = `<h1>${document.title}</h1>`;
         layout.prepend(header);
 
         const buttonNav = document.createElement("button");
