@@ -276,7 +276,7 @@
         <button class="wiecej" onclick="przejdzDoKategorii(2)">Przeglądaj dział</button>
     </div>
 
-    <div class="index-card">
+    <div class="index-card" id="karta-copy">
         <h2>Źródła</h2>
         <ul>
             <li></a href="https://www.w3schools.com/">W3Schools</a></li>
@@ -320,7 +320,7 @@
                 var hero = document.getElementById("hero");
                 if (hero) hero.classList.add("show");
             }, 200);
-            ["karta-podstawy", "karta-znaczniki", "karta-css"].forEach(function (id, i) {
+            ["karta-podstawy", "karta-znaczniki",karta-copy", "karta-css"].forEach(function (id, i) {
                 setTimeout(function () {
                     var el = document.getElementById(id);
                     if (el) el.classList.add("show");
