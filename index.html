@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="css/arkuszzerujacy.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-
-
         .index-hero {
             display: flex;
             flex-direction: column;
@@ -135,6 +133,15 @@
             border-bottom: none;
         }
 
+        .index-card ul li a {
+            color: #2a0060;
+            text-decoration: none;
+        }
+
+        .index-card ul li a:hover {
+            text-decoration: underline;
+        }
+
         .index-card .wiecej {
             display: inline-block;
             margin-top: 12px;
@@ -153,7 +160,6 @@
         .index-card .wiecej:hover {
             background: #3d0090;
         }
-
 
         .index-info {
             grid-column: 1 / -1;
@@ -194,7 +200,6 @@
             text-transform: uppercase;
             letter-spacing: 0.8px;
         }
-
 
         body .container {
             grid-template-columns: repeat(3, 1fr);
@@ -277,11 +282,12 @@
     </div>
 
     <div class="index-card" id="karta-copy">
+        <span class="index-card-ikona">&#128218;</span>
         <h2>Źródła</h2>
         <ul>
             <li><a href="https://www.w3schools.com/">W3Schools</a></li>
-            <li>Obrazki - domeny publiczne</li>
-            <li>Nagrania - publiczne, używane też na <em>w3Schools.com</em></li>
+            <li>Obrazki – domeny publiczne</li>
+            <li>Nagrania – publiczne, używane też na <em>W3Schools.com</em></li>
         </ul>
     </div>
 
@@ -315,21 +321,23 @@
             }
         }
 
-        window.addEventListener("load", function () {
+        document.addEventListener("DOMContentLoaded", function () {
             setTimeout(function () {
                 var hero = document.getElementById("hero");
                 if (hero) hero.classList.add("show");
             }, 200);
-            ["karta-podstawy", "karta-znaczniki", "karta-css","karta-copy"].forEach(function (id, i) {
+
+            ["karta-podstawy", "karta-znaczniki", "karta-css", "karta-copy"].forEach(function (id, i) {
                 setTimeout(function () {
                     var el = document.getElementById(id);
                     if (el) el.classList.add("show");
                 }, 350 + i * 100);
             });
+
             setTimeout(function () {
                 var info = document.getElementById("info-pasek");
                 if (info) info.classList.add("show");
-            }, 700);
+            }, 800);
         });
     </script>
 
